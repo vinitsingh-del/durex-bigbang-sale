@@ -232,12 +232,12 @@ html.hero-locked,html.hero-locked body{overflow:hidden;}
 .catrail-txt b{display:block;color:#fff;font-family:'One Night Sans','Assistant',sans-serif;font-size:12.5px;font-weight:700;text-transform:uppercase;}
 .catrail-txt i{display:block;margin-top:3px;color:#93a2c8;font-size:11.5px;font-style:normal;line-height:1.3;}
 
-.salebar{border-bottom:1px solid var(--line);background:rgba(0,8,44,.26);}
+.salebar{border-bottom:0;background:transparent;}
 .salebar dl{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;margin:0;}
-.salebar dl>div{padding:22px 22px 20px;border-right:1px solid rgba(217,228,255,.1);}
-.salebar dl>div:last-child{border-right:0;}
-.salebar dt{color:var(--yellow);font-family:'One Night Sans','Assistant',sans-serif;font-size:clamp(30px,3vw,40px);font-weight:700;line-height:1;}
-.salebar dd{margin:8px 0 0;color:#9dabd0;font-size:12.5px;line-height:1.4;max-width:24ch;}
+.salebar dl>div{padding:11px 14px 10px;border:0;}
+.salebar dt{color:var(--yellow);font-family:'One Night Sans','Assistant',sans-serif;
+  font-size:clamp(17px,1.6vw,22px);font-weight:700;line-height:1;letter-spacing:-.01em;}
+.salebar dd{margin:3px 0 0;color:#8ea0c8;font-size:10.5px;line-height:1.35;max-width:22ch;}
 @media (max-width:1080px){
   .catrail ul{grid-template-columns:repeat(3,minmax(0,1fr));}
   .catrail li:nth-child(3n){border-right:0;}
@@ -249,11 +249,11 @@ html.hero-locked,html.hero-locked body{overflow:hidden;}
     mask-image:linear-gradient(90deg,#000 0,#000 88%,transparent 100%);
     -webkit-mask-image:linear-gradient(90deg,#000 0,#000 88%,transparent 100%);}
   .salebar dl::-webkit-scrollbar{display:none;}
-  .salebar dl>div{flex:0 0 auto;min-width:min(60vw,232px);scroll-snap-align:start;
-    padding:15px 18px 14px;border-right:1px solid rgba(217,228,255,.12);border-bottom:0;}
-  .salebar dl>div:last-child{border-right:0;padding-right:26px;}
-  .salebar dt{font-size:29px;}
-  .salebar dd{max-width:22ch;}
+  .salebar dl>div{flex:0 0 auto;min-width:min(50vw,180px);scroll-snap-align:start;
+    padding:9px 14px 8px;border:0;}
+  .salebar dl>div:last-child{padding-right:20px;}
+  .salebar dt{font-size:17px;}
+  .salebar dd{max-width:20ch;font-size:10.5px;}
 }
 @media (max-width:640px){
   .catrail ul{display:flex;grid-template-columns:none;overflow-x:auto;
@@ -273,8 +273,9 @@ html.hero-locked,html.hero-locked body{overflow:hidden;}
   .catrail-pic img{padding:4px;}
   .catrail-txt b{font-size:11px;}
   .catrail-txt i{font-size:10px;white-space:nowrap;}
-  .salebar dl>div{padding:17px 16px;}
-  .salebar dd{font-size:11.5px;}
+  .salebar dl>div{padding:8px 12px;}
+  .salebar dt{font-size:16px;}
+  .salebar dd{font-size:10px;margin-top:2px;}
 }
 
 /* ---------- hesitation nudge ---------- */
@@ -455,6 +456,48 @@ html.hero-locked,html.hero-locked body{overflow:hidden;}
   .spin-panel{transition:none;}
 }
 
+/* ---------- MOOD NOW red-circle FAB ---------- */
+.mood-fab{position:fixed;z-index:70;right:20px;bottom:20px;
+  display:grid;place-items:center;
+  width:78px;height:78px;padding:0;border:0;border-radius:50%;
+  background:radial-gradient(circle at 32% 30%, #ff5b6b 0%, #e50914 55%, #a80410 100%);
+  color:#fff;cursor:pointer;overflow:visible;isolation:isolate;
+  font-family:'One Night Sans','Assistant',sans-serif;font-size:11px;font-weight:800;
+  letter-spacing:.06em;text-transform:uppercase;line-height:1.05;text-align:center;
+  box-shadow:0 14px 30px rgba(220,10,25,.5),
+    inset 0 3px 8px rgba(255,255,255,.36),
+    inset 0 -4px 10px rgba(0,0,0,.28);
+  animation:mood-pulse 2.2s ease-in-out infinite;
+  transition:transform .25s cubic-bezier(.2,.8,.2,1);}
+.mood-fab:hover{transform:scale(1.08);}
+.mood-fab:focus-visible{outline:2px solid #fff;outline-offset:4px;}
+.mood-fab-ring{position:absolute;inset:-7px;border-radius:50%;
+  border:2px dashed rgba(255,255,255,.65);animation:fabspin 7s linear infinite;pointer-events:none;}
+.mood-fab-slices{position:absolute;inset:8px;border-radius:50%;pointer-events:none;z-index:0;
+  background:conic-gradient(from 0deg,
+    rgba(255,255,255,.16) 0deg 60deg, transparent 60deg 120deg,
+    rgba(255,255,255,.16) 120deg 180deg, transparent 180deg 240deg,
+    rgba(255,255,255,.16) 240deg 300deg, transparent 300deg 360deg);
+  animation:fabspin 12s linear infinite reverse;}
+.mood-fab-txt{position:relative;z-index:1;text-shadow:0 1px 3px rgba(0,0,0,.35);}
+@keyframes mood-pulse{
+  0%,100%{box-shadow:0 14px 30px rgba(220,10,25,.5),
+    0 0 0 0 rgba(255,60,80,.55),
+    inset 0 3px 8px rgba(255,255,255,.36),
+    inset 0 -4px 10px rgba(0,0,0,.28);}
+  50%{box-shadow:0 14px 30px rgba(220,10,25,.5),
+    0 0 0 18px rgba(255,60,80,0),
+    inset 0 3px 8px rgba(255,255,255,.36),
+    inset 0 -4px 10px rgba(0,0,0,.28);}
+}
+@media (max-width:820px){
+  .mood-fab{right:14px;bottom:82px;width:66px;height:66px;font-size:10px;}
+}
+@media (prefers-reduced-motion:reduce){
+  .mood-fab{animation:none;}
+  .mood-fab-ring,.mood-fab-slices{animation:none;}
+}
+
 /* ---------- spin the wheel ----------
    Six wedges, each one a deal that is genuinely live on this page. Nothing is
    invented: the percentages come from the same catalogue the cards use. */
@@ -624,23 +667,23 @@ html.hero-locked,html.hero-locked body{overflow:hidden;}
 .sc-row{display:flex;overflow:hidden;
   -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 4%,#000 96%,transparent 100%);
   mask-image:linear-gradient(90deg,transparent 0,#000 4%,#000 96%,transparent 100%);}
-.sc-track{display:flex;gap:18px;flex-shrink:0;
+.sc-track{display:flex;gap:12px;flex-shrink:0;
   animation:sc-scroll 44s linear infinite;will-change:transform;}
 .sc-row:nth-child(2) .sc-track{animation-duration:56s;}
 .sc-marquee:hover .sc-track,.sc-marquee:focus-within .sc-track{animation-play-state:paused;}
 @media (prefers-reduced-motion:reduce){.sc-track{animation:none;}}
 @keyframes sc-scroll{
   from{transform:translate3d(0,0,0);}
-  to{transform:translate3d(calc(-50% - 9px),0,0);}
+  to{transform:translate3d(calc(-50% - 6px),0,0);}
 }
 
 /* Glass card — see the bedroom bg through it, gloss layer + sweeping shine */
-.sc-card{position:relative;flex:0 0 clamp(240px,26vw,340px);display:flex;flex-direction:column;
+.sc-card{position:relative;flex:0 0 calc((min(1232px, 100vw - 48px) - 12px) / 2);display:flex;flex-direction:column;
   padding:0;color:#fff;text-align:left;cursor:pointer;font-family:inherit;
   border-radius:20px;overflow:hidden;isolation:isolate;
-  background:linear-gradient(140deg,rgba(255,255,255,.14) 0%,rgba(255,255,255,.06) 45%,rgba(255,255,255,.03) 100%);
-  backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);
-  border:1px solid rgba(255,255,255,.20);
+  background:linear-gradient(140deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,.04) 45%,rgba(255,255,255,.02) 100%);
+  backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%);
+  border:1px solid rgba(255,255,255,.24);
   box-shadow:0 22px 50px -14px rgba(0,4,24,.55),
     inset 0 1px 0 rgba(255,255,255,.30),
     inset 0 -1px 0 rgba(255,255,255,.06);
@@ -660,11 +703,11 @@ html.hero-locked,html.hero-locked body{overflow:hidden;}
 .sc-card:hover::after{transform:rotate(20deg) translateX(520%);}
 
 /* Media panel: inset cream tile so product photo pops */
-.sc-media{position:relative;display:block;aspect-ratio:1/1;
+.sc-media{position:relative;display:block;aspect-ratio:4/3;
   background:linear-gradient(160deg,rgba(255,247,232,.88) 0%,rgba(244,239,226,.72) 100%);
   overflow:hidden;margin:10px 10px 0;border-radius:14px;z-index:2;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.6);}
-.sc-media img{width:100%;height:100%;object-fit:contain;padding:12%;
+.sc-media img{width:100%;height:100%;object-fit:contain;padding:8%;
   transition:transform .5s cubic-bezier(.2,.7,.2,1);}
 .sc-card:hover .sc-media img{transform:scale(1.07);}
 
@@ -681,15 +724,15 @@ html.hero-locked,html.hero-locked body{overflow:hidden;}
   background:linear-gradient(140deg,var(--yellow),#ffd21a);}
 
 /* Body — text on glass, subtle shadow for legibility */
-.sc-body{position:relative;z-index:3;display:flex;flex-direction:column;gap:6px;padding:14px 16px 8px;}
-.sc-price{display:flex;align-items:baseline;gap:8px;
-  color:#fff;font-family:'One Night Sans',sans-serif;font-size:21px;font-weight:700;line-height:1;
+.sc-body{position:relative;z-index:3;display:flex;flex-direction:column;gap:5px;padding:10px 14px 6px;}
+.sc-price{display:flex;align-items:baseline;gap:7px;
+  color:#fff;font-family:'One Night Sans',sans-serif;font-size:18px;font-weight:700;line-height:1;
   text-shadow:0 1px 6px rgba(0,4,24,.55);}
 .sc-price i{font-style:normal;color:rgba(255,255,255,.55);font-size:12px;font-weight:400;
   text-decoration:line-through;text-decoration-thickness:1px;}
-.sc-name{color:#f0f2fa;font-size:13.5px;line-height:1.35;font-weight:500;
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
-  min-height:38px;text-shadow:0 1px 4px rgba(0,4,24,.5);}
+.sc-name{color:#f0f2fa;font-size:12px;line-height:1.35;font-weight:500;
+  display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;
+  min-height:16px;text-shadow:0 1px 4px rgba(0,4,24,.5);}
 
 /* Blinking save badge */
 .sc-save{align-self:flex-start;margin-top:2px;padding:4px 10px;border-radius:99px;
@@ -1204,9 +1247,9 @@ footer{padding:44px 0 26px;}
 })();
 
 /* ---------- sale figures ----------
-   The numbers are tied to scroll position rather than fired once: as the strip
-   travels up into view every figure counts toward its target, and it recomputes
-   on the way back down too. */
+   Continuous auto-count loop: each cycle counts from 0 to the target with an
+   easeOut curve, holds briefly, then restarts. Runs forever until the tab is
+   hidden, and pauses if the user prefers reduced motion. */
 (function(){
   var bar=document.querySelector('.salebar');
   if(!bar) return;
@@ -1221,48 +1264,23 @@ footer{padding:44px 0 26px;}
     else out=String(Math.round(v));
     el.textContent=pre+out+suf;
   }
-  function paint(p){
-    var e=1-Math.pow(1-p,3);              /* settles instead of stopping dead */
-    cells.forEach(function(el){ render(el,(+el.dataset.count)*e); });
-  }
 
-  if(calm){ paint(1); return; }
+  if(calm){ cells.forEach(function(el){ render(el,+el.dataset.count); }); return; }
 
-  /* 0 while the strip is still below the fold, 1 once it is fully on screen, so
-     the figures always come to rest on their true values */
-  function reach(){
-    var r=bar.getBoundingClientRect();
-    /* fully on screen means the figures must read exactly, not 99% of the way */
-    if(r.bottom<=innerHeight-6 && r.top>=-r.height) return 1;
-    var from=innerHeight,
-        to=Math.max(80, innerHeight - r.height - 40),
-        p=(from-r.top)/Math.max(from-to,1);
-    return p<0?0:(p>1?1:p);
-  }
-
-  var tick=false, last=-1, intro=0, t0=null, INTRO=1200;
-  function draw(){
-    var p=reach()*intro;
-    if(Math.abs(p-last)<0.004) return;
-    last=p; paint(p);
-  }
-  function onScroll(){
-    if(tick) return; tick=true;
-    requestAnimationFrame(function(){ tick=false; draw(); });
-  }
-
-  /* the strip is often already on screen at load, so run the count once on
-     arrival and let scroll drive it from then on */
-  function step(now){
+  var COUNT=1500, HOLD=1600, CYCLE=COUNT+HOLD, t0=null, raf;
+  function frame(now){
     if(t0===null) t0=now;
-    intro=Math.min(1,(now-t0)/INTRO);
-    draw();
-    if(intro<1) requestAnimationFrame(step);
+    var t=(now-t0) % CYCLE;
+    var p=t<COUNT ? (t/COUNT) : 1;
+    var e=1-Math.pow(1-p,3);
+    cells.forEach(function(el){ render(el,(+el.dataset.count)*e); });
+    raf=requestAnimationFrame(frame);
   }
-  addEventListener('scroll',onScroll,{passive:true});
-  addEventListener('resize',onScroll);
-  paint(0);
-  requestAnimationFrame(step);
+  raf=requestAnimationFrame(frame);
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){ cancelAnimationFrame(raf); }
+    else { t0=null; raf=requestAnimationFrame(frame); }
+  });
 })();
 
 /* ---------- in-card image galleries, moving as one ----------
@@ -1777,7 +1795,7 @@ footer{padding:44px 0 26px;}
 </article></div><button class="rail-arw next" type="button" aria-label="Scroll right">›</button></div>
   </div>
 </section>
-<section class="shop showcase" id="massagers" style="--bg:url(https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/1de8bb6737d6.webp)"><div class="showcase-veil" aria-hidden="true"></div><div class="shell"><div class="showcase-head"><div class="showcase-kicker">Grown-up play</div><h2 class="showcase-title">Massagers, after dark.</h2><p class="showcase-sub">Six devices, up to 45% off. Discreet packaging. Next-day dispatch.</p></div><div class="sc-marquee"><div class="sc-row"><div class="sc-track"><button class="sc-card" type="button" data-name="Durex Play Buzzy Rabbit" data-price="3999" data-mrp="5624" aria-label="Durex Play Buzzy Rabbit, ₹3,999"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/7cabd60697e9.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹3,999<i>₹5,624</i></span><span class="sc-name">Durex Play Buzzy Rabbit</span><span class="sc-save">Save ₹1,625</span></span><span class="sc-cta">Add to bag <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button><button class="sc-card" type="button" data-name="Durex Play Wild Wand" data-price="2699" data-mrp="4686" aria-label="Durex Play Wild Wand, ₹2,699"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/dceb531409d3.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹2,699<i>₹4,686</i></span><span class="sc-name">Durex Play Wild Wand</span><span class="sc-save">Save ₹1,987</span></span><span class="sc-cta">Add to bag <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button><button class="sc-card" type="button" data-name="Durex Intense Vibe Ring" data-price="499" data-mrp="749" aria-label="Durex Intense Vibe Ring, ₹499"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/a6e5174bfaa3.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹499<i>₹749</i></span><span class="sc-name">Durex Intense Vibe Ring</span><span class="sc-save">Save ₹250</span></span><span class="sc-cta">Add to bag <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button><button class="sc-card" type="button" data-name="Durex Play Buzzy Rabbit" data-price="3999" data-mrp="5624" aria-hidden="true" tabindex="-1"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/7cabd60697e9.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹3,999<i>₹5,624</i></span><span class="sc-name">Durex Play Buzzy Rabbit</span><span class="sc-save">Save ₹1,625</span></span><span class="sc-cta">Add to bag <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button><button class="sc-card" type="button" data-name="Durex Play Wild Wand" data-price="2699" data-mrp="4686" aria-hidden="true" tabindex="-1"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/dceb531409d3.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹2,699<i>₹4,686</i></span><span class="sc-name">Durex Play Wild Wand</span><span class="sc-save">Save ₹1,987</span></span><span class="sc-cta">Add to bag <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button><button class="sc-card" type="button" data-name="Durex Intense Vibe Ring" data-price="499" data-mrp="749" aria-hidden="true" tabindex="-1"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/a6e5174bfaa3.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹499<i>₹749</i></span><span class="sc-name">Durex Intense Vibe Ring</span><span class="sc-save">Save ₹250</span></span><span class="sc-cta">Add to bag <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button></div></div><div class="sc-row"><div class="sc-track"><button class="sc-card" type="button" data-name="Durex Play Ride & Vibe for Men" data-price="4199" data-mrp="5499" aria-label="Durex Play Ride & Vibe for Men, ₹4,199"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/f5910e841e03.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹4,199<i>₹5,499</i></span><span class="sc-name">Durex Play Ride & Vibe for Men</span><span class="sc-save">Save ₹1,300</span></span><span class="sc-cta">Add to bag <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button><button class="sc-card" type="button" data-name="Durex Play A-Game" data-price="2599" data-mrp="2999" aria-label="Durex Play A-Game, ₹2,599"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/2d74ae3f00ad.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹2,599<i>₹2,999</i></span><span class="sc-name">Durex Play A-Game</span><span class="sc-save">Save ₹400</span></span><span class="sc-cta">Add to bag <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button><button class="sc-card" type="button" data-name="Durex Slide & Ride Sleeve for Men" data-price="2399" data-mrp="3749" aria-label="Durex Slide & Ride Sleeve for Men, ₹2,399"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/787479dd4214.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹2,399<i>₹3,749</i></span><span class="sc-name">Durex Slide & Ride Sleeve for Men</span><span class="sc-save">Save ₹1,350</span></span><span class="sc-cta">Add to bag <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button><button class="sc-card" type="button" data-name="Durex Play Ride & Vibe for Men" data-price="4199" data-mrp="5499" aria-hidden="true" tabindex="-1"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/f5910e841e03.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹4,199<i>₹5,499</i></span><span class="sc-name">Durex Play Ride & Vibe for Men</span><span class="sc-save">Save ₹1,300</span></span><span class="sc-cta">Add to bag <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button><button class="sc-card" type="button" data-name="Durex Play A-Game" data-price="2599" data-mrp="2999" aria-hidden="true" tabindex="-1"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/2d74ae3f00ad.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹2,599<i>₹2,999</i></span><span class="sc-name">Durex Play A-Game</span><span class="sc-save">Save ₹400</span></span><span class="sc-cta">Add to bag <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button><button class="sc-card" type="button" data-name="Durex Slide & Ride Sleeve for Men" data-price="2399" data-mrp="3749" aria-hidden="true" tabindex="-1"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/787479dd4214.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹2,399<i>₹3,749</i></span><span class="sc-name">Durex Slide & Ride Sleeve for Men</span><span class="sc-save">Save ₹1,350</span></span><span class="sc-cta">Add to bag <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button></div></div></div></div></section>
+<section class="shop showcase" id="massagers" style="--bg:url(https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/1de8bb6737d6.webp)"><div class="showcase-veil" aria-hidden="true"></div><div class="shell"><div class="showcase-head"><div class="showcase-kicker">Grown-up play</div><h2 class="showcase-title">Massagers, after dark.</h2><p class="showcase-sub">Six devices, up to 45% off. Discreet packaging. Next-day dispatch.</p></div><div class="sc-marquee"><div class="sc-row"><div class="sc-track"><button class="sc-card" type="button" data-name="Durex Play Buzzy Rabbit" data-price="3999" data-mrp="5624" aria-label="Durex Play Buzzy Rabbit, ₹3,999"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/7cabd60697e9.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹3,999<i>₹5,624</i></span><span class="sc-name">Durex Play Buzzy Rabbit</span><span class="sc-save">Save ₹1,625</span></span><span class="sc-cta">Buy Now <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button><button class="sc-card" type="button" data-name="Durex Play Wild Wand" data-price="2699" data-mrp="4686" aria-label="Durex Play Wild Wand, ₹2,699"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/dceb531409d3.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹2,699<i>₹4,686</i></span><span class="sc-name">Durex Play Wild Wand</span><span class="sc-save">Save ₹1,987</span></span><span class="sc-cta">Buy Now <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button><button class="sc-card" type="button" data-name="Durex Intense Vibe Ring" data-price="499" data-mrp="749" aria-label="Durex Intense Vibe Ring, ₹499"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/a6e5174bfaa3.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹499<i>₹749</i></span><span class="sc-name">Durex Intense Vibe Ring</span><span class="sc-save">Save ₹250</span></span><span class="sc-cta">Buy Now <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button><button class="sc-card" type="button" data-name="Durex Play Buzzy Rabbit" data-price="3999" data-mrp="5624" aria-hidden="true" tabindex="-1"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/7cabd60697e9.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹3,999<i>₹5,624</i></span><span class="sc-name">Durex Play Buzzy Rabbit</span><span class="sc-save">Save ₹1,625</span></span><span class="sc-cta">Buy Now <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button><button class="sc-card" type="button" data-name="Durex Play Wild Wand" data-price="2699" data-mrp="4686" aria-hidden="true" tabindex="-1"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/dceb531409d3.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹2,699<i>₹4,686</i></span><span class="sc-name">Durex Play Wild Wand</span><span class="sc-save">Save ₹1,987</span></span><span class="sc-cta">Buy Now <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button><button class="sc-card" type="button" data-name="Durex Intense Vibe Ring" data-price="499" data-mrp="749" aria-hidden="true" tabindex="-1"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/a6e5174bfaa3.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹499<i>₹749</i></span><span class="sc-name">Durex Intense Vibe Ring</span><span class="sc-save">Save ₹250</span></span><span class="sc-cta">Buy Now <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button></div></div><div class="sc-row"><div class="sc-track"><button class="sc-card" type="button" data-name="Durex Play Ride & Vibe for Men" data-price="4199" data-mrp="5499" aria-label="Durex Play Ride & Vibe for Men, ₹4,199"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/f5910e841e03.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹4,199<i>₹5,499</i></span><span class="sc-name">Durex Play Ride & Vibe for Men</span><span class="sc-save">Save ₹1,300</span></span><span class="sc-cta">Buy Now <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button><button class="sc-card" type="button" data-name="Durex Play A-Game" data-price="2599" data-mrp="2999" aria-label="Durex Play A-Game, ₹2,599"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/2d74ae3f00ad.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹2,599<i>₹2,999</i></span><span class="sc-name">Durex Play A-Game</span><span class="sc-save">Save ₹400</span></span><span class="sc-cta">Buy Now <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button><button class="sc-card" type="button" data-name="Durex Slide & Ride Sleeve for Men" data-price="2399" data-mrp="3749" aria-label="Durex Slide & Ride Sleeve for Men, ₹2,399"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/787479dd4214.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹2,399<i>₹3,749</i></span><span class="sc-name">Durex Slide & Ride Sleeve for Men</span><span class="sc-save">Save ₹1,350</span></span><span class="sc-cta">Buy Now <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button><button class="sc-card" type="button" data-name="Durex Play Ride & Vibe for Men" data-price="4199" data-mrp="5499" aria-hidden="true" tabindex="-1"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/f5910e841e03.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹4,199<i>₹5,499</i></span><span class="sc-name">Durex Play Ride & Vibe for Men</span><span class="sc-save">Save ₹1,300</span></span><span class="sc-cta">Buy Now <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button><button class="sc-card" type="button" data-name="Durex Play A-Game" data-price="2599" data-mrp="2999" aria-hidden="true" tabindex="-1"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/2d74ae3f00ad.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹2,599<i>₹2,999</i></span><span class="sc-name">Durex Play A-Game</span><span class="sc-save">Save ₹400</span></span><span class="sc-cta">Buy Now <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button><button class="sc-card" type="button" data-name="Durex Slide & Ride Sleeve for Men" data-price="2399" data-mrp="3749" aria-hidden="true" tabindex="-1"><span class="sc-media"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/787479dd4214.webp" alt=""></span><span class="sc-atc" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="sc-body"><span class="sc-price">₹2,399<i>₹3,749</i></span><span class="sc-name">Durex Slide & Ride Sleeve for Men</span><span class="sc-save">Save ₹1,350</span></span><span class="sc-cta">Buy Now <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span></button></div></div></div></div></section>
 
 <section class="bundle" id="completeset" data-mode="count" data-target="4">
   <div class="shell">
@@ -2047,79 +2065,6 @@ footer{padding:44px 0 26px;}
 
 <!-- ============ REELS ============ -->
 
-<!-- ============ HOUSE OF GRATIFICATION ============ -->
-<section class="bundle" id="reachparis" data-mode="spend" data-target="25000">
-  <div class="shell">
-    <div class="sec-head">
-      <div><div class="sec-kicker">Spin &amp; Spend</div><h2>The road to Paris.<em>Give it a whirl.</em></h2></div>
-      <p>Every rupee earns a spin. Land a treat on the way. Land the trip at the top.</p>
-    </div>
-    <div class="paris-grid">
-      <div class="paris-left">
-        <div class="bun-meter">
-      <div class="bun-track"><i class="bun-fill"></i><div class="bun-marks"><span style="left:4.0%"><i></i><b>Spark</b></span><span style="left:16.0%"><i></i><b>Flame</b></span><span style="left:40.0%"><i></i><b>Inferno</b></span><span style="left:100.0%"><i></i><b>Paris</b></span></div></div>
-      <p class="bun-say">Add anything below and watch the tiers unlock.</p>
-    </div>
-    <div class="bun-rail"><button class="pick" type="button" data-name="Durex Play Buzzy Rabbit" data-price="3999" data-mrp="5624">
-  <span class="pick-pic is-photo"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/7cabd60697e9.webp" alt=""></span>
-  <span class="pick-txt"><b>Durex Play Buzzy Rabbit</b><i>₹3,999 &nbsp;<s>₹5,624</s></i></span>
-  <span class="pick-tick" aria-hidden="true"></span>
-</button><button class="pick" type="button" data-name="Durex Play Wild Wand" data-price="2699" data-mrp="4686">
-  <span class="pick-pic"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/7ff599f2c78b.webp" alt=""></span>
-  <span class="pick-txt"><b>Durex Play Wild Wand</b><i>₹2,699 &nbsp;<s>₹4,686</s></i></span>
-  <span class="pick-tick" aria-hidden="true"></span>
-</button><button class="pick" type="button" data-name="Durex Play Ride & Vibe for Men" data-price="4199" data-mrp="5499">
-  <span class="pick-pic is-photo"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/f5910e841e03.webp" alt=""></span>
-  <span class="pick-txt"><b>Durex Play Ride & Vibe for Men</b><i>₹4,199 &nbsp;<s>₹5,499</s></i></span>
-  <span class="pick-tick" aria-hidden="true"></span>
-</button><button class="pick" type="button" data-name="Durex Slide & Ride Sleeve for Men" data-price="2399" data-mrp="3749">
-  <span class="pick-pic is-photo"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/787479dd4214.webp" alt=""></span>
-  <span class="pick-txt"><b>Durex Slide & Ride Sleeve for Men</b><i>₹2,399 &nbsp;<s>₹3,749</s></i></span>
-  <span class="pick-tick" aria-hidden="true"></span>
-</button><button class="pick" type="button" data-name="Durex Playthings Hands Off Playful Restraints" data-price="1499" data-mrp="3499">
-  <span class="pick-pic"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/497c2f75be07.webp" alt=""></span>
-  <span class="pick-txt"><b>Durex Playthings Hands Off Playful Restraints</b><i>₹1,499 &nbsp;<s>₹3,499</s></i></span>
-  <span class="pick-tick" aria-hidden="true"></span>
-</button><button class="pick" type="button" data-name="Durex Extra Time Ultra Thin - 10 Condoms" data-price="349" data-mrp="550">
-  <span class="pick-pic"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/7ab2e0623cf5.webp" alt=""></span>
-  <span class="pick-txt"><b>Durex Extra Time Ultra Thin - 10 Condoms</b><i>₹349 &nbsp;<s>₹550</s></i></span>
-  <span class="pick-tick" aria-hidden="true"></span>
-</button><button class="pick" type="button" data-name="Durex Naturals Intimate Lubricant | Water-Based" data-price="499" data-mrp="875">
-  <span class="pick-pic"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/7d0c4491d6ac.webp" alt=""></span>
-  <span class="pick-txt"><b>Durex Naturals Intimate Lubricant | Water-Based</b><i>₹499 &nbsp;<s>₹875</s></i></span>
-  <span class="pick-tick" aria-hidden="true"></span>
-</button><button class="pick" type="button" data-name="Durex Playthings Turn On Card Game" data-price="1874" data-mrp="1874">
-  <span class="pick-pic"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/c2fdf05caeed.webp" alt=""></span>
-  <span class="pick-txt"><b>Durex Playthings Turn On Card Game</b><i>₹1,874</i></span>
-  <span class="pick-tick" aria-hidden="true"></span>
-</button></div>
-    <div class="bun-foot">
-      <dl><div><dt>Selected</dt><dd class="bun-n">0</dd></div>
-          <div><dt>Bundle total</dt><dd class="bun-t">&#8377;0</dd></div>
-          <div><dt>You save</dt><dd class="bun-s">&#8377;0</dd></div></dl>
-      <button class="bun-add" type="button" disabled>Add these to cart</button>
-        </div>
-      </div>
-      <aside class="paris-right">
-      <div class="spin-inline">
-        <h3>Give it a whirl</h3>
-        <p class="spin-sub">Add anything below. Every pick earns you a spin.</p>
-        <div class="spin-stage">
-          <span class="spin-needle" aria-hidden="true"></span>
-          <div class="spin-wheel" id="spinWheel" style="--slices:conic-gradient(#ffdf00 0.00deg 60.00deg,#2450e6 60.00deg 120.00deg,#00863f 120.00deg 180.00deg,#6b2bb0 180.00deg 240.00deg,#0b6fd8 240.00deg 300.00deg,#e11d63 300.00deg 360.00deg)">
-            <div class="spin-labels"><span style="--a:30.00deg"><b>₹500 off</b><i>This order</i></span><span style="--a:90.00deg"><b>Free shipping</b><i>Any order</i></span><span style="--a:150.00deg"><b>10% off next</b><i>Sitewide</i></span><span style="--a:210.00deg"><b>Free lube</b><i>In your bag</i></span><span style="--a:270.00deg"><b>₹1,000 off</b><i>Paris pack</i></span><span style="--a:330.00deg"><b>Spin again</b><i>One more shot</i></span></div>
-            <span class="spin-hub" aria-hidden="true"></span>
-          </div>
-        </div>
-        <p class="spin-out" id="spinOut" aria-live="polite"></p>
-        <button class="spin-go" id="spinGo" type="button" disabled>Add a pick to unlock</button>
-        <a class="spin-cta" id="spinCta" href="#wanted" hidden>Shop it</a>
-      </div>
-    </aside>
-  
-    </div>
-  </div>
-</section>
 
 
 <!-- ============ TRUST ============ -->
@@ -2195,7 +2140,7 @@ footer{padding:44px 0 26px;}
 </div>
 
 <script>
-var WHEEL_DATA = '₹500 off|This order|#reachparis;Free shipping|Any order|#wanted;10% off next|Sitewide|#reachparis;Free lube|In your bag|#lubes;₹1,000 off|Paris pack|#reachparis;Spin again|One more shot|#reachparis';
+var WHEEL_DATA = 'Playful|Playthings & games|#playthings;Sensual|Lubes & massagers|#lubes;Intense|Massagers, after dark|#massagers;Rush|Extra time condoms|#condoms;Grown-up|Performance kit|#performance;Wanted|Top of the sale|#wanted';
 /* ---------- preloader ---------- */
 (function(){
   var p=document.getElementById('pre'),t0=performance.now(),done=false;
@@ -2774,9 +2719,9 @@ var WHEEL_DATA = '₹500 off|This order|#reachparis;Free shipping|Any order|#wan
 })();
 
 /* ---------- sale figures ----------
-   The numbers are tied to scroll position rather than fired once: as the strip
-   travels up into view every figure counts toward its target, and it recomputes
-   on the way back down too. */
+   Continuous auto-count loop: each cycle counts from 0 to the target with an
+   easeOut curve, holds briefly, then restarts. Runs forever until the tab is
+   hidden, and pauses if the user prefers reduced motion. */
 (function(){
   var bar=document.querySelector('.salebar');
   if(!bar) return;
@@ -2791,48 +2736,23 @@ var WHEEL_DATA = '₹500 off|This order|#reachparis;Free shipping|Any order|#wan
     else out=String(Math.round(v));
     el.textContent=pre+out+suf;
   }
-  function paint(p){
-    var e=1-Math.pow(1-p,3);              /* settles instead of stopping dead */
-    cells.forEach(function(el){ render(el,(+el.dataset.count)*e); });
-  }
 
-  if(calm){ paint(1); return; }
+  if(calm){ cells.forEach(function(el){ render(el,+el.dataset.count); }); return; }
 
-  /* 0 while the strip is still below the fold, 1 once it is fully on screen, so
-     the figures always come to rest on their true values */
-  function reach(){
-    var r=bar.getBoundingClientRect();
-    /* fully on screen means the figures must read exactly, not 99% of the way */
-    if(r.bottom<=innerHeight-6 && r.top>=-r.height) return 1;
-    var from=innerHeight,
-        to=Math.max(80, innerHeight - r.height - 40),
-        p=(from-r.top)/Math.max(from-to,1);
-    return p<0?0:(p>1?1:p);
-  }
-
-  var tick=false, last=-1, intro=0, t0=null, INTRO=1200;
-  function draw(){
-    var p=reach()*intro;
-    if(Math.abs(p-last)<0.004) return;
-    last=p; paint(p);
-  }
-  function onScroll(){
-    if(tick) return; tick=true;
-    requestAnimationFrame(function(){ tick=false; draw(); });
-  }
-
-  /* the strip is often already on screen at load, so run the count once on
-     arrival and let scroll drive it from then on */
-  function step(now){
+  var COUNT=1500, HOLD=1600, CYCLE=COUNT+HOLD, t0=null, raf;
+  function frame(now){
     if(t0===null) t0=now;
-    intro=Math.min(1,(now-t0)/INTRO);
-    draw();
-    if(intro<1) requestAnimationFrame(step);
+    var t=(now-t0) % CYCLE;
+    var p=t<COUNT ? (t/COUNT) : 1;
+    var e=1-Math.pow(1-p,3);
+    cells.forEach(function(el){ render(el,(+el.dataset.count)*e); });
+    raf=requestAnimationFrame(frame);
   }
-  addEventListener('scroll',onScroll,{passive:true});
-  addEventListener('resize',onScroll);
-  paint(0);
-  requestAnimationFrame(step);
+  raf=requestAnimationFrame(frame);
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){ cancelAnimationFrame(raf); }
+    else { t0=null; raf=requestAnimationFrame(frame); }
+  });
 })();
 
 /* ---------- in-card image galleries, moving as one ----------
@@ -3036,5 +2956,36 @@ var WHEEL_DATA = '₹500 off|This order|#reachparis;Free shipping|Any order|#wan
   vids.forEach(function(v){ io.observe(v); });
 })();
 </script>
+
+<!-- MOOD NOW sticky wheel — red circle FAB, spin to jump to a section -->
+<button class="mood-fab" id="spinFab" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Open the Mood Now wheel">
+  <span class="mood-fab-ring" aria-hidden="true"></span>
+  <span class="mood-fab-slices" aria-hidden="true"></span>
+  <span class="mood-fab-txt">Mood<br>Now</span>
+</button>
+<div class="spin-scrim" id="spinScrim" hidden></div>
+<div class="spin-panel" id="spinPanel" role="dialog" aria-modal="true" aria-labelledby="spinTitle" hidden>
+  <button class="spin-x" id="spinX" type="button" aria-label="Close">×</button>
+  <h3 id="spinTitle">Pick your mood</h3>
+  <p class="spin-sub">Spin the wheel — it lands on a section made for that vibe.</p>
+  <div class="spin-stage">
+    <span class="spin-needle" aria-hidden="true"></span>
+    <div class="spin-wheel" id="spinWheel" style="--slices:conic-gradient(#e11d63 0deg 60deg,#6b2bb0 60deg 120deg,#2450e6 120deg 180deg,#00863f 180deg 240deg,#0b6fd8 240deg 300deg,#ffdf00 300deg 360deg)">
+      <div class="spin-labels">
+        <span style="--a:30deg"><b>Playful</b><i>Games &amp; kit</i></span>
+        <span style="--a:90deg"><b>Sensual</b><i>Lubes &amp; more</i></span>
+        <span style="--a:150deg"><b>Intense</b><i>Massagers</i></span>
+        <span style="--a:210deg"><b>Rush</b><i>Extra time</i></span>
+        <span style="--a:270deg"><b>Grown-up</b><i>Performance</i></span>
+        <span style="--a:330deg"><b>Wanted</b><i>Top of sale</i></span>
+      </div>
+      <span class="spin-hub" aria-hidden="true"></span>
+    </div>
+  </div>
+  <p class="spin-out" id="spinOut" aria-live="polite"></p>
+  <button class="spin-go" id="spinGo" type="button">Spin the wheel</button>
+  <a class="spin-cta" id="spinCta" href="#" hidden>Take me there</a>
+</div>
+
 </body>
 </html>
