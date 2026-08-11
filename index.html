@@ -1518,16 +1518,17 @@ footer{padding:56px 0 34px;}
   will-change:transform;}
 .hv-numeral img{display:block;height:100%;width:auto;
   filter:drop-shadow(0 8px 24px rgba(255,47,146,.35));}
-/* 6 starts at -14vw, ends at -1vw (locked position) — 3 stages of convergence */
+/* 6 starts at -12vw (clearly apart), ends at 0 (fully touching the 9). 
+   Same magnitude on the 9 mirrored. Slight lift as they slot together. */
 .hv-six{
   transform:
-    translate3d(calc(-14vw + var(--hp) * 13vw), calc(var(--hp) * -2px), 0)
+    translate3d(calc(-12vw + var(--hp) * 12vw), 0, 0)
     rotate(calc((1 - var(--hp)) * -7deg));
   transform-origin:right center;
   transition:transform .06s linear;}
 .hv-nine{
   transform:
-    translate3d(calc(14vw - var(--hp) * 13vw), calc(var(--hp) * -2px), 0)
+    translate3d(calc(12vw - var(--hp) * 12vw), 0, 0)
     rotate(calc((1 - var(--hp)) * 7deg));
   transform-origin:left center;
   transition:transform .06s linear;}
@@ -1607,13 +1608,15 @@ footer{padding:56px 0 34px;}
   .hv-numeral{width:66vw;}
   .hv-title{font-size:clamp(19px,5vw,27px);}
   .hv-meta{font-size:10px;gap:7px;}
-  /* on mobile the 6 and 9 start closer together — narrower viewport */
+  /* on mobile the 6 and 9 start with a smaller offset — narrower viewport */
   .hv-six{transform:
-    translate3d(calc(-9vw + var(--hp) * 8vw), calc(var(--hp) * -2px), 0)
+    translate3d(calc(-16vw + var(--hp) * 16vw), 0, 0)
     rotate(calc((1 - var(--hp)) * -6deg));}
   .hv-nine{transform:
-    translate3d(calc(9vw - var(--hp) * 8vw), calc(var(--hp) * -2px), 0)
+    translate3d(calc(16vw - var(--hp) * 16vw), 0, 0)
     rotate(calc((1 - var(--hp)) * 6deg));}
+  .hv-numeral{width:55vw;
+    height:calc(55vw * 0.62);}
 }
 
 
