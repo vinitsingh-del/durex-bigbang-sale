@@ -1480,16 +1480,20 @@ footer{padding:56px 0 34px;}
 
 
 /* V1 feedback #3: catrail cards — bigger product image, tighter container */
-.catrail li a{padding:8px 12px 8px 8px !important;gap:10px !important;}
-.catrail-pic{width:52px !important;height:52px !important;border-radius:10px !important;}
+.catrail li a{padding:10px 14px 10px 10px !important;gap:12px !important;}
+.catrail-pic{flex:0 0 56px !important;width:56px !important;height:56px !important;border-radius:12px !important;}
 .catrail-pic img{padding:6% !important;}
 .catrail-txt b{font-size:13.5px !important;}
 .catrail-txt i{font-size:11px !important;}
 @media (max-width:820px){
-  .catrail li a{padding:6px 10px 6px 6px !important;gap:8px !important;}
-  .catrail-pic{width:44px !important;height:44px !important;}
-  .catrail-txt b{font-size:12.5px !important;}
-  .catrail-txt i{font-size:10.5px !important;}
+  .catrail li a{padding:8px 12px 8px 8px !important;gap:10px !important;}
+  /* flex-basis must be overridden explicitly — the base rule sets `flex:0 0 28px`
+     which wins over plain `width` in flex layout. */
+  .catrail-pic{flex:0 0 48px !important;width:48px !important;height:48px !important;
+    border-radius:10px !important;}
+  .catrail-pic img{padding:5px !important;}
+  .catrail-txt b{font-size:13px !important;}
+  .catrail-txt i{font-size:11px !important;}
 }
 
 
@@ -2678,11 +2682,30 @@ var WHEEL_DATA = 'Playful|Playthings & games|#playthings;Sensual|Lubes & massage
     removeEventListener('keydown',onKey);
   }
   function setLock(v){
-    locked=v;
+    /* V1 feedback #1 (Apple-style): no lock at all. Scroll always native.
+       The hero animation is driven by scroll position via onHeroScroll below. */
+    locked = false;
     document.documentElement.classList.toggle('hero-locked',v);
-    locked = false;  /* V1 feedback #1: never actually lock — always allow scroll */
-    if(v) attach(); else detach();
   }
+  /* Apple macbook-neo-style: hero progress tracks scrollY over the first
+     viewport height. As user scrolls naturally, orbit rotates + fades. */
+  var heroPin = document.getElementById('heroPin'),
+      heroSection = document.querySelector('.hero');
+  var heroScrollRAF = 0;
+  function onHeroScroll(){
+    if(heroScrollRAF) return;
+    heroScrollRAF = requestAnimationFrame(function(){
+      heroScrollRAF = 0;
+      if(!heroSection) return;
+      var pinH = heroPin ? heroPin.offsetHeight : innerHeight;
+      /* progress: 0 at top, 1 after scrolling ~1 pin height */
+      var p = clamp(pageYOffset / (pinH * 0.9));
+      prog = p;
+      frame(p);
+    });
+  }
+  addEventListener('scroll', onHeroScroll, {passive:true});
+  addEventListener('resize', onHeroScroll, {passive:true});
   function advance(delta){
     prog=clamp(prog+delta/LOCK);
     frame(prog);
