@@ -1465,7 +1465,7 @@ footer{padding:56px 0 34px;}
    (hero progress, 0 → 1) that JS sets from scrollY. No wheel hijack.
    =================================================================== */
 .hero-v2{--hp:0;position:relative;background:#080d24;overflow:hidden;isolation:isolate;}
-.hv-pin{position:relative;height:clamp(560px,88svh,780px);overflow:hidden;}
+.hv-pin{position:relative;height:clamp(475px,75svh,663px);overflow:hidden;}
 
 /* video kept as atmospheric backdrop — heavily softened */
 .hv-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;
@@ -1478,17 +1478,17 @@ footer{padding:56px 0 34px;}
 }
 .hv-grid{position:absolute;inset:0;z-index:2;width:100%;height:100%;pointer-events:none;
   opacity:calc(1 - var(--hp) * .35);
-  transform:translate3d(0, calc(var(--hp) * -30px), 0);}
+  transform:translate3d(0, calc(var(--hp) * -25px), 0);}
 
 /* stage: centered content, everything anchored to viewport middle */
 .hv-stage{position:relative;z-index:3;height:100%;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;padding:clamp(24px,3vw,48px);}
+  align-items:center;justify-content:center;padding:clamp(20px,2.6vw,40px);}
 
-/* corner chapter indicator — Apple's aesthetic detail */
-.hv-chapter{position:absolute;top:clamp(80px,10vh,100px);right:clamp(20px,3vw,40px);
+/* corner chapter indicator */
+.hv-chapter{position:absolute;top:clamp(68px,8.5vh,86px);right:clamp(18px,2.6vw,34px);
   display:flex;align-items:center;gap:10px;
   font-family:'One Night Sans','Assistant',sans-serif;
-  color:rgba(255,255,255,.55);font-size:11px;font-weight:800;letter-spacing:.16em;
+  color:rgba(255,255,255,.55);font-size:10px;font-weight:800;letter-spacing:.16em;
   opacity:calc(1 - var(--hp) * 1.5);}
 .hv-chapter-num{color:#fff;}
 .hv-chapter-dots{display:flex;gap:5px;}
@@ -1496,33 +1496,45 @@ footer{padding:56px 0 34px;}
   transition:background .3s,box-shadow .3s;}
 .hv-chapter-dots i.on{background:#ff2f92;box-shadow:0 0 10px rgba(255,47,146,.7);}
 
-/* kicker: subtle uppercase label above the 69 */
-.hv-kicker{margin-bottom:clamp(20px,2.4vw,32px);
-  opacity:calc(1 - var(--hp) * 1.8);transform:translate3d(0, calc(var(--hp) * -24px), 0);}
-.hv-kicker span{display:inline-block;padding:7px 16px;border-radius:999px;
+/* kicker */
+.hv-kicker{margin-bottom:clamp(16px,2vw,27px);
+  opacity:calc(1 - var(--hp) * 1.8);transform:translate3d(0, calc(var(--hp) * -20px), 0);}
+.hv-kicker span{display:inline-block;padding:6px 14px;border-radius:999px;
   border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.03);
   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
   color:rgba(255,255,255,.66);font-family:'One Night Sans','Assistant',sans-serif;
-  font-size:clamp(10px,.9vw,12px);font-weight:800;letter-spacing:.28em;text-transform:uppercase;}
+  font-size:clamp(9px,.8vw,11px);font-weight:800;letter-spacing:.28em;text-transform:uppercase;}
 
-/* the numeral 69 — original stroke-only paths, split into 6 and 9 */
-.hv-numeral{position:relative;width:clamp(300px,44vw,540px);height:auto;
-  margin-bottom:clamp(18px,2.2vw,32px);
+/* numeral — now uses the extracted 6 and 9 images side by side.
+   Progressive convergence: they start far apart with a slight outward tilt,
+   flow closer through mid-scroll, lock into the tight "69" position at end. */
+.hv-numeral{position:relative;width:clamp(255px,37vw,460px);
+  height:calc(clamp(255px,37vw,460px) * 0.62);
+  margin-bottom:clamp(14px,1.8vw,27px);
+  display:flex;align-items:center;justify-content:center;
   transform:
     scale(calc(1 - var(--hp) * .18))
-    translate3d(0, calc(var(--hp) * -70px), 0);
+    translate3d(0, calc(var(--hp) * -55px), 0);
   will-change:transform;}
-.hv-numeral svg{display:block;width:100%;height:auto;overflow:visible;}
-.hv-numeral path{filter:drop-shadow(0 6px 22px rgba(255,47,146,.35));}
-/* 6 and 9 drift toward each other as user scrolls back up (nice reverse reveal) */
-.hv-six{transform:translate3d(calc((1 - var(--hp)) * -6vw), 0, 0);
-  transform-origin:200px 250px;transition:transform .05s linear;}
-.hv-nine{transform:translate3d(calc((1 - var(--hp)) * 6vw), 0, 0);
-  transform-origin:600px 250px;transition:transform .05s linear;}
+.hv-numeral img{display:block;height:100%;width:auto;
+  filter:drop-shadow(0 8px 24px rgba(255,47,146,.35));}
+/* 6 starts at -14vw, ends at -1vw (locked position) — 3 stages of convergence */
+.hv-six{
+  transform:
+    translate3d(calc(-14vw + var(--hp) * 13vw), calc(var(--hp) * -2px), 0)
+    rotate(calc((1 - var(--hp)) * -7deg));
+  transform-origin:right center;
+  transition:transform .06s linear;}
+.hv-nine{
+  transform:
+    translate3d(calc(14vw - var(--hp) * 13vw), calc(var(--hp) * -2px), 0)
+    rotate(calc((1 - var(--hp)) * 7deg));
+  transform-origin:left center;
+  transition:transform .06s linear;}
 
-/* thin ring badge — floats top-right of the numeral */
-.hv-ring{position:absolute;top:clamp(96px,14vh,140px);right:clamp(16px,3vw,44px);
-  width:clamp(120px,15vw,180px);height:auto;z-index:4;
+/* thin ring badge — reduced by 15% */
+.hv-ring{position:absolute;top:clamp(82px,12vh,120px);right:clamp(14px,2.6vw,38px);
+  width:clamp(100px,13vw,150px);height:auto;z-index:4;
   transform:
     scale(calc(1 - var(--hp) * .35))
     rotate(calc(var(--hp) * -18deg));
@@ -1535,14 +1547,14 @@ footer{padding:56px 0 34px;}
   to  {transform:scale(calc(1 - var(--hp) * .35)) rotate(calc(var(--hp) * -18deg + 360deg));}
 }
 
-/* orbit of drifting dots — small pink points parallax at different depths */
+/* orbit of drifting dots */
 .hv-orbit{position:absolute;top:50%;left:50%;
-  width:clamp(420px,64vw,760px);height:clamp(420px,64vw,760px);
-  transform:translate3d(-50%, calc(-50% + var(--hp) * -40px), 0);
+  width:clamp(360px,54vw,645px);height:clamp(360px,54vw,645px);
+  transform:translate3d(-50%, calc(-50% + var(--hp) * -34px), 0);
   pointer-events:none;z-index:1;}
-.hv-dot{position:absolute;width:8px;height:8px;border-radius:50%;
+.hv-dot{position:absolute;width:7px;height:7px;border-radius:50%;
   background:linear-gradient(135deg, #ff5b85, #ff2f92);
-  box-shadow:0 0 12px rgba(255,47,146,.55), 0 0 3px rgba(255,255,255,.35) inset;}
+  box-shadow:0 0 10px rgba(255,47,146,.55), 0 0 3px rgba(255,255,255,.35) inset;}
 .hv-dot i{position:absolute;inset:-6px;border:1px solid rgba(255,47,146,.35);border-radius:50%;
   animation:hvDotPulse 2.4s ease-in-out infinite;}
 @keyframes hvDotPulse{
@@ -1554,47 +1566,54 @@ footer{padding:56px 0 34px;}
 .hv-dot-3{bottom:18%;left:8%;animation:hvDrift3 16s ease-in-out infinite alternate;}
 .hv-dot-4{bottom:22%;right:14%;animation:hvDrift1 15s ease-in-out infinite alternate;}
 .hv-dot-5{top:60%;right:42%;animation:hvDrift2 13s ease-in-out infinite alternate;}
-@keyframes hvDrift1{ 0%{transform:translate(0,0)} 100%{transform:translate(20px, -14px)} }
-@keyframes hvDrift2{ 0%{transform:translate(0,0)} 100%{transform:translate(-18px, 20px)} }
-@keyframes hvDrift3{ 0%{transform:translate(0,0)} 100%{transform:translate(24px, 10px)} }
+@keyframes hvDrift1{ 0%{transform:translate(0,0)} 100%{transform:translate(17px, -12px)} }
+@keyframes hvDrift2{ 0%{transform:translate(0,0)} 100%{transform:translate(-15px, 17px)} }
+@keyframes hvDrift3{ 0%{transform:translate(0,0)} 100%{transform:translate(20px, 8px)} }
 
-/* title */
-.hv-title{margin:0 0 clamp(10px,1.4vw,16px);color:#fff;
+/* title — reduced 15% */
+.hv-title{margin:0 0 clamp(8px,1.2vw,14px);color:#fff;
   font-family:'One Night Sans','Assistant',sans-serif;
-  font-size:clamp(26px,3.8vw,48px);font-weight:800;letter-spacing:-.02em;text-align:center;
-  opacity:calc(1 - var(--hp) * .8);transform:translate3d(0, calc(var(--hp) * -30px), 0);}
+  font-size:clamp(22px,3.2vw,40px);font-weight:800;letter-spacing:-.02em;text-align:center;
+  opacity:calc(1 - var(--hp) * .8);transform:translate3d(0, calc(var(--hp) * -25px), 0);}
 .hv-title span{display:inline-block;background:linear-gradient(92deg, #fff 0%, #ffdf00 55%, #fff 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;}
 
-/* meta line */
-.hv-meta{display:flex;align-items:center;gap:12px;
+/* meta line — reduced 15% */
+.hv-meta{display:flex;align-items:center;gap:10px;
   color:rgba(255,255,255,.65);font-family:'Assistant',sans-serif;
-  font-size:clamp(11px,1.05vw,13px);font-weight:500;letter-spacing:.03em;
-  opacity:calc(1 - var(--hp) * .9);transform:translate3d(0, calc(var(--hp) * -30px), 0);}
+  font-size:clamp(10px,.9vw,11px);font-weight:500;letter-spacing:.03em;
+  opacity:calc(1 - var(--hp) * .9);transform:translate3d(0, calc(var(--hp) * -25px), 0);}
 .hv-meta-a em{color:#ffdf00;font-style:normal;margin:0 2px;font-weight:700;}
 .hv-meta-sep{color:rgba(255,255,255,.28);}
 
 /* scroll hint at bottom */
-.hv-scroll-hint{position:absolute;bottom:22px;left:50%;
+.hv-scroll-hint{position:absolute;bottom:18px;left:50%;
   display:flex;flex-direction:column;align-items:center;gap:4px;
   color:rgba(255,255,255,.55);font-family:'One Night Sans','Assistant',sans-serif;
-  font-size:10px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
+  font-size:9px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
   opacity:calc(1 - var(--hp) * 2.4);
   animation:hvHintBounce 2.4s ease-in-out infinite;}
-.hv-scroll-hint svg{width:14px;height:14px;color:rgba(255,255,255,.55);}
+.hv-scroll-hint svg{width:12px;height:12px;color:rgba(255,255,255,.55);}
 @keyframes hvHintBounce{
   0%,100%{transform:translate(-50%, 0);}
   50%{transform:translate(-50%, 5px);}
 }
 
-/* mobile */
+/* mobile — even smaller so it fits fully in view */
 @media (max-width:820px){
-  .hv-pin{height:clamp(500px,78svh,660px);}
-  .hv-ring{width:96px;top:88px;right:12px;}
-  .hv-chapter{top:76px;right:16px;font-size:10px;}
-  .hv-numeral{width:78vw;}
-  .hv-title{font-size:clamp(22px,6vw,32px);}
-  .hv-meta{font-size:11px;gap:8px;}
+  .hv-pin{height:clamp(430px,66svh,560px);}
+  .hv-ring{width:82px;top:72px;right:10px;}
+  .hv-chapter{top:64px;right:14px;font-size:9px;}
+  .hv-numeral{width:66vw;}
+  .hv-title{font-size:clamp(19px,5vw,27px);}
+  .hv-meta{font-size:10px;gap:7px;}
+  /* on mobile the 6 and 9 start closer together — narrower viewport */
+  .hv-six{transform:
+    translate3d(calc(-9vw + var(--hp) * 8vw), calc(var(--hp) * -2px), 0)
+    rotate(calc((1 - var(--hp)) * -6deg));}
+  .hv-nine{transform:
+    translate3d(calc(9vw - var(--hp) * 8vw), calc(var(--hp) * -2px), 0)
+    rotate(calc((1 - var(--hp)) * 6deg));}
 }
 
 
@@ -1815,38 +1834,8 @@ footer{padding:56px 0 34px;}
       </div>
 
       <div class="hv-numeral" aria-hidden="true" data-hv="numeral">
-        <svg viewBox="0 0 800 460" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="hvSix" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#ff5b85"/>
-              <stop offset="1" stop-color="#c945ff"/>
-            </linearGradient>
-            <linearGradient id="hvNine" x1="0" y1="1" x2="1" y2="0">
-              <stop offset="0" stop-color="#c945ff"/>
-              <stop offset="1" stop-color="#66a6ff"/>
-            </linearGradient>
-          </defs>
-          <!-- '6' — geometric closed loop drawn as stroke-only -->
-          <g class="hv-six" data-hv="six">
-            <path pathLength="1000" fill="none" stroke="url(#hvSix)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"
-              d="M300,60
-                 C170,90 100,210 100,340
-                 C100,430 180,470 250,470
-                 C325,470 400,410 400,330
-                 C400,260 335,210 260,210
-                 C195,210 140,265 130,335"/>
-          </g>
-          <!-- '9' — same shape rotated 180° -->
-          <g class="hv-nine" data-hv="nine">
-            <path pathLength="1000" fill="none" stroke="url(#hvNine)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"
-              d="M500,400
-                 C630,370 700,250 700,120
-                 C700,30 620,-10 550,-10
-                 C475,-10 400,50 400,130
-                 C400,200 465,250 540,250
-                 C605,250 660,195 670,125"/>
-          </g>
-        </svg>
+        <img class="hv-six"  src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/hero-six.webp"  alt="" fetchpriority="high">
+        <img class="hv-nine" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/hero-nine.webp" alt="" fetchpriority="high">
       </div>
 
       <!-- sale ring badge - thin circular ring with SALE / 57% OFF text -->
