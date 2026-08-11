@@ -202,8 +202,8 @@ header{position:fixed;top:0;left:0;right:0;z-index:90;height:var(--nav);display:
   /* product-rail carousel arrows — bump size AND top offset to keep centered */
   .pc-rail .rail-arw{width:44px;height:44px;top:calc(50% - 22px);}
   /* catrail sticky right below the shorter mobile nav — no gap */
-  .catrail{margin:0;background:#050d24;border-top:0;
-    border-bottom:1px solid rgba(255,255,255,.10);}
+  .catrail{margin:0;background:linear-gradient(180deg,rgba(240,246,255,.75),rgba(220,235,255,.55));border-top:0;
+    border-bottom:1px solid rgba(255,255,255,.55);}
 }
 
 /* =========================================================
@@ -605,15 +605,16 @@ html.hero-locked,html.hero-locked body{overflow:auto;}  /* V1 feedback #1: no sc
 .hero-cta .btn-o:hover>i{color:var(--yellow);}
 @media (max-width:640px){.hero-cta{flex-direction:column;gap:14px;}}
 
-/* Catrail — better sticky separation from hero, softer tile hover with a yellow
-   underline-reveal instead of the flat blue background flash */
-.catrail{background:linear-gradient(180deg,rgba(4,10,42,.88),rgba(4,10,42,.94));
-  backdrop-filter:blur(10px);
-  box-shadow:0 1px 0 rgba(255,255,255,.04) inset,0 12px 24px -20px rgba(0,0,0,.8);}
+/* Catrail — blue/white glassmorphism instead of the old dark navy */
+.catrail{background:linear-gradient(180deg,rgba(240,246,255,.75),rgba(220,235,255,.55));
+  backdrop-filter:blur(16px) saturate(140%);
+  -webkit-backdrop-filter:blur(16px) saturate(140%);
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 6px 18px -12px rgba(15,45,95,.25);
+  border-bottom:1px solid rgba(255,255,255,.55);}
 .catrail a{position:relative;transition:background .2s ease;}
-.catrail a:hover{background:linear-gradient(180deg,rgba(11,30,80,.5),rgba(11,30,80,.24));}
+.catrail a:hover{background:linear-gradient(180deg,rgba(180,215,255,.35),rgba(140,190,240,.20));}
 .catrail a::after{content:'';position:absolute;left:14px;right:14px;bottom:0;height:2px;
-  background:var(--yellow);transform:scaleX(0);transform-origin:left center;
+  background:#2662b8;transform:scaleX(0);transform-origin:left center;
   transition:transform .3s cubic-bezier(.2,.7,.2,1);}
 .catrail a:hover::after{transform:scaleX(1);}
 .catrail-pic{transition:transform .3s cubic-bezier(.2,.7,.2,1);}
