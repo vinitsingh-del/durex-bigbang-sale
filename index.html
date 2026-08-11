@@ -61,7 +61,7 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
 }
 @media (prefers-reduced-motion:reduce){.mood-fab::before{animation:none;}}
 
-body{background:radial-gradient(120% 90% at 82% -8%,#4a7cff 0%,rgba(74,124,255,0) 55%),radial-gradient(96% 84% at 6% 104%,#8a4dd4 0%,rgba(138,77,212,0) 60%),radial-gradient(80% 65% at 50% 30%,rgba(255,143,182,.16) 0%,rgba(255,143,182,0) 65%),linear-gradient(180deg,#1e3178 0%,#233682 60%,#1e2c68 100%);
+body{background:radial-gradient(120% 90% at 82% -8%,#7cb3ff 0%,rgba(124,179,255,0) 55%),radial-gradient(96% 84% at 6% 104%,#3a80d4 0%,rgba(58,128,212,0) 60%),radial-gradient(80% 65% at 50% 30%,rgba(220,235,255,.55) 0%,rgba(220,235,255,0) 65%),linear-gradient(180deg,#f0f6ff 0%,#dbe8fa 60%,#b8ceec 100%);
   background-attachment:fixed;
   /* oversized so there is somewhere to travel, then drifted very slowly - one
      continuous pass, no seam, nothing that reads as a loop point */
@@ -1469,91 +1469,94 @@ footer{padding:56px 0 34px;}
    Every visual state driven by --hp (0 → 1) via native scroll.
    =================================================================== */
 /* ===================================================================
-   HERO V2 — scroll-jack + brighter palette + glow-burst on lock
+   HERO V2 — scroll-jack + blue/white palette + scale-up merge
    =================================================================== */
 .hero-v2{--hp:0;position:relative;isolation:isolate;overflow:hidden;
   height:55vh;min-height:400px;
-  /* MUCH brighter palette — cream/rose base with cool color washes.
-     No dark navy anywhere. Video removed so no product bleed-through. */
+  /* BLUE/WHITE only — no purple anywhere. Soft white base with blue washes. */
   background:
-    radial-gradient(90% 65% at 15% 15%, rgba(255,180,220,.45) 0%, rgba(255,180,220,0) 55%),
-    radial-gradient(85% 65% at 85% 85%, rgba(150,200,255,.42) 0%, rgba(150,200,255,0) 60%),
-    radial-gradient(70% 70% at 50% 40%, rgba(255,225,150,.28) 0%, rgba(255,225,150,0) 65%),
-    linear-gradient(180deg, #f5e8f2 0%, #ecdff0 60%, #dbd0e8 100%);}
+    radial-gradient(85% 65% at 15% 15%, rgba(180,215,255,.55) 0%, rgba(180,215,255,0) 55%),
+    radial-gradient(80% 65% at 85% 85%, rgba(140,190,240,.50) 0%, rgba(140,190,240,0) 60%),
+    radial-gradient(70% 70% at 50% 40%, rgba(220,235,255,.35) 0%, rgba(220,235,255,0) 65%),
+    linear-gradient(180deg, #ffffff 0%, #edf4fc 60%, #d5e3f7 100%);}
 .hv-pin{position:relative;height:100%;width:100%;overflow:hidden;}
 
-/* Hide the video entirely — was causing the dark read. Kept in DOM
-   as a no-op so JS references don't break. */
 .hv-video{display:none !important;}
 .hv-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
   background:
-    radial-gradient(60% 50% at 50% 40%, rgba(255,255,255,.12) 0%, rgba(255,255,255,0) 55%),
-    linear-gradient(180deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,.14) 100%);}
+    radial-gradient(60% 50% at 50% 40%, rgba(255,255,255,.20) 0%, rgba(255,255,255,0) 55%),
+    linear-gradient(180deg, rgba(255,255,255,.15) 0%, rgba(255,255,255,0) 40%, rgba(214,230,248,.20) 100%);}
 .hv-grid{position:absolute;inset:0;z-index:2;width:100%;height:100%;pointer-events:none;
   opacity:calc(.55 - var(--hp) * .3);
   transform:translate3d(0, calc(var(--hp) * -18px), 0);}
-.hv-grid path{stroke:rgba(120,80,180,.14) !important;}
-.hv-grid circle:nth-of-type(1){fill:rgba(255,120,180,.14) !important;}
-.hv-grid circle:nth-of-type(2){fill:rgba(120,180,255,.14) !important;}
+.hv-grid path{stroke:rgba(50,100,180,.14) !important;}
+.hv-grid circle:nth-of-type(1){fill:rgba(120,180,255,.14) !important;}
+.hv-grid circle:nth-of-type(2){fill:rgba(80,150,230,.14) !important;}
 
 .hv-stage{position:relative;z-index:3;height:100%;display:flex;flex-direction:column;
   align-items:center;justify-content:center;padding:clamp(14px,2vw,28px);}
 
-/* chapter indicator — now on light bg so darker text */
+/* chapter indicator — dark navy on light bg */
 .hv-chapter{position:absolute;top:clamp(56px,7vh,72px);right:clamp(14px,2vw,26px);
   display:flex;align-items:center;gap:8px;
   font-family:'One Night Sans','Assistant',sans-serif;
-  color:rgba(60,30,90,.55);font-size:9px;font-weight:800;letter-spacing:.14em;
+  color:rgba(15,45,95,.55);font-size:9px;font-weight:800;letter-spacing:.14em;
   opacity:calc(1 - var(--hp) * 1.5);}
-.hv-chapter-num{color:#3a1e6d;}
+.hv-chapter-num{color:#0d2b5c;}
 .hv-chapter-dots{display:flex;gap:4px;}
-.hv-chapter-dots i{width:4px;height:4px;border-radius:50%;background:rgba(60,30,90,.22);
+.hv-chapter-dots i{width:4px;height:4px;border-radius:50%;background:rgba(15,45,95,.22);
   transition:background .3s,box-shadow .3s;}
-.hv-chapter-dots i.on{background:#ff2f92;box-shadow:0 0 8px rgba(255,47,146,.7);}
+.hv-chapter-dots i.on{background:#2662b8;box-shadow:0 0 8px rgba(38,98,184,.75);}
 
 /* kicker */
 .hv-kicker{margin-bottom:clamp(12px,1.5vw,20px);
   opacity:calc(1 - var(--hp) * 1.8);transform:translate3d(0, calc(var(--hp) * -16px), 0);}
 .hv-kicker span{display:inline-block;padding:5px 12px;border-radius:999px;
-  border:1px solid rgba(60,30,90,.16);background:rgba(255,255,255,.35);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  color:rgba(60,30,90,.72);font-family:'One Night Sans','Assistant',sans-serif;
+  border:1px solid rgba(15,45,95,.16);background:rgba(255,255,255,.55);
+  backdrop-filter:blur(12px) saturate(140%);-webkit-backdrop-filter:blur(12px) saturate(140%);
+  color:rgba(15,45,95,.72);font-family:'One Night Sans','Assistant',sans-serif;
   font-size:clamp(8px,.7vw,10px);font-weight:800;letter-spacing:.26em;text-transform:uppercase;}
 
-/* the numeral — hand-drawn SVG '6' and '9' */
+/* the numeral — scale up from small to full as they converge and meet */
 .hv-numeral{position:relative;width:clamp(180px,27vw,336px);
   height:calc(clamp(180px,27vw,336px) * 0.5);
   margin-bottom:clamp(10px,1.4vw,20px);
   will-change:transform;
-  transform:
-    scale(calc(1 - var(--hp) * .10 + var(--hp) * 0)) /* base scale flat, burst adds on top */
-    translate3d(0, calc(var(--hp) * -20px), 0);}
+  transform:translate3d(0, calc(var(--hp) * -20px), 0);}
 .hv-numeral .hv-svg{display:block;width:100%;height:100%;overflow:visible;}
 
+/* Each digit: SCALE UP + slide together + un-tilt as hp advances.
+   At hp=0 → scale(.55), pushed 7vw outward, rotated 8° outward: small & apart.
+   At hp=1 → scale(1),   at their SVG-defined positions x=330/470 which put
+   them touching in the middle: big & merged. */
 .hv-six, .hv-nine{transform-box:fill-box;transform-origin:center center;
   transition:transform .06s linear;will-change:transform;}
 .hv-six{
   transform:
-    translate(calc(-9vw + var(--hp) * 9vw), 0)
-    rotate(calc((1 - var(--hp)) * -6deg));}
+    translate(calc(-7vw + var(--hp) * 7vw), 0)
+    scale(calc(0.55 + var(--hp) * 0.45))
+    rotate(calc((1 - var(--hp)) * -8deg));}
 .hv-nine{
   transform:
-    translate(calc(9vw - var(--hp) * 9vw), 0)
-    rotate(calc((1 - var(--hp)) * 6deg));}
+    translate(calc(7vw - var(--hp) * 7vw), 0)
+    scale(calc(0.55 + var(--hp) * 0.45))
+    rotate(calc((1 - var(--hp)) * 8deg));}
 
-/* GLOW BURST — fires when 69 locks together (hero .is-locked class) */
+/* GLOW BURST — blue/white flash when 6 and 9 lock into "69" */
 .hero-v2.is-locked .hv-numeral{animation:hv69Burst .6s cubic-bezier(.2,.7,.2,1);}
 @keyframes hv69Burst{
-  0%   { transform: scale(1)    translate3d(0, -20px, 0); filter: drop-shadow(0 0 0 rgba(255,47,146,0)); }
-  35%  { transform: scale(1.18) translate3d(0, -20px, 0); filter: drop-shadow(0 0 32px rgba(255,47,146,.85)) drop-shadow(0 0 60px rgba(255,180,0,.6)); }
-  100% { transform: scale(1.06) translate3d(0, -20px, 0); filter: drop-shadow(0 0 18px rgba(255,47,146,.55)); }
+  0%   { transform: scale(1)    translate3d(0, -20px, 0); filter: drop-shadow(0 0 0 rgba(38,98,184,0)); }
+  35%  { transform: scale(1.20) translate3d(0, -20px, 0);
+         filter: drop-shadow(0 0 36px rgba(58,128,212,.9)) drop-shadow(0 0 62px rgba(255,255,255,.7)); }
+  100% { transform: scale(1.06) translate3d(0, -20px, 0);
+         filter: drop-shadow(0 0 20px rgba(38,98,184,.5)); }
 }
 .hero-v2.is-locked .hv-six,
 .hero-v2.is-locked .hv-nine{
-  transform: translate(0, 0) rotate(0deg) !important;
+  transform: translate(0, 0) scale(1) rotate(0deg) !important;
 }
 
-/* ring badge */
+/* ring badge — blue tones */
 .hv-ring{position:absolute;top:clamp(66px,10vh,90px);right:clamp(12px,2vw,26px);
   width:clamp(72px,9vw,108px);height:auto;z-index:4;
   transform:
@@ -1562,7 +1565,7 @@ footer{padding:56px 0 34px;}
   opacity:calc(1 - var(--hp) * 1.2);
   animation:hvRingDrift 24s linear infinite;}
 .hv-ring svg{display:block;width:100%;height:auto;}
-.hv-ring text{fill:rgba(60,30,90,.68);}
+.hv-ring text{fill:rgba(15,45,95,.68);}
 @keyframes hvRingDrift{
   from{transform:scale(calc(1 - var(--hp) * .3)) rotate(calc(var(--hp) * -14deg + 0deg));}
   to  {transform:scale(calc(1 - var(--hp) * .3)) rotate(calc(var(--hp) * -14deg + 360deg));}
@@ -1573,9 +1576,9 @@ footer{padding:56px 0 34px;}
   transform:translate3d(-50%, calc(-50% + var(--hp) * -24px), 0);
   pointer-events:none;z-index:1;}
 .hv-dot{position:absolute;width:6px;height:6px;border-radius:50%;
-  background:linear-gradient(135deg, #ff8fb6, #ff2f92);
-  box-shadow:0 0 10px rgba(255,47,146,.7), 0 0 3px rgba(255,255,255,.5) inset;}
-.hv-dot i{position:absolute;inset:-5px;border:1px solid rgba(255,47,146,.5);border-radius:50%;
+  background:linear-gradient(135deg, #7cb3ff, #2662b8);
+  box-shadow:0 0 10px rgba(38,98,184,.65), 0 0 3px rgba(255,255,255,.6) inset;}
+.hv-dot i{position:absolute;inset:-5px;border:1px solid rgba(38,98,184,.5);border-radius:50%;
   animation:hvDotPulse 2.4s ease-in-out infinite;}
 @keyframes hvDotPulse{
   0%,100%{transform:scale(1);opacity:.7;}
@@ -1590,36 +1593,33 @@ footer{padding:56px 0 34px;}
 @keyframes hvDrift2{ 0%{transform:translate(0,0)} 100%{transform:translate(-13px, 14px)} }
 @keyframes hvDrift3{ 0%{transform:translate(0,0)} 100%{transform:translate(16px, 6px)} }
 
-/* title — dark ink on light bg */
 .hv-title{margin:0 0 clamp(6px,.9vw,10px);
   font-family:'One Night Sans','Assistant',sans-serif;
   font-size:clamp(16px,2.3vw,28px);font-weight:800;letter-spacing:-.02em;text-align:center;
   opacity:calc(1 - var(--hp) * .8);transform:translate3d(0, calc(var(--hp) * -18px), 0);}
 .hv-title span{display:inline-block;
-  background:linear-gradient(92deg, #3a1e6d 0%, #ff2f92 55%, #3a1e6d 100%);
+  background:linear-gradient(92deg, #0d2b5c 0%, #2662b8 55%, #0d2b5c 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;}
 
 .hv-meta{display:flex;align-items:center;gap:8px;
-  color:rgba(60,30,90,.65);font-family:'Assistant',sans-serif;
+  color:rgba(15,45,95,.65);font-family:'Assistant',sans-serif;
   font-size:clamp(9px,.75vw,10px);font-weight:500;letter-spacing:.03em;
   opacity:calc(1 - var(--hp) * .9);transform:translate3d(0, calc(var(--hp) * -18px), 0);}
-.hv-meta-a em{color:#ff2f92;font-style:normal;margin:0 2px;font-weight:700;}
-.hv-meta-sep{color:rgba(60,30,90,.32);}
+.hv-meta-a em{color:#2662b8;font-style:normal;margin:0 2px;font-weight:700;}
+.hv-meta-sep{color:rgba(15,45,95,.32);}
 
-/* scroll hint — updated copy so user knows to scroll for the animation */
 .hv-scroll-hint{position:absolute;bottom:12px;left:50%;
   display:flex;flex-direction:column;align-items:center;gap:3px;
-  color:rgba(60,30,90,.6);font-family:'One Night Sans','Assistant',sans-serif;
+  color:rgba(15,45,95,.6);font-family:'One Night Sans','Assistant',sans-serif;
   font-size:8px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
   opacity:calc(1 - var(--hp) * 2.4);
   animation:hvHintBounce 2.4s ease-in-out infinite;}
-.hv-scroll-hint svg{width:10px;height:10px;color:rgba(60,30,90,.6);}
+.hv-scroll-hint svg{width:10px;height:10px;color:rgba(15,45,95,.6);}
 @keyframes hvHintBounce{
   0%,100%{transform:translate(-50%, 0);}
   50%{transform:translate(-50%, 4px);}
 }
 
-/* mobile */
 @media (max-width:820px){
   .hero-v2{height:52svh;min-height:340px;}
   .hv-ring{width:52px;top:48px;right:8px;}
@@ -1632,11 +1632,13 @@ footer{padding:56px 0 34px;}
   .hv-scroll-hint{bottom:10px;font-size:7px;}
   .hv-scroll-hint svg{width:8px;height:8px;}
   .hv-six{transform:
-    translate(calc(-9vw + var(--hp) * 9vw), 0)
-    rotate(calc((1 - var(--hp)) * -6deg));}
+    translate(calc(-7vw + var(--hp) * 7vw), 0)
+    scale(calc(0.55 + var(--hp) * 0.45))
+    rotate(calc((1 - var(--hp)) * -8deg));}
   .hv-nine{transform:
-    translate(calc(9vw - var(--hp) * 9vw), 0)
-    rotate(calc((1 - var(--hp)) * 6deg));}
+    translate(calc(7vw - var(--hp) * 7vw), 0)
+    scale(calc(0.55 + var(--hp) * 0.45))
+    rotate(calc((1 - var(--hp)) * 8deg));}
 }
 
 
@@ -1725,46 +1727,76 @@ footer{padding:56px 0 34px;}
 
 
 
-/* Common feedback #1: ATC buttons no longer solid yellow — coral/pink gradient
-   for a more premium feel while keeping the same accent hierarchy. */
+/* Common feedback #1 v3: ATC buttons in BLUE (was pink) to match blue/white palette */
 .pc-add{
-  background:linear-gradient(135deg,#ff5b85 0%,#ff2f92 100%) !important;
+  background:linear-gradient(135deg,#5a9ce8 0%,#2662b8 100%) !important;
   color:#fff !important;
   border:0 !important;
-  box-shadow:0 8px 16px rgba(255,47,146,.28),inset 0 1px 0 rgba(255,255,255,.28) !important;
+  box-shadow:0 8px 16px rgba(38,98,184,.30),inset 0 1px 0 rgba(255,255,255,.32) !important;
   letter-spacing:.03em !important;
 }
 .pc-add:hover{filter:brightness(1.08);
-  box-shadow:0 12px 24px rgba(255,47,146,.38),inset 0 1px 0 rgba(255,255,255,.35) !important;}
+  box-shadow:0 12px 24px rgba(38,98,184,.40),inset 0 1px 0 rgba(255,255,255,.40) !important;}
 .pc-add:active{transform:translateY(1px);}
 .pc-add.done{background:linear-gradient(135deg,#3ecf8e 0%,#22c17b 100%) !important;color:#fff !important;
   box-shadow:0 8px 16px rgba(34,193,123,.32) !important;}
 
-/* dock "VIEW CART" button — also pink for consistency */
-.dock-cta,.cart-cta{background:linear-gradient(135deg,#ff5b85 0%,#ff2f92 100%) !important;
+.dock-cta,.cart-cta{background:linear-gradient(135deg,#5a9ce8 0%,#2662b8 100%) !important;
   color:#fff !important;border:0 !important;
-  box-shadow:0 8px 16px rgba(255,47,146,.28) !important;}
+  box-shadow:0 8px 16px rgba(38,98,184,.30) !important;}
 .dock-cta:hover,.cart-cta:hover{filter:brightness(1.08) !important;}
 
-/* header CART pill also pink */
 .header .navact a.pill.cart-btn,#cartBtn.pill{
-  background:linear-gradient(135deg,#ff5b85 0%,#ff2f92 100%) !important;
+  background:linear-gradient(135deg,#5a9ce8 0%,#2662b8 100%) !important;
   color:#fff !important;border:0 !important;
-  box-shadow:0 6px 12px rgba(255,47,146,.28) !important;
+  box-shadow:0 6px 12px rgba(38,98,184,.28) !important;
 }
 
+/* Glassmorphism on product cards + tier cards + bundle picks */
+.pc{
+  background:rgba(255,255,255,.55) !important;
+  backdrop-filter:blur(20px) saturate(140%) !important;
+  -webkit-backdrop-filter:blur(20px) saturate(140%) !important;
+  border:1px solid rgba(255,255,255,.65) !important;
+  box-shadow:0 8px 24px rgba(15,45,95,.10), inset 0 1px 0 rgba(255,255,255,.5) !important;
+}
+.pc-name, .pc-sub{color:#0d2b5c !important;}
+.pc-price b{color:#0d2b5c !important;}
+.pc-price s{color:rgba(15,45,95,.5) !important;}
+.pc-rating{color:rgba(15,45,95,.7) !important;}
+
+.pick{
+  background:rgba(255,255,255,.55) !important;
+  backdrop-filter:blur(18px) saturate(140%) !important;
+  -webkit-backdrop-filter:blur(18px) saturate(140%) !important;
+  border:1px solid rgba(255,255,255,.65) !important;
+  box-shadow:0 8px 20px rgba(15,45,95,.10) !important;
+}
+
+/* catrail cards get glassmorphism too */
+.catrail li a{
+  background:rgba(255,255,255,.60) !important;
+  backdrop-filter:blur(20px) saturate(140%) !important;
+  -webkit-backdrop-filter:blur(20px) saturate(140%) !important;
+  border:1px solid rgba(255,255,255,.70) !important;
+  box-shadow:0 6px 16px rgba(15,45,95,.10) !important;
+  color:#0d2b5c !important;
+}
+.catrail-txt b{color:#0d2b5c !important;}
+.catrail-txt i{color:rgba(15,45,95,.65) !important;}
 
 
-/* Common feedback #2 v2: brighter, more alive section tints (client wanted less
-   dark). Instead of muddy dark shades, subtle warm gradients that catch the light. */
-#wanted{background:linear-gradient(180deg,rgba(255,120,180,.10) 0%,rgba(200,100,220,.06) 100%) !important;}
-#condoms{background:linear-gradient(180deg,rgba(120,170,255,.08) 0%,rgba(80,140,220,.05) 100%) !important;}
-#lubes{background:linear-gradient(180deg,rgba(190,140,255,.09) 0%,rgba(140,100,220,.05) 100%) !important;}
-#massagers{background:linear-gradient(180deg,rgba(200,130,240,.09) 0%,rgba(150,110,230,.05) 100%) !important;}
-#completeset{background:linear-gradient(180deg,rgba(255,180,140,.08) 0%,rgba(220,120,180,.05) 100%) !important;}
-#shotwith{background:linear-gradient(180deg,rgba(120,200,240,.08) 0%,rgba(80,160,220,.05) 100%) !important;}
-#performance{background:linear-gradient(180deg,rgba(255,140,140,.09) 0%,rgba(220,100,120,.05) 100%) !important;}
-#playthings{background:linear-gradient(180deg,rgba(120,230,200,.08) 0%,rgba(80,190,180,.05) 100%) !important;}
+
+/* Common feedback: blue/white ONLY across sections — no purple, no pink tints.
+   Subtle variations of light blue with soft warmth. */
+#wanted{background:linear-gradient(180deg,rgba(190,220,255,.14) 0%,rgba(140,190,240,.08) 100%) !important;}
+#condoms{background:linear-gradient(180deg,rgba(210,230,255,.12) 0%,rgba(160,205,245,.07) 100%) !important;}
+#lubes{background:linear-gradient(180deg,rgba(180,215,255,.14) 0%,rgba(130,185,235,.08) 100%) !important;}
+#massagers{background:linear-gradient(180deg,rgba(200,225,255,.13) 0%,rgba(150,195,240,.08) 100%) !important;}
+#completeset{background:linear-gradient(180deg,rgba(220,235,255,.14) 0%,rgba(170,210,245,.08) 100%) !important;}
+#shotwith{background:linear-gradient(180deg,rgba(170,210,250,.14) 0%,rgba(120,175,230,.08) 100%) !important;}
+#performance{background:linear-gradient(180deg,rgba(190,220,255,.13) 0%,rgba(135,180,230,.08) 100%) !important;}
+#playthings{background:linear-gradient(180deg,rgba(205,230,255,.14) 0%,rgba(155,200,240,.08) 100%) !important;}
 
 
 
@@ -1866,25 +1898,27 @@ footer{padding:56px 0 34px;}
         <svg class="hv-svg" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="hvSixG" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#ff8fb6"/>
-              <stop offset=".55" stop-color="#ff2f92"/>
-              <stop offset="1" stop-color="#a854ff"/>
+              <stop offset="0" stop-color="#7cb3ff"/>
+              <stop offset=".55" stop-color="#3a80d4"/>
+              <stop offset="1" stop-color="#1e56a8"/>
             </linearGradient>
             <linearGradient id="hvNineG" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#a854ff"/>
-              <stop offset=".55" stop-color="#ff2f92"/>
-              <stop offset="1" stop-color="#ffb475"/>
+              <stop offset="0" stop-color="#1e56a8"/>
+              <stop offset=".55" stop-color="#3a80d4"/>
+              <stop offset="1" stop-color="#7cb3ff"/>
             </linearGradient>
             <filter id="hvGlow" x="-20%" y="-20%" width="140%" height="140%">
               <feGaussianBlur stdDeviation="8" result="b"/>
               <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
           </defs>
+          <!-- 6 and 9 sit near center of viewBox — their translate deltas take them
+               apart at hp=0 and bring them back together at hp=1, actually touching. -->
           <g class="hv-six" filter="url(#hvGlow)">
-            <text x="220" y="420" font-family="'One Night Sans','Assistant',system-ui" font-size="480" font-weight="900" fill="url(#hvSixG)" text-anchor="middle" letter-spacing="-0.04em">6</text>
+            <text x="330" y="420" font-family="'One Night Sans','Assistant',system-ui" font-size="480" font-weight="900" fill="url(#hvSixG)" text-anchor="middle" letter-spacing="-0.06em">6</text>
           </g>
           <g class="hv-nine" filter="url(#hvGlow)">
-            <text x="580" y="420" font-family="'One Night Sans','Assistant',system-ui" font-size="480" font-weight="900" fill="url(#hvNineG)" text-anchor="middle" letter-spacing="-0.04em">9</text>
+            <text x="470" y="420" font-family="'One Night Sans','Assistant',system-ui" font-size="480" font-weight="900" fill="url(#hvNineG)" text-anchor="middle" letter-spacing="-0.06em">9</text>
           </g>
         </svg>
       </div>
