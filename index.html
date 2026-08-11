@@ -846,22 +846,21 @@ html.hero-locked,html.hero-locked body{overflow:auto;}  /* V1 feedback #1: no sc
 
 
 /* ---------- Massagers "after dark" showcase section ---------- */
-/* Full-bleed bedroom background with a dark veil over it so text + cards
-   stay legible. Section footprint (padding/height) unchanged; only the visual
-   treatment differs from the other .shop rows. */
+/* Blue/white palette override: no more dark navy veil, no product-image backgrounds.
+   Section footprint (padding/height) unchanged; only the visual treatment differs. */
 .shop.showcase{position:relative;overflow:hidden;isolation:isolate;
   background-color:transparent;
-  background-image:var(--bg);background-size:cover;background-position:center;background-repeat:no-repeat;}
+  background-image:none !important;background-size:cover;background-position:center;background-repeat:no-repeat;}
 .showcase-veil{position:absolute;inset:0;z-index:0;pointer-events:none;
   background:
-    radial-gradient(60% 70% at 50% 40%,rgba(0,0,0,0) 0%,rgba(2,5,26,.42) 60%,rgba(2,5,26,.72) 100%),
-    linear-gradient(180deg,rgba(6,12,42,.58) 0%,rgba(6,12,42,.30) 40%,rgba(6,12,42,.62) 100%);}
+    radial-gradient(60% 70% at 50% 40%,rgba(255,255,255,.20) 0%,rgba(220,235,255,.10) 60%,rgba(180,210,240,.14) 100%),
+    linear-gradient(180deg,rgba(240,246,255,.30) 0%,rgba(220,235,255,.20) 40%,rgba(200,222,247,.30) 100%);}
 .showcase .shell{position:relative;z-index:1;}
 .showcase-head{text-align:center;max-width:520px;margin:0 auto clamp(10px,1vw,16px);}
-.showcase-kicker{color:var(--yellow);font-family:'One Night Sans',sans-serif;
+.showcase-kicker{color:#2662b8;font-family:'One Night Sans',sans-serif;
   font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:5px;}
-.showcase-title{margin:0;color:#fff;font-size:clamp(17px,2vw,26px);line-height:1.05;font-weight:800;}
-.showcase-sub{margin:10px 0 0;color:#d7ddef;font-size:14px;line-height:1.5;}
+.showcase-title{margin:0;color:#0d2b5c;font-size:clamp(17px,2vw,26px);line-height:1.05;font-weight:800;}
+.showcase-sub{margin:10px 0 0;color:rgba(15,45,95,.72);font-size:14px;line-height:1.5;}
 
 /* 2-row auto-scroll marquee (desktop + mobile) — glassmorph cards, gloss shine,
    blinking save badge, + ATC icon. Background stays visible through the glass. */
@@ -981,7 +980,7 @@ html.hero-locked,html.hero-locked body{overflow:auto;}  /* V1 feedback #1: no sc
 /* content-visibility removed from .shop/.reels/etc. — off-screen paint skip
    was causing a visible flash of unstyled cards and gradient when sections
    re-entered viewport on scroll-back. */
-.shop:nth-of-type(even){background-color:rgba(0,8,44,.30);}
+.shop:nth-of-type(even){background-color:transparent;}
 
 /* ---------- Sale-stat band right under "Build your night, your way." ---------- */
 .nudge-stats{margin:14px 0 0;padding:0;}
@@ -1030,10 +1029,10 @@ html.hero-locked,html.hero-locked body{overflow:auto;}  /* V1 feedback #1: no sc
 
 .sec-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;margin:0 auto clamp(16px,2vw,26px);max-width:720px;}
 .sec-head>div{display:flex;flex-direction:column;align-items:center;gap:6px;}
-.sec-kicker{margin-bottom:6px;color:#8b9ac2;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.14em;}
-.sec-head h2{margin:0;color:#fff;font-size:clamp(28px,3.7vw,48px);line-height:.95;}
-.sec-head h2 em{color:var(--yellow);font-family:'One Night Sans',sans-serif;font-size:.8em;font-weight:700;text-transform:none;}
-.sec-head p{max-width:560px;color:#afbddf;font-size:13px;line-height:1.45;margin:0 auto;}
+.sec-kicker{margin-bottom:6px;color:#2662b8;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.14em;}
+.sec-head h2{margin:0;color:#0d2b5c;font-size:clamp(28px,3.7vw,48px);line-height:.95;}
+.sec-head h2 em{color:#2662b8;font-family:'One Night Sans',sans-serif;font-size:.8em;font-weight:700;text-transform:none;}
+.sec-head p{max-width:560px;color:rgba(15,45,95,.72);font-size:13px;line-height:1.45;margin:0 auto;}
 @media (max-width:820px){.sec-head{gap:8px;margin-bottom:18px;}.sec-head p{max-width:92vw;font-size:12.5px;}}
 
 /* ---------- section titles: soft breathe glow ---------- */
