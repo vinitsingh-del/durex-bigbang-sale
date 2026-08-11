@@ -1459,8 +1459,145 @@ footer{padding:56px 0 34px;}
 
 
 
-/* V1 feedback #10: Playthings pick-your-play — horizontal scroll on mobile
-   instead of vertical stack. Two product cards + centered OR badge, swipe R→L. */
+/* ===================================================================
+   HERO V2 — thin, cinematic, scroll-linked parallax
+   Every visual state is driven by a single CSS custom property `--hp`
+   (hero progress, 0 → 1) that JS sets from scrollY. No wheel hijack.
+   =================================================================== */
+.hero-v2{--hp:0;position:relative;background:#080d24;overflow:hidden;isolation:isolate;}
+.hv-pin{position:relative;height:clamp(560px,88svh,780px);overflow:hidden;}
+
+/* video kept as atmospheric backdrop — heavily softened */
+.hv-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;
+  z-index:0;opacity:.28;filter:blur(4px) saturate(1.1) brightness(.9);transform:scale(1.06);pointer-events:none;}
+.hv-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    radial-gradient(80% 55% at 50% 40%, rgba(255,47,146,.09) 0%, rgba(255,47,146,0) 55%),
+    radial-gradient(70% 55% at 80% 90%, rgba(102,166,255,.08) 0%, rgba(102,166,255,0) 60%),
+    linear-gradient(180deg, rgba(8,13,36,.55) 0%, rgba(8,13,36,.78) 60%, rgba(8,13,36,.94) 100%);
+}
+.hv-grid{position:absolute;inset:0;z-index:2;width:100%;height:100%;pointer-events:none;
+  opacity:calc(1 - var(--hp) * .35);
+  transform:translate3d(0, calc(var(--hp) * -30px), 0);}
+
+/* stage: centered content, everything anchored to viewport middle */
+.hv-stage{position:relative;z-index:3;height:100%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:clamp(24px,3vw,48px);}
+
+/* corner chapter indicator — Apple's aesthetic detail */
+.hv-chapter{position:absolute;top:clamp(80px,10vh,100px);right:clamp(20px,3vw,40px);
+  display:flex;align-items:center;gap:10px;
+  font-family:'One Night Sans','Assistant',sans-serif;
+  color:rgba(255,255,255,.55);font-size:11px;font-weight:800;letter-spacing:.16em;
+  opacity:calc(1 - var(--hp) * 1.5);}
+.hv-chapter-num{color:#fff;}
+.hv-chapter-dots{display:flex;gap:5px;}
+.hv-chapter-dots i{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.22);
+  transition:background .3s,box-shadow .3s;}
+.hv-chapter-dots i.on{background:#ff2f92;box-shadow:0 0 10px rgba(255,47,146,.7);}
+
+/* kicker: subtle uppercase label above the 69 */
+.hv-kicker{margin-bottom:clamp(20px,2.4vw,32px);
+  opacity:calc(1 - var(--hp) * 1.8);transform:translate3d(0, calc(var(--hp) * -24px), 0);}
+.hv-kicker span{display:inline-block;padding:7px 16px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.03);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  color:rgba(255,255,255,.66);font-family:'One Night Sans','Assistant',sans-serif;
+  font-size:clamp(10px,.9vw,12px);font-weight:800;letter-spacing:.28em;text-transform:uppercase;}
+
+/* the numeral 69 — original stroke-only paths, split into 6 and 9 */
+.hv-numeral{position:relative;width:clamp(300px,44vw,540px);height:auto;
+  margin-bottom:clamp(18px,2.2vw,32px);
+  transform:
+    scale(calc(1 - var(--hp) * .18))
+    translate3d(0, calc(var(--hp) * -70px), 0);
+  will-change:transform;}
+.hv-numeral svg{display:block;width:100%;height:auto;overflow:visible;}
+.hv-numeral path{filter:drop-shadow(0 6px 22px rgba(255,47,146,.35));}
+/* 6 and 9 drift toward each other as user scrolls back up (nice reverse reveal) */
+.hv-six{transform:translate3d(calc((1 - var(--hp)) * -6vw), 0, 0);
+  transform-origin:200px 250px;transition:transform .05s linear;}
+.hv-nine{transform:translate3d(calc((1 - var(--hp)) * 6vw), 0, 0);
+  transform-origin:600px 250px;transition:transform .05s linear;}
+
+/* thin ring badge — floats top-right of the numeral */
+.hv-ring{position:absolute;top:clamp(96px,14vh,140px);right:clamp(16px,3vw,44px);
+  width:clamp(120px,15vw,180px);height:auto;z-index:4;
+  transform:
+    scale(calc(1 - var(--hp) * .35))
+    rotate(calc(var(--hp) * -18deg));
+  opacity:calc(1 - var(--hp) * 1.2);
+  animation:hvRingDrift 26s linear infinite;}
+.hv-ring svg{display:block;width:100%;height:auto;}
+.hv-ring text{fill:rgba(255,255,255,.7);}
+@keyframes hvRingDrift{
+  from{transform:scale(calc(1 - var(--hp) * .35)) rotate(calc(var(--hp) * -18deg + 0deg));}
+  to  {transform:scale(calc(1 - var(--hp) * .35)) rotate(calc(var(--hp) * -18deg + 360deg));}
+}
+
+/* orbit of drifting dots — small pink points parallax at different depths */
+.hv-orbit{position:absolute;top:50%;left:50%;
+  width:clamp(420px,64vw,760px);height:clamp(420px,64vw,760px);
+  transform:translate3d(-50%, calc(-50% + var(--hp) * -40px), 0);
+  pointer-events:none;z-index:1;}
+.hv-dot{position:absolute;width:8px;height:8px;border-radius:50%;
+  background:linear-gradient(135deg, #ff5b85, #ff2f92);
+  box-shadow:0 0 12px rgba(255,47,146,.55), 0 0 3px rgba(255,255,255,.35) inset;}
+.hv-dot i{position:absolute;inset:-6px;border:1px solid rgba(255,47,146,.35);border-radius:50%;
+  animation:hvDotPulse 2.4s ease-in-out infinite;}
+@keyframes hvDotPulse{
+  0%,100%{transform:scale(1);opacity:.6;}
+  50%{transform:scale(1.6);opacity:0;}
+}
+.hv-dot-1{top:14%;left:12%;animation:hvDrift1 12s ease-in-out infinite alternate;}
+.hv-dot-2{top:22%;right:10%;animation:hvDrift2 14s ease-in-out infinite alternate;}
+.hv-dot-3{bottom:18%;left:8%;animation:hvDrift3 16s ease-in-out infinite alternate;}
+.hv-dot-4{bottom:22%;right:14%;animation:hvDrift1 15s ease-in-out infinite alternate;}
+.hv-dot-5{top:60%;right:42%;animation:hvDrift2 13s ease-in-out infinite alternate;}
+@keyframes hvDrift1{ 0%{transform:translate(0,0)} 100%{transform:translate(20px, -14px)} }
+@keyframes hvDrift2{ 0%{transform:translate(0,0)} 100%{transform:translate(-18px, 20px)} }
+@keyframes hvDrift3{ 0%{transform:translate(0,0)} 100%{transform:translate(24px, 10px)} }
+
+/* title */
+.hv-title{margin:0 0 clamp(10px,1.4vw,16px);color:#fff;
+  font-family:'One Night Sans','Assistant',sans-serif;
+  font-size:clamp(26px,3.8vw,48px);font-weight:800;letter-spacing:-.02em;text-align:center;
+  opacity:calc(1 - var(--hp) * .8);transform:translate3d(0, calc(var(--hp) * -30px), 0);}
+.hv-title span{display:inline-block;background:linear-gradient(92deg, #fff 0%, #ffdf00 55%, #fff 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+
+/* meta line */
+.hv-meta{display:flex;align-items:center;gap:12px;
+  color:rgba(255,255,255,.65);font-family:'Assistant',sans-serif;
+  font-size:clamp(11px,1.05vw,13px);font-weight:500;letter-spacing:.03em;
+  opacity:calc(1 - var(--hp) * .9);transform:translate3d(0, calc(var(--hp) * -30px), 0);}
+.hv-meta-a em{color:#ffdf00;font-style:normal;margin:0 2px;font-weight:700;}
+.hv-meta-sep{color:rgba(255,255,255,.28);}
+
+/* scroll hint at bottom */
+.hv-scroll-hint{position:absolute;bottom:22px;left:50%;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  color:rgba(255,255,255,.55);font-family:'One Night Sans','Assistant',sans-serif;
+  font-size:10px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
+  opacity:calc(1 - var(--hp) * 2.4);
+  animation:hvHintBounce 2.4s ease-in-out infinite;}
+.hv-scroll-hint svg{width:14px;height:14px;color:rgba(255,255,255,.55);}
+@keyframes hvHintBounce{
+  0%,100%{transform:translate(-50%, 0);}
+  50%{transform:translate(-50%, 5px);}
+}
+
+/* mobile */
+@media (max-width:820px){
+  .hv-pin{height:clamp(500px,78svh,660px);}
+  .hv-ring{width:96px;top:88px;right:12px;}
+  .hv-chapter{top:76px;right:16px;font-size:10px;}
+  .hv-numeral{width:78vw;}
+  .hv-title{font-size:clamp(22px,6vw,32px);}
+  .hv-meta{font-size:11px;gap:8px;}
+}
+
+
 @media (max-width:820px){
   .pyp-grid{
     display:flex !important;flex-direction:row !important;
@@ -1632,27 +1769,134 @@ footer{padding:56px 0 34px;}
 <main id="top">
 
 <!-- ============ HERO — bag beside the title, products orbit it ============ -->
-<section class="hero" id="hero" aria-labelledby="hero-title">
-  <div class="hero-pin" id="heroPin">
-    <video class="hero-video" autoplay muted loop playsinline preload="metadata" fetchpriority="high" aria-hidden="true" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/7c09e2c9d1ee.mp4"></video>
-    <div class="hero-video-overlay" aria-hidden="true"></div>
-    <div class="hero-grid" id="heroGrid"></div>
-    <div class="hero-row">
-      <div class="hero-copy" id="heroCopy">
-        
+<section class="hero-v2" id="hero" aria-labelledby="hero-title">
+  <div class="hv-pin" id="heroPin">
+    <!-- video kept as atmospheric backdrop, heavily blurred + low opacity -->
+    <video class="hv-video" autoplay muted loop playsinline preload="metadata" fetchpriority="high" aria-hidden="true" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/7c09e2c9d1ee.mp4"></video>
+    <div class="hv-veil" aria-hidden="true"></div>
+
+    <!-- decorative background: precision grid + drifting orbs -->
+    <svg class="hv-grid" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1440 900">
+      <defs>
+        <linearGradient id="hvGridStroke" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ffffff" stop-opacity=".05"/>
+          <stop offset=".5" stop-color="#ffffff" stop-opacity=".12"/>
+          <stop offset="1" stop-color="#ffffff" stop-opacity=".05"/>
+        </linearGradient>
+        <radialGradient id="hvOrbA" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="#ff2f92" stop-opacity=".65"/>
+          <stop offset="1" stop-color="#ff2f92" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="hvOrbB" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="#5b9bff" stop-opacity=".55"/>
+          <stop offset="1" stop-color="#5b9bff" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <g stroke="url(#hvGridStroke)" stroke-width=".6" fill="none">
+        <path d="M0 300 H1440 M0 450 H1440 M0 600 H1440"/>
+        <path d="M240 0 V900 M480 0 V900 M720 0 V900 M960 0 V900 M1200 0 V900"/>
+      </g>
+      <circle cx="220" cy="720" r="240" fill="url(#hvOrbA)"/>
+      <circle cx="1240" cy="180" r="260" fill="url(#hvOrbB)"/>
+    </svg>
+
+    <!-- centrepiece: the numeral 69, thin outlined stroke -->
+    <div class="hv-stage">
+
+      <div class="hv-chapter" aria-hidden="true">
+        <span class="hv-chapter-num">01</span>
+        <span class="hv-chapter-dots">
+          <i class="on"></i><i></i><i></i><i></i>
+        </span>
       </div>
-      <div class="hero-stage" id="heroStage" aria-hidden="true">
-        <div class="orbit" id="orbit">
-          <svg class="orbit-connect" id="orbitConnect" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g id="orbitFrame"><polygon id="orbitHex" pathLength="1000" points=""></polygon><circle class="orbit-dot" r="3.4"></circle><circle class="orbit-dot" r="3.4"></circle><circle class="orbit-dot" r="3.4"></circle><circle class="orbit-dot" r="3.4"></circle><circle class="orbit-dot" r="3.4"></circle><circle class="orbit-dot" r="3.4"></circle></g></svg>
-          <img class="hp hp1" data-angle="-148" data-spin="-12" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/ede77bcb2f07.webp" alt=""><img class="hp hp2" data-angle="-124" data-spin="-7" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/dbb1c911eb5c.webp" alt=""><img class="hp hp3" data-angle="-101" data-spin="-3" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/18c5813375d3.webp" alt=""><img class="hp hp4" data-angle="-79" data-spin="3" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/a43daec71adf.webp" alt=""><img class="hp hp5" data-angle="-56" data-spin="7" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/44ef3c7eca84.webp" alt=""><img class="hp hp6" data-angle="-32" data-spin="12" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/fd2602ac14c8.webp" alt="">
-          <div class="bag-wrap" id="bagWrap">
-            <h1 class="hero-mark" id="heroMark"><img fetchpriority="high" src="https://cdn.jsdelivr.net/gh/vinitsingh-del/durex-bigbang-sale@main/assets/0588c09f7023.webp" alt="69 Big Bang Sale, 6th to 9th November"></h1>
-          </div>
-        </div>
+
+      <div class="hv-kicker" data-hv="kicker">
+        <span>Durex India presents</span>
+      </div>
+
+      <div class="hv-numeral" aria-hidden="true" data-hv="numeral">
+        <svg viewBox="0 0 800 460" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="hvSix" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ff5b85"/>
+              <stop offset="1" stop-color="#c945ff"/>
+            </linearGradient>
+            <linearGradient id="hvNine" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0" stop-color="#c945ff"/>
+              <stop offset="1" stop-color="#66a6ff"/>
+            </linearGradient>
+          </defs>
+          <!-- '6' — geometric closed loop drawn as stroke-only -->
+          <g class="hv-six" data-hv="six">
+            <path pathLength="1000" fill="none" stroke="url(#hvSix)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"
+              d="M300,60
+                 C170,90 100,210 100,340
+                 C100,430 180,470 250,470
+                 C325,470 400,410 400,330
+                 C400,260 335,210 260,210
+                 C195,210 140,265 130,335"/>
+          </g>
+          <!-- '9' — same shape rotated 180° -->
+          <g class="hv-nine" data-hv="nine">
+            <path pathLength="1000" fill="none" stroke="url(#hvNine)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"
+              d="M500,400
+                 C630,370 700,250 700,120
+                 C700,30 620,-10 550,-10
+                 C475,-10 400,50 400,130
+                 C400,200 465,250 540,250
+                 C605,250 660,195 670,125"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- sale ring badge - thin circular ring with SALE / 57% OFF text -->
+      <div class="hv-ring" aria-hidden="true" data-hv="ring">
+        <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <path id="hvRingPath" d="M110,110 m-92,0 a92,92 0 1,1 184,0 a92,92 0 1,1 -184,0"/>
+            <linearGradient id="hvRingG" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ffdf00"/>
+              <stop offset="1" stop-color="#ff2f92"/>
+            </linearGradient>
+          </defs>
+          <circle cx="110" cy="110" r="92" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+          <circle cx="110" cy="110" r="72" fill="none" stroke="url(#hvRingG)" stroke-width="1.4" stroke-dasharray="2 4"/>
+          <text font-family="Assistant,system-ui" font-weight="800" font-size="11" letter-spacing="4" fill="#fff">
+            <textPath href="#hvRingPath" startOffset="0">SALE · 57% OFF · 6–9 NOV · BIG BANG · </textPath>
+          </text>
+          <g transform="translate(110 110)" text-anchor="middle">
+            <text y="-6" font-family="Assistant,system-ui" font-weight="800" font-size="14" letter-spacing="6" fill="rgba(255,255,255,.55)">UP TO</text>
+            <text y="34" font-family="Assistant,system-ui" font-weight="900" font-size="52" fill="#ffdf00">57%</text>
+            <text y="60" font-family="Assistant,system-ui" font-weight="700" font-size="12" letter-spacing="5" fill="rgba(255,255,255,.6)">OFF</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- orbit of small product dots — decorative, positioned via absolute pos -->
+      <div class="hv-orbit" aria-hidden="true" data-hv="orbit">
+        <span class="hv-dot hv-dot-1"><i></i></span>
+        <span class="hv-dot hv-dot-2"><i></i></span>
+        <span class="hv-dot hv-dot-3"><i></i></span>
+        <span class="hv-dot hv-dot-4"><i></i></span>
+        <span class="hv-dot hv-dot-5"><i></i></span>
+      </div>
+
+      <h1 class="hv-title" id="hero-title" data-hv="title">
+        <span>Big Bang Sale</span>
+      </h1>
+
+      <div class="hv-meta" data-hv="meta">
+        <span class="hv-meta-a">6<em>—</em>9 November</span>
+        <span class="hv-meta-sep">·</span>
+        <span class="hv-meta-b">Ends Sunday</span>
+      </div>
+
+      <div class="hv-scroll-hint" aria-hidden="true" data-hv="hint">
+        <span>Scroll to shop</span>
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 4v14M6 12l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
     </div>
   </div>
-  <div class="hero-runway" id="heroRunway" aria-hidden="true"></div>
 </section>
 
 <div class="page-body" id="pageBody">
@@ -2478,6 +2722,43 @@ var WHEEL_DATA = 'Playful|Playthings & games|#playthings;Sensual|Lubes & massage
    Scroll input drives the sequence instead of moving the page, so
    the category strip below never shifts while it plays.
    ========================================================= */
+/* ===================================================================
+   HERO V2 — scroll-linked --hp driver
+   Maps window.scrollY (0 → hero height) to a CSS custom property.
+   All visual transitions in .hero-v2 are done via calc(var(--hp))
+   in CSS. Native scroll, no blocking, rAF-throttled.
+   =================================================================== */
+(function(){
+  var hero = document.querySelector('.hero-v2');
+  if(!hero) return;
+  var pin = hero.querySelector('.hv-pin');
+  var rafId = 0;
+  var lastP = -1;
+  function update(){
+    rafId = 0;
+    var h = pin ? pin.offsetHeight : innerHeight;
+    var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+    var p = y / (h * 0.85);   /* fully "out" after ~85% scroll through hero */
+    p = p < 0 ? 0 : p > 1 ? 1 : p;
+    if(Math.abs(p - lastP) < 0.002) return;   /* skip micro-updates */
+    lastP = p;
+    hero.style.setProperty('--hp', p.toFixed(3));
+    /* also advance the chapter indicator */
+    var dots = hero.querySelectorAll('.hv-chapter-dots i');
+    if(dots.length){
+      var idx = Math.min(dots.length - 1, Math.floor(p * dots.length));
+      dots.forEach(function(d, i){ d.classList.toggle('on', i === idx); });
+    }
+  }
+  function onScroll(){
+    if(rafId) return;
+    rafId = requestAnimationFrame(update);
+  }
+  addEventListener('scroll', onScroll, {passive:true});
+  addEventListener('resize', onScroll, {passive:true});
+  update();
+})();
+
 (function(){
   var hero=document.getElementById('hero'), pin=document.getElementById('heroPin'),
       copy=document.getElementById('heroCopy'), stage=document.getElementById('heroStage'),
