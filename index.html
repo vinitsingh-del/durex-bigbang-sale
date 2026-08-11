@@ -61,7 +61,7 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
 }
 @media (prefers-reduced-motion:reduce){.mood-fab::before{animation:none;}}
 
-body{background:radial-gradient(128% 96% at 82% -8%,#1a3fd0 0%,rgba(26,63,208,0) 56%),radial-gradient(96% 84% at 6% 104%,#3d1a6e 0%,rgba(61,26,110,0) 60%),radial-gradient(70% 60% at 50% 42%,rgba(0,64,180,.34) 0%,rgba(0,64,180,0) 70%),#001777;
+body{background:radial-gradient(120% 90% at 82% -8%,#4a7cff 0%,rgba(74,124,255,0) 55%),radial-gradient(96% 84% at 6% 104%,#8a4dd4 0%,rgba(138,77,212,0) 60%),radial-gradient(80% 65% at 50% 30%,rgba(255,143,182,.16) 0%,rgba(255,143,182,0) 65%),linear-gradient(180deg,#1e3178 0%,#233682 60%,#1e2c68 100%);
   background-attachment:fixed;
   /* oversized so there is somewhere to travel, then drifted very slowly - one
      continuous pass, no seam, nothing that reads as a loop point */
@@ -1737,16 +1737,16 @@ footer{padding:56px 0 34px;}
 
 
 
-/* Common feedback #2: subtle color variety across sections — each keeps the
-   dark base but with a different tint hue so they don't all read as one blue. */
-#wanted{background-color:rgba(38,14,32,.42) !important;}       /* dark rose */
-#condoms{background-color:rgba(9,17,52,.36) !important;}       /* deep navy */
-#lubes{background-color:rgba(20,10,44,.40) !important;}        /* deep purple */
-#massagers{background-color:rgba(28,14,38,.42) !important;}    /* dusk purple */
-#completeset{background-color:rgba(35,20,32,.42) !important;}  /* plum */
-#shotwith{background-color:rgba(6,26,48,.42) !important;}      /* teal-navy */
-#performance{background-color:rgba(46,16,26,.40) !important;}  /* burgundy */
-#playthings{background-color:rgba(12,32,32,.42) !important;}   /* dark teal */
+/* Common feedback #2 v2: brighter, more alive section tints (client wanted less
+   dark). Instead of muddy dark shades, subtle warm gradients that catch the light. */
+#wanted{background:linear-gradient(180deg,rgba(255,120,180,.10) 0%,rgba(200,100,220,.06) 100%) !important;}
+#condoms{background:linear-gradient(180deg,rgba(120,170,255,.08) 0%,rgba(80,140,220,.05) 100%) !important;}
+#lubes{background:linear-gradient(180deg,rgba(190,140,255,.09) 0%,rgba(140,100,220,.05) 100%) !important;}
+#massagers{background:linear-gradient(180deg,rgba(200,130,240,.09) 0%,rgba(150,110,230,.05) 100%) !important;}
+#completeset{background:linear-gradient(180deg,rgba(255,180,140,.08) 0%,rgba(220,120,180,.05) 100%) !important;}
+#shotwith{background:linear-gradient(180deg,rgba(120,200,240,.08) 0%,rgba(80,160,220,.05) 100%) !important;}
+#performance{background:linear-gradient(180deg,rgba(255,140,140,.09) 0%,rgba(220,100,120,.05) 100%) !important;}
+#playthings{background:linear-gradient(180deg,rgba(120,230,200,.08) 0%,rgba(80,190,180,.05) 100%) !important;}
 
 
 
@@ -2774,17 +2774,17 @@ var WHEEL_DATA = 'Playful|Playthings & games|#playthings;Sensual|Lubes & massage
 (function(){
   var hero = document.querySelector('.hero-v2');
   if(!hero) return;
+  var pin = hero.querySelector('.hv-pin');
   var rafId = 0;
   var lastP = -1;
   function update(){
     rafId = 0;
-    var r = hero.getBoundingClientRect();
-    var vh = window.innerHeight;
-    /* section top starts at 0 when it hits the top of viewport, goes negative as
-       user scrolls through. Full range is (section.height - vh). Progress is how
-       far into that range we've moved. */
-    var range = hero.offsetHeight - vh;
-    var p = range > 0 ? (-r.top) / range : 0;
+    /* Animation progresses across the sticky window: the difference between
+       section height and pin height IS the scroll distance the pin stays stuck. */
+    var pinH = pin ? pin.offsetHeight : innerHeight;
+    var range = hero.offsetHeight - pinH;
+    var scrolled = window.pageYOffset - hero.offsetTop;
+    var p = range > 0 ? scrolled / range : 0;
     if(p < 0) p = 0;
     if(p > 1) p = 1;
     if(Math.abs(p - lastP) < 0.002) return;
