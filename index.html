@@ -1468,17 +1468,19 @@ footer{padding:56px 0 34px;}
    HERO V2 — brighter, 30% smaller, own SVG numerals
    Every visual state driven by --hp (0 → 1) via native scroll.
    =================================================================== */
-.hero-v2{--hp:0;position:relative;isolation:isolate;overflow:visible;
-  /* Section slightly taller than viewport — gives the sticky pin ~40svh
-     of scroll runway for the animation, no visible dark gap below. */
-  min-height:140svh;
+/* ===================================================================
+   HERO V2 — 50% SMALLER, no sticky pin (was creating dark gap), 
+   5-stage parallax driven by scroll position.
+   =================================================================== */
+.hero-v2{--hp:0;position:relative;isolation:isolate;overflow:hidden;
+  /* No sticky, no runway. Section is exactly the visible frame.
+     Catrail below appears immediately with no dark navy gap. */
+  height:55vh;min-height:400px;
   background:
-    radial-gradient(80% 60% at 10% 0%, rgba(255,143,182,.14) 0%, rgba(255,143,182,0) 55%),
-    radial-gradient(70% 60% at 100% 100%, rgba(102,166,255,.16) 0%, rgba(102,166,255,0) 60%),
-    linear-gradient(180deg, #1c2a68 0%, #182050 60%, #131a44 100%);}
-/* Pin fills the visible viewport so there's no dark gap below hero content.
-   Content inside is 30% smaller via the sizing on child elements. */
-.hv-pin{position:sticky;top:0;height:100svh;overflow:hidden;}
+    radial-gradient(80% 60% at 10% 0%, rgba(255,143,182,.16) 0%, rgba(255,143,182,0) 55%),
+    radial-gradient(70% 60% at 100% 100%, rgba(102,166,255,.18) 0%, rgba(102,166,255,0) 60%),
+    linear-gradient(180deg, #2c3e8e 0%, #253680 60%, #1e2c68 100%);}
+.hv-pin{position:relative;height:100%;width:100%;overflow:hidden;}
 
 /* video kept but far brighter — user actually sees the atmosphere now */
 .hv-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;
@@ -1612,17 +1614,22 @@ footer{padding:56px 0 34px;}
 
 /* mobile — even more compact */
 @media (max-width:820px){
-  .hero-v2{min-height:130svh;}
-  .hv-ring{width:64px;top:60px;right:10px;}
-  .hv-chapter{top:52px;right:12px;font-size:8px;}
-  .hv-numeral{width:44vw;height:calc(44vw * 0.5);}
-  .hv-title{font-size:clamp(15px,4vw,20px);}
-  .hv-meta{font-size:9px;gap:6px;}
+  .hero-v2{height:52svh;min-height:340px;}
+  .hv-ring{width:52px;top:48px;right:8px;}
+  .hv-chapter{top:44px;right:12px;font-size:8px;}
+  .hv-numeral{width:38vw;height:calc(38vw * 0.5);margin-bottom:8px;}
+  .hv-title{font-size:clamp(13px,3.4vw,17px);}
+  .hv-meta{font-size:8.5px;gap:5px;}
+  .hv-kicker{margin-bottom:8px;}
+  .hv-kicker span{padding:4px 10px;font-size:8px;letter-spacing:.22em;}
+  .hv-scroll-hint{bottom:10px;font-size:7px;}
+  .hv-scroll-hint svg{width:8px;height:8px;}
+  /* on mobile the 6 and 9 travel across a smaller range */
   .hv-six{transform:
-    translate(calc(-12vw + var(--hp) * 12vw), 0)
+    translate(calc(-9vw + var(--hp) * 9vw), 0)
     rotate(calc((1 - var(--hp)) * -6deg));}
   .hv-nine{transform:
-    translate(calc(12vw - var(--hp) * 12vw), 0)
+    translate(calc(9vw - var(--hp) * 9vw), 0)
     rotate(calc((1 - var(--hp)) * 6deg));}
 }
 
@@ -2755,22 +2762,30 @@ var WHEEL_DATA = 'Playful|Playthings & games|#playthings;Sensual|Lubes & massage
 (function(){
   var hero = document.querySelector('.hero-v2');
   if(!hero) return;
-  var pin = hero.querySelector('.hv-pin');
   var rafId = 0;
   var lastP = -1;
+  /* Smoothstep curve gives the linear scroll five gentle "beats" — feels
+     like discrete stages (idle → drift → converge → join → reveal) rather
+     than a constant crawl. */
+  function ease(p){
+    if(p <= 0) return 0;
+    if(p >= 1) return 1;
+    /* smoothstep: 3p² - 2p³ */
+    return p * p * (3 - 2 * p);
+  }
   function update(){
     rafId = 0;
-    /* Animation progresses across the sticky window: the difference between
-       section height and pin height IS the scroll distance the pin stays stuck. */
-    var pinH = pin ? pin.offsetHeight : innerHeight;
-    var range = hero.offsetHeight - pinH;
+    /* Non-sticky short hero: animation progresses over the section's own
+       height. When section fully scrolled up: hp = 1. Full 5-stage
+       choreography plays out over exactly one hero-height of scroll. */
+    var range = hero.offsetHeight;
     var scrolled = window.pageYOffset - hero.offsetTop;
-    var p = range > 0 ? scrolled / range : 0;
-    if(p < 0) p = 0;
-    if(p > 1) p = 1;
+    var raw = range > 0 ? scrolled / range : 0;
+    var p = ease(raw < 0 ? 0 : raw > 1 ? 1 : raw);
     if(Math.abs(p - lastP) < 0.002) return;
     lastP = p;
     hero.style.setProperty('--hp', p.toFixed(3));
+    /* Chapter indicator advances through 4 dots as the 5 stages progress */
     var dots = hero.querySelectorAll('.hv-chapter-dots i');
     if(dots.length){
       var idx = Math.min(dots.length - 1, Math.floor(p * dots.length));
