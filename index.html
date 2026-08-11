@@ -1469,73 +1469,69 @@ footer{padding:56px 0 34px;}
    Every visual state driven by --hp (0 → 1) via native scroll.
    =================================================================== */
 /* ===================================================================
-   HERO V2 — 50% SMALLER, no sticky pin (was creating dark gap), 
-   5-stage parallax driven by scroll position.
+   HERO V2 — scroll-jack + brighter palette + glow-burst on lock
    =================================================================== */
 .hero-v2{--hp:0;position:relative;isolation:isolate;overflow:hidden;
-  /* No sticky, no runway. Section is exactly the visible frame.
-     Catrail below appears immediately with no dark navy gap. */
   height:55vh;min-height:400px;
+  /* MUCH brighter palette — cream/rose base with cool color washes.
+     No dark navy anywhere. Video removed so no product bleed-through. */
   background:
-    radial-gradient(80% 60% at 10% 0%, rgba(255,143,182,.16) 0%, rgba(255,143,182,0) 55%),
-    radial-gradient(70% 60% at 100% 100%, rgba(102,166,255,.18) 0%, rgba(102,166,255,0) 60%),
-    linear-gradient(180deg, #2c3e8e 0%, #253680 60%, #1e2c68 100%);}
+    radial-gradient(90% 65% at 15% 15%, rgba(255,180,220,.45) 0%, rgba(255,180,220,0) 55%),
+    radial-gradient(85% 65% at 85% 85%, rgba(150,200,255,.42) 0%, rgba(150,200,255,0) 60%),
+    radial-gradient(70% 70% at 50% 40%, rgba(255,225,150,.28) 0%, rgba(255,225,150,0) 65%),
+    linear-gradient(180deg, #f5e8f2 0%, #ecdff0 60%, #dbd0e8 100%);}
 .hv-pin{position:relative;height:100%;width:100%;overflow:hidden;}
 
-/* video kept but far brighter — user actually sees the atmosphere now */
-.hv-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;
-  z-index:0;opacity:.42;filter:blur(2px) saturate(1.15) brightness(1.1);transform:scale(1.04);pointer-events:none;}
+/* Hide the video entirely — was causing the dark read. Kept in DOM
+   as a no-op so JS references don't break. */
+.hv-video{display:none !important;}
 .hv-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
   background:
-    radial-gradient(70% 50% at 50% 40%, rgba(255,47,146,.11) 0%, rgba(255,47,146,0) 55%),
-    radial-gradient(60% 55% at 85% 90%, rgba(102,166,255,.10) 0%, rgba(102,166,255,0) 60%),
-    linear-gradient(180deg, rgba(28,42,104,.25) 0%, rgba(24,32,80,.45) 60%, rgba(19,26,68,.68) 100%);
-}
+    radial-gradient(60% 50% at 50% 40%, rgba(255,255,255,.12) 0%, rgba(255,255,255,0) 55%),
+    linear-gradient(180deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,.14) 100%);}
 .hv-grid{position:absolute;inset:0;z-index:2;width:100%;height:100%;pointer-events:none;
-  opacity:calc(.85 - var(--hp) * .4);
+  opacity:calc(.55 - var(--hp) * .3);
   transform:translate3d(0, calc(var(--hp) * -18px), 0);}
+.hv-grid path{stroke:rgba(120,80,180,.14) !important;}
+.hv-grid circle:nth-of-type(1){fill:rgba(255,120,180,.14) !important;}
+.hv-grid circle:nth-of-type(2){fill:rgba(120,180,255,.14) !important;}
 
-/* stage: centered */
 .hv-stage{position:relative;z-index:3;height:100%;display:flex;flex-direction:column;
   align-items:center;justify-content:center;padding:clamp(14px,2vw,28px);}
 
-/* chapter indicator - reduced 30% */
+/* chapter indicator — now on light bg so darker text */
 .hv-chapter{position:absolute;top:clamp(56px,7vh,72px);right:clamp(14px,2vw,26px);
   display:flex;align-items:center;gap:8px;
   font-family:'One Night Sans','Assistant',sans-serif;
-  color:rgba(255,255,255,.6);font-size:9px;font-weight:800;letter-spacing:.14em;
+  color:rgba(60,30,90,.55);font-size:9px;font-weight:800;letter-spacing:.14em;
   opacity:calc(1 - var(--hp) * 1.5);}
-.hv-chapter-num{color:#fff;}
+.hv-chapter-num{color:#3a1e6d;}
 .hv-chapter-dots{display:flex;gap:4px;}
-.hv-chapter-dots i{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.28);
+.hv-chapter-dots i{width:4px;height:4px;border-radius:50%;background:rgba(60,30,90,.22);
   transition:background .3s,box-shadow .3s;}
-.hv-chapter-dots i.on{background:#ff2f92;box-shadow:0 0 8px rgba(255,47,146,.75);}
+.hv-chapter-dots i.on{background:#ff2f92;box-shadow:0 0 8px rgba(255,47,146,.7);}
 
-/* kicker — reduced */
+/* kicker */
 .hv-kicker{margin-bottom:clamp(12px,1.5vw,20px);
   opacity:calc(1 - var(--hp) * 1.8);transform:translate3d(0, calc(var(--hp) * -16px), 0);}
 .hv-kicker span{display:inline-block;padding:5px 12px;border-radius:999px;
-  border:1px solid rgba(255,255,255,.20);background:rgba(255,255,255,.06);
+  border:1px solid rgba(60,30,90,.16);background:rgba(255,255,255,.35);
   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  color:rgba(255,255,255,.78);font-family:'One Night Sans','Assistant',sans-serif;
+  color:rgba(60,30,90,.72);font-family:'One Night Sans','Assistant',sans-serif;
   font-size:clamp(8px,.7vw,10px);font-weight:800;letter-spacing:.26em;text-transform:uppercase;}
 
-/* the numeral — my own hand-drawn SVG paths of 6 and 9, 30% smaller than v1 */
+/* the numeral — hand-drawn SVG '6' and '9' */
 .hv-numeral{position:relative;width:clamp(180px,27vw,336px);
   height:calc(clamp(180px,27vw,336px) * 0.5);
   margin-bottom:clamp(10px,1.4vw,20px);
   will-change:transform;
   transform:
-    scale(calc(1 - var(--hp) * .16))
-    translate3d(0, calc(var(--hp) * -38px), 0);}
+    scale(calc(1 - var(--hp) * .10 + var(--hp) * 0)) /* base scale flat, burst adds on top */
+    translate3d(0, calc(var(--hp) * -20px), 0);}
 .hv-numeral .hv-svg{display:block;width:100%;height:100%;overflow:visible;}
 
-/* the two <g> groups get animated by CSS - transform-box:fill-box means
-   transform-origin is relative to each group's own bounding box */
 .hv-six, .hv-nine{transform-box:fill-box;transform-origin:center center;
   transition:transform .06s linear;will-change:transform;}
-/* At hp=0: 6 far left, tilted CCW. At hp=1: back to origin, upright.
-   The 9 mirrors — starts far right, tilted CW, then locks. */
 .hv-six{
   transform:
     translate(calc(-9vw + var(--hp) * 9vw), 0)
@@ -1545,7 +1541,19 @@ footer{padding:56px 0 34px;}
     translate(calc(9vw - var(--hp) * 9vw), 0)
     rotate(calc((1 - var(--hp)) * 6deg));}
 
-/* ring badge — 30% smaller */
+/* GLOW BURST — fires when 69 locks together (hero .is-locked class) */
+.hero-v2.is-locked .hv-numeral{animation:hv69Burst .6s cubic-bezier(.2,.7,.2,1);}
+@keyframes hv69Burst{
+  0%   { transform: scale(1)    translate3d(0, -20px, 0); filter: drop-shadow(0 0 0 rgba(255,47,146,0)); }
+  35%  { transform: scale(1.18) translate3d(0, -20px, 0); filter: drop-shadow(0 0 32px rgba(255,47,146,.85)) drop-shadow(0 0 60px rgba(255,180,0,.6)); }
+  100% { transform: scale(1.06) translate3d(0, -20px, 0); filter: drop-shadow(0 0 18px rgba(255,47,146,.55)); }
+}
+.hero-v2.is-locked .hv-six,
+.hero-v2.is-locked .hv-nine{
+  transform: translate(0, 0) rotate(0deg) !important;
+}
+
+/* ring badge */
 .hv-ring{position:absolute;top:clamp(66px,10vh,90px);right:clamp(12px,2vw,26px);
   width:clamp(72px,9vw,108px);height:auto;z-index:4;
   transform:
@@ -1554,24 +1562,23 @@ footer{padding:56px 0 34px;}
   opacity:calc(1 - var(--hp) * 1.2);
   animation:hvRingDrift 24s linear infinite;}
 .hv-ring svg{display:block;width:100%;height:auto;}
-.hv-ring text{fill:rgba(255,255,255,.78);}
+.hv-ring text{fill:rgba(60,30,90,.68);}
 @keyframes hvRingDrift{
   from{transform:scale(calc(1 - var(--hp) * .3)) rotate(calc(var(--hp) * -14deg + 0deg));}
   to  {transform:scale(calc(1 - var(--hp) * .3)) rotate(calc(var(--hp) * -14deg + 360deg));}
 }
 
-/* orbit dots */
 .hv-orbit{position:absolute;top:50%;left:50%;
   width:clamp(280px,42vw,500px);height:clamp(280px,42vw,500px);
   transform:translate3d(-50%, calc(-50% + var(--hp) * -24px), 0);
   pointer-events:none;z-index:1;}
 .hv-dot{position:absolute;width:6px;height:6px;border-radius:50%;
   background:linear-gradient(135deg, #ff8fb6, #ff2f92);
-  box-shadow:0 0 10px rgba(255,47,146,.6), 0 0 3px rgba(255,255,255,.4) inset;}
-.hv-dot i{position:absolute;inset:-5px;border:1px solid rgba(255,47,146,.4);border-radius:50%;
+  box-shadow:0 0 10px rgba(255,47,146,.7), 0 0 3px rgba(255,255,255,.5) inset;}
+.hv-dot i{position:absolute;inset:-5px;border:1px solid rgba(255,47,146,.5);border-radius:50%;
   animation:hvDotPulse 2.4s ease-in-out infinite;}
 @keyframes hvDotPulse{
-  0%,100%{transform:scale(1);opacity:.6;}
+  0%,100%{transform:scale(1);opacity:.7;}
   50%{transform:scale(1.6);opacity:0;}
 }
 .hv-dot-1{top:14%;left:12%;animation:hvDrift1 12s ease-in-out infinite alternate;}
@@ -1583,36 +1590,36 @@ footer{padding:56px 0 34px;}
 @keyframes hvDrift2{ 0%{transform:translate(0,0)} 100%{transform:translate(-13px, 14px)} }
 @keyframes hvDrift3{ 0%{transform:translate(0,0)} 100%{transform:translate(16px, 6px)} }
 
-/* title */
-.hv-title{margin:0 0 clamp(6px,.9vw,10px);color:#fff;
+/* title — dark ink on light bg */
+.hv-title{margin:0 0 clamp(6px,.9vw,10px);
   font-family:'One Night Sans','Assistant',sans-serif;
   font-size:clamp(16px,2.3vw,28px);font-weight:800;letter-spacing:-.02em;text-align:center;
   opacity:calc(1 - var(--hp) * .8);transform:translate3d(0, calc(var(--hp) * -18px), 0);}
-.hv-title span{display:inline-block;background:linear-gradient(92deg, #fff 0%, #ffe17a 55%, #fff 100%);
+.hv-title span{display:inline-block;
+  background:linear-gradient(92deg, #3a1e6d 0%, #ff2f92 55%, #3a1e6d 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;}
 
-/* meta */
 .hv-meta{display:flex;align-items:center;gap:8px;
-  color:rgba(255,255,255,.72);font-family:'Assistant',sans-serif;
+  color:rgba(60,30,90,.65);font-family:'Assistant',sans-serif;
   font-size:clamp(9px,.75vw,10px);font-weight:500;letter-spacing:.03em;
   opacity:calc(1 - var(--hp) * .9);transform:translate3d(0, calc(var(--hp) * -18px), 0);}
-.hv-meta-a em{color:#ffdf00;font-style:normal;margin:0 2px;font-weight:700;}
-.hv-meta-sep{color:rgba(255,255,255,.32);}
+.hv-meta-a em{color:#ff2f92;font-style:normal;margin:0 2px;font-weight:700;}
+.hv-meta-sep{color:rgba(60,30,90,.32);}
 
-/* scroll hint */
+/* scroll hint — updated copy so user knows to scroll for the animation */
 .hv-scroll-hint{position:absolute;bottom:12px;left:50%;
   display:flex;flex-direction:column;align-items:center;gap:3px;
-  color:rgba(255,255,255,.6);font-family:'One Night Sans','Assistant',sans-serif;
+  color:rgba(60,30,90,.6);font-family:'One Night Sans','Assistant',sans-serif;
   font-size:8px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
   opacity:calc(1 - var(--hp) * 2.4);
   animation:hvHintBounce 2.4s ease-in-out infinite;}
-.hv-scroll-hint svg{width:10px;height:10px;color:rgba(255,255,255,.6);}
+.hv-scroll-hint svg{width:10px;height:10px;color:rgba(60,30,90,.6);}
 @keyframes hvHintBounce{
   0%,100%{transform:translate(-50%, 0);}
   50%{transform:translate(-50%, 4px);}
 }
 
-/* mobile — even more compact */
+/* mobile */
 @media (max-width:820px){
   .hero-v2{height:52svh;min-height:340px;}
   .hv-ring{width:52px;top:48px;right:8px;}
@@ -1624,7 +1631,6 @@ footer{padding:56px 0 34px;}
   .hv-kicker span{padding:4px 10px;font-size:8px;letter-spacing:.22em;}
   .hv-scroll-hint{bottom:10px;font-size:7px;}
   .hv-scroll-hint svg{width:8px;height:8px;}
-  /* on mobile the 6 and 9 travel across a smaller range */
   .hv-six{transform:
     translate(calc(-9vw + var(--hp) * 9vw), 0)
     rotate(calc((1 - var(--hp)) * -6deg));}
@@ -1632,6 +1638,9 @@ footer{padding:56px 0 34px;}
     translate(calc(9vw - var(--hp) * 9vw), 0)
     rotate(calc((1 - var(--hp)) * 6deg));}
 }
+
+
+
 
 
 }
@@ -2762,43 +2771,109 @@ var WHEEL_DATA = 'Playful|Playthings & games|#playthings;Sensual|Lubes & massage
 (function(){
   var hero = document.querySelector('.hero-v2');
   if(!hero) return;
-  var rafId = 0;
-  var lastP = -1;
-  /* Smoothstep curve gives the linear scroll five gentle "beats" — feels
-     like discrete stages (idle → drift → converge → join → reveal) rather
-     than a constant crawl. */
-  function ease(p){
-    if(p <= 0) return 0;
-    if(p >= 1) return 1;
-    /* smoothstep: 3p² - 2p³ */
-    return p * p * (3 - 2 * p);
-  }
-  function update(){
-    rafId = 0;
-    /* Non-sticky short hero: animation progresses over the section's own
-       height. When section fully scrolled up: hp = 1. Full 5-stage
-       choreography plays out over exactly one hero-height of scroll. */
-    var range = hero.offsetHeight;
-    var scrolled = window.pageYOffset - hero.offsetTop;
-    var raw = range > 0 ? scrolled / range : 0;
-    var p = ease(raw < 0 ? 0 : raw > 1 ? 1 : raw);
-    if(Math.abs(p - lastP) < 0.002) return;
-    lastP = p;
-    hero.style.setProperty('--hp', p.toFixed(3));
-    /* Chapter indicator advances through 4 dots as the 5 stages progress */
+
+  /* === Scroll-jack for the 69 parallax ===
+     User's wheel/touch input advances --hp instead of scrolling the page.
+     When --hp reaches 1 (the 69 has locked together), we fire a glow burst,
+     then release the page to normal scroll. Scrolling back to the top
+     re-arms the sequence. */
+
+  var progress = 0;
+  var locked = true;
+  var deltaSum = 0;
+  var STEP = 1400;             /* accumulated wheel px to reach hp=1 */
+  var completedAt = 0;
+  var releaseDelay = 550;      /* ms of glow before scroll unlocks */
+
+  function apply(){
+    hero.style.setProperty('--hp', progress.toFixed(3));
     var dots = hero.querySelectorAll('.hv-chapter-dots i');
     if(dots.length){
-      var idx = Math.min(dots.length - 1, Math.floor(p * dots.length));
+      var idx = Math.min(dots.length - 1, Math.floor(progress * dots.length));
       dots.forEach(function(d, i){ d.classList.toggle('on', i === idx); });
     }
   }
-  function onScroll(){
-    if(rafId) return;
-    rafId = requestAnimationFrame(update);
+
+  function armLock(){
+    if(locked){
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+    }
   }
+  function release(){
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+  }
+
+  function setP(p){
+    progress = p < 0 ? 0 : p > 1 ? 1 : p;
+    apply();
+    if(progress >= 1 && locked){
+      /* 69 has combined — glow burst, then unlock scroll */
+      hero.classList.add('is-locked');
+      completedAt = performance.now();
+      setTimeout(function(){
+        locked = false;
+        release();
+      }, releaseDelay);
+    }
+  }
+
+  function onWheel(e){
+    if(!locked) return;
+    e.preventDefault();
+    deltaSum += e.deltaY;
+    if(deltaSum < 0) deltaSum = 0;
+    setP(deltaSum / STEP);
+  }
+
+  var touchY = 0;
+  function onTouchStart(e){ touchY = e.touches[0].clientY; }
+  function onTouchMove(e){
+    if(!locked) return;
+    e.preventDefault();
+    var ty = e.touches[0].clientY;
+    var dy = touchY - ty;   /* dragging up = positive (advance animation) */
+    touchY = ty;
+    deltaSum += dy * 4;     /* touch swipes are shorter than wheel — multiply */
+    if(deltaSum < 0) deltaSum = 0;
+    setP(deltaSum / STEP);
+  }
+
+  function onKey(e){
+    if(!locked) return;
+    if(e.code === 'ArrowDown' || e.code === 'PageDown' || e.code === 'Space' || e.code === 'End'){
+      e.preventDefault();
+      deltaSum += 140;
+      setP(deltaSum / STEP);
+    }
+    if(e.code === 'ArrowUp' || e.code === 'PageUp' || e.code === 'Home'){
+      e.preventDefault();
+      deltaSum -= 140;
+      if(deltaSum < 0) deltaSum = 0;
+      setP(deltaSum / STEP);
+    }
+  }
+
+  /* If user scrolls all the way back up after unlocking, re-arm the sequence */
+  function onScroll(){
+    if(!locked && window.pageYOffset < 5){
+      deltaSum = 0;
+      progress = 0;
+      hero.classList.remove('is-locked');
+      apply();
+      locked = true;
+      armLock();
+    }
+  }
+
+  armLock();
+  addEventListener('wheel', onWheel, {passive:false});
+  addEventListener('touchstart', onTouchStart, {passive:false});
+  addEventListener('touchmove', onTouchMove, {passive:false});
+  addEventListener('keydown', onKey, {passive:false});
   addEventListener('scroll', onScroll, {passive:true});
-  addEventListener('resize', onScroll, {passive:true});
-  update();
+  apply();
 })();
 
 (function(){
