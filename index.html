@@ -147,6 +147,31 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
   draw();
 })();
 </script><script>
+/* On phones the sale ribbon locks beneath the browser edge; its automatic crawl
+   pauses there and then responds to page scroll, rather than continuing to drift. */
+(()=>{
+  const ribbon=document.querySelector('.promo-ribbon');
+  const track=ribbon?.querySelector('.promo-ribbon__track');
+  if(!ribbon||!track||!matchMedia('(max-width: 680px)').matches)return;
+  let previousY=scrollY,shift=0;
+  const update=()=>{
+    const stuck=scrollY>ribbon.offsetTop&&ribbon.getBoundingClientRect().top<=1;
+    ribbon.classList.toggle('is-stuck',stuck);
+    if(stuck){
+      shift-=((scrollY-previousY)*.48);
+      const loop=Math.max(1,track.scrollWidth/2);
+      shift=((shift%loop)+loop)%loop-loop;
+      track.style.transform=`translate3d(${shift}px,0,0)`;
+    }else{
+      track.style.transform='';
+    }
+    previousY=scrollY;
+  };
+  addEventListener('scroll',update,{passive:true});
+  addEventListener('resize',update,{passive:true});
+  update();
+})();
+</script><script>
 /* Hero video: restart cleanly when the visitor scrolls upward into the scene. */
 (()=>{
   const hero=document.querySelector('.hero');
