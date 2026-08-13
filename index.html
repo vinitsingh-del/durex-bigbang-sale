@@ -17,7 +17,7 @@ section{scroll-margin-top:12px}.section{padding-top:74px}.heading{display:flex;j
 </style><link rel="stylesheet" href="brand-refresh.css?v=hero-hd-strip"></head>
 <body>
 <header><a class="brand" href="#top"><img src="assets/3614303eb08b.png" alt="Durex"></a><nav class="nav"><a href="#condoms">Condoms</a><a href="#lubes">Lubes</a><a href="#massagers">Massagers</a><a href="#performance">Performance</a><a href="#playthings">Playthings</a><a href="#rewards">Rewards</a></nav><div class="actions"><button>Cart <span class="cart-no" id="cartCount">0</span></button><button>Account</button></div><button class="hamb" aria-label="Menu"><i></i><i></i><i></i></button></header>
-<main id="top"><div class="shell"><section class="hero"><video src="assets/hero-clean.mp4?v=final" autoplay muted loop playsinline preload="auto" poster="assets/hero-clean-poster.webp?v=final" aria-label="Durex Big Bang Sale film"></video></section>
+<main id="top"><div class="shell"><section class="hero"><video src="assets/hero-clean.mp4?v=final" autoplay muted loop playsinline preload="auto" aria-label="Durex Big Bang Sale film"></video></section>
 <section class="categories"><a class="category" href="#condoms"><img src="assets/01a8382c9fb5.webp" alt=""><span><b>Condoms</b><small>6 packs, from ₹99</small></span><em>↗</em></a><a class="category" href="#lubes"><img src="assets/ad65f356e8bc.webp" alt=""><span><b>Lubes</b><small>5 lubes, up to 43% off</small></span><em>↗</em></a><a class="category" href="#massagers"><img src="assets/fe283623f553.webp" alt=""><span><b>Massagers</b><small>Up to 42% off</small></span><em>↗</em></a><a class="category" href="#performance"><img src="assets/1c2354442d3f.webp" alt=""><span><b>Performance</b><small>From ₹374</small></span><em>↗</em></a><a class="category" href="#playthings"><img src="assets/602c6f017f9e.webp" alt=""><span><b>Playthings</b><small>Up to 57% off</small></span><em>↗</em></a><a class="category" href="#rewards"><img src="assets/f87f3ffb1f76.webp" alt=""><span><b>Rewards</b><small>Four tiers to unlock</small></span><em>↗</em></a></section>
 <section id="wanted"><p class="kicker">Shop the sale</p><h2 class="title">MOST WANTED.<i>Ready now.</i></h2><div class="cards" data-cards="wanted"></div></section>
 <section class="section" id="condoms"><div class="heading"><div><p>Shop the sale</p><h2>Condoms<i>from ₹99</i></h2></div><a href="#top">View all →</a></div><div class="rail" data-cards="condoms"></div></section>
@@ -40,11 +40,11 @@ const primaryShell=document.querySelector('#top > .shell');
 const categoryMenu=document.querySelector('.categories');
 const catalog=document.createElement('section');
 catalog.className='sale-catalog';catalog.id='sale-catalog';
-catalog.innerHTML='<div class="sale-intro"><p class="kicker"><span class="store-signal" aria-hidden="true"></span>The 69 Store</p><h2 class="title">SHOP THE SALE.<i>Pick your pleasure.</i></h2></div><div class="sale-tabs" role="tablist"><button class="active" data-tab="three">Condoms – Pack of 3</button><button data-tab="ten">Condoms – Pack of 10</button><button data-tab="lubes">Lubes</button><button data-tab="performance">Performance</button><button data-tab="massagers">Massagers</button></div><div class="cards" id="tabCards"></div>';
+catalog.innerHTML='<div class="sale-intro"><p class="kicker"><span class="store-signal" aria-hidden="true"></span>The 69 Store</p><h2 class="title">SHOP THE SALE.</h2></div><div class="sale-tabs" role="tablist"><button class="active" data-tab="three">Condoms – Pack of 3</button><button data-tab="ten">Condoms – Pack of 10</button><button data-tab="lubes">Lubes</button><button data-tab="performance">Performance</button><button data-tab="massagers">Massagers</button></div><div class="cards" id="tabCards"></div>';
 const promoRibbon=document.createElement('div');
 promoRibbon.className='promo-ribbon';
-promoRibbon.setAttribute('aria-label','69 Big Bang Sale — choose your pleasure');
-promoRibbon.innerHTML='<div class="promo-ribbon__track"><span class="ribbon-panel ribbon-panel--navy">69 Big Bang</span><span class="ribbon-panel ribbon-panel--white">Pick your pleasure</span><span class="ribbon-panel ribbon-panel--yellow">Choose a category</span><span class="ribbon-panel ribbon-panel--pink">Sale on now</span><span class="ribbon-panel ribbon-panel--navy">69 Big Bang</span><span class="ribbon-panel ribbon-panel--white">Pick your pleasure</span><span class="ribbon-panel ribbon-panel--yellow">Choose a category</span><span class="ribbon-panel ribbon-panel--pink">Sale on now</span></div>';
+promoRibbon.setAttribute('aria-label','69 Big Bang Sale announcements');
+promoRibbon.innerHTML='<div class="promo-ribbon__track"><span class="ribbon-panel ribbon-panel--navy">69 Big Bang Sale</span><span class="ribbon-panel ribbon-panel--yellow">Sale live now</span><span class="ribbon-panel ribbon-panel--white">Choose a category</span><span class="ribbon-panel ribbon-panel--pink">Discreet delivery</span><span class="ribbon-panel ribbon-panel--navy">69 Big Bang Sale</span><span class="ribbon-panel ribbon-panel--yellow">Sale live now</span><span class="ribbon-panel ribbon-panel--white">Choose a category</span><span class="ribbon-panel ribbon-panel--pink">Discreet delivery</span></div>';
 const heroStage=document.querySelector('.hero');
 heroStage.before(promoRibbon);heroStage.after(catalog);catalog.after(categoryMenu);
 categoryMenu.className='quick-links';
@@ -85,6 +85,68 @@ let moodIndex=0;document.querySelector('.mood-now').onclick=event=>{const wheel=
 /* Card motion is intentionally brief: cards brighten into view, while every second card blinks once. */
 let cardObserver;const initCardMotion=()=>{cardObserver?.disconnect();const cards=[...document.querySelectorAll('.card')];cards.forEach((card,index)=>{card.classList.add('is-dim');card.dataset.cardIndex=index});cardObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{const card=entry.target;if(entry.isIntersecting){card.classList.remove('is-dim');card.classList.add('is-in-view');if(Number(card.dataset.cardIndex)%2===1){card.classList.remove('blink-on-enter');void card.offsetWidth;card.classList.add('blink-on-enter')}}else{card.classList.remove('is-in-view');card.classList.add('is-dim')}}),{threshold:.42});cards.forEach(card=>cardObserver.observe(card))};initCardMotion();document.querySelector('.sale-tabs').addEventListener('click',()=>requestAnimationFrame(initCardMotion));
 document.addEventListener('error',event=>{const image=event.target;if(image.tagName==='IMG'&&image.closest('.card')){image.onerror=null;image.src='assets/3614303eb08b.png';image.style.objectFit='contain';image.style.padding='24px'}},true);
+</script><script>
+/* Restored hero parallax: the separated 6 and 9 resolve into the campaign lock-up
+   on the first scroll gesture, then normal page scroll resumes. */
+(()=>{
+  const hero=document.querySelector('.hero');
+  if(!hero)return;
+  const copy=document.createElement('div');
+  copy.className='hero-copy';
+  copy.innerHTML='<div class="hero-parallax-stage" aria-label="69 Big Bang Sale"><div class="hero-lockup-bob"><span class="hero-digit-wrap hero-six-wrap"><img class="hero-digit hero-six" src="assets/hero-six.png" alt="6"></span><span class="hero-digit-wrap hero-nine-wrap"><img class="hero-digit hero-nine" src="assets/hero-nine.png" alt="9"></span><img class="hero-sale-wordmark" src="assets/hero-big-bang-sale.png" alt="Big Bang Sale"><img class="hero-date-ribbon" src="assets/bigbang-date-ribbon-transparent.png" alt="29th August onwards"></div></div>';
+  hero.append(copy);
+  const stage=copy.querySelector('.hero-parallax-stage');
+  const six=copy.querySelector('.hero-six-wrap');
+  const nine=copy.querySelector('.hero-nine-wrap');
+  const sale=copy.querySelector('.hero-sale-wordmark');
+  const date=copy.querySelector('.hero-date-ribbon');
+  const video=hero.querySelector('video');
+  const clamp=(value,min,max)=>Math.min(max,Math.max(min,value));
+  const ease=value=>1-Math.pow(1-value,3);
+  let progress=0;
+  let touchY=null;
+  const inScene=()=>{const rect=hero.getBoundingClientRect();return rect.top<innerHeight*.56&&rect.bottom>innerHeight*.13};
+  const draw=()=>{
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){progress=1}
+    const joined=ease(progress);
+    const lift=6*(1-joined);
+    six.style.transform=`translate3d(${30*joined}%,${lift}px,0) rotate(${-5*(1-joined)}deg)`;
+    nine.style.transform=`translate3d(${-30*joined}%,-${lift}px,0) rotate(${5*(1-joined)}deg)`;
+    const reveal=ease(clamp((progress-.56)/.44,0,1));
+    sale.style.opacity=String(reveal);
+    sale.style.transform=`translate3d(0,${18*(1-reveal)}px,0) scale(${.92+.08*reveal})`;
+    date.style.opacity=String(reveal);
+    date.style.transform=`translate3d(0,${11*(1-reveal)}px,0) scale(${.95+.05*reveal})`;
+    stage.classList.toggle('is-active',progress>.001);
+    stage.classList.toggle('is-complete',reveal>.985);
+    /* Keep the film at native scale. Enlarging a 16:9 source inside the hero was
+       softening the image, especially on high-density mobile screens. */
+    if(video)video.style.transform='none';
+  };
+  const progressScene=delta=>{
+    const previous=progress;
+    progress=clamp(progress+delta/460,0,1);
+    if(progress===previous)return false;
+    draw();
+    return true;
+  };
+  addEventListener('wheel',event=>{
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches||!inScene())return;
+    const forwards=event.deltaY>0;
+    const capture=(forwards&&progress<1)||(!forwards&&progress>0&&hero.getBoundingClientRect().top<=8);
+    if(capture&&progressScene(event.deltaY))event.preventDefault();
+  },{passive:false});
+  hero.addEventListener('touchstart',event=>{touchY=event.touches[0]?.clientY??null},{passive:true});
+  hero.addEventListener('touchmove',event=>{
+    const current=event.touches[0]?.clientY;
+    if(touchY===null||current===undefined||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    const delta=touchY-current;touchY=current;
+    const capture=(delta>0&&progress<1)||(delta<0&&progress>0&&hero.getBoundingClientRect().top<=8);
+    if(capture&&progressScene(delta))event.preventDefault();
+  },{passive:false});
+  hero.addEventListener('touchend',()=>{touchY=null},{passive:true});
+  draw();
+})();
 </script><script>
 /* Hero video: restart cleanly when the visitor scrolls upward into the scene. */
 (()=>{
