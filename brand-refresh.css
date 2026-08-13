@@ -1,0 +1,14 @@
+/* Brand-led Big Bang refinements: keeps the hero video fully visible. */
+.announcement{display:flex;justify-content:center;gap:38px;padding:9px 18px;background:#ffdf00;color:#06154a;font:800 10px One,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.nav{gap:18px}.nav a{font-size:10px}
+.hero{height:382px;background:#062579}
+.hero:after,.hero .grid{display:none}
+.hero-copy{display:flex;flex-direction:column;align-items:flex-start;gap:0}
+.hero-copy .eyebrow,.hero-copy h1,.hero-copy .date{display:none}
+.hero-copy:before{content:"";display:block;width:min(355px,43vw);aspect-ratio:1225/1284;background:url('assets/bigbang-sale-logo.webp') center/contain no-repeat;filter:drop-shadow(0 8px 15px #00114a80)}
+.hero-copy:after{content:"";display:block;width:min(260px,31vw);height:87px;margin:-20px 0 0 42px;background:url('assets/bigbang-date-ribbon.webp') center/contain no-repeat}
+.sale-catalog{padding:32px 0 8px}.sale-catalog .title{margin-bottom:14px}.tab-copy{margin:0 0 13px;color:#dff2ff;font:800 11px One,Arial;letter-spacing:.08em;text-transform:uppercase}.sale-tabs{display:flex;gap:10px;overflow:auto;padding:4px 0 14px;scrollbar-width:none}.sale-tabs button{flex:0 0 auto;border:2px solid #142c83;border-radius:999px;padding:13px 22px;background:#f8fbff;color:#687182;font:800 14px One,Arial;cursor:pointer}.sale-tabs button.active{background:#ffcd2e;color:#07165a}.sale-catalog .cards{margin-top:4px}
+.quick-links{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;margin:25px 0 40px}.quick-links a{display:grid;place-items:center;min-height:48px;padding:7px;border:1px solid #d9efff85;border-radius:10px;background:#f2faff;color:#082069;text-align:center;font:800 10px/1.15 One,Arial;text-transform:uppercase}.launch{padding-top:52px}
+.card,.category,.bundle,.compare article{box-shadow:0 8px 18px #00105228}.card{border-radius:13px}.add{background:#ffcf2e;color:#07165a}.tag{background:#07318d}.notice a{background:#ffcf2e;color:#07165a}
+@media(max-width:960px){.quick-links{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:680px){.announcement{gap:11px;padding:8px;font-size:8px}.hero{height:330px}.hero-copy{left:18px;top:48%}.hero-copy:before{width:210px}.hero-copy:after{width:160px;height:54px;margin:-10px 0 0 25px}.offer{width:94px;right:15px}.offer b{font-size:35px}.offer span{font-size:7px}.sale-catalog{padding-top:22px}.sale-tabs button{padding:11px 17px;font-size:11px}.quick-links{grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:16px}.quick-links a{min-height:43px;font-size:8px}.launch{padding-top:34px}}
