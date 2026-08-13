@@ -13,3 +13,14 @@
 #bundle,.feed,.rewards{display:none}
 @media(max-width:960px){.quick-links{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:680px){.announcement{gap:11px;padding:8px;font-size:8px}.hero{height:330px}.hero-copy{left:18px;top:48%}.hero-copy:before{width:210px}.hero-copy:after{width:160px;height:54px;margin:-10px 0 0 25px}.offer{width:94px;right:15px}.offer b{font-size:35px}.offer span{font-size:7px}.sale-catalog{padding-top:22px}.sale-tabs button{padding:11px 17px;font-size:11px}.quick-links{grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:16px}.quick-links a{min-height:43px;font-size:8px}.launch{padding-top:34px}}
+
+/* Compact, fully visible campaign stage. */
+.hero{height:306px}
+.hero video{filter:saturate(.88) contrast(.94) brightness(1.05)}
+.hero:after{display:block;pointer-events:none;background:linear-gradient(90deg,rgba(255,255,255,.78) 0%,rgba(255,255,255,.38) 38%,rgba(255,255,255,.08) 72%,transparent 100%)}
+.hero-copy{left:9%;top:50%}
+.hero-copy:before{width:min(225px,21vw);filter:drop-shadow(0 7px 12px #00114a70);transform-origin:50% 34%;animation:mark-breathe 3.6s ease-in-out infinite}
+.hero-copy:after{width:min(210px,19vw);height:58px;margin:-12px 0 0 13px;background-image:url('assets/bigbang-date-ribbon.webp')}
+.offer{display:none}
+@keyframes mark-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.055)}}
+@media(max-width:680px){.hero{height:264px}.hero-copy{left:50%;top:50%;transform:translate(-50%,-50%);align-items:center}.hero-copy:before{width:158px}.hero-copy:after{width:150px;height:43px;margin:-8px 0 0 10px}}
