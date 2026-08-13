@@ -210,3 +210,8 @@ body:before{background:radial-gradient(ellipse at 8% 4%,#d9fbff4d 0,transparent 
 .hero-parallax-stage.is-complete .hero-lockup-bob{animation:hero-lockup-float 2.25s ease-in-out infinite}
 @media(max-width:680px){.hero-digit-wrap{width:56%;height:59%}.hero-six-wrap{left:-16%}.hero-nine-wrap{right:-16%}}
 @media(prefers-reduced-motion:reduce){.hero-parallax-stage:not(.is-active) .hero-digit-wrap{animation:none!important}}
+
+/* Locked hero replacement: the supplied film is the entire hero. */
+.hero{overflow:hidden!important;isolation:isolate!important}
+.hero>video{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;display:block!important;object-fit:cover!important;object-position:center center!important;z-index:0!important;transform:none!important;filter:none!important}
+.hero:after,.hero .grid,.hero-copy,.hero .offer{display:none!important}
