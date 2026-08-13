@@ -50,7 +50,7 @@ body:before{z-index:-1;background:radial-gradient(ellipse at 10% 8%,#d9fbff68 0,
 .promo-ribbon{position:relative;z-index:1;height:34px;margin:10px 0 16px;overflow:hidden;border-radius:0;background:#061d69;box-shadow:0 6px 13px #00145126}
 .promo-ribbon__track{display:flex;align-items:stretch;width:max-content;height:100%;animation:promo-ribbon-run 24s linear infinite;will-change:transform}
 .ribbon-panel{flex:0 0 184px;display:grid;place-items:center;height:100%;padding:0 14px;font:800 9px/1 One,Arial,sans-serif;letter-spacing:.12em;text-align:center;text-transform:uppercase;white-space:nowrap}
-.sale-catalog{padding:14px 0 0!important}.sale-intro{display:grid;justify-items:center;gap:6px;margin:0 0 14px!important;text-align:center}.sale-catalog .title{font-size:clamp(28px,3vw,40px)!important;line-height:1!important}.sale-catalog .title i{display:none!important}.sale-catalog .sale-tabs{justify-content:center;padding:0 0 14px!important}
+.sale-catalog{padding:14px 0 0!important}.sale-intro{display:flex!important;align-items:center!important;justify-content:center!important;gap:9px!important;margin:0 0 14px!important;text-align:center;white-space:nowrap!important}.sale-catalog .kicker{display:flex!important;align-items:center!important;gap:7px!important;flex:0 0 auto!important;margin:0!important;animation:store-blink 1.1s steps(2,end) infinite!important}.sale-catalog .title{flex:0 1 auto!important;margin:0!important;font-size:clamp(25px,2.7vw,38px)!important;line-height:1!important}.sale-catalog .title i{display:none!important}.sale-catalog .sale-tabs{justify-content:center;padding:0 0 14px!important}
 .sale-catalog .cards{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px!important;overflow:visible!important;padding:0 0 8px!important;scroll-snap-type:none!important}
 .sale-catalog .card{position:relative!important;display:grid!important;grid-template-rows:minmax(192px,1fr) auto!important;flex:none!important;width:100%!important;min-width:0!important;max-width:none!important;min-height:360px!important;height:100%!important;aspect-ratio:auto!important;overflow:hidden!important;background:#fff!important;border:1px solid #d8e8f6!important;border-radius:15px!important;box-shadow:0 8px 18px #0014512e!important}
 .sale-catalog .card .media{position:relative!important;inset:auto!important;display:block!important;min-height:0!important;height:auto!important;overflow:hidden!important;background:#fff!important}.sale-catalog .card .media img{width:100%!important;height:100%!important;max-width:100%!important;object-fit:contain!important;mix-blend-mode:normal!important;padding:12px!important;transform:none!important;filter:none!important}.sale-catalog .card .info{position:relative!important;inset:auto!important;display:flex!important;flex-direction:column!important;min-height:126px!important;padding:11px!important;background:#fff!important;color:#071d62!important}.sale-catalog .card .info h3{display:-webkit-box!important;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:13px!important;line-height:1.08!important}.sale-catalog .card .bottom{margin-top:auto!important}.sale-catalog .card .add{flex:0 0 auto!important}
@@ -76,13 +76,88 @@ body:before{z-index:-1;background:radial-gradient(ellipse at 10% 8%,#d9fbff68 0,
 .cards .card .info h3,.rail .card .info h3{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:3!important;overflow:hidden!important}
 .cards .card .bottom,.rail .card .bottom{margin-top:auto!important;min-height:30px!important}
 .cards .card .media img,.rail .card .media img{transform:scale(1.2)!important;transform-origin:center center!important}
+.sale-intro{display:flex!important;align-items:center!important;justify-content:center!important;gap:9px!important;margin:0 0 14px!important;white-space:nowrap!important}
+.sale-catalog .kicker{display:flex!important;align-items:center!important;gap:7px!important;flex:0 0 auto!important;margin:0!important;animation:store-blink 1.1s steps(2,end) infinite!important}
+.sale-catalog .title{flex:0 1 auto!important;margin:0!important;font-size:clamp(25px,2.7vw,38px)!important;line-height:1!important}
+#wanted .title i,.launch .title i{animation:store-blink 1.1s steps(2,end) infinite!important;text-shadow:none!important}
+.hero>video{filter:brightness(1.2) contrast(1.03) saturate(1.04)!important;transform:none!important;image-rendering:auto!important}
+.sale-intro{display:flex!important;align-items:center!important;justify-content:center!important;gap:9px!important;margin:0 0 14px!important;white-space:nowrap!important}
+.sale-catalog .kicker{display:flex!important;align-items:center!important;gap:7px!important;flex:0 0 auto!important;margin:0!important;animation:store-blink 1.1s steps(2,end) infinite!important}
+.sale-catalog .title{flex:0 1 auto!important;margin:0!important;font-size:clamp(25px,2.7vw,38px)!important;line-height:1!important}
 @media(max-width:680px){
   .promo-ribbon{margin:0 0 13px!important}
   .hero{height:180px!important}
   .cards .card,.rail .card{grid-template-rows:minmax(0,57%) minmax(0,43%)!important}
-  .cards .card .info,.rail .card .info{padding:8px!important}
-  .cards .card .info h3,.rail .card .info h3{font-size:10px!important;line-height:1.04!important}
-  .cards .card .bottom,.rail .card .bottom{min-height:26px!important}
+.cards .card .info,.rail .card .info{padding:8px!important}
+.cards .card .info h3,.rail .card .info h3{font-size:10px!important;line-height:1.04!important}
+.cards .card .bottom,.rail .card .bottom{min-height:26px!important}
+}
+
+/* Latest mobile release values: one-line animated store heading, bright crisp
+   hero film, and rail clearance so the fixed navigation never hides a card. */
+.sale-intro{display:flex!important;align-items:center!important;justify-content:center!important;gap:9px!important;margin:0 0 14px!important;white-space:nowrap!important}
+.sale-catalog .kicker{display:flex!important;align-items:center!important;gap:7px!important;flex:0 0 auto!important;margin:0!important;animation:store-blink 1.1s steps(2,end) infinite!important}
+.sale-catalog .title{flex:0 1 auto!important;margin:0!important;font-size:clamp(25px,2.7vw,38px)!important;line-height:1!important}
+#wanted .title i,.launch .title i{animation:store-blink 1.1s steps(2,end) infinite!important;text-shadow:none!important}
+.hero>video{filter:brightness(1.2) contrast(1.03) saturate(1.04)!important;transform:none!important;image-rendering:auto!important}
+@media(max-width:680px){
+  .promo-ribbon{position:sticky!important;top:0!important;z-index:40!important;margin:0 0 13px!important}
+  .promo-ribbon.is-stuck .promo-ribbon__track{animation-play-state:paused!important}
+  .sale-intro{gap:6px!important;margin-bottom:11px!important}.sale-catalog .kicker{font-size:8px!important;letter-spacing:.12em!important}.sale-catalog .title{font-size:clamp(22px,6.3vw,27px)!important;letter-spacing:-.04em!important}
+  .sale-catalog .cards,.section .rail,.dark-showcase .cards{padding-bottom:112px!important;scroll-padding-bottom:112px!important}
+  .cards .card .media img,.rail .card .media img{object-fit:contain!important;padding:0!important;transform:scale(1.2)!important}
+}
+
+/* Final sale-heading cascade. This remains after legacy visual styles. */
+.sale-intro{display:flex!important;align-items:center!important;justify-content:center!important;gap:9px!important;margin:0 0 14px!important;white-space:nowrap!important}
+.sale-catalog .kicker{display:flex!important;align-items:center!important;gap:7px!important;flex:0 0 auto!important;margin:0!important;animation:store-blink 1.1s steps(2,end) infinite!important}
+.sale-catalog .title{flex:0 1 auto!important;margin:0!important;font-size:clamp(25px,2.7vw,38px)!important;line-height:1!important}
+@media(max-width:680px){.sale-intro{gap:6px!important;margin-bottom:11px!important}.sale-catalog .kicker{font-size:8px!important;letter-spacing:.12em!important}.sale-catalog .title{font-size:clamp(22px,6.3vw,27px)!important;letter-spacing:-.04em!important}}
+
+/* Sale heading lock: keep the animated store marker and title together. */
+.sale-intro{display:flex!important;align-items:center!important;justify-content:center!important;gap:9px!important;margin:0 0 14px!important;white-space:nowrap!important}
+.sale-catalog .kicker{display:flex!important;align-items:center!important;gap:7px!important;flex:0 0 auto!important;margin:0!important;animation:store-blink 1.1s steps(2,end) infinite!important}
+.sale-catalog .title{flex:0 1 auto!important;margin:0!important;font-size:clamp(25px,2.7vw,38px)!important;line-height:1!important}
+@media(max-width:680px){
+  .sale-intro{gap:6px!important;margin-bottom:11px!important}
+  .sale-catalog .kicker{font-size:8px!important;letter-spacing:.12em!important}
+  .sale-catalog .title{font-size:clamp(22px,6.3vw,27px)!important;letter-spacing:-.04em!important}
+}
+
+/* Final cascade lock for the desktop one-line store heading. */
+.sale-intro{display:flex!important;align-items:center!important;justify-content:center!important;gap:9px!important;margin:0 0 14px!important;white-space:nowrap!important}
+.sale-catalog .kicker{display:flex!important;align-items:center!important;gap:7px!important;flex:0 0 auto!important;margin:0!important;animation:store-blink 1.1s steps(2,end) infinite!important}
+.sale-catalog .title{flex:0 1 auto!important;margin:0!important;font-size:clamp(25px,2.7vw,38px)!important;line-height:1!important}
+@media(max-width:680px){.sale-intro{gap:6px!important;margin-bottom:11px!important}.sale-catalog .kicker{font-size:8px!important;letter-spacing:.12em!important}.sale-catalog .title{font-size:clamp(22px,6.3vw,27px)!important;letter-spacing:-.04em!important}}
+
+/* Latest mobile release values: one-line animated store heading, bright crisp
+   hero film, and rail clearance so the fixed navigation never hides a card. */
+.sale-intro{display:flex!important;align-items:center!important;justify-content:center!important;gap:9px!important;margin:0 0 14px!important;white-space:nowrap!important}
+.sale-catalog .kicker{display:flex!important;align-items:center!important;gap:7px!important;flex:0 0 auto!important;margin:0!important;animation:store-blink 1.1s steps(2,end) infinite!important}
+.sale-catalog .title{flex:0 1 auto!important;margin:0!important;font-size:clamp(25px,2.7vw,38px)!important;line-height:1!important}
+#wanted .title i,.launch .title i{animation:store-blink 1.1s steps(2,end) infinite!important;text-shadow:none!important}
+.hero>video{filter:brightness(1.2) contrast(1.03) saturate(1.04)!important;transform:none!important;image-rendering:auto!important}
+@media(max-width:680px){
+  .promo-ribbon{position:sticky!important;top:0!important;z-index:40!important;margin:0 0 13px!important}
+  .promo-ribbon.is-stuck .promo-ribbon__track{animation-play-state:paused!important}
+  .sale-intro{gap:6px!important;margin-bottom:11px!important}.sale-catalog .kicker{font-size:8px!important;letter-spacing:.12em!important}.sale-catalog .title{font-size:clamp(22px,6.3vw,27px)!important;letter-spacing:-.04em!important}
+  .sale-catalog .cards,.section .rail,.dark-showcase .cards{padding-bottom:112px!important;scroll-padding-bottom:112px!important}
+  .cards .card .media img,.rail .card .media img{object-fit:contain!important;padding:0!important;transform:scale(1.2)!important}
+}
+
+/* Final mobile sale polish: make the store signal and sale title a single line,
+   preserve the signal animation, and keep every card reachable above the fixed nav. */
+.sale-intro{display:flex!important;align-items:center!important;justify-content:center!important;gap:9px!important;margin:0 0 14px!important;white-space:nowrap!important}
+.sale-catalog .kicker{display:flex!important;align-items:center!important;gap:7px!important;flex:0 0 auto!important;margin:0!important;animation:store-blink 1.1s steps(2,end) infinite!important}
+.sale-catalog .title{flex:0 1 auto!important;margin:0!important;font-size:clamp(25px,2.7vw,38px)!important;line-height:1!important}
+#wanted .title i,.launch .title i{animation:store-blink 1.1s steps(2,end) infinite!important;text-shadow:none!important}
+.hero>video{filter:brightness(1.2) contrast(1.03) saturate(1.04)!important;transform:none!important;image-rendering:auto!important}
+@media(max-width:680px){
+  .promo-ribbon{position:sticky!important;top:0!important;z-index:40!important;margin:0 0 13px!important}
+  .promo-ribbon.is-stuck .promo-ribbon__track{animation-play-state:paused!important}
+  .sale-intro{gap:6px!important;margin-bottom:11px!important}.sale-catalog .kicker{font-size:8px!important;letter-spacing:.12em!important}.sale-catalog .title{font-size:clamp(22px,6.3vw,27px)!important;letter-spacing:-.04em!important}
+  .sale-catalog .cards,.section .rail,.dark-showcase .cards{padding-bottom:112px!important;scroll-padding-bottom:112px!important}
+  .cards .card .media img,.rail .card .media img{object-fit:contain!important;padding:0!important;transform:scale(1.2)!important}
 }
 
 /* Final phone-specific layout pass: one thumb-zone system, full imagery, no overlap. */
@@ -331,6 +406,8 @@ body:before{background:radial-gradient(ellipse at 8% 4%,#d9fbff4d 0,transparent 
 .cards .card .info h3,.rail .card .info h3{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:3!important;overflow:hidden!important}
 .cards .card .bottom,.rail .card .bottom{margin-top:auto!important;min-height:30px!important}
 .cards .card .media img,.rail .card .media img{transform:scale(1.2)!important;transform-origin:center center!important}
+#wanted .title i,.launch .title i{animation:store-blink 1.1s steps(2,end) infinite!important;text-shadow:none!important}
+.hero>video{filter:brightness(1.2) contrast(1.03) saturate(1.04)!important;transform:none!important;image-rendering:auto!important}
 @media(max-width:680px){
   .promo-ribbon{margin:0 0 13px!important}
   .hero{height:180px!important}
@@ -338,4 +415,15 @@ body:before{background:radial-gradient(ellipse at 8% 4%,#d9fbff4d 0,transparent 
   .cards .card .info,.rail .card .info{padding:8px!important}
   .cards .card .info h3,.rail .card .info h3{font-size:10px!important;line-height:1.04!important}
   .cards .card .bottom,.rail .card .bottom{min-height:26px!important}
+  .promo-ribbon{position:sticky!important;top:0!important;z-index:40!important;margin:0 0 13px!important}
+  .promo-ribbon.is-stuck .promo-ribbon__track{animation-play-state:paused!important}
+  .sale-intro{gap:6px!important;margin-bottom:11px!important}.sale-catalog .kicker{font-size:8px!important;letter-spacing:.12em!important}.sale-catalog .title{font-size:clamp(22px,6.3vw,27px)!important;letter-spacing:-.04em!important}
+  .sale-catalog .cards,.section .rail,.dark-showcase .cards{padding-bottom:112px!important;scroll-padding-bottom:112px!important}
+  .cards .card .media img,.rail .card .media img{object-fit:contain!important;padding:0!important;transform:scale(1.2)!important}
 }
+
+/* Absolute final sale-heading cascade. */
+.sale-intro{display:flex!important;align-items:center!important;justify-content:center!important;gap:9px!important;margin:0 0 14px!important;white-space:nowrap!important}
+.sale-catalog .kicker{display:flex!important;align-items:center!important;gap:7px!important;flex:0 0 auto!important;margin:0!important;animation:store-blink 1.1s steps(2,end) infinite!important}
+.sale-catalog .title{flex:0 1 auto!important;margin:0!important;font-size:clamp(25px,2.7vw,38px)!important;line-height:1!important}
+@media(max-width:680px){.sale-intro{gap:6px!important;margin-bottom:11px!important}.sale-catalog .kicker{font-size:8px!important;letter-spacing:.12em!important}.sale-catalog .title{font-size:clamp(22px,6.3vw,27px)!important;letter-spacing:-.04em!important}}
