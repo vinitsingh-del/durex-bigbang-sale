@@ -153,3 +153,15 @@ body:before{background:radial-gradient(ellipse at 8% 4%,#d9fbff4d 0,transparent 
 @media(max-width:960px){.hero-parallax-stage{width:min(286px,42vw);height:198px}}
 @media(max-width:680px){.hero{height:224px;border-radius:18px}.hero:after{background:radial-gradient(ellipse 72% 97% at 50% 48%,rgba(255,255,255,.78),rgba(255,255,255,.38) 46%,transparent 78%)!important}.hero-parallax-stage{width:190px;height:184px}.hero-digit{height:58%}.hero-sale-wordmark{top:53%;height:31%}.hero-date-ribbon{top:84%;height:14%}}
 @media(prefers-reduced-motion:reduce){.hero video{transition:none}.hero-parallax-stage.is-complete .hero-lockup-bob{animation:none}}
+
+/* Mobile visual QA: keep the hero artwork above its video and give every packshot the approved contained zoom. */
+.hero video{z-index:0!important}
+.hero:after{z-index:1!important}
+.hero-copy{z-index:2!important}
+@media(max-width:680px){
+  .card{aspect-ratio:3/4!important}
+  .card .media{overflow:hidden}
+  .card .media img{object-fit:contain!important;object-position:center center!important;transform:scale(1.1)!important;transform-origin:50% 50%!important;padding:3px!important}
+  .sale-catalog .card .media img{transform:scale(1.18)!important;padding:0!important}
+  .sale-catalog .card .media{background:transparent!important}
+}
