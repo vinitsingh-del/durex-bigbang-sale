@@ -158,6 +158,9 @@ body:before{background:radial-gradient(ellipse at 8% 4%,#d9fbff4d 0,transparent 
 .hero video{z-index:0!important}
 .hero:after{z-index:1!important}
 .hero-copy{z-index:2!important}
+.hero-parallax-stage{z-index:3!important;isolation:isolate;filter:drop-shadow(0 0 2px #fff9) drop-shadow(0 7px 15px #00134bcc)!important}
+.hero-lockup-bob{isolation:isolate}
+.hero-digit,.hero-sale-wordmark,.hero-date-ribbon{z-index:1!important;filter:brightness(1.12) contrast(1.08)}
 @media(max-width:680px){
   .card{aspect-ratio:3/4!important}
   .card .media{overflow:hidden}
