@@ -197,3 +197,16 @@ body:before{background:radial-gradient(ellipse at 8% 4%,#d9fbff4d 0,transparent 
   .sale-catalog .card .media img{transform:scale(1.2)!important;transform-origin:50% 46%!important}
   .sale-catalog .card .info{padding:44px 11px 11px!important}
 }
+
+/* Captured hero-scroll scene: digits idle independently, then settle into one centred 69. */
+.hero-lockup-bob{position:absolute!important;inset:0!important}
+.hero-digit-wrap{position:absolute;top:0;display:block;width:55%;height:58%;will-change:transform}
+.hero-six-wrap{left:-16%}.hero-nine-wrap{right:-16%}
+.hero-digit-wrap .hero-digit{position:static!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:contain!important;filter:brightness(1.12) contrast(1.08)}
+.hero-parallax-stage:not(.is-active) .hero-six-wrap{animation:hero-six-idle 1.08s cubic-bezier(.34,1.56,.64,1) infinite}
+.hero-parallax-stage:not(.is-active) .hero-nine-wrap{animation:hero-nine-idle 1.24s cubic-bezier(.34,1.56,.64,1) .16s infinite}
+@keyframes hero-six-idle{0%,100%{transform:translateY(0) rotate(-4deg)}44%{transform:translateY(-9px) rotate(-7deg)}72%{transform:translateY(2px) rotate(-2deg)}}
+@keyframes hero-nine-idle{0%,100%{transform:translateY(0) rotate(4deg)}46%{transform:translateY(-12px) rotate(7deg)}73%{transform:translateY(2px) rotate(2deg)}}
+.hero-parallax-stage.is-complete .hero-lockup-bob{animation:hero-lockup-float 2.25s ease-in-out infinite}
+@media(max-width:680px){.hero-digit-wrap{width:56%;height:59%}.hero-six-wrap{left:-16%}.hero-nine-wrap{right:-16%}}
+@media(prefers-reduced-motion:reduce){.hero-parallax-stage:not(.is-active) .hero-digit-wrap{animation:none!important}}
