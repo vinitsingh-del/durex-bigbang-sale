@@ -82,47 +82,75 @@ let cardObserver;const initCardMotion=()=>{cardObserver?.disconnect();const card
 let saleRailTimer;const startSaleRail=()=>{clearInterval(saleRailTimer);const rail=document.querySelector('.sale-catalog .cards');if(!rail)return;const move=()=>{const card=rail.querySelector('.card');if(!card)return;const step=card.getBoundingClientRect().width+16;if(rail.scrollLeft+rail.clientWidth>=rail.scrollWidth-12){rail.scrollTo({left:0,behavior:'smooth'})}else{rail.scrollBy({left:step,behavior:'smooth'})}};setTimeout(move,500);saleRailTimer=setInterval(move,2400)};startSaleRail();document.querySelector('.sale-tabs').addEventListener('click',()=>requestAnimationFrame(startSaleRail));
 document.addEventListener('error',event=>{const image=event.target;if(image.tagName==='IMG'&&image.closest('.card')){image.onerror=null;image.src='assets/3614303eb08b.png';image.style.objectFit='contain';image.style.padding='24px'}},true);
 </script><script>
-/* Hero-only two-step parallax: separate digits → joined 69 → sale reveal. */
+/* Hero-only scroll scene: first gesture completes 69, then the page continues. */
 (()=>{
   const hero=document.querySelector('.hero');
   const copy=hero?.querySelector('.hero-copy');
   if(!hero||!copy)return;
-  copy.innerHTML='<div class="hero-parallax-stage" aria-label="69 Big Bang Sale"><div class="hero-lockup-bob"><img class="hero-digit hero-six" src="assets/hero-six.webp" alt="6"><img class="hero-digit hero-nine" src="assets/hero-nine.webp" alt="9"><img class="hero-sale-wordmark" src="assets/hero-big-bang-sale.webp" alt="Big Bang Sale"><img class="hero-date-ribbon" src="assets/bigbang-date-ribbon.webp" alt="29th August onwards"></div></div>';
+  copy.innerHTML='<div class="hero-parallax-stage" aria-label="69 Big Bang Sale"><div class="hero-lockup-bob"><span class="hero-digit-wrap hero-six-wrap"><img class="hero-digit hero-six" src="assets/hero-six.webp" alt="6"></span><span class="hero-digit-wrap hero-nine-wrap"><img class="hero-digit hero-nine" src="assets/hero-nine.webp" alt="9"></span><img class="hero-sale-wordmark" src="assets/hero-big-bang-sale.webp" alt="Big Bang Sale"><img class="hero-date-ribbon" src="assets/bigbang-date-ribbon.webp" alt="29th August onwards"></div></div>';
   const stage=copy.querySelector('.hero-parallax-stage');
-  const six=copy.querySelector('.hero-six');
-  const nine=copy.querySelector('.hero-nine');
+  const six=copy.querySelector('.hero-six-wrap');
+  const nine=copy.querySelector('.hero-nine-wrap');
   const sale=copy.querySelector('.hero-sale-wordmark');
   const date=copy.querySelector('.hero-date-ribbon');
   const video=hero.querySelector('video');
   const clamp=(value,min,max)=>Math.min(max,Math.max(min,value));
+  const ease=value=>1-Math.pow(1-value,3);
+  let progress=0;
+  let touchY=null;
+  const isInScene=()=>{const rect=hero.getBoundingClientRect();return rect.top<innerHeight*.55&&rect.bottom>innerHeight*.12};
   const update=()=>{
     if(matchMedia('(prefers-reduced-motion: reduce)').matches){
       six.style.transform='translate3d(0,0,0) rotate(0deg)';
       nine.style.transform='translate3d(0,0,0) rotate(0deg)';
       sale.style.opacity=date.style.opacity='1';
       sale.style.transform=date.style.transform='translate3d(0,0,0) scale(1)';
-      stage.classList.add('is-complete');
+      stage.classList.add('is-active','is-complete');
       return;
     }
-    const travelled=Math.max(0,window.scrollY-hero.offsetTop+28);
-    const join=clamp(travelled/Math.max(108,hero.offsetHeight*.52),0,1);
-    const reveal=clamp((travelled-Math.max(108,hero.offsetHeight*.52))/Math.max(96,hero.offsetHeight*.46),0,1);
-    const sixX=-21*(1-join),nineX=21*(1-join);
-    const lift=5*(1-join);
-    six.style.transform=`translate3d(${sixX}%,${lift}px,0) rotate(${-4*(1-join)}deg)`;
-    nine.style.transform=`translate3d(${nineX}%,-${lift}px,0) rotate(${4*(1-join)}deg)`;
+    if(progress<=0){
+      six.style.transform='';nine.style.transform='';
+    }else{
+      const join=ease(progress);
+      const lift=6*(1-join);
+      six.style.transform=`translate3d(${30*join}%,${lift}px,0) rotate(${-5*(1-join)}deg)`;
+      nine.style.transform=`translate3d(${-30*join}%,-${lift}px,0) rotate(${5*(1-join)}deg)`;
+    }
+    const reveal=ease(clamp((progress-.56)/.44,0,1));
     sale.style.opacity=String(reveal);
     sale.style.transform=`translate3d(0,${18*(1-reveal)}px,0) scale(${.92+.08*reveal})`;
     date.style.opacity=String(reveal);
     date.style.transform=`translate3d(0,${11*(1-reveal)}px,0) scale(${.95+.05*reveal})`;
+    stage.classList.toggle('is-active',progress>.001);
     stage.classList.toggle('is-complete',reveal>.985);
     if(video){
-      const depth=join*.055+reveal*.025;
+      const depth=progress*.07;
       video.style.transform=`scale(${1+depth}) translate3d(0,${reveal*1.5}px,0)`;
     }
   };
+  const progressScene=delta=>{
+    const previous=progress;
+    progress=clamp(progress+delta/440,0,1);
+    if(progress===previous)return false;
+    update();
+    return true;
+  };
+  addEventListener('wheel',event=>{
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches||!isInScene())return;
+    const goingForward=event.deltaY>0;
+    const shouldCapture=(goingForward&&progress<1)||( !goingForward&&progress>0&&hero.getBoundingClientRect().top<=8);
+    if(!shouldCapture)return;
+    if(progressScene(event.deltaY))event.preventDefault();
+  },{passive:false});
+  hero.addEventListener('touchstart',event=>{touchY=event.touches[0]?.clientY??null},{passive:true});
+  hero.addEventListener('touchmove',event=>{
+    const current=event.touches[0]?.clientY;
+    if(touchY===null||current===undefined||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    const delta=touchY-current;touchY=current;
+    const shouldCapture=(delta>0&&progress<1)||(delta<0&&progress>0&&hero.getBoundingClientRect().top<=8);
+    if(shouldCapture&&progressScene(delta))event.preventDefault();
+  },{passive:false});
+  hero.addEventListener('touchend',()=>{touchY=null},{passive:true});
   update();
-  addEventListener('scroll',update,{passive:true});
-  addEventListener('resize',update,{passive:true});
 })();
 </script></body></html>
