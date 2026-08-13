@@ -65,6 +65,26 @@ body:before{z-index:-1;background:radial-gradient(ellipse at 10% 8%,#d9fbff68 0,
 }
 @media(prefers-reduced-motion:reduce){.promo-ribbon__track{animation:none!important}.hero>video{transform:none!important}}
 
+/* Latest live adjustment: a clean film-only hero and one safe card geometry for
+   every product rail, with larger contained packshots and no clipped price rows. */
+.promo-ribbon{margin:0 0 16px!important}
+.hero{height:208px!important}
+.cards,.rail{align-items:stretch!important}
+.cards .card,.rail .card{display:grid!important;grid-template-rows:minmax(0,58%) minmax(0,42%)!important;overflow:hidden!important;min-height:0!important}
+.cards .card .media,.rail .card .media{display:block!important;height:auto!important;min-height:0!important;flex:none!important;overflow:hidden!important}
+.cards .card .info,.rail .card .info{display:flex!important;flex-direction:column!important;min-height:0!important;overflow:hidden!important}
+.cards .card .info h3,.rail .card .info h3{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:3!important;overflow:hidden!important}
+.cards .card .bottom,.rail .card .bottom{margin-top:auto!important;min-height:30px!important}
+.cards .card .media img,.rail .card .media img{transform:scale(1.2)!important;transform-origin:center center!important}
+@media(max-width:680px){
+  .promo-ribbon{margin:0 0 13px!important}
+  .hero{height:180px!important}
+  .cards .card,.rail .card{grid-template-rows:minmax(0,57%) minmax(0,43%)!important}
+  .cards .card .info,.rail .card .info{padding:8px!important}
+  .cards .card .info h3,.rail .card .info h3{font-size:10px!important;line-height:1.04!important}
+  .cards .card .bottom,.rail .card .bottom{min-height:26px!important}
+}
+
 /* Final phone-specific layout pass: one thumb-zone system, full imagery, no overlap. */
 @media(max-width:680px){
   html,body{max-width:100%;overflow-x:hidden}
@@ -299,3 +319,23 @@ body:before{background:radial-gradient(ellipse at 8% 4%,#d9fbff4d 0,transparent 
   .hero .hero-parallax-stage{width:190px!important;height:184px!important}
 }
 @media(prefers-reduced-motion:reduce){.promo-ribbon__track{animation:none!important}.hero>video{transform:none!important}}
+
+/* Definitive live values: no gap above the strip, a smaller film-only hero,
+   and stable card internals across every catalogue and horizontal rail. */
+.promo-ribbon{margin:0 0 16px!important}
+.hero{height:208px!important}
+.cards,.rail{align-items:stretch!important}
+.cards .card,.rail .card{display:grid!important;grid-template-rows:minmax(0,58%) minmax(0,42%)!important;overflow:hidden!important;min-height:0!important}
+.cards .card .media,.rail .card .media{display:block!important;height:auto!important;min-height:0!important;flex:none!important;overflow:hidden!important}
+.cards .card .info,.rail .card .info{display:flex!important;flex-direction:column!important;min-height:0!important;overflow:hidden!important}
+.cards .card .info h3,.rail .card .info h3{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:3!important;overflow:hidden!important}
+.cards .card .bottom,.rail .card .bottom{margin-top:auto!important;min-height:30px!important}
+.cards .card .media img,.rail .card .media img{transform:scale(1.2)!important;transform-origin:center center!important}
+@media(max-width:680px){
+  .promo-ribbon{margin:0 0 13px!important}
+  .hero{height:180px!important}
+  .cards .card,.rail .card{grid-template-rows:minmax(0,57%) minmax(0,43%)!important}
+  .cards .card .info,.rail .card .info{padding:8px!important}
+  .cards .card .info h3,.rail .card .info h3{font-size:10px!important;line-height:1.04!important}
+  .cards .card .bottom,.rail .card .bottom{min-height:26px!important}
+}
