@@ -86,11 +86,10 @@ let moodIndex=0;document.querySelector('.mood-now').onclick=event=>{const wheel=
 let cardObserver;const initCardMotion=()=>{cardObserver?.disconnect();const cards=[...document.querySelectorAll('.card')];cards.forEach((card,index)=>{card.classList.add('is-dim');card.dataset.cardIndex=index});cardObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{const card=entry.target;if(entry.isIntersecting){card.classList.remove('is-dim');card.classList.add('is-in-view');if(Number(card.dataset.cardIndex)%2===1){card.classList.remove('blink-on-enter');void card.offsetWidth;card.classList.add('blink-on-enter')}}else{card.classList.remove('is-in-view');card.classList.add('is-dim')}}),{threshold:.42});cards.forEach(card=>cardObserver.observe(card))};initCardMotion();document.querySelector('.sale-tabs').addEventListener('click',()=>requestAnimationFrame(initCardMotion));
 document.addEventListener('error',event=>{const image=event.target;if(image.tagName==='IMG'&&image.closest('.card')){image.onerror=null;image.src='assets/3614303eb08b.png';image.style.objectFit='contain';image.style.padding='24px'}},true);
 </script><script>
-/* Restored hero parallax: the separated 6 and 9 resolve into the campaign lock-up
-   on the first scroll gesture, then normal page scroll resumes. */
+/* The hero now plays as a clean film with no 69 artwork layered over it. */
 (()=>{
   const hero=document.querySelector('.hero');
-  if(!hero)return;
+  if(!hero||!hero.dataset.showHeroLockup)return;
   const copy=document.createElement('div');
   copy.className='hero-copy';
   copy.innerHTML='<div class="hero-parallax-stage" aria-label="69 Big Bang Sale"><div class="hero-lockup-bob"><span class="hero-digit-wrap hero-six-wrap"><img class="hero-digit hero-six" src="assets/hero-six.png" alt="6"></span><span class="hero-digit-wrap hero-nine-wrap"><img class="hero-digit hero-nine" src="assets/hero-nine.png" alt="9"></span><img class="hero-sale-wordmark" src="assets/hero-big-bang-sale.png" alt="Big Bang Sale"><img class="hero-date-ribbon" src="assets/bigbang-date-ribbon-transparent.png" alt="29th August onwards"></div></div>';
