@@ -24,3 +24,22 @@
 .offer{display:none}
 @keyframes mark-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.055)}}
 @media(max-width:680px){.hero{height:264px}.hero-copy{left:50%;top:50%;transform:translate(-50%,-50%);align-items:center}.hero-copy:before{width:158px}.hero-copy:after{width:150px;height:43px;margin:-8px 0 0 10px}}
+
+/* Retro-futurist commercial-promo finish, applied without changing the layout geometry. */
+body:before{z-index:-1;background:radial-gradient(ellipse at 10% 8%,#d9fbff68 0,transparent 30%),radial-gradient(ellipse at 90% 75%,#9e34ba88 0,transparent 35%),radial-gradient(ellipse at 48% 50%,#00a6c46b 0,transparent 42%),linear-gradient(125deg,#061c66,#085aa0 47%,#561a94 100%);background-size:155% 155%;animation:promo-flow 9s ease-in-out infinite alternate}
+@keyframes promo-flow{0%{background-position:0% 50%}50%{background-position:82% 42%}100%{background-position:30% 100%}}
+.hero-copy{left:50%;transform:translate(-50%,-50%);align-items:center;text-align:center}
+.hero-copy:after{margin:-12px 0 0 8px}
+.hero:after{background:radial-gradient(ellipse 42% 92% at 50% 50%,rgba(255,255,255,.95) 0%,rgba(255,255,255,.69) 28%,rgba(255,255,255,.25) 57%,rgba(255,255,255,0) 100%)}
+.title,.heading h2,.dark-showcase h2{background:linear-gradient(180deg,#fff 6%,#bcefff 38%,#dca7ff 65%,#fff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 2px 0 #082269,0 7px 19px #9b4adc52}
+.title i,.heading h2 i{color:#ecdeff;text-shadow:none}.card{border-color:#f0fbffbf;background:linear-gradient(150deg,#ffffff 0%,#ddf7ff 51%,#f8ebff 100%);box-shadow:0 12px 26px #00105242,0 0 0 1px #b4edff33 inset}.card .media:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(122deg,transparent 35%,#ffffff6e 49%,transparent 63%);transform:translateX(-130%);animation:card-sheen 5.2s ease-in-out infinite}.card:nth-child(2n) .media:after{animation-delay:1.3s}@keyframes card-sheen{0%,60%,100%{transform:translateX(-130%)}78%{transform:translateX(130%)}}.tag{background:linear-gradient(135deg,#092a80,#6f24a8);box-shadow:0 2px 7px #00134d66}.sale-tabs button.active{background:linear-gradient(135deg,#ffdf2d,#f8a9e6);box-shadow:0 4px 0 #08226e,0 9px 20px #f3a5ff42}.quick-links a{background:linear-gradient(145deg,#ffffff,#e7fbff);box-shadow:0 4px 11px #0014522b}
+.mobile-mega,.mood-now{display:none}
+@media(max-width:680px){
+  .hero-copy{left:50%;transform:translate(-50%,-50%)}
+  .hero:after{background:radial-gradient(ellipse 75% 86% at 50% 50%,rgba(255,255,255,.91),rgba(255,255,255,.46) 42%,transparent 78%)}
+  .cards .card,.rail .card{flex-basis:70vw}.card .media{height:224px}.info h3{font-size:14px}.bottom b{font-size:15px}
+  .mobile-mega{display:block;position:fixed;z-index:30;left:10px;right:10px;bottom:10px;border:1px solid #dff8ffcc;border-radius:16px;background:linear-gradient(120deg,#071d67ed,#512087e8);box-shadow:0 12px 32px #0010418a;backdrop-filter:blur(14px)}
+  .mobile-mega-bar{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:6px;padding:7px}.mobile-mega button{min-height:42px;border:1px solid #ffffff2e;border-radius:10px;background:#ffffff12;color:#fff;font:800 9px One,Arial;letter-spacing:.05em;text-transform:uppercase}.mobile-mega .primary{background:linear-gradient(135deg,#ffdf23,#ffafe3);color:#09205c;border-color:#fff7bd}.mobile-mega-panel{display:none;grid-template-columns:repeat(3,1fr);gap:6px;padding:0 7px 7px}.mobile-mega.open .mobile-mega-panel{display:grid}.mobile-mega-panel a{min-height:34px;display:grid;place-items:center;border-radius:8px;background:#fff;color:#102066;font:800 8px One,Arial;text-transform:uppercase}
+  .mood-now{display:grid;position:fixed;z-index:31;right:15px;bottom:78px;width:58px;height:58px;place-items:center;border:2px solid #fff7b2;border-radius:50%;background:conic-gradient(#ffe027,#f7a5e8,#7d4dce,#38c9e9,#ffe027);box-shadow:0 7px 20px #00135c80;cursor:pointer;transition:transform .65s cubic-bezier(.2,.9,.2,1)}.mood-now:after{content:"MOOD\\A NOW";white-space:pre;display:grid;place-items:center;width:39px;height:39px;border-radius:50%;background:#071d68;color:white;text-align:center;font:800 8px/1 One,Arial;letter-spacing:.04em}.mood-now.spin{transform:rotate(540deg)}
+  .notice{bottom:139px}.notice[hidden]{display:none}
+}

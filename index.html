@@ -68,4 +68,13 @@ promiseSection.classList.add('shell');playthingsSection.after(promiseSection);
 document.querySelector('footer').id='footer';
 document.querySelector('.feed').closest('section').style.display='none';
 document.querySelector('#notice strong').textContent='The sale starts 29th August.';
+</script><script>
+/* Mobile-first shortcuts: a compact sales rail and a playful discovery wheel. */
+document.body.insertAdjacentHTML('beforeend','<nav class="mobile-mega" aria-label="Mobile sale navigation"><div class="mobile-mega-bar"><button class="primary" data-jump="sale-catalog">Shop the sale</button><button data-mega-toggle>Explore</button><button data-jump="wanted">Bestsellers</button></div><div class="mobile-mega-panel"><a href="#condoms">Condoms</a><a href="#lubes">Lubes</a><a href="#massagers">Massagers</a><a href="#performance">Performance</a><a href="#playthings">Playthings</a><a href="#footer">Help</a></div></nav><button class="mood-now" aria-label="Spin Mood Now to explore a section"></button>');
+const compactNav=document.querySelector('.mobile-mega');
+document.querySelector('[data-mega-toggle]').onclick=()=>compactNav.classList.toggle('open');
+document.querySelectorAll('[data-jump]').forEach(button=>button.onclick=()=>document.getElementById(button.dataset.jump)?.scrollIntoView({behavior:'smooth',block:'start'}));
+const moodTargets=['sale-catalog','wanted','massagers','playthings','condoms'];
+let moodIndex=0;document.querySelector('.mood-now').onclick=event=>{const wheel=event.currentTarget;wheel.classList.remove('spin');void wheel.offsetWidth;wheel.classList.add('spin');moodIndex=(moodIndex+1)%moodTargets.length;setTimeout(()=>document.getElementById(moodTargets[moodIndex])?.scrollIntoView({behavior:'smooth',block:'start'}),620)};
+document.addEventListener('error',event=>{const image=event.target;if(image.tagName==='IMG'&&image.closest('.card')){image.onerror=null;image.src='assets/3614303eb08b.png';image.style.objectFit='contain';image.style.padding='24px'}},true);
 </script></body></html>
