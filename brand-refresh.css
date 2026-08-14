@@ -483,3 +483,12 @@ body:before{background:radial-gradient(ellipse at 8% 4%,#d9fbff4d 0,transparent 
   .mobile-mega{opacity:0!important;visibility:hidden!important;pointer-events:none!important;transform:translateY(calc(100% + 16px))!important;transition:opacity .22s ease,transform .22s ease,visibility .22s!important}
   .mobile-mega.is-scroll-ready{opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:translateY(0)!important}
 }
+
+/* Mobile-only strip and heading cleanup: compact, plain and edge-to-edge. */
+.promo-ribbon{display:none!important}
+@media(max-width:680px){
+  .promo-ribbon{display:block!important;position:sticky!important;top:0!important;z-index:60!important;width:100vw!important;height:20px!important;margin:0 calc(50% - 50vw) 8px!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+  .promo-ribbon__track,.promo-ribbon.is-stuck .promo-ribbon__track{animation:promo-ribbon-run 24s linear infinite!important;animation-play-state:running!important}
+  .sale-catalog .title{font-size:22px!important;line-height:.95!important;letter-spacing:-.035em!important;background:none!important;color:#fff!important;-webkit-text-fill-color:#fff!important;text-shadow:none!important;filter:none!important}
+  .sale-intro{gap:5px!important;margin-bottom:7px!important}
+}
