@@ -171,4 +171,14 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
   video.load();
   video.play().catch(()=>{});
 })();
+</script><script>
+/* Keep the mobile sale controls out of the first two screens; Mood Now remains independent. */
+(()=>{
+  const menu=document.querySelector('.mobile-mega');
+  if(!menu||!matchMedia('(max-width: 680px)').matches)return;
+  const update=()=>menu.classList.toggle('is-scroll-ready',scrollY>=innerHeight*2);
+  addEventListener('scroll',update,{passive:true});
+  addEventListener('resize',update,{passive:true});
+  update();
+})();
 </script></body></html>
