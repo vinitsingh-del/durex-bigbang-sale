@@ -163,6 +163,8 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
   const replay=()=>{video.currentTime=0;video.play().catch(()=>{})};
   const resume=()=>video.play().catch(()=>{});
   const stopAtStart=()=>{video.pause();video.currentTime=0};
+  /* Start the commercial in the same user gesture that begins the parallax. */
+  hero.addEventListener('pointerdown',resume,{passive:true});
   const observe=new IntersectionObserver(entries=>entries.forEach(entry=>{
     const visible=entry.isIntersecting;
     if(visible&&!wasVisible&&scrollY!==0){if(scrollY<lastY)replay();else resume()}
