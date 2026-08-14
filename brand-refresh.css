@@ -530,3 +530,6 @@ body:before{background:radial-gradient(ellipse at 8% 4%,#d9fbff4d 0,transparent 
 .sale-catalog .store-signal{display:none!important}
 .sale-catalog .kicker{font:400 clamp(16px,1.5vw,22px)/.9 Georgia,serif!important;letter-spacing:-.03em!important;text-transform:none!important;color:#ffdf00!important;text-shadow:none!important;animation:none!important}
 @media(max-width:680px){.sale-catalog .kicker{font-size:17px!important;line-height:.9!important}}
+
+/* Restore the label blink without restoring the removed bullet. */
+.sale-catalog .kicker{animation:store-blink 1.1s steps(2,end) infinite!important}
