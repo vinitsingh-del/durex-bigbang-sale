@@ -500,3 +500,8 @@ body:before{background:radial-gradient(ellipse at 8% 4%,#d9fbff4d 0,transparent 
   .promo-ribbon.is-mobile-pinned{position:fixed!important;inset:0 auto auto 0!important;width:100vw!important;margin:0!important;z-index:90!important}
   .promo-ribbon.is-mobile-pinned .promo-ribbon__track{animation:promo-ribbon-run 24s linear infinite!important;animation-play-state:running!important}
 }
+
+/* Exact Bestsellers finish for the compact sale title — no size increase. */
+@media(max-width:680px){
+  .sale-catalog .title{font:800 22px/.95 One,Arial,sans-serif!important;letter-spacing:-.035em!important;color:#fff!important;-webkit-text-fill-color:#fff!important;background:none!important;text-shadow:0 2px 0 #062269,0 5px 12px #00155080!important;filter:none!important}
+}
