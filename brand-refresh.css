@@ -132,7 +132,7 @@ body:before{z-index:-1;background:radial-gradient(ellipse at 10% 8%,#d9fbff68 0,
 @media(max-width:680px){
   .promo-ribbon{position:sticky!important;top:0!important;z-index:60!important;height:25px!important;margin:0 0 10px!important}
   .promo-ribbon__track{animation-play-state:running!important}
-  .promo-ribbon.is-stuck .promo-ribbon__track{animation-play-state:running!important;transform:none!important}
+  .promo-ribbon.is-stuck .promo-ribbon__track{animation-play-state:running!important}
   .sale-intro{gap:6px!important;margin-bottom:8px!important}
   .sale-catalog .sale-tabs{gap:5px!important;padding-bottom:8px!important}
   .sale-catalog .sale-tabs button{min-height:27px!important;padding:6px 10px!important}
@@ -491,4 +491,12 @@ body:before{background:radial-gradient(ellipse at 8% 4%,#d9fbff4d 0,transparent 
   .promo-ribbon__track,.promo-ribbon.is-stuck .promo-ribbon__track{animation:promo-ribbon-run 24s linear infinite!important;animation-play-state:running!important}
   .sale-catalog .title{font-size:22px!important;line-height:.95!important;letter-spacing:-.035em!important;background:none!important;color:#fff!important;-webkit-text-fill-color:#fff!important;text-shadow:none!important;filter:none!important}
   .sale-intro{gap:5px!important;margin-bottom:7px!important}
+}
+
+/* Fallback pin for mobile browsers that do not retain sticky inside the sale shell. */
+@media(max-width:680px){
+  .promo-ribbon-spacer{display:none!important}
+  .promo-ribbon-spacer.is-active{display:block!important;height:20px!important}
+  .promo-ribbon.is-mobile-pinned{position:fixed!important;inset:0 auto auto 0!important;width:100vw!important;margin:0!important;z-index:90!important}
+  .promo-ribbon.is-mobile-pinned .promo-ribbon__track{animation:promo-ribbon-run 24s linear infinite!important;animation-play-state:running!important}
 }
