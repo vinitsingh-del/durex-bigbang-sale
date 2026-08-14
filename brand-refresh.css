@@ -521,3 +521,7 @@ body:before{background:radial-gradient(ellipse at 8% 4%,#d9fbff4d 0,transparent 
   .hamb{top:14px!important}
   .sale-intro{margin-bottom:8px!important}
 }
+
+/* Preserve the full campaign film on desktop without altering the hero card. */
+@media(min-width:681px){.hero>video{object-fit:contain!important;object-position:center center!important;background:#f2f2f2!important}}
+@media(max-width:680px){header{min-height:61px!important;max-height:61px!important}.brand img{width:92px!important}}
