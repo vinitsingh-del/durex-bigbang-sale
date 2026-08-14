@@ -181,4 +181,28 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
   addEventListener('resize',update,{passive:true});
   update();
 })();
+</script><script>
+/* Guarantee that the mobile campaign strip remains both pinned and continuously moving. */
+(()=>{
+  const ribbon=document.querySelector('.promo-ribbon');
+  if(!ribbon||!matchMedia('(max-width: 680px)').matches)return;
+  const spacer=document.createElement('div');
+  spacer.className='promo-ribbon-spacer';
+  ribbon.before(spacer);
+  let pinAt=0;
+  const measure=()=>{
+    ribbon.classList.remove('is-mobile-pinned');
+    spacer.classList.remove('is-active');
+    pinAt=ribbon.getBoundingClientRect().top+scrollY;
+    update();
+  };
+  const update=()=>{
+    const pinned=scrollY>=pinAt;
+    ribbon.classList.toggle('is-mobile-pinned',pinned);
+    spacer.classList.toggle('is-active',pinned);
+  };
+  addEventListener('scroll',update,{passive:true});
+  addEventListener('resize',measure,{passive:true});
+  requestAnimationFrame(measure);
+})();
 </script></body></html>
