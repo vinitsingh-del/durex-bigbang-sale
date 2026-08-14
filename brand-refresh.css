@@ -522,8 +522,8 @@ body:before{background:radial-gradient(ellipse at 8% 4%,#d9fbff4d 0,transparent 
   .sale-intro{margin-bottom:8px!important}
 }
 
-/* Preserve the full campaign film on desktop without altering the hero card. */
-@media(min-width:681px){.hero>video{object-fit:contain!important;object-position:center center!important;background:#f2f2f2!important}}
+/* Desktop-only: fill the existing hero card from edge to edge at native rendering quality. */
+@media(min-width:681px){.hero>video{object-fit:cover!important;object-position:center center!important;background:#f2f2f2!important;image-rendering:auto!important;transform:translateZ(0)!important;backface-visibility:hidden!important}}
 @media(max-width:680px){header{min-height:61px!important;max-height:61px!important}.brand img{width:92px!important}}
 
 /* The 69 Store uses the supplied companion-word treatment: yellow, serif, no bullet. */
