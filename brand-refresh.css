@@ -513,3 +513,11 @@ body:before{background:radial-gradient(ellipse at 8% 4%,#d9fbff4d 0,transparent 
 
 /* Bestsellers-matched depth with a restrained white glow — compact size stays fixed. */
 @media(max-width:680px){.sale-catalog .title{font-size:22px!important;text-shadow:0 2px 0 #062269,0 5px 12px #00155080,0 0 8px #ffffff73!important}}
+
+/* Final responsive polish: restore desktop ribbon; shrink only mobile bar chrome. */
+.promo-ribbon{display:block!important}
+@media(max-width:680px){
+  header{height:61px!important;padding:12px 16px 0!important}
+  .hamb{top:14px!important}
+  .sale-intro{margin-bottom:8px!important}
+}
