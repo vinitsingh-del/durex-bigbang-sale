@@ -154,20 +154,21 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
   ribbon.classList.add('is-stuck');
 })();
 </script><script>
-/* Hero video: restart cleanly when the visitor scrolls upward into the scene. */
+/* Hero video: resume on downward entry and restart cleanly on upward entry. */
 (()=>{
   const hero=document.querySelector('.hero');
   const video=hero?.querySelector('video');
   if(!hero||!video)return;
   let lastY=scrollY,wasVisible=false;
   const replay=()=>{video.currentTime=0;video.play().catch(()=>{})};
+  const resume=()=>video.play().catch(()=>{});
   const observe=new IntersectionObserver(entries=>entries.forEach(entry=>{
     const visible=entry.isIntersecting;
-    if(visible&&!wasVisible&&scrollY<lastY)replay();
+    if(visible&&!wasVisible){if(scrollY<lastY)replay();else resume()}
     wasVisible=visible;
   }),{threshold:.58});
   observe.observe(hero);
-  addEventListener('scroll',()=>{const current=scrollY;if(current<lastY&&hero.getBoundingClientRect().top<innerHeight*.7&&hero.getBoundingClientRect().bottom>innerHeight*.3)replay();lastY=current},{passive:true});
+  addEventListener('scroll',()=>{const current=scrollY;const inScene=hero.getBoundingClientRect().top<innerHeight*.7&&hero.getBoundingClientRect().bottom>innerHeight*.3;if(inScene){if(current<lastY)replay();else if(current>lastY)resume()}lastY=current},{passive:true});
   video.load();
   video.play().catch(()=>{});
 })();
