@@ -510,3 +510,6 @@ body:before{background:radial-gradient(ellipse at 8% 4%,#d9fbff4d 0,transparent 
 .announcement{gap:30px!important;padding:7px 14px!important;font-size:8px!important}
 .sale-catalog .title{filter:brightness(1.2)!important}
 @media(max-width:680px){.announcement{gap:9px!important;padding:6px!important;font-size:6.4px!important}}
+
+/* Bestsellers-matched depth with a restrained white glow — compact size stays fixed. */
+@media(max-width:680px){.sale-catalog .title{font-size:22px!important;text-shadow:0 2px 0 #062269,0 5px 12px #00155080,0 0 8px #ffffff73!important}}
