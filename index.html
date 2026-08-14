@@ -162,14 +162,16 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
   let lastY=scrollY,wasVisible=false;
   const replay=()=>{video.currentTime=0;video.play().catch(()=>{})};
   const resume=()=>video.play().catch(()=>{});
+  const stopAtStart=()=>{video.pause();video.currentTime=0};
   const observe=new IntersectionObserver(entries=>entries.forEach(entry=>{
     const visible=entry.isIntersecting;
     if(visible&&!wasVisible&&scrollY!==0){if(scrollY<lastY)replay();else resume()}
     wasVisible=visible;
   }),{threshold:.58});
   observe.observe(hero);
-  addEventListener('scroll',()=>{const current=scrollY;const inScene=hero.getBoundingClientRect().top<innerHeight*.7&&hero.getBoundingClientRect().bottom>innerHeight*.3;if(inScene){if(current<lastY)replay();else if(current>lastY)resume()}lastY=current},{passive:true});
+  addEventListener('scroll',()=>{const current=scrollY;if(current===0){stopAtStart();lastY=current;return}const inScene=hero.getBoundingClientRect().top<innerHeight*.7&&hero.getBoundingClientRect().bottom>innerHeight*.3;if(inScene){if(current<lastY)replay();else if(current>lastY)resume()}lastY=current},{passive:true});
   video.load();
+  stopAtStart();
 })();
 </script><script>
 /* Keep the mobile sale controls out of the first two screens; Mood Now remains independent. */
