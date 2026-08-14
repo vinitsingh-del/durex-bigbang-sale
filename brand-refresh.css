@@ -468,7 +468,18 @@ body:before{background:radial-gradient(ellipse at 8% 4%,#d9fbff4d 0,transparent 
 .sale-catalog + .quick-links{margin-top:8px!important;margin-bottom:18px!important}
 .card,.sale-catalog .card{border:1px solid #ff8bca!important;box-shadow:0 0 0 1px #ff8bc955,0 0 12px #ff65b76e,0 9px 20px #0014512e!important;animation:retro-card-glow 2.4s ease-in-out infinite!important}
 @keyframes retro-card-glow{0%,100%{border-color:#ff9ad1;box-shadow:0 0 0 1px #ffb0d766,0 0 9px #ff62b55c,0 9px 20px #0014512e}50%{border-color:#ff54ad;box-shadow:0 0 0 1px #ff83c399,0 0 16px #ff56ae92,0 9px 22px #00145136}}
-@media(max-width:680px){.promo-ribbon{position:sticky!important;top:0!important;z-index:60!important;height:25px!important;margin:0 0 10px!important}.promo-ribbon__track,.promo-ribbon.is-stuck .promo-ribbon__track{animation-play-state:running!important;transform:none!important}.sale-intro{gap:6px!important;margin-bottom:8px!important}.sale-catalog .sale-tabs{gap:5px!important;padding-bottom:8px!important}.sale-catalog .sale-tabs button{min-height:27px!important;padding:6px 10px!important}.sale-catalog .cards{padding-bottom:12px!important;scroll-padding-bottom:76px!important}.sale-catalog + .quick-links{margin-top:6px!important;margin-bottom:14px!important}.cards .card .bottom,.rail .card .bottom,.sale-catalog .card .bottom{margin-top:6px!important}}
+@media(max-width:680px){.promo-ribbon{position:sticky!important;top:0!important;z-index:60!important;height:25px!important;margin:0 0 10px!important}.promo-ribbon__track,.promo-ribbon.is-stuck .promo-ribbon__track{animation-play-state:running!important}.sale-intro{gap:6px!important;margin-bottom:8px!important}.sale-catalog .sale-tabs{gap:5px!important;padding-bottom:8px!important}.sale-catalog .sale-tabs button{min-height:27px!important;padding:6px 10px!important}.sale-catalog .cards{padding-bottom:12px!important;scroll-padding-bottom:76px!important}.sale-catalog + .quick-links{margin-top:6px!important;margin-bottom:14px!important}.cards .card .bottom,.rail .card .bottom,.sale-catalog .card .bottom{margin-top:6px!important}}
 
 /* Final card-state glow specificity. */
 .card.is-dim,.card.is-in-view{border:1px solid #ff8bca!important;box-shadow:0 0 0 1px #ff8bc955,0 0 12px #ff65b76e,0 9px 20px #0014512e!important;animation:retro-card-glow 2.4s ease-in-out infinite!important}
+
+/* Mobile release controls: share Bestsellers' title treatment and defer only
+   the bottom sale menu until the visitor has reached the third screen. */
+.sale-catalog .title{font:800 clamp(28px,3vw,40px)/.95 One,Arial,sans-serif!important;letter-spacing:-.035em!important;color:#fff!important;-webkit-text-fill-color:#fff!important;text-shadow:0 2px 0 #062269,0 5px 12px #00155080!important}
+@media(max-width:680px){
+  .sale-catalog .title{font-size:28px!important;line-height:.95!important}
+  .promo-ribbon{position:sticky!important;top:0!important;z-index:60!important}
+  .promo-ribbon__track,.promo-ribbon.is-stuck .promo-ribbon__track{animation:promo-ribbon-run 24s linear infinite!important;animation-play-state:running!important}
+  .mobile-mega{opacity:0!important;visibility:hidden!important;pointer-events:none!important;transform:translateY(calc(100% + 16px))!important;transition:opacity .22s ease,transform .22s ease,visibility .22s!important}
+  .mobile-mega.is-scroll-ready{opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:translateY(0)!important}
+}
