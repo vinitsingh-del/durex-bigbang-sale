@@ -565,3 +565,8 @@ footer{margin-top:56px!important}
 /* One visible, continuous page-light field behind every transparent page section. */
 body:before{background:radial-gradient(ellipse at 8% 12%,#d9fbff73 0,transparent 30%),radial-gradient(ellipse at 90% 80%,#b56bd673 0,transparent 35%),radial-gradient(ellipse at 48% 48%,#08a9c850 0,transparent 42%),linear-gradient(135deg,#04195f,#075d9d 52%,#402477 100%)!important;background-size:210% 210%!important;animation:page-gradient-flow 11s linear infinite!important;will-change:background-position}
 @keyframes page-gradient-flow{0%{background-position:0% 20%}25%{background-position:90% 2%}50%{background-position:100% 88%}75%{background-position:15% 100%}100%{background-position:0% 20%}}
+
+
+/* Remove the inherited 112px rail reserve that created the visible empty blocks. */
+.section .rail,.dark-showcase .cards{padding-bottom:10px!important;scroll-padding-bottom:10px!important}
+@media(max-width:680px){.section .rail,.dark-showcase .cards{padding-bottom:8px!important;scroll-padding-bottom:8px!important}}
