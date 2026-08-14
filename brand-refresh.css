@@ -549,3 +549,19 @@ body:before{
   75%{background-position:18% 100%}
   100%{background-position:0% 20%}
 }
+
+
+/* Full-page density pass: remove only the repeated empty gutters between modules. */
+.sale-catalog{padding-bottom:0!important}
+.launch{padding-top:30px!important}
+.section{padding-top:48px!important}
+.heading{margin-bottom:14px!important}
+.quick-links{margin-bottom:18px!important}
+.dark-showcase{margin-top:40px!important;padding:58px 0!important}
+.dark-showcase .cards{margin-top:20px!important}
+footer{margin-top:56px!important}
+@media(max-width:680px){.sale-catalog{padding-top:18px!important}.launch{padding-top:22px!important}.section{padding-top:34px!important}.heading{margin-bottom:11px!important}.quick-links{margin:8px 0 12px!important}.dark-showcase{margin-top:28px!important;padding:38px 0!important}.dark-showcase .cards{margin-top:14px!important}footer{margin-top:38px!important}}
+
+/* One visible, continuous page-light field behind every transparent page section. */
+body:before{background:radial-gradient(ellipse at 8% 12%,#d9fbff73 0,transparent 30%),radial-gradient(ellipse at 90% 80%,#b56bd673 0,transparent 35%),radial-gradient(ellipse at 48% 48%,#08a9c850 0,transparent 42%),linear-gradient(135deg,#04195f,#075d9d 52%,#402477 100%)!important;background-size:210% 210%!important;animation:page-gradient-flow 11s linear infinite!important;will-change:background-position}
+@keyframes page-gradient-flow{0%{background-position:0% 20%}25%{background-position:90% 2%}50%{background-position:100% 88%}75%{background-position:15% 100%}100%{background-position:0% 20%}}
