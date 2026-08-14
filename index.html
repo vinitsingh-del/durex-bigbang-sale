@@ -40,7 +40,7 @@ const primaryShell=document.querySelector('#top > .shell');
 const categoryMenu=document.querySelector('.categories');
 const catalog=document.createElement('section');
 catalog.className='sale-catalog';catalog.id='sale-catalog';
-catalog.innerHTML='<div class="sale-intro"><p class="kicker"><span class="store-signal" aria-hidden="true"></span>The 69 Store</p><h2 class="title">SHOP THE SALE.</h2></div><div class="sale-tabs" role="tablist"><button class="active" data-tab="three">Condoms – Pack of 3</button><button data-tab="ten">Condoms – Pack of 10</button><button data-tab="lubes">Lubes</button><button data-tab="performance">Performance</button><button data-tab="massagers">Massagers</button></div><div class="cards" id="tabCards"></div>';
+catalog.innerHTML='<div class="sale-intro"><h2 class="title">SHOP THE SALE.</h2><p class="kicker"><span class="store-signal" aria-hidden="true"></span>The 69 Store</p></div><div class="sale-tabs" role="tablist"><button class="active" data-tab="three">Condoms – Pack of 3</button><button data-tab="ten">Condoms – Pack of 10</button><button data-tab="lubes">Lubes</button><button data-tab="performance">Performance</button><button data-tab="massagers">Massagers</button></div><div class="cards" id="tabCards"></div>';
 const promoRibbon=document.createElement('div');
 promoRibbon.className='promo-ribbon';
 promoRibbon.setAttribute('aria-label','69 Big Bang Sale announcements');
@@ -147,29 +147,11 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
   draw();
 })();
 </script><script>
-/* On phones the sale ribbon locks beneath the browser edge; its automatic crawl
-   pauses there and then responds to page scroll, rather than continuing to drift. */
+/* On phones the sale ribbon stays pinned above the hero and keeps its own crawl. */
 (()=>{
   const ribbon=document.querySelector('.promo-ribbon');
-  const track=ribbon?.querySelector('.promo-ribbon__track');
-  if(!ribbon||!track||!matchMedia('(max-width: 680px)').matches)return;
-  let previousY=scrollY,shift=0;
-  const update=()=>{
-    const stuck=scrollY>ribbon.offsetTop&&ribbon.getBoundingClientRect().top<=1;
-    ribbon.classList.toggle('is-stuck',stuck);
-    if(stuck){
-      shift-=((scrollY-previousY)*.48);
-      const loop=Math.max(1,track.scrollWidth/2);
-      shift=((shift%loop)+loop)%loop-loop;
-      track.style.transform=`translate3d(${shift}px,0,0)`;
-    }else{
-      track.style.transform='';
-    }
-    previousY=scrollY;
-  };
-  addEventListener('scroll',update,{passive:true});
-  addEventListener('resize',update,{passive:true});
-  update();
+  if(!ribbon||!matchMedia('(max-width: 680px)').matches)return;
+  ribbon.classList.add('is-stuck');
 })();
 </script><script>
 /* Hero video: restart cleanly when the visitor scrolls upward into the scene. */
