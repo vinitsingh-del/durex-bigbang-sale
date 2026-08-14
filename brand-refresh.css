@@ -505,3 +505,8 @@ body:before{background:radial-gradient(ellipse at 8% 4%,#d9fbff4d 0,transparent 
 @media(max-width:680px){
   .sale-catalog .title{font:800 22px/.95 One,Arial,sans-serif!important;letter-spacing:-.035em!important;color:#fff!important;-webkit-text-fill-color:#fff!important;background:none!important;text-shadow:0 2px 0 #062269,0 5px 12px #00155080!important;filter:none!important}
 }
+
+/* Focused scale and brightness adjustment. */
+.announcement{gap:30px!important;padding:7px 14px!important;font-size:8px!important}
+.sale-catalog .title{filter:brightness(1.2)!important}
+@media(max-width:680px){.announcement{gap:9px!important;padding:6px!important;font-size:6.4px!important}}
