@@ -570,3 +570,9 @@ body:before{background:radial-gradient(ellipse at 8% 12%,#d9fbff73 0,transparent
 /* Remove the inherited 112px rail reserve that created the visible empty blocks. */
 .section .rail,.dark-showcase .cards{padding-bottom:10px!important;scroll-padding-bottom:10px!important}
 @media(max-width:680px){.section .rail,.dark-showcase .cards{padding-bottom:8px!important;scroll-padding-bottom:8px!important}}
+
+
+/* Hero spacing and a smaller mobile bar; the Durex mark remains unchanged. */
+.promo-ribbon{margin-bottom:10px!important}
+.hero{margin-bottom:12px!important}
+@media(max-width:680px){header{height:52px!important;min-height:52px!important;max-height:52px!important;padding-top:8px!important}.brand img{width:92px!important}.hamb{top:9px!important}.promo-ribbon{margin-bottom:8px!important}.hero{margin-bottom:10px!important}}
