@@ -533,3 +533,19 @@ body:before{background:radial-gradient(ellipse at 8% 4%,#d9fbff4d 0,transparent 
 
 /* Restore the label blink without restoring the removed bullet. */
 .sale-catalog .kicker{animation:store-blink 1.1s steps(2,end) infinite!important}
+
+/* Stronger continuous page-background movement within the established Durex tone. */
+body:before{
+  background:radial-gradient(ellipse at 7% 10%,#d9fbff66 0,transparent 29%),radial-gradient(ellipse at 92% 78%,#ba74d166 0,transparent 34%),radial-gradient(ellipse at 48% 52%,#08a4bd42 0,transparent 38%),linear-gradient(135deg,#04195f,#075d9d 52%,#402477 100%)!important;
+  background-size:190% 190%!important;
+  background-position:0% 20%;
+  will-change:background-position;
+  animation:page-gradient-flow 7s cubic-bezier(.45,0,.55,1) infinite!important;
+}
+@keyframes page-gradient-flow{
+  0%{background-position:0% 20%}
+  25%{background-position:85% 0%}
+  50%{background-position:100% 85%}
+  75%{background-position:18% 100%}
+  100%{background-position:0% 20%}
+}
