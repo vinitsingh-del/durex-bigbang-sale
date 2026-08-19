@@ -667,15 +667,21 @@ body:before{background-image:radial-gradient(ellipse at 8% 12%,#d9fbff73 0,trans
 .trust-dot.active{width:22px;border-radius:5px;background:#ffdf00}
 
 /* 14. Reels: influencer-content rail */
-.reel-rail{display:flex;gap:14px;overflow-x:auto;padding:4px 2px 12px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.reel-viewport{position:relative}
+.reel-rail{display:flex;gap:14px;overflow-x:auto;padding:24px 6vw 12px;scroll-snap-type:x mandatory;scrollbar-width:none}
 .reel-rail::-webkit-scrollbar{display:none}
-.reel-card{position:relative;flex:0 0 200px;aspect-ratio:9/16;border-radius:16px;overflow:hidden;background:#00113f;scroll-snap-align:start;cursor:pointer;box-shadow:0 10px 22px #00105235}
+.reel-card{position:relative;flex:0 0 200px;aspect-ratio:9/16;border-radius:16px;overflow:hidden;background:#00113f;scroll-snap-align:center;cursor:pointer;box-shadow:0 10px 22px #00105235;transition:transform .35s cubic-bezier(.2,.8,.3,1),opacity .35s ease;will-change:transform}
+.reel-card.is-centred{box-shadow:0 18px 34px #00113f70,0 0 0 2px #ffdf00}
+.reel-arrow{position:absolute;top:50%;z-index:20;transform:translateY(-50%);width:38px;height:38px;border:1px solid #ffffff3a;border-radius:50%;background:#0a1f6bd9;color:#fff;font-size:20px;line-height:1;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(4px)}
+.reel-arrow--prev{left:2px}
+.reel-arrow--next{right:2px}
+.reel-arrow:hover{background:#ffdf00;color:#07165a}
 .reel-card video{width:100%;height:100%;object-fit:cover}
 .reel-meta{position:absolute;left:10px;right:10px;bottom:10px;display:flex;flex-direction:column;gap:2px;color:#fff;text-shadow:0 2px 6px #00113f}
 .reel-handle{font:800 11px One,Arial;letter-spacing:.02em}
 .reel-caption{font-size:10px;color:#dff2ffcc}
 .reel-play{position:absolute;top:10px;right:10px;width:26px;height:26px;display:grid;place-items:center;border-radius:50%;background:#ffffff30;color:#fff;font-size:10px;backdrop-filter:blur(6px)}
-@media(max-width:680px){.reel-card{flex-basis:132px}}
+@media(max-width:680px){.reel-card{flex-basis:132px}.reel-arrow{width:30px;height:30px;font-size:16px}.reel-rail{padding-left:4vw;padding-right:4vw}}
 
 /* ============================================================
    Background gradient — client request: keep blue as the main
@@ -722,3 +728,49 @@ body{background:#2452b8}
   }
 }
 @media(prefers-reduced-motion:reduce){body:before{animation:none!important}}
+
+/* ============================================================
+   Bundle builder #2 (after Lubes) — same card/typography
+   language as the rest of the site, laid out like the
+   reference "Complete the Game" bundle picker.
+   ============================================================ */
+.bundle2{background:#ffffff14;border:1px solid #ffffff2e;border-radius:20px;padding:24px;backdrop-filter:blur(6px)}
+.bundle2-top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.bundle2-steps{display:flex;align-items:center;gap:0}
+.bundle2-dot{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#ffffff26;color:#dff2ffb8;font:800 11px One,Arial;flex:0 0 auto}
+.bundle2-dot.is-done{background:#ffdf00;color:#07165a}
+.bundle2-dot--set{width:auto;padding:0 10px;border-radius:13px;font-size:9px;letter-spacing:.06em}
+.bundle2-line{width:34px;height:2px;background:#ffffff26;flex:0 0 auto}
+.bundle2-line.is-done{background:#ffdf00}
+.bundle2-hint{margin:0;font:800 11px One,Arial;letter-spacing:.05em;text-transform:uppercase;color:#dff2ffcc}
+.bundle2-row{display:flex;gap:14px;overflow-x:auto;padding:2px 2px 10px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.bundle2-row::-webkit-scrollbar{display:none}
+.bundle2-card{position:relative;flex:0 0 168px;border-radius:14px;overflow:hidden;background:#fff;border:1px solid #e5f6ffca;box-shadow:0 8px 18px #00105228;cursor:pointer;scroll-snap-align:start;transition:box-shadow .25s ease,transform .25s ease}
+.bundle2-card.is-picked{box-shadow:0 0 0 2px #ffdf00,0 10px 22px #0010522e;transform:translateY(-3px)}
+.bundle2-check{position:absolute;top:8px;right:8px;z-index:2;width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:#fff;border:1px solid #c9dcec;color:#07165a;font:800 11px One,Arial}
+.bundle2-card.is-picked .bundle2-check{background:#ffdf00;border-color:#ffdf00}
+.bundle2-media{height:150px;background:#eef6fb}
+.bundle2-media img{width:100%;height:100%;object-fit:contain;padding:12px}
+.bundle2-info{padding:10px 11px 12px}
+.bundle2-info p{margin:0 0 4px;min-height:30px;font:800 11px/1.25 One,Arial;color:#091640}
+.bundle2-info b{font:800 14px One,Arial;color:#091640}
+.bundle2-summary{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:16px;padding-top:16px;border-top:1px solid #ffffff26}
+.bundle2-stats{display:flex;gap:26px}
+.bundle2-stats span{display:block;margin-bottom:3px;font:800 9px One,Arial;letter-spacing:.08em;text-transform:uppercase;color:#dff2ffb0}
+.bundle2-stats b{font:800 18px One,Arial;color:#fff}
+.bundle2.is-complete{border-color:#ffdf0080}
+@media(max-width:680px){
+  .bundle2{padding:16px;border-radius:16px}
+  .bundle2-top{margin-bottom:13px}
+  .bundle2-dot{width:22px;height:22px;font-size:10px}
+  .bundle2-line{width:20px}
+  .bundle2-hint{font-size:9px}
+  .bundle2-card{flex-basis:130px}
+  .bundle2-media{height:118px}
+  .bundle2-info p{font-size:10px;min-height:24px}
+  .bundle2-info b{font-size:12px}
+  .bundle2-summary{gap:12px}
+  .bundle2-stats{gap:16px}
+  .bundle2-stats b{font-size:15px}
+  .bundle2-summary .yellow{width:100%}
+}
