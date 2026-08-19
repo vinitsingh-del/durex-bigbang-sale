@@ -536,7 +536,7 @@ body:before{background:radial-gradient(ellipse at 8% 4%,#d9fbff4d 0,transparent 
 
 /* Stronger continuous page-background movement within the established Durex tone. */
 body:before{
-  background:radial-gradient(ellipse at 7% 10%,#d9fbff66 0,transparent 29%),radial-gradient(ellipse at 92% 78%,#ba74d166 0,transparent 34%),radial-gradient(ellipse at 48% 52%,#08a4bd42 0,transparent 38%),linear-gradient(135deg,#04195f,#075d9d 52%,#402477 100%)!important;
+  background-image:radial-gradient(ellipse at 7% 10%,#d9fbff66 0,transparent 29%),radial-gradient(ellipse at 92% 78%,#ba74d166 0,transparent 34%),radial-gradient(ellipse at 48% 52%,#08a4bd42 0,transparent 38%),linear-gradient(135deg,#04195f,#075d9d 52%,#402477 100%)!important;
   background-size:190% 190%!important;
   background-position:0% 20%;
   will-change:background-position;
@@ -563,7 +563,7 @@ footer{margin-top:56px!important}
 @media(max-width:680px){.sale-catalog{padding-top:18px!important}.launch{padding-top:22px!important}.section{padding-top:34px!important}.heading{margin-bottom:11px!important}.quick-links{margin:8px 0 12px!important}.dark-showcase{margin-top:28px!important;padding:38px 0!important}.dark-showcase .cards{margin-top:14px!important}footer{margin-top:38px!important}}
 
 /* One visible, continuous page-light field behind every transparent page section. */
-body:before{background:radial-gradient(ellipse at 8% 12%,#d9fbff73 0,transparent 30%),radial-gradient(ellipse at 90% 80%,#b56bd673 0,transparent 35%),radial-gradient(ellipse at 48% 48%,#08a9c850 0,transparent 42%),linear-gradient(135deg,#04195f,#075d9d 52%,#402477 100%)!important;background-size:210% 210%!important;animation:page-gradient-flow 11s linear infinite!important;will-change:background-position}
+body:before{background-image:radial-gradient(ellipse at 8% 12%,#d9fbff73 0,transparent 30%),radial-gradient(ellipse at 90% 80%,#b56bd673 0,transparent 35%),radial-gradient(ellipse at 48% 48%,#08a9c850 0,transparent 42%),linear-gradient(135deg,#04195f,#075d9d 52%,#402477 100%)!important;background-size:210% 210%!important;animation:page-gradient-flow 11s linear infinite!important;will-change:background-position}
 @keyframes page-gradient-flow{0%{background-position:0% 20%}25%{background-position:90% 2%}50%{background-position:100% 88%}75%{background-position:15% 100%}100%{background-position:0% 20%}}
 
 
@@ -676,3 +676,44 @@ body:before{background:radial-gradient(ellipse at 8% 12%,#d9fbff73 0,transparent
 .reel-caption{font-size:10px;color:#dff2ffcc}
 .reel-play{position:absolute;top:10px;right:10px;width:26px;height:26px;display:grid;place-items:center;border-radius:50%;background:#ffffff30;color:#fff;font-size:10px;backdrop-filter:blur(6px)}
 @media(max-width:680px){.reel-card{flex-basis:132px}}
+
+/* ============================================================
+   Background gradient — client request: keep blue as the main
+   tone (lighter, not darker), with visible moving pops of
+   yellow and red cycling through continuously, independent of
+   scroll or idle state (pure CSS animation on a fixed layer).
+   A large, oversized gradient strip slides across the viewport
+   so the warm bands sweep through as a clear, visible phase.
+   ============================================================ */
+body:before{
+  content:"" !important;
+  position:fixed !important;
+  z-index:-1 !important;
+  inset:0 !important;
+  background-image:linear-gradient(115deg,
+    #2f6fe0 0%,#2f6fe0 55%,
+    #4f8ef7 66%,
+    #ffe066 76%,
+    #ff5c5c 83%,
+    #ff8fa3 88%,
+    #4f8ef7 95%,
+    #2f6fe0 100%
+  ) !important;
+  background-size:280% 280% !important;
+  background-repeat:no-repeat !important;
+  filter:none !important;
+  transform:none !important;
+  background-position:0% 30%;
+  animation:pop-gradient-cycle 18s ease-in-out infinite !important;
+  will-change:background-position;
+}
+@keyframes pop-gradient-cycle{
+  0%{background-position:0% 30%}
+  15%{background-position:15% 40%}
+  40%{background-position:75% 55%}
+  55%{background-position:88% 25%}
+  75%{background-position:35% 45%}
+  100%{background-position:0% 30%}
+}
+body{background:#2452b8}
+@media(prefers-reduced-motion:reduce){body:before{animation:none!important}}
