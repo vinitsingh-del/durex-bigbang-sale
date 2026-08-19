@@ -680,40 +680,45 @@ body:before{background-image:radial-gradient(ellipse at 8% 12%,#d9fbff73 0,trans
 /* ============================================================
    Background gradient — client request: keep blue as the main
    tone (lighter, not darker), with visible moving pops of
-   yellow and red cycling through continuously, independent of
-   scroll or idle state (pure CSS animation on a fixed layer).
-   A large, oversized gradient strip slides across the viewport
-   so the warm bands sweep through as a clear, visible phase.
+   yellow/orange/red cycling through continuously, independent
+   of scroll or idle state (pure CSS animation on a fixed layer,
+   identical single layer behind every section — no seams).
    ============================================================ */
 body:before{
   content:"" !important;
   position:fixed !important;
   z-index:-1 !important;
   inset:0 !important;
-  background-image:linear-gradient(115deg,
-    #2f6fe0 0%,#2f6fe0 55%,
-    #4f8ef7 66%,
-    #ffe066 76%,
-    #ff5c5c 83%,
-    #ff8fa3 88%,
-    #4f8ef7 95%,
+  background-image:linear-gradient(120deg,
+    #2f6fe0 0%,#2f6fe0 50%,
+    #4f8ef7 60%,
+    #ffd23f 70%,
+    #ff9d2f 78%,
+    #ff5c3d 85%,
+    #4f8ef7 94%,
     #2f6fe0 100%
   ) !important;
-  background-size:280% 280% !important;
+  background-size:260% 260% !important;
   background-repeat:no-repeat !important;
   filter:none !important;
   transform:none !important;
   background-position:0% 30%;
-  animation:pop-gradient-cycle 18s ease-in-out infinite !important;
+  animation:pop-gradient-cycle 12s ease-in-out infinite !important;
   will-change:background-position;
 }
 @keyframes pop-gradient-cycle{
-  0%{background-position:0% 30%}
-  15%{background-position:15% 40%}
-  40%{background-position:75% 55%}
-  55%{background-position:88% 25%}
-  75%{background-position:35% 45%}
-  100%{background-position:0% 30%}
+  0%{background-position:0% 25%}
+  20%{background-position:20% 35%}
+  45%{background-position:90% 60%}
+  60%{background-position:100% 15%}
+  80%{background-position:40% 45%}
+  100%{background-position:0% 25%}
 }
 body{background:#2452b8}
+@media(max-width:680px){
+  body:before{
+    background-size:340% 340% !important;
+    animation-duration:11s !important;
+  }
+}
 @media(prefers-reduced-motion:reduce){body:before{animation:none!important}}
