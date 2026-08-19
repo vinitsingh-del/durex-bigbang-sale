@@ -576,3 +576,103 @@ body:before{background:radial-gradient(ellipse at 8% 12%,#d9fbff73 0,transparent
 .promo-ribbon{margin-bottom:10px!important}
 .hero{margin-bottom:12px!important}
 @media(max-width:680px){header{height:52px!important;min-height:52px!important;max-height:52px!important;padding-top:8px!important}.brand img{width:92px!important}.hamb{top:9px!important}.promo-ribbon{margin-bottom:8px!important}.hero{margin-bottom:10px!important}}
+
+/* ============================================================
+   Aug 2026 client review round — Anjali / Saga / Vinit notes
+   Appended as the final, authoritative layer (cascade winner)
+   ============================================================ */
+
+/* 1. Shorter hero so the sale listing peeks into the first screen */
+.hero{height:172px!important}
+@media(max-width:680px){.hero{height:142px!important}}
+
+/* 2. Top strip becomes a single running marquee; the block-by-block ribbon under the logo is gone */
+.promo-ribbon{display:none!important}
+.announcement{display:block!important;overflow:hidden!important;padding:0!important;gap:0!important;background:#ffdf00!important;justify-content:flex-start!important}
+.announcement__track{display:flex!important;align-items:center;gap:38px;width:max-content;white-space:nowrap;padding:9px 18px;font:800 10px One,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#06154a;animation:announcement-run 16s linear infinite}
+.announcement__track span{flex:0 0 auto}
+@keyframes announcement-run{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(max-width:680px){.announcement__track{gap:22px;padding:7px 14px;font-size:8px;animation-duration:12s}}
+@media(prefers-reduced-motion:reduce){.announcement__track{animation:none!important}}
+
+/* 3 & 7. The 69 Store is now the headline; Shop the sale is the quiet subcopy underneath, no blinking */
+.sale-catalog .kicker{animation:none!important;-webkit-text-fill-color:currentColor!important}
+.sale-intro{flex-direction:column!important;align-items:flex-start!important;gap:2px!important;text-align:left;white-space:normal!important}
+.sale-catalog .title{order:1!important;font-size:clamp(26px,2.9vw,39px)!important}
+.sale-catalog .kicker{order:2!important;font-size:11px!important}
+@media(max-width:680px){.sale-catalog .title{font-size:clamp(23px,6.6vw,28px)!important}.sale-intro{align-items:center!important;text-align:center!important}}
+
+/* 4. Listing card "+" becomes a labelled Add to cart pill with a cart icon */
+.add{width:100%!important;height:auto!important;min-width:0!important;border-radius:999px!important;background:#ffcf2e!important;color:#07165a!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:5px!important;padding:9px 12px!important;font:800 10.5px One,Arial!important;line-height:1!important;white-space:nowrap!important;box-shadow:none!important}
+.add .add-cart{font-size:12px}
+.bottom{flex-direction:column!important;align-items:stretch!important;gap:8px!important}
+.sale-catalog .card .add{width:100%!important;height:auto!important;padding:7px 10px!important;font-size:9.5px!important}
+@media(max-width:680px){.add{padding:8px 10px!important;font-size:9px!important}.sale-catalog .card .add{padding:6px 8px!important;font-size:8.5px!important}}
+.sale-catalog .card{height:auto!important;min-height:0!important}
+.sale-catalog .card .info{min-height:0!important;padding-bottom:12px!important;display:block!important;flex:none!important}
+.sale-catalog .card .info h3{-webkit-line-clamp:2!important;min-height:0!important}
+.card{aspect-ratio:auto!important;height:auto!important;overflow:visible!important;border-radius:15px!important;display:block!important}
+.cards .card,.rail .card,[data-cards] .card{display:block!important;grid-template-rows:none!important;overflow:visible!important;min-height:0!important}
+.card .media{aspect-ratio:1/1!important;flex:0 0 auto!important;height:auto!important;overflow:hidden!important;border-radius:15px 15px 0 0!important}
+.card .info,.cards .card .info,.rail .card .info,[data-cards] .card .info{overflow:visible!important;min-height:0!important;padding-bottom:12px!important;display:block!important;flex:none!important;height:auto!important}
+.card .info h3{min-height:0!important;-webkit-line-clamp:2!important}
+.rail .card,[data-cards] .card{aspect-ratio:auto!important;height:auto!important}
+@media(max-width:680px){.card .media{aspect-ratio:1/1!important}}
+
+/* 6. Discount moves beside the price; the corner badge is reserved for tags like Bestseller, and it now sits top-right */
+.tag{left:auto!important;right:9px!important}
+.bottom .price-row{display:block!important;flex:1 1 auto!important;min-width:0;line-height:1.2}
+.bottom .add{flex:0 0 auto!important}
+.bottom .price-row b{display:block!important;font:800 16px One}
+.bottom .price-sub{display:flex!important;align-items:center!important;gap:6px!important;margin-top:3px!important}
+.card .bottom .price-sub s,.sale-catalog .card .bottom .price-sub s,.rail .card .bottom .price-sub s{display:inline-block!important;font-size:11px!important;color:#7c93ad!important;text-decoration-thickness:1.5px}
+.sale-catalog .card .bottom .price-sub s{color:#7c93ad!important}
+.bottom .price-sub em.disc{font-style:normal;display:inline-block;padding:2px 6px;border-radius:999px;background:#e9f6d0;color:#2c6b1f;font:800 9px One,Arial;letter-spacing:.02em;line-height:1.4}
+.sale-catalog .card .bottom .price-sub em.disc{background:#fff4c2;color:#5a4200}
+@media(max-width:680px){.card .bottom .price-sub s,.sale-catalog .card .bottom .price-sub s{font-size:9.5px!important}.bottom .price-sub em.disc{font-size:7.5px;padding:2px 5px}}
+
+/* 9. View all links, a touch larger */
+.heading a{font-size:12px!important}
+@media(max-width:680px){.heading a{font-size:10.5px!important}}
+
+/* 10. Placeholder slot after Lubes, ready for Anjali's section */
+.placeholder-slot{border:1px dashed #ffffff55;border-radius:16px;padding:34px 22px;text-align:center;background:#ffffff0d}
+.placeholder-slot .title{margin-bottom:10px}
+.placeholder-note{max-width:520px;margin:0 auto;color:#dff2ffcc;font-size:13px;line-height:1.5}
+
+/* 11. Explore control gets a directional arrow that flips when the panel opens */
+.mega-arrow{display:inline-block;margin-left:6px;font-size:10px;transition:transform .3s ease}
+.mobile-mega.open [data-mega-toggle] .mega-arrow{transform:rotate(180deg)}
+
+/* 5 & 12. Category rail: header on top, real category art, one continuous revolving line */
+.quick-links{position:static!important;display:block!important;top:auto!important;grid-template-columns:none!important;padding:0!important;margin:30px 0 22px!important;background:none!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important}
+.quick-links-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 12px}
+.quick-links-head .kicker{margin:0}
+.quick-links-head h3{margin:0;font:800 15px One,Arial;letter-spacing:.02em;color:#fff}
+.quick-links-viewport{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.quick-links-track{display:flex!important;flex-wrap:nowrap!important;gap:10px;width:max-content;animation:quick-links-run 28s linear infinite}
+.quick-links-track.is-paused{animation-play-state:paused}
+.quick-links-track a{flex:0 0 128px!important;min-height:0!important}
+.quick-links-track a img{display:block!important;width:56px!important;height:56px!important;object-fit:contain!important;border-radius:50%!important;background:#fff!important;padding:6px!important}
+@keyframes quick-links-run{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(max-width:680px){.quick-links-track a{flex:0 0 92px!important}.quick-links-track a img{width:42px!important;height:42px!important}.quick-links-track{animation-duration:20s}}
+@media(prefers-reduced-motion:reduce){.quick-links-track{animation:none!important}}
+
+/* 13. Durex Promise becomes one dynamic carousel instead of a static three-up grid */
+#trustCarousel{display:block;overflow:hidden}
+.trust-track{display:flex;transition:transform .5s cubic-bezier(.2,.85,.22,1)}
+.trust-track article{flex:0 0 100%;min-width:0}
+.trust-dots{display:flex;justify-content:center;gap:8px;margin-top:18px}
+.trust-dot{width:8px;height:8px;padding:0;border:0;border-radius:50%;background:#ffffff40;cursor:pointer}
+.trust-dot.active{width:22px;border-radius:5px;background:#ffdf00}
+
+/* 14. Reels: influencer-content rail */
+.reel-rail{display:flex;gap:14px;overflow-x:auto;padding:4px 2px 12px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.reel-rail::-webkit-scrollbar{display:none}
+.reel-card{position:relative;flex:0 0 200px;aspect-ratio:9/16;border-radius:16px;overflow:hidden;background:#00113f;scroll-snap-align:start;cursor:pointer;box-shadow:0 10px 22px #00105235}
+.reel-card video{width:100%;height:100%;object-fit:cover}
+.reel-meta{position:absolute;left:10px;right:10px;bottom:10px;display:flex;flex-direction:column;gap:2px;color:#fff;text-shadow:0 2px 6px #00113f}
+.reel-handle{font:800 11px One,Arial;letter-spacing:.02em}
+.reel-caption{font-size:10px;color:#dff2ffcc}
+.reel-play{position:absolute;top:10px;right:10px;width:26px;height:26px;display:grid;place-items:center;border-radius:50%;background:#ffffff30;color:#fff;font-size:10px;backdrop-filter:blur(6px)}
+@media(max-width:680px){.reel-card{flex-basis:132px}}
