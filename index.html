@@ -17,7 +17,7 @@ section{scroll-margin-top:12px}.section{padding-top:74px}.heading{display:flex;j
 </style><link rel="stylesheet" href="brand-refresh.css?v=hero-hd-strip"></head>
 <body>
 <header><a class="brand" href="#top"><img src="assets/3614303eb08b.png" alt="Durex"></a><nav class="nav"><a href="#condoms">Condoms</a><a href="#lubes">Lubes</a><a href="#massagers">Massagers</a><a href="#performance">Performance</a><a href="#playthings">Playthings</a><a href="#rewards">Rewards</a></nav><div class="actions"><button>Cart <span class="cart-no" id="cartCount">0</span></button><button>Account</button></div><button class="hamb" aria-label="Menu"><i></i><i></i><i></i></button></header>
-<main id="top"><div class="shell"><section class="hero"><video src="assets/hero-clean.mp4?v=final" muted loop playsinline preload="auto" aria-label="Durex Big Bang Sale film"></video></section>
+<main id="top"><div class="shell"><section class="hero" id="heroBanner"><div class="hero-slides"><div class="hero-slide is-active" style="background-image:url('assets/hero-banner-bg.webp')"><h2 class="hero-slide-text">Buy 1 Get 1 Free</h2></div><div class="hero-slide" style="background-image:url('assets/hero-banner-bg.webp')"><h2 class="hero-slide-text">Limited Time Offer</h2></div><div class="hero-slide" style="background-image:url('assets/hero-banner-bg.webp')"><h2 class="hero-slide-text">Explore New Arrivals</h2></div></div></section>
 <section class="categories"><a class="category" href="#condoms"><img src="assets/01a8382c9fb5.webp" alt=""><span><b>Condoms</b><small>6 packs, from ₹99</small></span><em>↗</em></a><a class="category" href="#lubes"><img src="assets/ad65f356e8bc.webp" alt=""><span><b>Lubes</b><small>5 lubes, up to 43% off</small></span><em>↗</em></a><a class="category" href="#massagers"><img src="assets/fe283623f553.webp" alt=""><span><b>Massagers</b><small>Up to 42% off</small></span><em>↗</em></a><a class="category" href="#performance"><img src="assets/1c2354442d3f.webp" alt=""><span><b>Performance</b><small>From ₹374</small></span><em>↗</em></a><a class="category" href="#playthings"><img src="assets/602c6f017f9e.webp" alt=""><span><b>Playthings</b><small>Up to 57% off</small></span><em>↗</em></a><a class="category" href="#rewards"><img src="assets/f87f3ffb1f76.webp" alt=""><span><b>Rewards</b><small>Four tiers to unlock</small></span><em>↗</em></a></section>
 <section id="wanted"><p class="kicker">Shop the sale</p><h2 class="title">MOST WANTED.<i>Ready now.</i></h2><div class="cards" data-cards="wanted"></div></section>
 <section class="section" id="condoms"><div class="heading"><div><p>Shop the sale</p><h2>Condoms<i>from ₹99</i></h2></div><a href="#top">View all →</a></div><div class="rail" data-cards="condoms"></div></section>
@@ -140,67 +140,6 @@ let moodIndex=0;document.querySelector('.mood-now').onclick=event=>{const wheel=
 let cardObserver;const initCardMotion=()=>{cardObserver?.disconnect();const cards=[...document.querySelectorAll('.card')];cards.forEach((card,index)=>{card.classList.add('is-dim');card.dataset.cardIndex=index});cardObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{const card=entry.target;if(entry.isIntersecting){card.classList.remove('is-dim');card.classList.add('is-in-view');if(Number(card.dataset.cardIndex)%2===1){card.classList.add('blink-on-enter')}cardObserver.unobserve(card)}}),{threshold:.2});cards.forEach(card=>cardObserver.observe(card))};initCardMotion();document.querySelector('.sale-tabs').addEventListener('click',()=>requestAnimationFrame(initCardMotion));
 document.addEventListener('error',event=>{const image=event.target;if(image.tagName==='IMG'&&image.closest('.card')){image.onerror=null;image.src='assets/3614303eb08b.png';image.style.objectFit='contain';image.style.padding='24px'}},true);
 </script><script>
-/* The hero now plays as a clean film with no 69 artwork layered over it. */
-(()=>{
-  const hero=document.querySelector('.hero');
-  if(!hero||!hero.dataset.showHeroLockup)return;
-  const copy=document.createElement('div');
-  copy.className='hero-copy';
-  copy.innerHTML='<div class="hero-parallax-stage" aria-label="69 Big Bang Sale"><div class="hero-lockup-bob"><span class="hero-digit-wrap hero-six-wrap"><img class="hero-digit hero-six" src="assets/hero-six.png" alt="6"></span><span class="hero-digit-wrap hero-nine-wrap"><img class="hero-digit hero-nine" src="assets/hero-nine.png" alt="9"></span><img class="hero-sale-wordmark" src="assets/hero-big-bang-sale.png" alt="Big Bang Sale"><img class="hero-date-ribbon" src="assets/bigbang-date-ribbon-transparent.png" alt="29th August onwards"></div></div>';
-  hero.append(copy);
-  const stage=copy.querySelector('.hero-parallax-stage');
-  const six=copy.querySelector('.hero-six-wrap');
-  const nine=copy.querySelector('.hero-nine-wrap');
-  const sale=copy.querySelector('.hero-sale-wordmark');
-  const date=copy.querySelector('.hero-date-ribbon');
-  const video=hero.querySelector('video');
-  const clamp=(value,min,max)=>Math.min(max,Math.max(min,value));
-  const ease=value=>1-Math.pow(1-value,3);
-  let progress=0;
-  let touchY=null;
-  const inScene=()=>{const rect=hero.getBoundingClientRect();return rect.top<innerHeight*.56&&rect.bottom>innerHeight*.13};
-  const draw=()=>{
-    if(matchMedia('(prefers-reduced-motion: reduce)').matches){progress=1}
-    const joined=ease(progress);
-    const lift=6*(1-joined);
-    six.style.transform=`translate3d(${30*joined}%,${lift}px,0) rotate(${-5*(1-joined)}deg)`;
-    nine.style.transform=`translate3d(${-30*joined}%,-${lift}px,0) rotate(${5*(1-joined)}deg)`;
-    const reveal=ease(clamp((progress-.56)/.44,0,1));
-    sale.style.opacity=String(reveal);
-    sale.style.transform=`translate3d(0,${18*(1-reveal)}px,0) scale(${.92+.08*reveal})`;
-    date.style.opacity=String(reveal);
-    date.style.transform=`translate3d(0,${11*(1-reveal)}px,0) scale(${.95+.05*reveal})`;
-    stage.classList.toggle('is-active',progress>.001);
-    stage.classList.toggle('is-complete',reveal>.985);
-    /* Keep the film at native scale. Enlarging a 16:9 source inside the hero was
-       softening the image, especially on high-density mobile screens. */
-    if(video)video.style.transform='none';
-  };
-  const progressScene=delta=>{
-    const previous=progress;
-    progress=clamp(progress+delta/460,0,1);
-    if(progress===previous)return false;
-    draw();
-    return true;
-  };
-  addEventListener('wheel',event=>{
-    if(matchMedia('(prefers-reduced-motion: reduce)').matches||!inScene())return;
-    const forwards=event.deltaY>0;
-    const capture=(forwards&&progress<1)||(!forwards&&progress>0&&hero.getBoundingClientRect().top<=8);
-    if(capture&&progressScene(event.deltaY))event.preventDefault();
-  },{passive:false});
-  hero.addEventListener('touchstart',event=>{touchY=event.touches[0]?.clientY??null},{passive:true});
-  hero.addEventListener('touchmove',event=>{
-    const current=event.touches[0]?.clientY;
-    if(touchY===null||current===undefined||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-    const delta=touchY-current;touchY=current;
-    const capture=(delta>0&&progress<1)||(delta<0&&progress>0&&hero.getBoundingClientRect().top<=8);
-    if(capture&&progressScene(delta))event.preventDefault();
-  },{passive:false});
-  hero.addEventListener('touchend',()=>{touchY=null},{passive:true});
-  draw();
-})();
-</script><script>
 /* On phones the sale ribbon stays pinned above the hero and keeps its own crawl. */
 (()=>{
   const ribbon=document.querySelector('.promo-ribbon');
@@ -208,27 +147,31 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
   ribbon.classList.add('is-stuck');
 })();
 </script><script>
-/* Hero video: resume on downward entry and restart cleanly on upward entry. */
+/* Hero banner slider: smooth crossfade between slides, auto-advancing, and
+   restarting cleanly from slide one whenever the hero scrolls back into view. */
 (()=>{
-  const hero=document.querySelector('.hero');
-  const video=hero?.querySelector('video');
-  if(!hero||!video)return;
-  let lastY=scrollY,wasVisible=false;
-  const replay=()=>{video.currentTime=0;video.play().catch(()=>{})};
-  const resume=()=>video.play().catch(()=>{});
-  const stopAtStart=()=>{video.pause();video.currentTime=0};
-  /* Start the commercial in the same user gesture that begins the parallax. */
-  hero.addEventListener('pointerdown',resume,{passive:true});
-  addEventListener('wheel',event=>{if(event.deltaY>0&&scrollY===0)resume()},{passive:true});
-  const observe=new IntersectionObserver(entries=>entries.forEach(entry=>{
-    const visible=entry.isIntersecting;
-    if(visible&&!wasVisible&&scrollY!==0){if(scrollY<lastY)replay();else resume()}
-    wasVisible=visible;
-  }),{threshold:.58});
-  observe.observe(hero);
-  addEventListener('scroll',()=>{const current=scrollY;if(current===0){stopAtStart();lastY=current;return}const inScene=hero.getBoundingClientRect().top<innerHeight*.7&&hero.getBoundingClientRect().bottom>innerHeight*.3;if(inScene){if(current<lastY)replay();else if(current>lastY)resume()}lastY=current},{passive:true});
-  video.load();
-  stopAtStart();
+  const hero=document.querySelector('#heroBanner');
+  const slides=[...document.querySelectorAll('.hero-slide')];
+  if(!hero||!slides.length)return;
+  const SLIDE_MS=3200;
+  let index=0,timer=null;
+  const show=next=>{
+    slides[index].classList.remove('is-active');
+    index=next;
+    slides[index].classList.add('is-active');
+  };
+  const advance=()=>show((index+1)%slides.length);
+  const start=()=>{stop();if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;timer=setInterval(advance,SLIDE_MS)};
+  const stop=()=>{if(timer)clearInterval(timer)};
+  const restart=()=>{show(0);start()};
+  let wasVisible=false;
+  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
+    if(entry.isIntersecting&&!wasVisible)restart();
+    else if(!entry.isIntersecting)stop();
+    wasVisible=entry.isIntersecting;
+  }),{threshold:.5});
+  observer.observe(hero);
+  start();
 })();
 </script><script>
 /* Keep the mobile sale controls out of the first two screens; Mood Now remains independent. */
