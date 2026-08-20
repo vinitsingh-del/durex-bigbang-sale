@@ -980,14 +980,12 @@ body{background:#2452b8}
   object-fit:contain;
   transform-origin:50% 55%;
   filter:drop-shadow(0 5px 3px rgba(3,14,86,.28)) drop-shadow(0 0 10px rgba(255,255,255,.82));
-  animation:hero-logo-bounce-zoom 2.35s cubic-bezier(.45,.05,.3,1) infinite;
+  animation:hero-logo-scale-pulse 2.2s ease-in-out infinite;
   will-change:transform;
 }
-@keyframes hero-logo-bounce-zoom{
-  0%,100%{transform:translate3d(-50%,-50%,0) scale(1)}
-  38%{transform:translate3d(-50%,calc(-50% - 7px),0) scale(1.065)}
-  58%{transform:translate3d(-50%,calc(-50% + 1px),0) scale(1.025)}
-  76%{transform:translate3d(-50%,calc(-50% - 3px),0) scale(1.045)}
+@keyframes hero-logo-scale-pulse{
+  0%,100%{transform:translate3d(-50%,-50%,0) scale(1.14)}
+  50%{transform:translate3d(-50%,-50%,0) scale(.86)}
 }
 @media(max-width:680px){
   .hero-logo-overlay{padding:6px}
@@ -1000,3 +998,17 @@ body{background:#2452b8}
   .hero#heroBanner .hero-slide.is-active{animation:none!important}
   .hero-logo-overlay__image{animation:none!important;transform:translate3d(-50%,-50%,0)}
 }
+
+/* One global cadence keeps every product-card cart sticker appearing and
+   disappearing together, including cards rendered after a tab change. */
+.add-cart{
+  animation:none!important;
+  opacity:1;
+  transform:translateY(-50%) scale(1)!important;
+  transition:opacity .3s ease,transform .3s ease!important;
+}
+body.cart-icons-hidden .add-cart{
+  opacity:0!important;
+  transform:translateY(-50%) scale(.72)!important;
+}
+@media(prefers-reduced-motion:reduce){.add-cart{transition:none!important}}
