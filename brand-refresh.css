@@ -804,3 +804,15 @@ body{background:#2452b8}
 .compare .compare-pic{background:radial-gradient(circle at 50% 44%,#fff 0 29%,#d8eff8 69%,#c5e6f3 100%)!important}
 .compare img{object-fit:contain!important;padding:18px!important}
 @media(max-width:680px){.compare .compare-pic{height:210px!important}.compare img{padding:14px!important}.compare article{padding:12px!important}.compare h3{font-size:19px!important;margin:11px 0 4px!important}}
+
+/* Fix: Bestsellers / Just Launched / Massagers card grids had a hidden
+   horizontal-scroll carousel on mobile (overflow-x + scroll-snap) left over
+   from the original build. That nested scroll region inside a vertically
+   scrolling page is what caused the janky "scrolling within the card" feel.
+   These aren't tab/rail carousels with a "View all" affordance, so they
+   should just be a plain, static, wrapping 2-column grid like everywhere else. */
+@media(max-width:680px){
+  .cards{display:grid!important;grid-template-columns:repeat(2,1fr)!important;overflow:visible!important;overflow-x:visible!important;scroll-snap-type:none!important;padding-bottom:0!important}
+  .cards .card{flex:none!important;width:auto!important;scroll-snap-align:none!important}
+}
+.sale-catalog .cards{display:flex!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important}
