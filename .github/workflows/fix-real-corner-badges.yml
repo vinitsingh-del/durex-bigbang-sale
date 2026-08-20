@@ -1,0 +1,88 @@
+name: Fix real product corner badges
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: ${{ !contains(github.event.head_commit.message, '[real-corner-badges]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Render badges as real image elements
+        shell: bash
+        run: |
+          cat >> brand-refresh.css <<'CSS'
+
+          /* ============================================================
+             REAL CORNER BADGES — actual IMG nodes, not pseudo-elements.
+             This is the final rendering path for the three added stickers.
+             Same locked treatment as the approved SALE sticker.
+             ============================================================ */
+          .card.corner-badge{position:relative!important;overflow:visible!important;isolation:isolate!important}
+          .card.corner-badge::before{display:none!important;content:none!important}
+          .product-corner-sticker{
+            position:absolute!important;
+            z-index:120!important;
+            top:-12px!important;
+            left:-6px!important;
+            width:66px!important;
+            height:46px!important;
+            max-width:none!important;
+            object-fit:contain!important;
+            object-position:center!important;
+            padding:0!important;
+            margin:0!important;
+            pointer-events:none!important;
+            transform-origin:50% 55%!important;
+            animation:sale-sticker-shake 1.15s ease-in-out infinite!important;
+            filter:drop-shadow(0 4px 5px rgba(0,0,0,.24))!important;
+          }
+          .card:hover .product-corner-sticker{transform:none}
+          #tabCards,.cards,.rail{overflow-y:visible!important}
+          @media(max-width:680px){
+            .product-corner-sticker{
+              top:-10px!important;
+              left:-5px!important;
+              width:46px!important;
+              height:32px!important;
+            }
+          }
+          @media(prefers-reduced-motion:reduce){.product-corner-sticker{animation:none!important}}
+          CSS
+
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          marker='/* Real IMG product corner badges — deterministic renderer. */'
+          script='''<script>\n/* Real IMG product corner badges — deterministic renderer. */\n(()=>{\n  const badgeMap={\n    'Durex Intense - 3 Condoms':['corner-badge--best-deal','assets/badge-best-deal-ever.svg','Best Deal Ever'],\n    'Durex Naturals Smooth Glide - 3 Condoms':['corner-badge--limited','assets/badge-limited-time.svg','Limited Time'],\n    'Durex Intense Vibe Ring':['corner-badge--popular','assets/badge-popular-choice.svg','Popular Choice']\n  };\n  const applyRealBadges=root=>{\n    (root||document).querySelectorAll('.card').forEach(card=>{\n      const name=card.querySelector('h3')?.textContent?.trim();\n      const spec=badgeMap[name];\n      card.querySelectorAll(':scope > .product-corner-sticker').forEach(el=>el.remove());\n      card.classList.remove('corner-badge','corner-badge--best-deal','corner-badge--limited','corner-badge--popular');\n      if(!spec)return;\n      card.classList.add('corner-badge',spec[0]);\n      const badge=document.createElement('img');\n      badge.className='product-corner-sticker';\n      badge.src=spec[1];\n      badge.alt=spec[2];\n      badge.setAttribute('aria-hidden','true');\n      badge.decoding='sync';\n      card.prepend(badge);\n    });\n  };\n  const paint=()=>applyRealBadges(document);\n  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',paint,{once:true});else paint();\n  new MutationObserver(mutations=>{\n    if(mutations.some(m=>[...m.addedNodes].some(n=>n.nodeType===1)))requestAnimationFrame(paint);\n  }).observe(document.body,{childList:true,subtree:true});\n  document.querySelector('.sale-tabs')?.addEventListener('click',()=>requestAnimationFrame(paint));\n})();\n</script>'''
+          if marker not in s:
+              s=s.replace('</body>',script+'\n</body>')
+              p.write_text(s)
+          PY
+
+          rm -f .github/workflows/fix-real-corner-badges.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html brand-refresh.css .github/workflows/fix-real-corner-badges.yml
+          git commit -m "fix: render corner stickers as real images [real-corner-badges]"
+          git push origin HEAD:main
+
+      - name: Verify implementation
+        shell: bash
+        run: |
+          git diff HEAD^ --check
+          grep -q "Real IMG product corner badges — deterministic renderer" index.html
+          grep -q "REAL CORNER BADGES" brand-refresh.css
+          grep -q "product-corner-sticker" index.html
+          test -f assets/badge-best-deal-ever.svg
+          test -f assets/badge-limited-time.svg
+          test -f assets/badge-popular-choice.svg
