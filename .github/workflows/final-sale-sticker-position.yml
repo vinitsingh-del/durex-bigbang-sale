@@ -1,0 +1,69 @@
+name: Final sale sticker position
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: ${{ !contains(github.event.head_commit.message, '[sale-sticker-final-redmark]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply final sticker position only
+        shell: bash
+        run: |
+          cat >> brand-refresh.css <<'CSS'
+
+          /* ============================================================
+             FINAL SALE sticker placement — approved red-mark position.
+             Only first Extra Time 3-pack card affected.
+             Keep sticker fully visible, slightly overlapping the outer
+             top-left card corner. No other layout changes.
+             ============================================================ */
+          #tabCards .card:first-child{
+            position:relative!important;
+            overflow:visible!important;
+            isolation:isolate!important;
+          }
+          #tabCards .card:first-child::after{
+            top:-12px!important;
+            left:-6px!important;
+            z-index:50!important;
+          }
+          #tabCards{overflow:visible!important}
+
+          @media(max-width:680px){
+            #tabCards{
+              overflow-x:auto!important;
+              overflow-y:visible!important;
+              padding-left:14px!important;
+              margin-left:-14px!important;
+              width:calc(100% + 14px)!important;
+            }
+            #tabCards .card:first-child::after{
+              top:-10px!important;
+              left:-5px!important;
+              z-index:50!important;
+            }
+          }
+          CSS
+
+          rm -f .github/workflows/final-sale-sticker-position.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add brand-refresh.css .github/workflows/final-sale-sticker-position.yml
+          git commit -m "fix: final approved SALE sticker placement [sale-sticker-final-redmark]"
+          git push origin HEAD:main
+
+      - name: Verify
+        shell: bash
+        run: |
+          git diff HEAD^ --check
+          grep -q "FINAL SALE sticker placement — approved red-mark position" brand-refresh.css
