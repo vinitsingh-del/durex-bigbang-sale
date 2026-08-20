@@ -780,9 +780,27 @@ body{background:#2452b8}
    promo slides sharing one cropped background artwork. Hero's own
    size/shape is untouched; slides simply fill it (cover, centered).
    ============================================================ */
-.hero-slides{position:absolute;inset:0;z-index:0}
-.hero-slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:0 6%;text-align:center;background-size:cover;background-position:center;background-repeat:no-repeat;opacity:0;transition:opacity 1.1s ease-in-out;will-change:opacity}
-.hero-slide.is-active{opacity:1;z-index:1}
-.hero-slide-text{margin:0;font:800 clamp(26px,4.6vw,64px)/1.05 One,Arial;letter-spacing:-.01em;text-transform:uppercase;color:#fff;-webkit-text-fill-color:#fff;text-shadow:-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,2px 2px 0 #000,0 6px 18px #00000070;max-width:22ch}
+.hero{border:3px solid #ffffffe6}
+.hero-slides{position:absolute;inset:0;z-index:0;overflow:hidden;border-radius:inherit}
+.hero-slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:0 6%;text-align:center;background-size:cover;background-repeat:no-repeat;opacity:0;transform:scale(1);transition:opacity 1.1s ease-in-out;will-change:opacity,transform}
+.hero-slide.is-active{opacity:1;z-index:1;animation:hero-slide-zoom 4.2s ease-out forwards}
+@keyframes hero-slide-zoom{from{transform:scale(1)}to{transform:scale(1.09)}}
+.hero-slide-text{position:relative;margin:0;font:800 clamp(26px,4.6vw,64px)/1.05 One,Arial;letter-spacing:-.01em;text-transform:uppercase;color:#fff;-webkit-text-fill-color:#fff;text-shadow:-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,2px 2px 0 #000,0 6px 18px #00000070;max-width:22ch}
 @media(max-width:680px){.hero-slide-text{font-size:clamp(20px,7.2vw,34px);-webkit-text-stroke:0}}
-@media(prefers-reduced-motion:reduce){.hero-slide{transition:none}}
+@media(prefers-reduced-motion:reduce){.hero-slide{transition:none}.hero-slide.is-active{animation:none}}
+/* Retro border glow, cycling through the brand's blue / yellow / red palette */
+.hero{animation:hero-border-glow 6s ease-in-out infinite}
+@keyframes hero-border-glow{
+  0%,100%{box-shadow:0 24px 50px #04134d75,0 0 0 5px #2f6fe066,0 0 34px 8px #2f6fe055}
+  33%{box-shadow:0 24px 50px #04134d75,0 0 0 5px #ffd23f66,0 0 34px 8px #ffd23f55}
+  66%{box-shadow:0 24px 50px #04134d75,0 0 0 5px #ff5c3d66,0 0 34px 8px #ff5c3d55}
+}
+@media(prefers-reduced-motion:reduce){.hero{animation:none}}
+
+/* Fix: "Pick your pleasure partner" product photo was using object-fit:cover,
+   cropping/zooming into the product unlike every other card on the site
+   (which show the full product via contain). Also right-sized the image
+   height on mobile so the card doesn't dominate the whole screen per scroll. */
+.compare .compare-pic{background:radial-gradient(circle at 50% 44%,#fff 0 29%,#d8eff8 69%,#c5e6f3 100%)!important}
+.compare img{object-fit:contain!important;padding:18px!important}
+@media(max-width:680px){.compare .compare-pic{height:210px!important}.compare img{padding:14px!important}.compare article{padding:12px!important}.compare h3{font-size:19px!important;margin:11px 0 4px!important}}
