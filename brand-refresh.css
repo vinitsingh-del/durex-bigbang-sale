@@ -1562,3 +1562,38 @@ body.is-loading{overflow:hidden}
     z-index:40!important;
   }
 }
+
+/* ============================================================
+   FINAL VERIFIED SALE STICKER POSITION
+   Reference: red mark at the outer top-left corner of the first
+   Extra Time 3-pack card. Position only. No other UI changes.
+   ============================================================ */
+#tabCards .card:first-child{
+  position:relative!important;
+  overflow:visible!important;
+  isolation:isolate!important;
+}
+#tabCards .card:first-child::after{
+  top:-10px!important;
+  left:-8px!important;
+  z-index:50!important;
+}
+#tabCards{overflow:visible!important}
+
+@media(max-width:680px){
+  #tabCards{
+    overflow-x:auto!important;
+    overflow-y:visible!important;
+    padding-left:12px!important;
+    margin-left:-12px!important;
+    width:calc(100% + 12px)!important;
+  }
+  #tabCards .card:first-child{
+    overflow:visible!important;
+  }
+  #tabCards .card:first-child::after{
+    top:-8px!important;
+    left:-6px!important;
+    z-index:50!important;
+  }
+}
