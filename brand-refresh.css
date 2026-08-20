@@ -1508,3 +1508,21 @@ body.is-loading{overflow:hidden}
     height:32px!important;
   }
 }
+
+/* Exact approved SALE sticker position — outer blue top-left corner. */
+#tabCards .card:first-child{
+  position:relative!important;
+  overflow:visible!important;
+  isolation:isolate!important;
+}
+#tabCards .card:first-child::after{
+  top:-18px!important;
+  left:-14px!important;
+}
+@media(max-width:680px){
+  #tabCards .card:first-child{overflow:visible!important}
+  #tabCards .card:first-child::after{
+    top:-12px!important;
+    left:-10px!important;
+  }
+}
