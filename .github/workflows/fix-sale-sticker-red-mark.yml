@@ -1,0 +1,72 @@
+name: Align sale sticker to marked corner
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: ${{ !contains(github.event.head_commit.message, '[sale-sticker-red-mark]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply exact sticker corner position
+        shell: bash
+        run: |
+          cat >> brand-refresh.css <<'CSS'
+
+          /* ============================================================
+             Exact SALE sticker placement from approved red-mark reference.
+             Only the first Extra Time 3-pack card is affected.
+             Keep sticker fully visible outside the white card edge.
+             ============================================================ */
+          #tabCards .card:first-child{
+            position:relative!important;
+            overflow:visible!important;
+            isolation:isolate!important;
+          }
+          #tabCards .card:first-child::after{
+            top:2px!important;
+            left:-30px!important;
+            z-index:40!important;
+          }
+
+          /* Prevent the first-card sticker from being clipped by the rail viewport. */
+          #tabCards{
+            overflow:visible!important;
+          }
+
+          @media(max-width:680px){
+            #tabCards{
+              overflow-x:auto!important;
+              overflow-y:visible!important;
+              padding-left:18px!important;
+              margin-left:-18px!important;
+              width:calc(100% + 18px)!important;
+            }
+            #tabCards .card:first-child::after{
+              top:1px!important;
+              left:-18px!important;
+              z-index:40!important;
+            }
+          }
+          CSS
+
+          rm -f .github/workflows/fix-sale-sticker-red-mark.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add brand-refresh.css .github/workflows/fix-sale-sticker-red-mark.yml
+          git commit -m "fix: align SALE sticker to marked card corner [sale-sticker-red-mark]"
+          git push origin HEAD:main
+
+      - name: Verify
+        shell: bash
+        run: |
+          git diff HEAD^ --check
+          grep -q "Exact SALE sticker placement from approved red-mark reference" brand-refresh.css
