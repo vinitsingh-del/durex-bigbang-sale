@@ -328,29 +328,34 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
     'Durex Naturals Smooth Glide - 3 Condoms':['corner-badge--limited','assets/badge-limited-time.svg','Limited Time'],
     'Durex Intense Vibe Ring':['corner-badge--popular','assets/badge-popular-choice.svg','Popular Choice']
   };
-  const applyRealBadges=root=>{
-    (root||document).querySelectorAll('.card').forEach(card=>{
-      const name=card.querySelector('h3')?.textContent?.trim();
-      const spec=badgeMap[name];
-      card.querySelectorAll(':scope > .product-corner-sticker').forEach(el=>el.remove());
-      card.classList.remove('corner-badge','corner-badge--best-deal','corner-badge--limited','corner-badge--popular');
-      if(!spec)return;
-      card.classList.add('corner-badge',spec[0]);
-      const badge=document.createElement('img');
-      badge.className='product-corner-sticker';
-      badge.src=spec[1];
-      badge.alt=spec[2];
-      badge.setAttribute('aria-hidden','true');
-      badge.decoding='sync';
-      card.prepend(badge);
-    });
+  const paintCard=card=>{
+    const name=card.querySelector('h3')?.textContent?.trim();
+    const spec=badgeMap[name];
+    const existing=card.querySelector(':scope > .product-corner-sticker');
+    card.classList.remove('corner-badge','corner-badge--best-deal','corner-badge--limited','corner-badge--popular');
+    if(!spec){existing?.remove();return;}
+    card.classList.add('corner-badge',spec[0]);
+    if(existing){
+      if(!existing.src.endsWith(spec[1].split('/').pop()))existing.src=spec[1];
+      existing.alt=spec[2];
+      return;
+    }
+    const badge=document.createElement('img');
+    badge.className='product-corner-sticker';
+    badge.src=spec[1];
+    badge.alt=spec[2];
+    badge.setAttribute('aria-hidden','true');
+    badge.decoding='sync';
+    card.prepend(badge);
   };
-  const paint=()=>applyRealBadges(document);
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',paint,{once:true});else paint();
-  new MutationObserver(mutations=>{
-    if(mutations.some(m=>[...m.addedNodes].some(n=>n.nodeType===1)))requestAnimationFrame(paint);
-  }).observe(document.body,{childList:true,subtree:true});
-  document.querySelector('.sale-tabs')?.addEventListener('click',()=>requestAnimationFrame(paint));
+  const paintAll=root=>(root||document).querySelectorAll('.card').forEach(paintCard);
+  const start=()=>{
+    paintAll(document);
+    const tabHost=document.querySelector('#tabCards');
+    if(tabHost)new MutationObserver(()=>requestAnimationFrame(()=>paintAll(tabHost))).observe(tabHost,{childList:true});
+    document.querySelector('.sale-tabs')?.addEventListener('click',()=>requestAnimationFrame(()=>paintAll(document)));
+  };
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
 </script>
 </body></html>
