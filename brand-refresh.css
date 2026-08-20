@@ -1787,6 +1787,63 @@ body.is-loading{overflow:hidden}
 }
 @media(prefers-reduced-motion:reduce){.product-corner-sticker{animation:none!important}}
 
+/* ============================================================
+   STICKER-ONLY FINAL MOTION PASS
+   - No shake/rotation animation.
+   - Faster, prominent zoom in/out pulse.
+   - Keep all stickers fully visible on desktop and mobile.
+   - No product-card geometry, typography or other UI changes.
+   ============================================================ */
+@keyframes sticker-zoom-pulse{
+  0%,100%{transform:rotate(-6deg) scale(.88)}
+  50%{transform:rotate(-6deg) scale(1.18)}
+}
+
+/* Original SALE sticker. */
+#tabCards .card:first-child{
+  overflow:visible!important;
+}
+#tabCards .card:first-child::after{
+  animation:sticker-zoom-pulse .72s cubic-bezier(.22,.75,.25,1) infinite!important;
+  transform-origin:50% 55%!important;
+}
+
+/* Added product stickers rendered as real IMG nodes. */
+.card.corner-badge{
+  overflow:visible!important;
+}
+.product-corner-sticker{
+  animation:sticker-zoom-pulse .72s cubic-bezier(.22,.75,.25,1) infinite!important;
+  transform-origin:50% 55%!important;
+}
+.card:hover .product-corner-sticker{
+  animation:sticker-zoom-pulse .72s cubic-bezier(.22,.75,.25,1) infinite!important;
+}
+
+/* Preserve horizontal rails while allowing vertical sticker overflow. */
+#tabCards,.sale-catalog .cards,.cards,.rail{
+  overflow-y:visible!important;
+}
+
+@media(max-width:680px){
+  #tabCards,.sale-catalog .cards,.rail{
+    overflow-x:auto!important;
+    overflow-y:visible!important;
+  }
+  #tabCards .card:first-child,
+  .card.corner-badge{
+    overflow:visible!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  #tabCards .card:first-child::after,
+  .product-corner-sticker{
+    animation:none!important;
+    transform:rotate(-6deg) scale(1)!important;
+  }
+}
+
 /* Mobile only: bump every product image zoom ~20% more than current —
    image size only, nothing else (card size/layout untouched). */
 @media(max-width:680px){
