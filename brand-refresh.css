@@ -816,3 +816,11 @@ body{background:#2452b8}
   .cards .card{flex:none!important;width:auto!important;scroll-snap-align:none!important}
 }
 .sale-catalog .cards{display:flex!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important}
+
+/* CRITICAL FIX: a higher-specificity rule (.cards:not(.sale-catalog .cards)
+   .card) was forcing aspect-ratio:3/4 on Bestsellers/Just Launched/Massagers
+   cards, which — combined with overflow:visible from the earlier card-height
+   fix — caused content taller than that fixed box (price, button) to bleed
+   outside the card and overlap the section below instead of expanding it. */
+.cards:not(.sale-catalog .cards) .card{aspect-ratio:auto!important;height:auto!important}
+@media(max-width:680px){.cards:not(.sale-catalog .cards) .card{aspect-ratio:auto!important}}
