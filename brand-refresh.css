@@ -1742,3 +1742,39 @@ body.is-loading{overflow:hidden}
   }
 }
 @media(prefers-reduced-motion:reduce){.card.corner-badge::before{animation:none!important}}
+
+/* ============================================================
+   REAL CORNER BADGES — actual IMG nodes, not pseudo-elements.
+   This is the final rendering path for the three added stickers.
+   Same locked treatment as the approved SALE sticker.
+   ============================================================ */
+.card.corner-badge{position:relative!important;overflow:visible!important;isolation:isolate!important}
+.card.corner-badge::before{display:none!important;content:none!important}
+.product-corner-sticker{
+  position:absolute!important;
+  z-index:120!important;
+  top:-12px!important;
+  left:-6px!important;
+  width:66px!important;
+  height:46px!important;
+  max-width:none!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  padding:0!important;
+  margin:0!important;
+  pointer-events:none!important;
+  transform-origin:50% 55%!important;
+  animation:sale-sticker-shake 1.15s ease-in-out infinite!important;
+  filter:drop-shadow(0 4px 5px rgba(0,0,0,.24))!important;
+}
+.card:hover .product-corner-sticker{transform:none}
+#tabCards,.cards,.rail{overflow-y:visible!important}
+@media(max-width:680px){
+  .product-corner-sticker{
+    top:-10px!important;
+    left:-5px!important;
+    width:46px!important;
+    height:32px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){.product-corner-sticker{animation:none!important}}
