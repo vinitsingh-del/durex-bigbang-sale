@@ -1,0 +1,67 @@
+name: Apply shaking sale label
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: ${{ !contains(github.event.head_commit.message, '[sale-badge-applied]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Append targeted sale badge styles
+        shell: bash
+        run: |
+          cat >> brand-refresh.css <<'CSS'
+
+          /* ============================================================
+             Targeted SALE sticker — only Extra Time Ultra Thin 3-pack card
+             in the opening 3-pack sale rail. No other card is affected.
+             ============================================================ */
+          #tabCards .card:first-child{position:relative!important}
+          #tabCards .card:first-child::after{
+            content:"";
+            position:absolute;
+            z-index:20;
+            top:10px;
+            left:10px;
+            width:78px;
+            height:54px;
+            background:url('assets/sale-badge.svg') center/contain no-repeat;
+            pointer-events:none;
+            transform-origin:50% 55%;
+            animation:sale-sticker-shake 1.15s ease-in-out infinite;
+            filter:drop-shadow(0 4px 5px rgba(0,0,0,.24));
+          }
+          @keyframes sale-sticker-shake{
+            0%,100%{transform:rotate(-3deg) translate3d(0,0,0) scale(1)}
+            18%{transform:rotate(4deg) translate3d(1px,-1px,0) scale(1.03)}
+            36%{transform:rotate(-5deg) translate3d(-1px,1px,0) scale(.99)}
+            54%{transform:rotate(3deg) translate3d(1px,0,0) scale(1.02)}
+            72%{transform:rotate(-2deg) translate3d(-1px,-1px,0) scale(1)}
+          }
+          @media(max-width:680px){
+            #tabCards .card:first-child::after{top:6px;left:6px;width:54px;height:38px}
+          }
+          @media(prefers-reduced-motion:reduce){
+            #tabCards .card:first-child::after{animation:none!important}
+          }
+          CSS
+
+          rm -f .github/workflows/apply-sale-badge.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add brand-refresh.css .github/workflows/apply-sale-badge.yml
+          git commit -m "feat: add shaking SALE label to Extra Time 3-pack [sale-badge-applied]"
+          git push origin HEAD:main
+
+      - name: Validate
+        run: |
+          git diff HEAD^ --check
+          grep -q "Targeted SALE sticker" brand-refresh.css
