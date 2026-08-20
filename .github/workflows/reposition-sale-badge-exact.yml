@@ -1,0 +1,52 @@
+name: Reposition sale badge exact
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: ${{ !contains(github.event.head_commit.message, '[sale-badge-exact]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Move badge to marked outer corner
+        shell: bash
+        run: |
+          cat >> brand-refresh.css <<'CSS'
+
+          /* Exact approved SALE sticker position — outer blue top-left corner. */
+          #tabCards .card:first-child{
+            position:relative!important;
+            overflow:visible!important;
+            isolation:isolate!important;
+          }
+          #tabCards .card:first-child::after{
+            top:-18px!important;
+            left:-14px!important;
+          }
+          @media(max-width:680px){
+            #tabCards .card:first-child{overflow:visible!important}
+            #tabCards .card:first-child::after{
+              top:-12px!important;
+              left:-10px!important;
+            }
+          }
+          CSS
+
+          rm -f .github/workflows/reposition-sale-badge-exact.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add brand-refresh.css .github/workflows/reposition-sale-badge-exact.yml
+          git commit -m "fix: move SALE sticker to exact outer corner [sale-badge-exact]"
+          git push origin HEAD:main
+
+      - name: Validate
+        run: |
+          git diff HEAD^ --check
+          grep -q "Exact approved SALE sticker position" brand-refresh.css
