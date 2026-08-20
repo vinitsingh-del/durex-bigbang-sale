@@ -1597,3 +1597,36 @@ body.is-loading{overflow:hidden}
     z-index:50!important;
   }
 }
+
+/* ============================================================
+   FINAL SALE sticker placement — approved red-mark position.
+   Only first Extra Time 3-pack card affected.
+   Keep sticker fully visible, slightly overlapping the outer
+   top-left card corner. No other layout changes.
+   ============================================================ */
+#tabCards .card:first-child{
+  position:relative!important;
+  overflow:visible!important;
+  isolation:isolate!important;
+}
+#tabCards .card:first-child::after{
+  top:-12px!important;
+  left:-6px!important;
+  z-index:50!important;
+}
+#tabCards{overflow:visible!important}
+
+@media(max-width:680px){
+  #tabCards{
+    overflow-x:auto!important;
+    overflow-y:visible!important;
+    padding-left:14px!important;
+    margin-left:-14px!important;
+    width:calc(100% + 14px)!important;
+  }
+  #tabCards .card:first-child::after{
+    top:-10px!important;
+    left:-5px!important;
+    z-index:50!important;
+  }
+}
