@@ -1526,3 +1526,39 @@ body.is-loading{overflow:hidden}
     left:-10px!important;
   }
 }
+
+/* ============================================================
+   Exact SALE sticker placement from approved red-mark reference.
+   Only the first Extra Time 3-pack card is affected.
+   Keep sticker fully visible outside the white card edge.
+   ============================================================ */
+#tabCards .card:first-child{
+  position:relative!important;
+  overflow:visible!important;
+  isolation:isolate!important;
+}
+#tabCards .card:first-child::after{
+  top:2px!important;
+  left:-30px!important;
+  z-index:40!important;
+}
+
+/* Prevent the first-card sticker from being clipped by the rail viewport. */
+#tabCards{
+  overflow:visible!important;
+}
+
+@media(max-width:680px){
+  #tabCards{
+    overflow-x:auto!important;
+    overflow-y:visible!important;
+    padding-left:18px!important;
+    margin-left:-18px!important;
+    width:calc(100% + 18px)!important;
+  }
+  #tabCards .card:first-child::after{
+    top:1px!important;
+    left:-18px!important;
+    z-index:40!important;
+  }
+}
