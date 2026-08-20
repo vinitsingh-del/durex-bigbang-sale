@@ -1046,3 +1046,63 @@ body.is-loading{overflow:hidden}
 @keyframes sale-preloader-line{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @media(max-width:680px){.sale-preloader__inner{gap:11px}.sale-preloader__logo{width:138px}.sale-preloader p{font-size:9px;letter-spacing:.14em}}
 @media(prefers-reduced-motion:reduce){.sale-preloader,.sale-preloader__logo,.sale-preloader__line i{animation:none!important}}
+
+/* Desktop consistency pass: normalize existing spacing, type and card baselines
+   without changing mobile behavior, content, colour or layout orientation. */
+@media(min-width:681px){
+  .launch,.section{padding-top:30px!important}
+  .heading{margin-bottom:17px!important}
+  .dark-showcase{margin-top:0!important;padding-top:30px!important;padding-bottom:30px!important}
+  #performance{padding-top:0!important}
+
+  main section h2,
+  main section h2.title,
+  main section.sale-catalog .sale-intro h2.title{
+    font-size:clamp(26px,2.9vw,39px)!important;
+    font-weight:800!important;
+    letter-spacing:-.035em!important;
+    line-height:.9!important;
+  }
+  .sale-catalog .kicker,
+  #wanted .kicker,
+  .launch .kicker,
+  .heading>div>p,
+  .dark-showcase .eyebrow{
+    font-size:10px!important;
+    font-weight:800!important;
+    letter-spacing:1.3px!important;
+  }
+  #wanted .title i,.launch .title i{animation:none!important}
+
+  #tabCards .card,#wanted .card,#launchCards .card,#condoms .card,
+  #lubes .card,#massagers .card,#performance .card,#playthings .card{
+    display:flex!important;
+    flex-direction:column!important;
+  }
+  #tabCards .card .info,#wanted .card .info,#launchCards .card .info,#condoms .card .info,
+  #lubes .card .info,#massagers .card .info,#performance .card .info,#playthings .card .info{
+    display:flex!important;
+    flex:1 1 auto!important;
+    flex-direction:column!important;
+    height:auto!important;
+  }
+  #tabCards .card .bottom,#wanted .card .bottom,#launchCards .card .bottom,#condoms .card .bottom,
+  #lubes .card .bottom,#massagers .card .bottom,#performance .card .bottom,#playthings .card .bottom{
+    margin-top:auto!important;
+  }
+  main .card .bottom .price-row{
+    display:flex!important;
+    align-items:center!important;
+    gap:6px!important;
+  }
+  main .card .bottom .price-sub{margin-top:0!important}
+  main .card .bottom .price-sub em.disc{padding:1px 5px!important;line-height:1!important}
+  .add-cart{right:0!important}
+}
+
+/* Preserve the complete portrait product video inside the existing media boxes. */
+.card .media video,
+.compare .compare-pic video{
+  object-fit:contain!important;
+  object-position:center center!important;
+}
