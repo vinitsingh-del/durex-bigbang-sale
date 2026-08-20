@@ -1488,3 +1488,23 @@ body.is-loading{overflow:hidden}
 @media(prefers-reduced-motion:reduce){
   #tabCards .card:first-child::after{animation:none!important}
 }
+
+/* Final SALE badge placement: sit on the outer top-left card corner,
+   keep the same shake/tilt, and scale the badge down by 15%. */
+#tabCards .card:first-child{
+  position:relative!important;
+}
+#tabCards .card:first-child::after{
+  top:2px!important;
+  left:2px!important;
+  width:66px!important;
+  height:46px!important;
+}
+@media(max-width:680px){
+  #tabCards .card:first-child::after{
+    top:2px!important;
+    left:2px!important;
+    width:46px!important;
+    height:32px!important;
+  }
+}
