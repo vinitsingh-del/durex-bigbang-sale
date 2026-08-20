@@ -298,4 +298,26 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
   else addEventListener('load',finishAfterMinimum,{once:true});
   setTimeout(finish,4000);
 })();
-</script></body></html>
+</script><script>
+/* Explicit product corner badges: stable across dynamic card renders. */
+(()=>{
+  const badgeMap={
+    'Durex Intense - 3 Condoms':'corner-badge--best-deal',
+    'Durex Naturals Smooth Glide - 3 Condoms':'corner-badge--limited',
+    'Durex Intense Vibe Ring':'corner-badge--popular'
+  };
+  const applyBadges=root=>{
+    (root||document).querySelectorAll('.card').forEach(card=>{
+      const name=card.querySelector('h3')?.textContent?.trim();
+      const badgeClass=badgeMap[name];
+      card.classList.remove('corner-badge','corner-badge--best-deal','corner-badge--limited','corner-badge--popular');
+      if(badgeClass)card.classList.add('corner-badge',badgeClass);
+    });
+  };
+  applyBadges(document);
+  const tabHost=document.querySelector('#tabCards');
+  if(tabHost)new MutationObserver(()=>applyBadges(tabHost)).observe(tabHost,{childList:true,subtree:true});
+  document.querySelector('.sale-tabs')?.addEventListener('click',()=>requestAnimationFrame(()=>applyBadges(document)));
+})();
+</script>
+</body></html>

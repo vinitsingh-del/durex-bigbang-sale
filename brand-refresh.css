@@ -1700,3 +1700,45 @@ body.is-loading{overflow:hidden}
     animation:none!important;
   }
 }
+
+/* ============================================================
+   Reliable explicit corner badges — class based, no :has().
+   Uses the same locked outer top-left treatment as the approved
+   SALE sticker and survives dynamic tab re-rendering.
+   ============================================================ */
+.card.corner-badge{
+  position:relative!important;
+  overflow:visible!important;
+  isolation:isolate!important;
+}
+.card.corner-badge::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  z-index:60!important;
+  top:-12px!important;
+  left:-6px!important;
+  width:66px!important;
+  height:46px!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  background-size:contain!important;
+  pointer-events:none!important;
+  transform-origin:50% 55%!important;
+  animation:sale-sticker-shake 1.15s ease-in-out infinite!important;
+  filter:drop-shadow(0 4px 5px rgba(0,0,0,.24))!important;
+}
+.card.corner-badge--best-deal::before{background-image:url('assets/badge-best-deal-ever.svg')!important}
+.card.corner-badge--limited::before{background-image:url('assets/badge-limited-time.svg')!important}
+.card.corner-badge--popular::before{background-image:url('assets/badge-popular-choice.svg')!important}
+#tabCards,.cards,.rail{overflow-y:visible!important}
+
+@media(max-width:680px){
+  .card.corner-badge::before{
+    top:-10px!important;
+    left:-5px!important;
+    width:46px!important;
+    height:32px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){.card.corner-badge::before{animation:none!important}}
