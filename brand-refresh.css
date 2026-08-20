@@ -860,3 +860,64 @@ body{background:#2452b8}
   .add-cart svg{width:13px;height:13px}
 }
 @media(prefers-reduced-motion:reduce){.add-cart{animation:none}}
+
+/* Thin hero-derived border system: keep the hero's white rim and soft glow,
+   scaled down to 1px so cards and controls stay clean and product-first. */
+.card,
+.card.is-in-view,
+.card.is-dim,
+.category,
+.quick-links-track a,
+.bundle,
+.bundle2,
+.bundle2-card,
+.compare article,
+.reward,
+.trust article,
+.feed figure,
+.reel-card,
+.notice,
+.mobile-mega{
+  outline:1px solid rgba(255,255,255,.92)!important;
+  outline-offset:-1px;
+  box-shadow:0 0 0 1px rgba(255,255,255,.14),0 0 11px rgba(96,214,255,.34),0 10px 24px rgba(0,16,82,.28)!important;
+}
+
+.card,.card.is-in-view,.card.is-dim,.category,.quick-links-track a,.bundle2,.bundle2-card,.trust article,.notice,.mobile-mega{
+  border-color:rgba(255,255,255,.92)!important;
+}
+
+.sale-catalog .sale-tabs button,
+.add,
+.card .add,
+.bottom .add,
+.sale-catalog .card .add,
+.yellow,
+.choice,
+.compare button,
+.mobile-mega button,
+.mobile-mega-panel a,
+.reel-arrow{
+  outline:1px solid rgba(255,255,255,.88)!important;
+  outline-offset:-1px;
+  box-shadow:0 0 0 1px rgba(255,255,255,.12),0 0 8px rgba(96,214,255,.3)!important;
+}
+
+.sale-catalog .sale-tabs button,.choice,.mobile-mega button,.reel-arrow{border-color:rgba(255,255,255,.88)!important}
+
+.bundle2-card.is-picked{
+  border-color:#fff!important;
+  outline-color:#fff!important;
+  box-shadow:0 0 0 1px rgba(255,255,255,.16),0 0 0 3px rgba(255,223,0,.72),0 0 12px rgba(96,214,255,.36),0 10px 24px rgba(0,16,82,.3)!important;
+}
+
+.reel-card.is-centred{
+  outline-color:#fff!important;
+  box-shadow:0 0 0 1px rgba(255,255,255,.18),0 0 0 3px rgba(255,223,0,.62),0 0 13px rgba(96,214,255,.38),0 14px 28px rgba(0,16,82,.34)!important;
+}
+
+@media(max-width:680px){
+  .card,.card.is-in-view,.card.is-dim,.category,.quick-links-track a,.bundle2,.bundle2-card,.compare article,.trust article,.reel-card,.notice,.mobile-mega{
+    box-shadow:0 0 0 1px rgba(255,255,255,.12),0 0 8px rgba(96,214,255,.28),0 7px 17px rgba(0,16,82,.26)!important;
+  }
+}
