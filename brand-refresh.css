@@ -1216,3 +1216,112 @@ body.is-loading{overflow:hidden}
   /* Prevent accidental clipping from long labels while preserving existing copy. */
   .title,.heading h2,.dark-showcase h2,.card h3,.compare h3,.bundle2-info p{overflow-wrap:anywhere}
 }
+
+/* ============================================================
+   Mobile card correction — preserve the original 3:4 product-card
+   statement at a smaller phone scale. No desktop rules changed.
+   Removes the min-height/media treatment that introduced dead space.
+   ============================================================ */
+@media(max-width:680px){
+  /* One ratio everywhere on mobile — same 3:4 statement, only scaled down. */
+  .card,
+  .sale-catalog .card,
+  .cards:not(.sale-catalog .cards) .card,
+  .rail .card,
+  [data-cards]:not(.sale-catalog .cards) .card{
+    aspect-ratio:3/4!important;
+    height:auto!important;
+    min-height:0!important;
+    overflow:hidden!important;
+    display:grid!important;
+    grid-template-rows:minmax(0,64%) minmax(0,36%)!important;
+  }
+
+  /* Keep current mobile widths/orientation; only restore card proportion. */
+  .cards:not(.sale-catalog .cards) .card{width:100%!important;max-width:none!important}
+  .rail .card{flex:0 0 46vw!important;width:46vw!important;max-width:180px!important}
+  .sale-catalog .card{flex:0 0 46vw!important;width:46vw!important;max-width:180px!important}
+
+  /* Product image owns the visual area — no empty white image panel. */
+  .card .media,
+  .rail .card .media,
+  .sale-catalog .card .media{
+    position:relative!important;
+    inset:auto!important;
+    width:100%!important;
+    height:100%!important;
+    min-height:0!important;
+    aspect-ratio:auto!important;
+    overflow:hidden!important;
+    border-radius:13px 13px 0 0!important;
+    background:#fff!important;
+  }
+  .card .media img,
+  .rail .card .media img,
+  .sale-catalog .card .media img{
+    width:100%!important;
+    height:100%!important;
+    max-width:100%!important;
+    object-fit:contain!important;
+    object-position:center!important;
+    padding:0!important;
+    transform:scale(1.12)!important;
+    transform-origin:50% 50%!important;
+  }
+
+  /* Remove forced info min-height that created white dead space. */
+  .card .info,
+  .rail .card .info,
+  .sale-catalog .card .info,
+  .cards:not(.sale-catalog .cards) .card .info{
+    position:relative!important;
+    inset:auto!important;
+    display:flex!important;
+    flex-direction:column!important;
+    height:100%!important;
+    min-height:0!important;
+    overflow:hidden!important;
+    padding:8px 9px!important;
+    background:#fff!important;
+  }
+  .card .info p,
+  .rail .card .info p,
+  .sale-catalog .card .info p{
+    min-height:0!important;
+    margin:0 0 3px!important;
+    font-size:6.5px!important;
+    line-height:1.1!important;
+  }
+  .card .info h3,
+  .rail .card .info h3,
+  .sale-catalog .card .info h3{
+    min-height:0!important;
+    margin:0 0 4px!important;
+    font-size:10.5px!important;
+    line-height:1.05!important;
+    -webkit-line-clamp:2!important;
+  }
+  .card .bottom,
+  .rail .card .bottom,
+  .sale-catalog .card .bottom{
+    margin-top:auto!important;
+    gap:5px!important;
+    min-height:0!important;
+  }
+  .bottom .price-row{gap:5px!important}
+  .bottom .price-row b{font-size:12.5px!important}
+  .card .bottom .price-sub s,
+  .rail .card .bottom .price-sub s,
+  .sale-catalog .card .bottom .price-sub s{font-size:8px!important}
+  .bottom .price-sub em.disc{font-size:7px!important;padding:1px 4px!important}
+
+  /* CTA remains finger-safe while fitting the original card proportion. */
+  .add,.card .add,.bottom .add,.sale-catalog .card .add{
+    min-height:34px!important;
+    height:34px!important;
+    padding:7px 34px 7px 10px!important;
+    font-size:8px!important;
+  }
+  .add-cart,.sale-catalog .card .add-cart{width:26px!important;height:26px!important;right:-3px!important}
+  .add-cart svg,.sale-catalog .card .add-cart svg{width:12px!important;height:12px!important}
+}
