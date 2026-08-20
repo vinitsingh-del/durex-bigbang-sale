@@ -1455,3 +1455,36 @@ body.is-loading{overflow:hidden}
   }
   .add-cart svg,.sale-catalog .card .add-cart svg{width:11px!important;height:11px!important}
 }
+
+/* ============================================================
+   Targeted SALE sticker — only Extra Time Ultra Thin 3-pack card
+   in the opening 3-pack sale rail. No other card is affected.
+   ============================================================ */
+#tabCards .card:first-child{position:relative!important}
+#tabCards .card:first-child::after{
+  content:"";
+  position:absolute;
+  z-index:20;
+  top:10px;
+  left:10px;
+  width:78px;
+  height:54px;
+  background:url('assets/sale-badge.svg') center/contain no-repeat;
+  pointer-events:none;
+  transform-origin:50% 55%;
+  animation:sale-sticker-shake 1.15s ease-in-out infinite;
+  filter:drop-shadow(0 4px 5px rgba(0,0,0,.24));
+}
+@keyframes sale-sticker-shake{
+  0%,100%{transform:rotate(-3deg) translate3d(0,0,0) scale(1)}
+  18%{transform:rotate(4deg) translate3d(1px,-1px,0) scale(1.03)}
+  36%{transform:rotate(-5deg) translate3d(-1px,1px,0) scale(.99)}
+  54%{transform:rotate(3deg) translate3d(1px,0,0) scale(1.02)}
+  72%{transform:rotate(-2deg) translate3d(-1px,-1px,0) scale(1)}
+}
+@media(max-width:680px){
+  #tabCards .card:first-child::after{top:6px;left:6px;width:54px;height:38px}
+}
+@media(prefers-reduced-motion:reduce){
+  #tabCards .card:first-child::after{animation:none!important}
+}
