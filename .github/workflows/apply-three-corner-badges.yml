@@ -1,0 +1,109 @@
+name: Apply three product corner badges
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: ${{ !contains(github.event.head_commit.message, '[three-corner-badges-applied]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Append locked corner badge treatment
+        shell: bash
+        run: |
+          cat >> brand-refresh.css <<'CSS'
+
+          /* ============================================================
+             Three additional product badges — locked to the exact same
+             outer top-left corner treatment as the approved SALE sticker.
+             Product mapping:
+             Best Deal Ever  -> Durex Intense - 3 Condoms
+             Limited Time    -> Durex Naturals Smooth Glide - 3 Condoms
+             Popular Choice  -> Durex Intense Vibe Ring
+             ============================================================ */
+          #tabCards .card:has(img[alt="Durex Intense - 3 Condoms"]),
+          #tabCards .card:has(img[alt="Durex Naturals Smooth Glide - 3 Condoms"]),
+          #massagers .card:has(img[alt="Durex Intense Vibe Ring"]),
+          #massagers .card:has(video[aria-label="Durex Intense Vibe Ring product video"]){
+            position:relative!important;
+            overflow:visible!important;
+            isolation:isolate!important;
+          }
+
+          #tabCards .card:has(img[alt="Durex Intense - 3 Condoms"])::before,
+          #tabCards .card:has(img[alt="Durex Naturals Smooth Glide - 3 Condoms"])::before,
+          #massagers .card:has(img[alt="Durex Intense Vibe Ring"])::before,
+          #massagers .card:has(video[aria-label="Durex Intense Vibe Ring product video"])::before{
+            content:""!important;
+            display:block!important;
+            position:absolute!important;
+            z-index:50!important;
+            top:-12px!important;
+            left:-6px!important;
+            width:66px!important;
+            height:46px!important;
+            background-position:center!important;
+            background-repeat:no-repeat!important;
+            background-size:contain!important;
+            pointer-events:none!important;
+            transform-origin:50% 55%!important;
+            animation:sale-sticker-shake 1.15s ease-in-out infinite!important;
+            filter:drop-shadow(0 4px 5px rgba(0,0,0,.24))!important;
+          }
+
+          #tabCards .card:has(img[alt="Durex Intense - 3 Condoms"])::before{
+            background-image:url('assets/badge-best-deal-ever.svg')!important;
+          }
+          #tabCards .card:has(img[alt="Durex Naturals Smooth Glide - 3 Condoms"])::before{
+            background-image:url('assets/badge-limited-time.svg')!important;
+          }
+          #massagers .card:has(img[alt="Durex Intense Vibe Ring"])::before,
+          #massagers .card:has(video[aria-label="Durex Intense Vibe Ring product video"])::before{
+            background-image:url('assets/badge-popular-choice.svg')!important;
+          }
+
+          @media(max-width:680px){
+            #tabCards .card:has(img[alt="Durex Intense - 3 Condoms"])::before,
+            #tabCards .card:has(img[alt="Durex Naturals Smooth Glide - 3 Condoms"])::before,
+            #massagers .card:has(img[alt="Durex Intense Vibe Ring"])::before,
+            #massagers .card:has(video[aria-label="Durex Intense Vibe Ring product video"])::before{
+              top:-10px!important;
+              left:-5px!important;
+              width:46px!important;
+              height:32px!important;
+            }
+          }
+
+          @media(prefers-reduced-motion:reduce){
+            #tabCards .card:has(img[alt="Durex Intense - 3 Condoms"])::before,
+            #tabCards .card:has(img[alt="Durex Naturals Smooth Glide - 3 Condoms"])::before,
+            #massagers .card:has(img[alt="Durex Intense Vibe Ring"])::before,
+            #massagers .card:has(video[aria-label="Durex Intense Vibe Ring product video"])::before{
+              animation:none!important;
+            }
+          }
+          CSS
+
+          rm -f .github/workflows/apply-three-corner-badges.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add brand-refresh.css .github/workflows/apply-three-corner-badges.yml
+          git commit -m "feat: add three locked product corner badges [three-corner-badges-applied]"
+          git push origin HEAD:main
+
+      - name: Verify
+        shell: bash
+        run: |
+          git diff HEAD^ --check
+          grep -q "Three additional product badges" brand-refresh.css
+          test -f assets/badge-best-deal-ever.svg
+          test -f assets/badge-limited-time.svg
+          test -f assets/badge-popular-choice.svg
