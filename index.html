@@ -386,39 +386,47 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
 })();
 </script>
 <script>
-/* Real IMG product corner badges — deterministic renderer. */
+/* Real IMG product corner badges — deterministic renderer.
+   Each badge is shown on exactly one card: the first occurrence of that
+   product in the page, in DOM order. Every later repeat of the same
+   product (it can appear in the tab carousel, a rail, Just Launched,
+   Bestsellers, Massagers, etc.) has its badge removed so it isn't
+   duplicated across the page. */
 (()=>{
   const badgeMap={
     'Durex Intense - 3 Condoms':['corner-badge--best-deal','assets/badge-best-deal-ever.svg','Best Deal Ever'],
     'Durex Naturals Smooth Glide - 3 Condoms':['corner-badge--limited','assets/badge-limited-time.svg','Limited Time'],
     'Durex Intense Vibe Ring':['corner-badge--popular','assets/badge-popular-choice.svg','Popular Choice']
   };
-  const paintCard=card=>{
-    const name=card.querySelector('h3')?.textContent?.trim();
-    const spec=badgeMap[name];
-    const existing=card.querySelector(':scope > .product-corner-sticker');
-    card.classList.remove('corner-badge','corner-badge--best-deal','corner-badge--limited','corner-badge--popular');
-    if(!spec){existing?.remove();return;}
-    card.classList.add('corner-badge',spec[0]);
-    if(existing){
-      if(!existing.src.endsWith(spec[1].split('/').pop()))existing.src=spec[1];
-      existing.alt=spec[2];
-      return;
-    }
-    const badge=document.createElement('img');
-    badge.className='product-corner-sticker';
-    badge.src=spec[1];
-    badge.alt=spec[2];
-    badge.setAttribute('aria-hidden','true');
-    badge.decoding='sync';
-    card.prepend(badge);
+  const paintAll=()=>{
+    const usedNames=new Set();
+    document.querySelectorAll('.card').forEach(card=>{
+      const name=card.querySelector('h3')?.textContent?.trim();
+      const spec=badgeMap[name];
+      const existing=card.querySelector(':scope > .product-corner-sticker');
+      card.classList.remove('corner-badge','corner-badge--best-deal','corner-badge--limited','corner-badge--popular');
+      if(!spec||usedNames.has(name)){existing?.remove();return;}
+      usedNames.add(name);
+      card.classList.add('corner-badge',spec[0]);
+      if(existing){
+        if(!existing.src.endsWith(spec[1].split('/').pop()))existing.src=spec[1];
+        existing.alt=spec[2];
+        return;
+      }
+      const badge=document.createElement('img');
+      badge.className='product-corner-sticker';
+      badge.src=spec[1];
+      badge.alt=spec[2];
+      badge.setAttribute('aria-hidden','true');
+      badge.decoding='sync';
+      card.prepend(badge);
+    });
   };
-  const paintAll=root=>(root||document).querySelectorAll('.card').forEach(paintCard);
   const start=()=>{
-    paintAll(document);
+    paintAll();
     const tabHost=document.querySelector('#tabCards');
-    if(tabHost)new MutationObserver(()=>requestAnimationFrame(()=>paintAll(tabHost))).observe(tabHost,{childList:true});
-    document.querySelector('.sale-tabs')?.addEventListener('click',()=>requestAnimationFrame(()=>paintAll(document)));
+    if(tabHost)new MutationObserver(()=>requestAnimationFrame(paintAll)).observe(tabHost,{childList:true});
+    document.querySelector('.sale-tabs')?.addEventListener('click',()=>requestAnimationFrame(paintAll));
   };
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();

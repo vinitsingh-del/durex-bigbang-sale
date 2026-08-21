@@ -1943,3 +1943,23 @@ body.cart-icons-hidden .add-cart{opacity:1!important;transform:translateY(-50%) 
   #tabCards .card:first-child::after,
   .product-corner-sticker{animation:none!important;transform:rotate(-3deg)!important}
 }
+
+/* Preloader: background only changed to the site's established blue
+   gradient theme (same moving gradient as the page background), still
+   animated/continuously moving. Logo, text, loading bar all untouched. */
+.sale-preloader{
+  background:linear-gradient(120deg,
+    #2f6fe0 0%,#2f6fe0 50%,
+    #4f8ef7 60%,
+    #ffd23f 70%,
+    #ff9d2f 78%,
+    #ff5c3d 85%,
+    #4f8ef7 94%,
+    #2f6fe0 100%
+  )!important;
+  background-size:260% 260%!important;
+  background-position:0% 30%!important;
+  animation:pop-gradient-cycle 12s ease-in-out infinite!important;
+}
+@media(max-width:680px){.sale-preloader{background-size:340% 340%!important;animation-duration:11s!important}}
+@media(prefers-reduced-motion:reduce){.sale-preloader{animation:none!important}}
