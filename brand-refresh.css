@@ -1022,6 +1022,12 @@ body{background:#2452b8}
 @media(max-width:680px){.hero-typewriter{top:8%;width:88%;font-size:clamp(13px,5.3vw,27px);text-shadow:0 0 4px #fff,0 0 9px #ff39ee,0 3px 8px #02052b}}
 @media(prefers-reduced-motion:reduce){.hero#heroBanner{animation:none!important;background-position:50% 50%!important}.hero-typewriter i{animation:none!important}.hero-typewriter #heroTypeText{visibility:visible}.hero-typewriter #heroTypeText::after{content:'PRICES LOUD.'}}
 
+/* The sale mark follows the third typewriter line, then settles above the
+   product stage without changing the hero's footprint. */
+.hero-sale-mark{position:absolute;z-index:5;top:19%;left:50%;width:clamp(48px,6vw,76px);opacity:0;transform:translateX(-50%) scale(.72) rotate(-4deg);pointer-events:none;transition:opacity .35s ease,transform .55s cubic-bezier(.2,.8,.2,1)}
+.hero-sale-mark img{width:100%;height:auto;filter:drop-shadow(0 4px 4px rgba(4,4,34,.68)) drop-shadow(0 0 9px rgba(255,63,225,.72))}
+.hero-sale-mark.is-active{opacity:1;transform:translateX(-50%) scale(1) rotate(0deg)}
+
 /* Original-product hero pass: the banner artwork stays clean and contained;
    the real transparent product cutouts supply the focal row. The stage and
    gradient are CSS layers so the full hero frame is always covered at every
@@ -1032,25 +1038,58 @@ body{background:#2452b8}
 .hero#heroBanner .hero-slides{background:transparent!important;z-index:0!important}
 .hero#heroBanner .hero-slide{background-image:none!important;background:transparent!important;opacity:1!important;transform:none!important;animation:none!important}
 .hero#heroBanner .hero-slide:after{display:none!important}
-.hero-product-stage{position:absolute;z-index:4;top:29%;left:50%;width:min(72%,720px);height:68%;transform:translateX(-50%);display:flex;align-items:flex-end;justify-content:center;gap:clamp(8px,1.25vw,19px);pointer-events:none}
+.hero-product-stage{position:absolute;z-index:4;top:25%;left:50%;width:min(86%,900px);height:73%;transform:translateX(-50%);display:flex;align-items:flex-end;justify-content:center;gap:clamp(6px,1vw,15px);pointer-events:none}
 .hero-product-floor{position:absolute;z-index:-1;left:50%;bottom:1%;width:92%;height:18%;transform:translateX(-50%);border-radius:50%;background:radial-gradient(ellipse at center,rgba(255,242,190,.8) 0,rgba(255,53,230,.55) 24%,rgba(88,17,162,.32) 57%,transparent 75%);box-shadow:0 0 22px rgba(255,46,225,.62),0 0 42px rgba(34,176,255,.28)}
 .hero-product{display:block;width:auto;height:auto;max-width:24%;max-height:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 4px 4px rgba(4,4,34,.62)) drop-shadow(0 0 7px rgba(177,79,255,.35));transform-origin:center bottom;will-change:transform}
 .hero-product--intense{height:82%;animation:hero-bottle-shake 2.8s ease-in-out infinite}
 .hero-product--realfeel{height:76%;animation:hero-bottle-rotate 4.6s ease-in-out infinite}
 .hero-product--buzzy{height:100%;animation:hero-product-float 3.8s ease-in-out infinite}
 .hero-product--wand{height:92%;animation:hero-product-sway 4.2s ease-in-out infinite}
+.hero-product--smooth{height:76%;animation:hero-product-float 4.5s ease-in-out infinite}
+.hero-product--elevate{height:88%;animation:hero-bottle-rotate 4.4s ease-in-out infinite}
 @keyframes hero-stage-pulse{from{opacity:.72;transform:scale(1)}to{opacity:1;transform:scale(1.035)}}
 @keyframes hero-product-float{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-5px) rotate(1deg)}}
 @keyframes hero-bottle-shake{0%,100%{transform:translate3d(0,0,0) rotate(-2deg)}18%{transform:translate3d(-1px,-1px,0) rotate(1deg)}36%{transform:translate3d(1px,0,0) rotate(-1deg)}54%{transform:translate3d(-1px,1px,0) rotate(1deg)}72%{transform:translate3d(1px,0,0) rotate(-1deg)}}
 @keyframes hero-bottle-rotate{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-3px) rotate(4deg)}}
 @keyframes hero-product-sway{0%,100%{transform:translateY(0) rotate(2deg)}50%{transform:translateY(-5px) rotate(-3deg)}}
 @media(max-width:680px){
-  .hero-product-stage{top:34%;width:92%;height:61%;gap:clamp(3px,1.3vw,8px)}
+  .hero-sale-mark{top:20%;width:clamp(44px,14vw,62px)}
+  .hero-product-stage{top:31%;width:100%;height:67%;gap:clamp(2px,1vw,6px)}
   .hero-product{max-width:25%;filter:drop-shadow(0 3px 3px rgba(4,4,34,.64)) drop-shadow(0 0 5px rgba(177,79,255,.35))}
-  .hero-product--intense{height:79%}.hero-product--realfeel{height:72%}.hero-product--buzzy{height:100%}.hero-product--wand{height:88%}
+  .hero-product--intense{height:86%}.hero-product--realfeel{height:78%}.hero-product--buzzy{height:100%}.hero-product--wand{height:92%}.hero-product--smooth{height:82%}.hero-product--elevate{height:92%}
   .hero-product-floor{width:96%;height:17%;bottom:0}
 }
-@media(prefers-reduced-motion:reduce){.hero#heroBanner:before,.hero-product,.hero-product-floor{animation:none!important}.hero-product{transform:none!important}}
+@media(prefers-reduced-motion:reduce){.hero#heroBanner:before,.hero-product,.hero-product-floor{animation:none!important}.hero-product{transform:none!important}.hero-sale-mark{transition:none!important}}
+
+/* Responsive motion tuning: the desktop stage gets a slower, more legible
+   product push-in; mobile keeps the same idea compact so the contained
+   cutouts never touch the hero edges. */
+@keyframes hero-product-float-desktop{0%,100%{transform:translateY(0) rotate(-1deg) scale(1)}50%{transform:translateY(-5px) rotate(1deg) scale(1.065)}}
+@keyframes hero-bottle-shake-desktop{0%,100%{transform:translate3d(0,0,0) rotate(-2deg) scale(1)}18%{transform:translate3d(-1px,-1px,0) rotate(1deg) scale(1.03)}36%{transform:translate3d(1px,0,0) rotate(-1deg) scale(1.05)}54%{transform:translate3d(-1px,1px,0) rotate(1deg) scale(1.03)}72%{transform:translate3d(1px,0,0) rotate(-1deg) scale(1.01)}}
+@keyframes hero-bottle-rotate-desktop{0%,100%{transform:translateY(0) rotate(-4deg) scale(1)}50%{transform:translateY(-3px) rotate(4deg) scale(1.055)}}
+@keyframes hero-product-sway-desktop{0%,100%{transform:translateY(0) rotate(2deg) scale(1)}50%{transform:translateY(-5px) rotate(-3deg) scale(1.06)}}
+@media(min-width:681px){
+  .hero#heroBanner{background-size:240% 240%!important;animation:hero-gradient-drift 12s ease-in-out infinite alternate!important}
+  .hero-product--intense{animation:hero-bottle-shake-desktop 3.4s ease-in-out infinite}
+  .hero-product--realfeel{animation:hero-bottle-rotate-desktop 5.2s ease-in-out infinite}
+  .hero-product--buzzy{animation:hero-product-float-desktop 4.2s ease-in-out infinite}
+  .hero-product--wand{animation:hero-product-sway-desktop 4.8s ease-in-out infinite}
+  .hero-product--smooth{animation:hero-product-float-desktop 4.6s ease-in-out infinite reverse}
+  .hero-product--elevate{animation:hero-bottle-rotate-desktop 4.6s ease-in-out infinite reverse}
+}
+@keyframes hero-product-float-mobile{0%,100%{transform:translateY(0) rotate(-.6deg) scale(1)}50%{transform:translateY(-2px) rotate(.6deg) scale(1.028)}}
+@keyframes hero-bottle-shake-mobile{0%,100%{transform:translate3d(0,0,0) rotate(-1deg) scale(1)}25%{transform:translate3d(-.5px,0,0) rotate(.7deg) scale(1.015)}50%{transform:translate3d(.5px,0,0) rotate(-.7deg) scale(1.025)}75%{transform:translate3d(-.5px,0,0) rotate(.7deg) scale(1.015)}}
+@keyframes hero-bottle-rotate-mobile{0%,100%{transform:translateY(0) rotate(-2deg) scale(1)}50%{transform:translateY(-1px) rotate(2deg) scale(1.022)}}
+@keyframes hero-product-sway-mobile{0%,100%{transform:translateY(0) rotate(1deg) scale(1)}50%{transform:translateY(-2px) rotate(-1.5deg) scale(1.026)}}
+@media(max-width:680px){
+  .hero#heroBanner{background-size:300% 300%!important;animation:hero-gradient-drift 8s ease-in-out infinite alternate!important}
+  .hero-product--intense{animation:hero-bottle-shake-mobile 2.9s ease-in-out infinite}
+  .hero-product--realfeel{animation:hero-bottle-rotate-mobile 4.2s ease-in-out infinite}
+  .hero-product--buzzy{animation:hero-product-float-mobile 3.5s ease-in-out infinite}
+  .hero-product--wand{animation:hero-product-sway-mobile 3.9s ease-in-out infinite}
+  .hero-product--smooth{animation:hero-product-float-mobile 3.8s ease-in-out infinite reverse}
+  .hero-product--elevate{animation:hero-bottle-rotate-mobile 4s ease-in-out infinite reverse}
+}
 
 /* One global cadence keeps every product-card cart sticker appearing and
    disappearing together, including cards rendered after a tab change. */
