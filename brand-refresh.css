@@ -1963,3 +1963,12 @@ body.cart-icons-hidden .add-cart{opacity:1!important;transform:translateY(-50%) 
 }
 @media(max-width:680px){.sale-preloader{background-size:340% 340%!important;animation-duration:11s!important}}
 @media(prefers-reduced-motion:reduce){.sale-preloader{animation:none!important}}
+
+/* Mobile only: reduce the hero banner card size by 10% overall
+   (351x142 -> ~316x128), centered within its container. Desktop is
+   completely untouched. The Hero -> THE 69 STORE gap stays exactly
+   25px since it's controlled by separate fixed margin/padding values
+   that this rule doesn't touch. */
+@media(max-width:680px){
+  .hero{width:90%!important;height:128px!important;margin-left:auto!important;margin-right:auto!important}
+}
