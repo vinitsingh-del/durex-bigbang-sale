@@ -2136,3 +2136,16 @@ body.is-scrolling .hero{
    helper pauses other expensive section effects. */
 body.is-scrolling .hero#heroBanner,
 body.is-scrolling .hero#heroBanner:before{animation-play-state:running!important}
+
+/* ============================================================
+   Three new promotional tags, same pill shape/position as the
+   existing Bestseller tag, different colors per request:
+   - Hot Pick (pink→coral) on the 1st tab-carousel card, blinking
+   - Trending (magenta→pink) on the 2nd tab-carousel card, blinking
+   - Top Rated (green→mint) on Buzzy Rabbit, static
+   ============================================================ */
+.tag--hot-pick{background:linear-gradient(135deg,#d5006d,#ff5c8a)!important;animation:tag-blink 1.8s ease-in-out infinite}
+.tag--trending{background:linear-gradient(135deg,#9d174d,#ff6fae)!important;animation:tag-blink 1.8s ease-in-out infinite}
+.tag--top-rated{background:linear-gradient(135deg,#166534,#4ade80)!important}
+@keyframes tag-blink{0%,55%,100%{opacity:1}75%{opacity:.15}}
+@media(prefers-reduced-motion:reduce){.tag--hot-pick,.tag--trending{animation:none!important}}
