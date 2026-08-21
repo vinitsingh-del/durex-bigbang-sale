@@ -704,15 +704,17 @@ body:before{
   z-index:-1 !important;
   inset:0 !important;
   background-image:linear-gradient(120deg,
-    #9462ff 0%,
-    #ff6565 100%
+    #ff76e9 0%,
+    #007bff 33%,
+    #ffcf40 66%,
+    #ff7ea0 100%
   ) !important;
   background-size:260% 260% !important;
   background-repeat:no-repeat !important;
   filter:none !important;
   transform:none !important;
   background-position:0% 30%;
-  animation:pop-gradient-cycle 10.9s ease-in-out infinite !important;
+  animation:pop-gradient-cycle 9.3s ease-in-out infinite !important;
   will-change:background-position;
 }
 @keyframes pop-gradient-cycle{
@@ -727,7 +729,7 @@ body{background:#2452b8}
 @media(max-width:680px){
   body:before{
     background-size:340% 340% !important;
-    animation-duration:10s !important;
+    animation-duration:8.5s !important;
   }
 }
 @media(prefers-reduced-motion:reduce){body:before{animation:none!important}}
@@ -1954,9 +1956,9 @@ body.cart-icons-hidden .add-cart{opacity:1!important;transform:translateY(-50%) 
   )!important;
   background-size:260% 260%!important;
   background-position:0% 30%!important;
-  animation:pop-gradient-cycle 12s ease-in-out infinite!important;
+  animation:pop-gradient-cycle 10.2s ease-in-out infinite!important;
 }
-@media(max-width:680px){.sale-preloader{background-size:340% 340%!important;animation-duration:11s!important}}
+@media(max-width:680px){.sale-preloader{background-size:340% 340%!important;animation-duration:9.4s!important}}
 @media(prefers-reduced-motion:reduce){.sale-preloader{animation:none!important}}
 
 /* Mobile only: reduce the hero banner card HEIGHT by 10% only —
