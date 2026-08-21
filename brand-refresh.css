@@ -2217,3 +2217,47 @@ body.is-scrolling .hero#heroBanner:before{animation-play-state:running!important
   .hero-product-item img,.hero-product-discount,.hero#heroBanner.logo-beat-active .hero-typewriter{transition:none!important}
   .hero-logo-beat.is-active{animation:none!important;opacity:1;transform:translate(-50%,-50%) scale(.92)}
 }
+
+
+/* Hard-match the hero rail card geometry without changing its existing
+   orientation or scale. Each product uses the same viewport box; the source
+   artwork remains contained so tall packs never crop. */
+.hero-product-item{
+  flex:0 0 clamp(74px,8.8vw,126px)!important;
+  width:clamp(74px,8.8vw,126px)!important;
+  height:100%!important;
+  min-height:0!important;
+  max-height:none!important;
+  box-sizing:border-box!important;
+  align-self:flex-end!important;
+  display:grid!important;
+  place-items:end center!important;
+}
+.hero-product-item img{
+  width:100%!important;
+  max-width:100%!important;
+  height:90%!important;
+  max-height:90%!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+}
+.hero-product-discount{
+  bottom:3px!important;
+  max-width:calc(100% - 6px)!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+@media(max-width:680px){
+  .hero-product-item{
+    flex-basis:clamp(56px,18vw,82px)!important;
+    width:clamp(56px,18vw,82px)!important;
+    height:100%!important;
+    min-height:0!important;
+    max-height:none!important;
+  }
+  .hero-product-item img{
+    height:88%!important;
+    max-height:88%!important;
+  }
+  .hero-product-discount{bottom:2px!important}
+}
