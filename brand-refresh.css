@@ -1972,3 +1972,13 @@ body.cart-icons-hidden .add-cart{opacity:1!important;transform:translateY(-50%) 
 @media(max-width:680px){
   .hero{width:90%!important;height:128px!important;margin-left:auto!important;margin-right:auto!important}
 }
+
+/* Scroll smoothness: pause the expensive continuous box-shadow glow
+   animations (cards + hero) while the page is actively scrolling.
+   Purely a performance optimization — no visual change when idle,
+   animations resume the instant scrolling stops. */
+body.is-scrolling .card,
+body.is-scrolling .sale-catalog .card,
+body.is-scrolling .hero{
+  animation-play-state:paused!important;
+}

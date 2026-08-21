@@ -254,9 +254,11 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
   const menu=document.querySelector('.mobile-mega');
   const bestsellers=document.querySelector('#wanted');
   if(!menu||!bestsellers||!matchMedia('(max-width: 680px)').matches)return;
-  const update=()=>menu.classList.toggle('is-scroll-ready',bestsellers.getBoundingClientRect().top<=innerHeight*.35);
-  addEventListener('scroll',update,{passive:true});
-  addEventListener('resize',update,{passive:true});
+  let ticking=false;
+  const update=()=>{menu.classList.toggle('is-scroll-ready',bestsellers.getBoundingClientRect().top<=innerHeight*.35);ticking=false};
+  const onScroll=()=>{if(ticking)return;ticking=true;requestAnimationFrame(update)};
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll,{passive:true});
   update();
 })();
 </script><script>
@@ -429,6 +431,23 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
     document.querySelector('.sale-tabs')?.addEventListener('click',()=>requestAnimationFrame(paintAll));
   };
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+})();
+</script><script>
+/* Scroll smoothness fix: every product card (and the hero) runs a
+   continuous box-shadow glow animation. Box-shadow repaints are
+   expensive, and doing this on many cards at once while the browser
+   is also compositing a scroll is a real cause of jank/stutter. Pause
+   all of these purely-decorative animations for the brief moment the
+   page is actually moving, and resume them the instant it settles. */
+(()=>{
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  let scrollTimer=null;
+  const onScroll=()=>{
+    document.body.classList.add('is-scrolling');
+    clearTimeout(scrollTimer);
+    scrollTimer=setTimeout(()=>document.body.classList.remove('is-scrolling'),160);
+  };
+  addEventListener('scroll',onScroll,{passive:true});
 })();
 </script>
 </body></html>
