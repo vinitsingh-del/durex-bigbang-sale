@@ -2263,3 +2263,26 @@ body.is-scrolling .hero#heroBanner:before{animation-play-state:running!important
   }
   .hero-product-discount{bottom:2px!important}
 }
+
+
+/* Hero rail framing fix: let each contained product leave its item viewport
+   cleanly while the hero itself remains the no-bleed boundary. */
+.hero#heroBanner .hero-product-stage{
+  overflow:visible!important;
+  mask-image:none!important;
+  -webkit-mask-image:none!important;
+}
+.hero#heroBanner .hero-product-item{
+  overflow:visible!important;
+}
+.hero#heroBanner .hero-product-item img{
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  max-width:100%!important;
+  max-height:90%!important;
+}
+@media(max-width:680px){
+  .hero#heroBanner .hero-product-item img{
+    max-height:88%!important;
+  }
+}
