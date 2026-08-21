@@ -268,6 +268,28 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
   tick();
 })();
 </script><script>
+/* Use the supplied 69 Big Bang Sale asset set for the hero rail. The second
+   pass is an exact duplicate so the marquee loops without a visible seam. */
+(()=>{
+  const track=document.querySelector('.hero-product-track');
+  if(!track)return;
+  const products=[
+    ['hero-zip-buzzy-rabbit.png','Durex Play Buzzy Rabbit'],
+    ['hero-zip-a-game.png','Durex Play A-Game'],
+    ['hero-zip-elevate.png','Durex Elevate'],
+    ['hero-zip-extra-time.png','Durex Extra Time'],
+    ['hero-zip-extra-dots.png','Durex Extra Dots'],
+    ['hero-zip-extra-ribbed.webp','Durex Extra Ribbed'],
+    ['hero-zip-extra-thin.png','Durex Extra Thin'],
+    ['hero-zip-mutual-climax.png','Durex Mutual Climax'],
+    ['hero-zip-real-feel.webp','Durex Real Feel'],
+    ['hero-zip-smooth-glide.png','Durex Smooth Glide'],
+    ['hero-zip-vibe-ring.png','Durex Intense Vibe Ring'],
+    ['hero-zip-wild-wand.png','Durex Play Wild Wand']
+  ];
+  track.innerHTML=[...products,...products].map(([src,alt])=>'<div class="hero-product-item"><img src="assets/'+src+'" alt="'+alt+'"></div>').join('');
+})();
+</script><script>
 /* Keep the mobile sale controls out of the first two screens; Mood Now remains independent. */
 (()=>{
   const menu=document.querySelector('.mobile-mega');
