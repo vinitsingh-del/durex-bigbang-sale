@@ -2006,3 +2006,10 @@ body.is-scrolling .hero{
 @media(max-width:680px){
   .sale-catalog .card .sale-card-sticker{top:7px!important;left:7px!important;width:38%!important;max-width:78px!important}
 }
+
+/* Fix: the old CSS ::after "SALE!" sticker and the new image-based
+   .sale-card-sticker were both rendering on the same first card,
+   stacked directly on top of each other. The newer commit's stated
+   intent was to replace the old badge, not add a second one — so the
+   old ::after sticker is now fully disabled, leaving just one sticker. */
+#tabCards .card:first-child::after{content:none!important;display:none!important}
