@@ -1,0 +1,51 @@
+name: Swap retro hero banners
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: ${{ !contains(github.event.head_commit.message, '[retro-hero-swapped]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Replace only hero banner assets
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          swaps={
+            "assets/hero-synthwave-sale-tickets-v3.webp":"assets/hero-retro-69-1.webp",
+            "assets/hero-synthwave-sale-portal-v3.webp":"assets/hero-retro-69-2.webp",
+            "assets/hero-pop-ribbons-v2.webp":"assets/hero-retro-69-3.webp",
+          }
+          before=s
+          for old,new in swaps.items():
+              s=s.replace(old,new)
+          if s==before:
+              raise SystemExit('Hero asset references were not found; refusing unrelated changes.')
+          p.write_text(s)
+          PY
+
+          rm -f .github/workflows/swap-retro-hero-banners.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/workflows/swap-retro-hero-banners.yml
+          git commit -m "feat: swap three brighter retro hero banners [retro-hero-swapped]"
+          git push origin HEAD:main
+
+      - name: Verify
+        run: |
+          git diff HEAD^ --check
+          grep -q "assets/hero-retro-69-1.webp" index.html
+          grep -q "assets/hero-retro-69-2.webp" index.html
+          grep -q "assets/hero-retro-69-3.webp" index.html
+          grep -q "assets/hero-69-big-bang-sale-brand.png" index.html
