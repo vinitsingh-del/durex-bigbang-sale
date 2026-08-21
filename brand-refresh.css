@@ -1985,3 +1985,24 @@ body.is-scrolling .hero{
    "All products" uses a transparent Durex logo — was invisible on the
    white circle background, now given a navy fill so it shows clearly. */
 .quick-links-track a img.quick-links-logo{background:#0a1f6e!important;object-fit:contain!important;padding:8px!important}
+
+/* The only product-card sticker: a compact die-cut accent on card one. */
+.sale-catalog .card:first-child{position:relative!important}
+.sale-catalog .card .sale-card-sticker{
+  position:absolute!important;
+  z-index:12!important;
+  top:8px!important;
+  left:8px!important;
+  width:40%!important;
+  max-width:94px!important;
+  height:auto!important;
+  padding:0!important;
+  object-fit:contain!important;
+  pointer-events:none;
+  transform:rotate(-4deg)!important;
+  filter:drop-shadow(0 4px 4px #00175b38)!important;
+}
+.sale-catalog .card:hover .sale-card-sticker{transform:rotate(-4deg)!important}
+@media(max-width:680px){
+  .sale-catalog .card .sale-card-sticker{top:7px!important;left:7px!important;width:38%!important;max-width:78px!important}
+}
