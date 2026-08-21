@@ -2151,36 +2151,6 @@ body.is-scrolling .hero#heroBanner:before{animation-play-state:running!important
 @media(prefers-reduced-motion:reduce){.tag--hot-pick,.tag--trending{animation:none!important}}
 
 /* ============================================================
-   Hero container background: continuous moving purple/pink
-   gradient, same technique as the main page background
-   (explicit longhand properties + non-important background-position
-   so the animation can actually drive it — a shorthand `background:`
-   with !important elsewhere was silently locking position at 0% 0%).
-   ============================================================ */
-.hero#heroBanner{
-  background-image:linear-gradient(120deg,
-    #1a0f3d 0%,
-    #4a1a7a 22%,
-    #a3197e 44%,
-    #d1428f 60%,
-    #7a1f8f 78%,
-    #1a0f3d 100%
-  )!important;
-  background-size:280% 280%!important;
-  background-repeat:no-repeat!important;
-  background-position:0% 30%;
-  animation:hero-purple-pink-cycle 10s ease-in-out infinite!important;
-}
-@keyframes hero-purple-pink-cycle{
-  0%{background-position:0% 30%}
-  25%{background-position:60% 55%}
-  50%{background-position:100% 25%}
-  75%{background-position:40% 60%}
-  100%{background-position:0% 30%}
-}
-@media(prefers-reduced-motion:reduce){.hero#heroBanner{animation:none!important}}
-
-/* ============================================================
    Hero background: continuous moving purple/pink gradient.
    Uses a real oversized child layer animated via transform
    (not background-position) — this element has proven resistant
@@ -2217,3 +2187,29 @@ body.is-scrolling .hero#heroBanner:before{animation-play-state:running!important
 }
 .hero#heroBanner .hero-slides,.hero#heroBanner .hero-product-stage,.hero#heroBanner .hero-typewriter{position:relative;z-index:1}
 @media(prefers-reduced-motion:reduce){.hero-gradient-layer{animation:none!important}}
+
+/* Rail focus + fourth campaign beat. Gaps stay fixed, while only the item
+   passing the centre gets a contained scale-up and a stronger sale badge. */
+.hero-product-track{gap:14px!important}
+.hero-product-item{position:relative!important;overflow:visible!important}
+.hero-product-item img{transition:transform .45s ease,filter .45s ease!important}
+.hero-product-item.is-centre{z-index:8!important}
+.hero-product-item.is-centre img{transform:scale(1.17)!important;filter:drop-shadow(0 5px 5px rgba(4,4,34,.72)) drop-shadow(0 0 12px rgba(255,62,222,.64))!important}
+.hero-product-discount{position:absolute;z-index:3;left:50%;bottom:1%;transform:translate(-50%,0) scale(.9);padding:3px 6px;border:1px solid rgba(255,255,255,.78);border-radius:999px;background:rgba(8,16,83,.82);color:#fff;font:800 clamp(6px,.55vw,9px)/1 One,Arial;letter-spacing:.04em;white-space:nowrap;opacity:.82;box-shadow:0 0 7px rgba(255,55,224,.32);transition:opacity .35s ease,transform .35s ease,box-shadow .35s ease}
+.hero-product-item.is-centre .hero-product-discount{opacity:1;transform:translate(-50%,0) scale(1.08);background:#ffdf00;color:#091542;border-color:#fff;box-shadow:0 0 12px rgba(255,223,0,.78)}
+.hero-logo-beat{position:absolute;z-index:9;top:50%;left:50%;width:min(22%,126px);opacity:0;transform:translate(-50%,-50%) scale(.45);pointer-events:none;display:grid;place-items:center}
+.hero-logo-beat img{display:block;width:100%;height:auto;filter:drop-shadow(0 6px 7px rgba(4,4,34,.78)) drop-shadow(0 0 17px rgba(255,72,225,.88))}
+.hero-logo-beat.is-active{opacity:1;animation:hero-logo-beat-zoom 2s ease-in-out forwards}
+.hero#heroBanner.logo-beat-active:after{background:rgba(4,7,38,.58)!important}
+.hero#heroBanner.logo-beat-active .hero-typewriter{opacity:0;transition:opacity .2s ease}
+@keyframes hero-logo-beat-zoom{0%{opacity:0;transform:translate(-50%,-50%) scale(.45)}34%{opacity:1;transform:translate(-50%,-50%) scale(.86)}70%{opacity:1;transform:translate(-50%,-50%) scale(1.06)}100%{opacity:1;transform:translate(-50%,-50%) scale(.92)}}
+@media(max-width:680px){
+  .hero-product-track{gap:6px!important}
+  .hero-product-item.is-centre img{transform:scale(1.11)!important}
+  .hero-logo-beat{width:min(30%,102px)}
+  .hero-product-discount{padding:2px 4px;font-size:6px}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-product-item img,.hero-product-discount,.hero#heroBanner.logo-beat-active .hero-typewriter{transition:none!important}
+  .hero-logo-beat.is-active{animation:none!important;opacity:1;transform:translate(-50%,-50%) scale(.92)}
+}
