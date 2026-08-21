@@ -139,8 +139,78 @@ const compactNav=document.querySelector('.mobile-mega');
 const megaToggle=document.querySelector('[data-mega-toggle]');
 megaToggle.onclick=()=>{const open=compactNav.classList.toggle('open');megaToggle.setAttribute('aria-expanded',String(open))};
 document.querySelectorAll('[data-jump]').forEach(button=>button.onclick=()=>document.getElementById(button.dataset.jump)?.scrollIntoView({behavior:'smooth',block:'start'}));
-const moodTargets=['sale-catalog','wanted','massagers','playthings','condoms'];
-let moodIndex=0;document.querySelector('.mood-now').onclick=event=>{const wheel=event.currentTarget;wheel.classList.remove('spin');void wheel.offsetWidth;wheel.classList.add('spin');moodIndex=(moodIndex+1)%moodTargets.length;setTimeout(()=>document.getElementById(moodTargets[moodIndex])?.scrollIntoView({behavior:'smooth',block:'start'}),620)};
+</script><script>
+/* Mood Now: a real spin-the-wheel modal. Five mood segments, each mapped to
+   a section; the wheel spins with realistic ease-out physics and lands
+   precisely on one segment, which is then highlighted before a smooth
+   scroll takes the person straight there. */
+(()=>{
+  const moods=[
+    {label:'Bold',target:'sale-catalog',color:'#2f6fe0'},
+    {label:'Popular',target:'wanted',color:'#ffd23f'},
+    {label:'Romantic',target:'massagers',color:'#ff5c3d'},
+    {label:'Playful',target:'playthings',color:'#ff5eb8'},
+    {label:'Classic',target:'condoms',color:'#38c9e9'}
+  ];
+  const n=moods.length;const slice=360/n;
+  const gradientStops=moods.map((m,i)=>`${m.color} ${i*slice}deg ${(i+1)*slice}deg`).join(',');
+  const labelsHTML=moods.map((m,i)=>{
+    const mid=i*slice+slice/2;
+    return `<span class="mood-wheel-label" style="transform:rotate(${mid}deg) translate(0,-92px) rotate(${-mid}deg)">${m.label}</span>`;
+  }).join('');
+  document.body.insertAdjacentHTML('beforeend',`
+    <div class="mood-wheel-overlay" id="moodWheelOverlay" role="dialog" aria-modal="true" aria-label="Spin your mood">
+      <div class="mood-wheel-modal">
+        <button class="mood-wheel-close" id="moodWheelClose" aria-label="Close">✕</button>
+        <p class="mood-wheel-kicker">Can't decide?</p>
+        <h3 class="mood-wheel-title">Spin your mood.</h3>
+        <div class="mood-wheel-stage">
+          <div class="mood-wheel-pointer" aria-hidden="true"></div>
+          <div class="mood-wheel" id="moodWheel" style="background:conic-gradient(${gradientStops})">${labelsHTML}</div>
+          <div class="mood-wheel-hub" aria-hidden="true">SPIN</div>
+        </div>
+        <p class="mood-wheel-result" id="moodWheelResult">&nbsp;</p>
+      </div>
+    </div>
+  `);
+  const overlay=document.querySelector('#moodWheelOverlay');
+  const wheel=document.querySelector('#moodWheel');
+  const hub=document.querySelector('.mood-wheel-hub');
+  const resultEl=document.querySelector('#moodWheelResult');
+  const closeBtn=document.querySelector('#moodWheelClose');
+  let currentRotation=0;let spinning=false;
+  const open=()=>{overlay.classList.add('is-open');resultEl.textContent='\u00a0';document.body.style.overflow='hidden'};
+  const close=()=>{overlay.classList.remove('is-open');document.body.style.overflow=''};
+  closeBtn.onclick=close;
+  overlay.addEventListener('click',event=>{if(event.target===overlay)close()});
+  const spin=()=>{
+    if(spinning)return;
+    spinning=true;
+    resultEl.textContent='Spinning…';
+    const targetIndex=Math.floor(Math.random()*n);
+    const segmentMid=targetIndex*slice+slice/2;
+    const jitter=(Math.random()-.5)*(slice*.6);
+    const fullSpins=5*360;
+    const finalAngle=fullSpins+(360-segmentMid)+jitter;
+    currentRotation+=finalAngle;
+    wheel.style.transition='transform 4.2s cubic-bezier(.12,.72,.14,1)';
+    wheel.style.transform=`rotate(${currentRotation}deg)`;
+    setTimeout(()=>{
+      spinning=false;
+      const mood=moods[targetIndex];
+      resultEl.textContent=`Landed on ${mood.label} — taking you there…`;
+      wheel.classList.add('has-landed');
+      setTimeout(()=>{
+        close();
+        wheel.classList.remove('has-landed');
+        document.getElementById(mood.target)?.scrollIntoView({behavior:'smooth',block:'start'});
+      },900);
+    },4200);
+  };
+  hub.onclick=spin;
+  document.querySelector('.mood-now').onclick=open;
+})();
+</script><script>
 /* Card motion is intentionally brief: cards brighten into view, while every second card blinks once. */
 let cardObserver;const initCardMotion=()=>{cardObserver?.disconnect();const cards=[...document.querySelectorAll('.card')];cards.forEach((card,index)=>{card.classList.add('is-dim');card.dataset.cardIndex=index});cardObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{const card=entry.target;if(entry.isIntersecting){card.classList.remove('is-dim');card.classList.add('is-in-view');if(Number(card.dataset.cardIndex)%2===1){card.classList.add('blink-on-enter')}cardObserver.unobserve(card)}}),{threshold:.2});cards.forEach(card=>cardObserver.observe(card))};initCardMotion();document.querySelector('.sale-tabs').addEventListener('click',()=>requestAnimationFrame(initCardMotion));
 document.addEventListener('error',event=>{const image=event.target;if(image.tagName==='IMG'&&image.closest('.card')){image.onerror=null;image.src='assets/3614303eb08b.png';image.style.objectFit='contain';image.style.padding='24px'}},true);
