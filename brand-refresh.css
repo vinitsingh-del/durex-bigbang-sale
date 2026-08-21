@@ -1851,3 +1851,10 @@ body.is-loading{overflow:hidden}
   .sale-catalog .card .media img{transform:scale(1.2)!important}
   .card .media img{object-position:center}
 }
+
+/* Mobile only: tighten the Hero → THE 69 STORE gap to exactly 25px total
+   (was 12px box-gap + 30px section padding = 42px). Desktop untouched. */
+@media(max-width:680px){
+  .hero{margin-bottom:8px!important}
+  .sale-catalog{padding-top:17px!important}
+}
