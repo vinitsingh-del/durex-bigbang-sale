@@ -717,7 +717,7 @@ body:before{
   filter:none !important;
   transform:none !important;
   background-position:0% 30%;
-  animation:pop-gradient-cycle 12s ease-in-out infinite !important;
+  animation:pop-gradient-cycle 10.9s ease-in-out infinite !important;
   will-change:background-position;
 }
 @keyframes pop-gradient-cycle{
@@ -732,7 +732,7 @@ body{background:#2452b8}
 @media(max-width:680px){
   body:before{
     background-size:340% 340% !important;
-    animation-duration:11s !important;
+    animation-duration:10s !important;
   }
 }
 @media(prefers-reduced-motion:reduce){body:before{animation:none!important}}
