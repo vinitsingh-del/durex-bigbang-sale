@@ -1979,3 +1979,9 @@ body.is-scrolling .sale-catalog .card,
 body.is-scrolling .hero{
   animation-play-state:paused!important;
 }
+
+/* Fix: "Accessories" and "Games" category icons were marketing text
+   banners (invisible white-on-white); replaced with real product photos.
+   "All products" uses a transparent Durex logo — was invisible on the
+   white circle background, now given a navy fill so it shows clearly. */
+.quick-links-track a img.quick-links-logo{background:#0a1f6e!important;object-fit:contain!important;padding:8px!important}
