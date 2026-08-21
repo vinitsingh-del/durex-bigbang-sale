@@ -1901,3 +1901,45 @@ body.is-loading{overflow:hidden}
 .mood-now{position:fixed}
 .mood-now-icon{position:relative;z-index:1;width:22px;height:22px;pointer-events:none}
 @media(max-width:680px){.mood-now-icon{width:19px;height:19px}}
+
+/* ============================================================
+   Cart icon: continuous shine instead of blink. The badge stays
+   fully, always visible; a soft light band sweeps across it on
+   a permanent loop.
+   ============================================================ */
+body.cart-icons-hidden .add-cart{opacity:1!important;transform:translateY(-50%) scale(1)!important}
+.add-cart{overflow:hidden!important;animation:none!important}
+.add-cart:before{
+  content:"";
+  position:absolute;
+  top:-60%;left:-160%;
+  width:55%;height:220%;
+  background:linear-gradient(75deg,transparent 0%,transparent 40%,#ffffffb0 50%,transparent 60%,transparent 100%);
+  animation:cart-shine-sweep 2.4s linear infinite;
+  pointer-events:none;
+  z-index:2;
+}
+.add-cart svg{position:relative;z-index:1}
+@keyframes cart-shine-sweep{
+  0%{left:-160%}
+  100%{left:160%}
+}
+@media(prefers-reduced-motion:reduce){.add-cart:before{animation:none!important;display:none}}
+
+/* ============================================================
+   Product corner stickers: continuous shake, not a zoom pulse —
+   and reduce the mobile upward poke so a sticker never touches
+   the card sitting in the row above it (was under 1px clearance).
+   ============================================================ */
+#tabCards .card:first-child::after,
+.product-corner-sticker,
+.card:hover .product-corner-sticker{
+  animation:sale-sticker-shake 1.6s ease-in-out infinite!important;
+}
+@media(max-width:680px){
+  .product-corner-sticker{top:-5px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #tabCards .card:first-child::after,
+  .product-corner-sticker{animation:none!important;transform:rotate(-3deg)!important}
+}

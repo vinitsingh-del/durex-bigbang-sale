@@ -343,12 +343,7 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
   ['mouseleave','touchend'].forEach(evt=>viewport.addEventListener(evt,()=>track.classList.remove('is-paused'),{passive:true}));
 })();
 </script><script>
-/* Keep every product-card cart sticker on one shared visibility cycle. */
-(()=>{
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  let hidden=false;
-  setInterval(()=>{hidden=!hidden;document.body.classList.toggle('cart-icons-hidden',hidden)},900);
-})();
+/* Cart icon now uses a continuous CSS shine sweep instead of a blink. */
 </script><script>
 /* A short sale welcome that clears cleanly once the page is ready. */
 (()=>{
