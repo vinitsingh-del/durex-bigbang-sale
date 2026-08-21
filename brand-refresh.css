@@ -844,7 +844,7 @@ body{background:#2452b8}
 .add-label{margin:0 auto 0 0}
 .add-cart{
   position:absolute!important;
-  right:-7px;
+  right:8px;
   top:50%;
   display:grid!important;
   place-items:center;
@@ -861,10 +861,10 @@ body{background:#2452b8}
   0%,100%{transform:translateY(-50%) rotate(-9deg) scale(1)}
   50%{transform:translateY(-50%) rotate(-2deg) scale(1.14)}
 }
-.sale-catalog .card .add-cart{width:27px;height:27px;right:-6px}
+.sale-catalog .card .add-cart{width:27px;height:27px;right:6px}
 .sale-catalog .card .add-cart svg{width:13px;height:13px}
 @media(max-width:680px){
-  .add-cart{width:27px;height:27px;right:-6px}
+  .add-cart{width:27px;height:27px;right:6px}
   .add-cart svg{width:13px;height:13px}
 }
 @media(prefers-reduced-motion:reduce){.add-cart{animation:none}}
