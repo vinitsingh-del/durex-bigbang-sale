@@ -597,10 +597,10 @@ body:before{background-image:radial-gradient(ellipse at 8% 12%,#d9fbff73 0,trans
 /* 2. Top strip becomes a single running marquee; the block-by-block ribbon under the logo is gone */
 .promo-ribbon{display:none!important}
 .announcement{display:block!important;overflow:hidden!important;padding:0!important;gap:0!important;background:#ffdf00!important;justify-content:flex-start!important}
-.announcement__track{display:flex!important;align-items:center;gap:38px;width:max-content;white-space:nowrap;padding:9px 18px;font:800 10px One,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#06154a;animation:announcement-run 16s linear infinite}
+.announcement__track{display:flex!important;align-items:center;gap:38px;width:max-content;white-space:nowrap;padding:9px 18px;font:800 10px One,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#06154a;animation:announcement-run 64s linear infinite}
 .announcement__track span{flex:0 0 auto}
 @keyframes announcement-run{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@media(max-width:680px){.announcement__track{gap:22px;padding:7px 14px;font-size:8px;animation-duration:12s}}
+@media(max-width:680px){.announcement__track{gap:22px;padding:7px 14px;font-size:8px;animation-duration:48s}}
 @media(prefers-reduced-motion:reduce){.announcement__track{animation:none!important}}
 
 /* 3 & 7. The 69 Store is now the headline; Shop the sale is the quiet subcopy underneath, no blinking */
