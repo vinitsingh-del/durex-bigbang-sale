@@ -903,9 +903,8 @@ body{background:#2452b8}
 .mobile-mega button,
 .mobile-mega-panel a,
 .reel-arrow{
-  outline:1px solid rgba(255,255,255,.88)!important;
-  outline-offset:-1px;
-  box-shadow:0 0 0 1px rgba(255,255,255,.12),0 0 8px rgba(96,214,255,.3)!important;
+  outline:none!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.88),0 0 0 1px rgba(255,255,255,.12),0 0 8px rgba(96,214,255,.3)!important;
 }
 
 .sale-catalog .sale-tabs button,.choice,.mobile-mega button,.reel-arrow{border-color:rgba(255,255,255,.88)!important}
