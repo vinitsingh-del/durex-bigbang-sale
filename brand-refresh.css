@@ -2013,3 +2013,12 @@ body.is-scrolling .hero{
    intent was to replace the old badge, not add a second one — so the
    old ::after sticker is now fully disabled, leaving just one sticker. */
 #tabCards .card:first-child::after{content:none!important;display:none!important}
+
+/* Product stickers removed: keep every product card free of sticker overlays. */
+.sale-card-sticker,.product-corner-sticker{display:none!important;content:none!important}
+#tabCards .card:first-child::before,#tabCards .card:first-child::after,
+#tabCards .card:has(img[alt="Durex Intense - 3 Condoms"])::before,
+#tabCards .card:has(img[alt="Durex Naturals Smooth Glide - 3 Condoms"])::before,
+#massagers .card:has(img[alt="Durex Intense Vibe Ring"])::before,
+#massagers .card:has(video[aria-label="Durex Intense Vibe Ring product video"])::before,
+.card.corner-badge::before{content:none!important;display:none!important;background:none!important}
