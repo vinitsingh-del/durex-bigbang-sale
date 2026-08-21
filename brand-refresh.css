@@ -1887,3 +1887,17 @@ body.is-loading{overflow:hidden}
   .mood-wheel.has-landed{animation:none}
   .mood-wheel-modal{animation:none}
 }
+
+/* Category rail icons were washed out/near-invisible (object-fit:contain
+   left them tiny and letterboxed against the white circle background).
+   Switching to cover zooms the image to fill the same circle — same
+   size/shape/position, just a bigger, more visible crop of the image. */
+.quick-links-track a img{object-fit:cover!important}
+
+/* Mood Now icon: same button/circle size, but a clean vector shuffle icon
+   instead of tiny "MOOD NOW" text that was hard to read against the
+   rainbow ring. */
+.mood-now:after{content:""!important;position:absolute!important;top:50%!important;left:50%!important;transform:translate(-50%,-50%)!important;margin:0!important}
+.mood-now{position:fixed}
+.mood-now-icon{position:relative;z-index:1;width:22px;height:22px;pointer-events:none}
+@media(max-width:680px){.mood-now-icon{width:19px;height:19px}}
