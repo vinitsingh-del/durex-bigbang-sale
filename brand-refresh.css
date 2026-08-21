@@ -1011,6 +1011,17 @@ body{background:#2452b8}
 .hero#heroBanner .hero-slide.is-active{animation:none!important;transform:none!important}
 .hero#heroBanner .hero-logo-overlay{display:none!important}
 
+/* One wide hero asset with a continuously moving campaign gradient behind it. */
+.hero#heroBanner{background:linear-gradient(120deg,#07134f 0%,#2d147e 28%,#86137e 52%,#152a92 76%,#07134f 100%)!important;background-size:240% 240%!important;animation:hero-gradient-drift 9s ease-in-out infinite alternate!important}
+.hero#heroBanner .hero-slides{background:inherit!important}
+.hero#heroBanner .hero-slide{background-size:contain!important;background-position:center!important;background-color:transparent!important}
+@keyframes hero-gradient-drift{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+.hero-typewriter{position:absolute;z-index:6;top:9%;left:50%;width:min(72%,720px);transform:translateX(-50%);display:flex;align-items:center;justify-content:center;min-height:1.15em;color:#fff;text-align:center;font:800 clamp(18px,3.6vw,47px)/1 One,Arial;letter-spacing:.015em;text-transform:uppercase;text-shadow:0 0 5px #fff,0 0 13px #ff39ee,0 4px 12px #02052b;pointer-events:none}
+.hero-typewriter i{display:inline-block;width:.07em;height:1em;margin-left:.12em;background:#ffdf00;box-shadow:0 0 8px #ffdf00;animation:hero-caret-blink .8s steps(1,end) infinite}
+@keyframes hero-caret-blink{50%{opacity:0}}
+@media(max-width:680px){.hero-typewriter{top:8%;width:88%;font-size:clamp(13px,5.3vw,27px);text-shadow:0 0 4px #fff,0 0 9px #ff39ee,0 3px 8px #02052b}}
+@media(prefers-reduced-motion:reduce){.hero#heroBanner{animation:none!important;background-position:50% 50%!important}.hero-typewriter i{animation:none!important}.hero-typewriter #heroTypeText{visibility:visible}.hero-typewriter #heroTypeText::after{content:'PRICES LOUD.'}}
+
 /* One global cadence keeps every product-card cart sticker appearing and
    disappearing together, including cards rendered after a tab change. */
 .add-cart{

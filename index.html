@@ -18,7 +18,7 @@ section{scroll-margin-top:12px}.section{padding-top:74px}.heading{display:flex;j
 <body class="is-loading">
 <div class="sale-preloader" id="salePreloader" role="status" aria-live="polite" aria-label="Welcome to the Big Bang Sale"><div class="sale-preloader__inner"><img class="sale-preloader__logo" src="assets/hero-69-big-bang-sale-brand.png" alt=""><p>WELCOME TO THE BIG BANG SALE</p><span class="sale-preloader__line" aria-hidden="true"><i></i></span></div></div>
 <header><a class="brand" href="#top"><img src="assets/3614303eb08b.png" alt="Durex"></a><nav class="nav"><a href="#condoms">Condoms</a><a href="#lubes">Lubes</a><a href="#massagers">Massagers</a><a href="#performance">Performance</a><a href="#playthings">Playthings</a><a href="#rewards">Rewards</a></nav><div class="actions"><button>Cart <span class="cart-no" id="cartCount">0</span></button><button>Account</button></div><button class="hamb" aria-label="Menu"><i></i><i></i><i></i></button></header>
-<main id="top"><div class="shell"><section class="hero" id="heroBanner" aria-label="69 Big Bang Sale"><div class="hero-slides" aria-hidden="true"><div class="hero-slide is-active" style="background-image:url('assets/hero-ai-1584x396-1.png')"></div><div class="hero-slide" style="background-image:url('assets/hero-ai-1584x396-2.png')"></div><div class="hero-slide" style="background-image:url('assets/hero-ai-1584x396-3.png')"></div></div></section>
+<main id="top"><div class="shell"><section class="hero" id="heroBanner" aria-label="69 Big Bang Sale"><div class="hero-slides" aria-hidden="true"><div class="hero-slide is-active" style="background-image:url('assets/hero-single-product-1584x396.png')"></div></div><div class="hero-typewriter" aria-live="polite"><span id="heroTypeText"></span><i aria-hidden="true"></i></div></section>
 <section class="categories"><a class="category" href="#condoms"><img src="assets/01a8382c9fb5.webp" alt=""><span><b>Condoms</b><small>6 packs, from ₹99</small></span><em>↗</em></a><a class="category" href="#lubes"><img src="assets/ad65f356e8bc.webp" alt=""><span><b>Lubes</b><small>5 lubes, up to 43% off</small></span><em>↗</em></a><a class="category" href="#massagers"><img src="assets/fe283623f553.webp" alt=""><span><b>Massagers</b><small>Up to 42% off</small></span><em>↗</em></a><a class="category" href="#performance"><img src="assets/1c2354442d3f.webp" alt=""><span><b>Performance</b><small>From ₹374</small></span><em>↗</em></a><a class="category" href="#playthings"><img src="assets/602c6f017f9e.webp" alt=""><span><b>Playthings</b><small>Up to 57% off</small></span><em>↗</em></a><a class="category" href="#rewards"><img src="assets/f87f3ffb1f76.webp" alt=""><span><b>Rewards</b><small>Four tiers to unlock</small></span><em>↗</em></a></section>
 <section id="wanted"><p class="kicker">Shop the sale</p><h2 class="title">MOST WANTED.<i>Ready now.</i></h2><div class="cards" data-cards="wanted"></div></section>
 <section class="section" id="condoms"><div class="heading"><div><p>Shop the sale</p><h2>Condoms<i>from ₹99</i></h2></div><a href="#top">View all →</a></div><div class="rail" data-cards="condoms"></div></section>
@@ -246,6 +246,26 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
   }),{threshold:.5});
   observer.observe(hero);
   start();
+})();
+</script><script>
+/* Single-hero campaign copy: type, pause, then erase and rotate through the
+   approved sale messages without changing the hero card geometry. */
+(()=>{
+  const textEl=document.querySelector('#heroTypeText');
+  if(!textEl)return;
+  const phrases=['PRICES LOUD.','PLEASURE LOUDER.','UP TO 69% OFF'];
+  let phrase=0,pos=0,deleting=false;
+  const tick=()=>{
+    const value=phrases[phrase];
+    textEl.textContent=value.slice(0,pos);
+    let delay=deleting?48:86;
+    if(!deleting&&pos<value.length)pos++;
+    else if(deleting&&pos>0)pos--;
+    else if(!deleting){deleting=true;delay=1450}
+    else{deleting=false;phrase=(phrase+1)%phrases.length;delay=260}
+    setTimeout(tick,delay);
+  };
+  tick();
 })();
 </script><script>
 /* Keep the mobile sale controls out of the first two screens; Mood Now remains independent. */
