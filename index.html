@@ -43,7 +43,7 @@ const primaryShell=document.querySelector('#top > .shell');
 const categoryMenu=document.querySelector('.categories');
 const catalog=document.createElement('section');
 catalog.className='sale-catalog';catalog.id='sale-catalog';
-catalog.innerHTML='<div class="sale-intro"><h2 class="title">THE 69 STORE.</h2><p class="kicker">Shop the sale</p></div><div class="sale-tabs" role="tablist"><button class="active" data-tab="three">Condoms – Pack of 3</button><button data-tab="ten">Condoms – Pack of 10</button><button data-tab="lubes">Lubes</button><button data-tab="performance">Performance</button><button data-tab="massagers">Massagers</button></div><div class="cards" id="tabCards"></div>';
+catalog.innerHTML='<div class="sale-intro"><h2 class="title">THE 69 STORE.</h2></div><div class="sale-tabs" role="tablist"><button class="active" data-tab="three">Condoms – Pack of 3</button><button data-tab="ten">Condoms – Pack of 10</button><button data-tab="lubes">Lubes</button><button data-tab="performance">Performance</button><button data-tab="massagers">Massagers</button></div><div class="cards" id="tabCards"></div>';
 const heroStage=document.querySelector('.hero');
 heroStage.after(catalog);catalog.after(categoryMenu);
 categoryMenu.className='quick-links';
