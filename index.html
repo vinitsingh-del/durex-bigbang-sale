@@ -61,27 +61,12 @@ const cardHTML=([name,img,price,mrp,tag],video='')=>{
 const markup=product=>cardHTML(product);
 const massagerVideos=['assets/c6252565906c.mp4','assets/ca0ffa202f1c.mp4','assets/06314e5975c2.webm','assets/e17e58c121cb.webm'];
 const renderTab=key=>{const host=document.querySelector('#tabCards');host.innerHTML=saleProducts[key].map((product,index)=>cardHTML(product,key==='massagers'?massagerVideos[index]:'')).join('');host.querySelectorAll('video[autoplay]').forEach(video=>video.play().catch(()=>{}))};renderTab('three');
-document.querySelector('.sale-tabs').onclick=e=>{const button=e.target.closest('[data-tab]');if(!button)return;document.querySelectorAll('.sale-tabs button').forEach(x=>x.classList.toggle('active',x===button));renderTab(button.dataset.tab);requestAnimationFrame(paintExtraTags)};
-/* Extra promotional tags: Hot Pick / Trending follow the 1st/2nd card
-   position within the tab carousel (re-applied on every tab switch).
-   Top Rated is name-matched to Buzzy Rabbit, searched outside the tab
-   carousel so it never collides with the position-based tags above. */
-function paintExtraTags(){
-  const tabCards=[...document.querySelectorAll('#tabCards .card')];
-  tabCards.forEach(c=>c.querySelectorAll('.tag--hot-pick,.tag--trending').forEach(t=>t.remove()));
-  if(tabCards[0]&&!tabCards[0].querySelector('.tag'))tabCards[0].querySelector('.media')?.insertAdjacentHTML('beforeend','<span class="tag tag--hot-pick">Hot Pick</span>');
-  if(tabCards[1]&&!tabCards[1].querySelector('.tag'))tabCards[1].querySelector('.media')?.insertAdjacentHTML('beforeend','<span class="tag tag--trending">Trending</span>');
-  document.querySelectorAll('.tag--top-rated').forEach(t=>t.remove());
-  const buzzy=[...document.querySelectorAll('.card')].find(c=>!c.closest('#tabCards')&&c.querySelector('h3')?.textContent?.trim()==='Durex Play Buzzy Rabbit');
-  if(buzzy&&!buzzy.querySelector('.tag'))buzzy.querySelector('.media')?.insertAdjacentHTML('beforeend','<span class="tag tag--top-rated">Top Rated</span>');
-}
-paintExtraTags();
+document.querySelector('.sale-tabs').onclick=e=>{const button=e.target.closest('[data-tab]');if(!button)return;document.querySelectorAll('.sale-tabs button').forEach(x=>x.classList.toggle('active',x===button));renderTab(button.dataset.tab)};
 const best=document.querySelector('#wanted');best.querySelector('.kicker').textContent='Loved by the community';best.querySelector('.title').innerHTML='BESTSELLERS.<i>Start here.</i>';
 const launch=document.createElement('section');launch.className='launch';launch.innerHTML='<p class="kicker">Fresh on the shelf</p><h2 class="title">JUST LAUNCHED.<i>New ways to play.</i></h2><div class="cards" id="launchCards"></div>';best.after(launch);document.querySelector('#launchCards').innerHTML=[saleProducts.lubes[3],saleProducts.three[2],saleProducts.massagers[3],saleProducts.ten[0]].map(markup).join('');
 const data={wanted:[saleProducts.massagers[0],saleProducts.massagers[1],saleProducts.massagers[2],saleProducts.ten[2]],condoms:[...saleProducts.three,...saleProducts.ten],lubes:saleProducts.lubes,massagers:saleProducts.massagers,performance:saleProducts.performance,playthings:[['Durex Playthings O! Snap Card Game','https://www.durexindia.com/cdn/shop/files/O_Snap_3d13743a-7460-4a52-bdd1-5afc5fadebea.webp?v=1721044269&width=1445','₹930','₹1,874','50% off'],['Durex Playthings Lights Off Eye Mask','https://www.durexindia.com/cdn/shop/files/1_ac7aa896-c019-43f2-8b37-9847b3704112.webp?v=1690786256&width=1445','₹950','₹1,874','49% off'],['Durex Playthings Turn On Card Game','https://www.durexindia.com/cdn/shop/files/Turn_On_0ce54ddd-dbe4-474c-97f8-e4b0e787571a.webp?v=1721044428&width=1445','₹1,874','','Sale pick'],['Durex Playthings Hands Off Restraints','https://www.durexindia.com/cdn/shop/files/Hand_off.webp?v=1721044178&width=1445','₹1,499','₹3,499','57% off']]};
 const cardVideoFor=(group,index)=>group==='massagers'?massagerVideos[index]:group==='wanted'&&index<2?massagerVideos[index]:'';
 const card=cardHTML;document.querySelectorAll('[data-cards]').forEach(e=>{e.innerHTML=data[e.dataset.cards].map((product,index)=>cardHTML(product,cardVideoFor(e.dataset.cards,index))).join('');e.querySelectorAll('video[autoplay]').forEach(video=>video.play().catch(()=>{}))});
-paintExtraTags();
 document.querySelectorAll('.compare video[autoplay]').forEach(video=>video.play().catch(()=>{}));
 let count=0;const update=()=>document.querySelector('#cartCount').textContent=count;document.addEventListener('click',e=>{if(e.target.closest('[data-add]')){count++;update()}});document.querySelector('.close').onclick=()=>document.querySelector('#notice').remove();let pieces=['Durex Extra Time Ultra Thin - 3 Condoms','Durex Real Feel Intimate Lube | Silicone Based'];const picks=[...data.condoms.slice(0,2),...data.lubes.slice(0,2),['Durex Play A-Game','2d74ae3f00ad.webp','₹2,599','₹2,999','']];const paint=()=>{document.querySelector('#choices').innerHTML=picks.map(x=>'<button class="choice '+(pieces.includes(x[0])?'selected':'')+'" data-choice="'+x[0]+'"><img src="'+productImage(x[1])+'" alt=""><span>'+x[0]+'</span><b>'+(pieces.includes(x[0])?'✓':'+')+'</b></button>').join('');document.querySelector('#pieceCount').textContent=pieces.length+' pieces selected'};paint();document.querySelector('#choices').onclick=e=>{const b=e.target.closest('[data-choice]');if(!b)return;const n=b.dataset.choice;pieces=pieces.includes(n)?pieces.filter(x=>x!==n):[...pieces,n];paint()};document.querySelector('#addBundle').onclick=()=>{count+=pieces.length;update()};let seconds=44762;setInterval(()=>{seconds=Math.max(0,seconds-1);hr.textContent=String(Math.floor(seconds/3600)).padStart(2,'0');min.textContent=String(Math.floor(seconds%3600/60)).padStart(2,'0');sec.textContent=String(seconds%60).padStart(2,'0')},1000);
 </script><script>
@@ -267,16 +252,35 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
    approved sale messages without changing the hero card geometry. */
 (()=>{
   const textEl=document.querySelector('#heroTypeText');
+  const hero=document.querySelector('#heroBanner');
+  let logo=document.querySelector('#heroLogoBeat');
+  if(!logo&&hero){
+    logo=document.createElement('div');logo.id='heroLogoBeat';logo.className='hero-logo-beat';logo.setAttribute('aria-hidden','true');
+    logo.innerHTML='<img src="assets/bigbang-sale-logo.webp" alt="">';hero.appendChild(logo);
+  }
   if(!textEl)return;
-  const phrases=['PRICES LOUD.','PLEASURE LOUDER.','ENTER THE SALE.'];
+  const phrases=['PRICES LOUD.','PLEASURE LOUDER.','UP TO 69% OFF','ENTER THE SALE.'];
   let phrase=0,pos=0,deleting=false;
+  const logoBeat=()=>{
+    textEl.textContent='';
+    hero?.classList.add('logo-beat-active');
+    logo?.classList.add('is-active');
+    setTimeout(()=>{
+      hero?.classList.remove('logo-beat-active');
+      logo?.classList.remove('is-active');
+      phrase=3;pos=0;deleting=false;setTimeout(tick,260);
+    },2000);
+  };
   const tick=()=>{
     const value=phrases[phrase];
     textEl.textContent=value.slice(0,pos);
     let delay=deleting?48:86;
     if(!deleting&&pos<value.length)pos++;
     else if(deleting&&pos>0)pos--;
-    else if(!deleting){deleting=true;delay=phrase===2?1800:1450}
+    else if(!deleting){
+      if(phrase===2){logoBeat();return}
+      deleting=true;delay=phrase===3?1800:1450
+    }
     else{deleting=false;phrase=(phrase+1)%phrases.length;delay=260}
     setTimeout(tick,delay);
   };
@@ -302,7 +306,18 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
     ['hero-zip-vibe-ring.png','Durex Intense Vibe Ring'],
     ['hero-zip-wild-wand.png','Durex Play Wild Wand']
   ];
-  track.innerHTML=[...products,...products].map(([src,alt])=>'<div class="hero-product-item"><img src="assets/'+src+'" alt="'+alt+'"></div>').join('');
+  track.innerHTML=[...products,...products].map(([src,alt])=>'<div class="hero-product-item"><img src="assets/'+src+'" alt="'+alt+'"><span class="hero-product-discount">UP TO 69% OFF</span></div>').join('');
+  const items=[...track.children];
+  const hero=document.querySelector('#heroBanner');
+  const updateCentre=()=>{
+    if(!hero)return;
+    const centre=hero.getBoundingClientRect().left+hero.getBoundingClientRect().width/2;
+    let nearest=null,distance=Infinity;
+    items.forEach(item=>{const rect=item.getBoundingClientRect();const d=Math.abs(rect.left+rect.width/2-centre);if(d<distance){distance=d;nearest=item}});
+    items.forEach(item=>item.classList.toggle('is-centre',item===nearest));
+    requestAnimationFrame(updateCentre);
+  };
+  requestAnimationFrame(updateCentre);
 })();
 </script><script>
 /* Keep the mobile sale controls out of the first two screens; Mood Now remains independent. */
