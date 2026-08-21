@@ -71,9 +71,14 @@ function paintExtraTags(){
   tabCards.forEach(c=>c.querySelectorAll('.tag--hot-pick,.tag--trending').forEach(t=>t.remove()));
   if(tabCards[0]&&!tabCards[0].querySelector('.tag'))tabCards[0].querySelector('.media')?.insertAdjacentHTML('beforeend','<span class="tag tag--hot-pick">Hot Pick</span>');
   if(tabCards[1]&&!tabCards[1].querySelector('.tag'))tabCards[1].querySelector('.media')?.insertAdjacentHTML('beforeend','<span class="tag tag--trending">Trending</span>');
-  document.querySelectorAll('.tag--top-rated').forEach(t=>t.remove());
-  const buzzy=[...document.querySelectorAll('.card')].find(c=>!c.closest('#tabCards')&&c.querySelector('h3')?.textContent?.trim()==='Durex Play Buzzy Rabbit');
-  if(buzzy&&!buzzy.querySelector('.tag'))buzzy.querySelector('.media')?.insertAdjacentHTML('beforeend','<span class="tag tag--top-rated">Top Rated</span>');
+  const paintByName=(name,cls,label)=>{
+    document.querySelectorAll('.'+cls).forEach(t=>t.remove());
+    const match=[...document.querySelectorAll('.card')].find(c=>!c.closest('#tabCards')&&c.querySelector('h3')?.textContent?.trim()===name);
+    if(match&&!match.querySelector('.tag'))match.querySelector('.media')?.insertAdjacentHTML('beforeend','<span class="tag '+cls+'">'+label+'</span>');
+  };
+  paintByName('Durex Play Buzzy Rabbit','tag--top-rated','Top Rated');
+  paintByName('Durex Play Wild Wand','tag--value-pick','Value Pick');
+  paintByName('Durex Intense Vibe Ring','tag--limited-stock','Limited Stock');
 }
 paintExtraTags();
 const best=document.querySelector('#wanted');best.querySelector('.kicker').textContent='Loved by the community';best.querySelector('.title').innerHTML='BESTSELLERS.<i>Start here.</i>';
