@@ -932,7 +932,7 @@ body{background:#2452b8}
   position:relative!important;
   overflow:hidden!important;
   isolation:isolate!important;
-  background:linear-gradient(90deg,#0b0f2e,#160f3d 50%,#0b0f2e)!important;
+  background-image:linear-gradient(90deg,#0b0f2e,#160f3d 50%,#0b0f2e)!important;
 }
 .hero#heroBanner:after{display:none!important}
 .hero#heroBanner .hero-slides{position:absolute;inset:0;z-index:0;overflow:hidden;border-radius:inherit}
@@ -1012,7 +1012,7 @@ body{background:#2452b8}
 .hero#heroBanner .hero-logo-overlay{display:none!important}
 
 /* One wide hero asset with a continuously moving campaign gradient behind it. */
-.hero#heroBanner{background:linear-gradient(120deg,#07134f 0%,#2d147e 28%,#86137e 52%,#152a92 76%,#07134f 100%)!important;background-size:240% 240%!important;animation:hero-gradient-drift 9s ease-in-out infinite alternate!important}
+.hero#heroBanner{background-image:linear-gradient(120deg,#07134f 0%,#2d147e 28%,#86137e 52%,#152a92 76%,#07134f 100%)!important;background-size:240% 240%!important;animation:hero-gradient-drift 9s ease-in-out infinite alternate!important}
 .hero#heroBanner .hero-slides{background:inherit!important}
 .hero#heroBanner .hero-slide{background-size:contain!important;background-position:center!important;background-color:transparent!important}
 @keyframes hero-gradient-drift{0%{background-position:0% 50%}100%{background-position:100% 50%}}
@@ -1027,7 +1027,7 @@ body{background:#2452b8}
    the real transparent product cutouts supply the focal row. The stage and
    gradient are CSS layers so the full hero frame is always covered at every
    breakpoint without cropping the products. */
-.hero#heroBanner{isolation:isolate!important;background:linear-gradient(116deg,#070d36 0%,#1b1557 27%,#7e197d 51%,#26328f 77%,#070d36 100%)!important;background-size:240% 240%!important;animation:hero-gradient-drift 9s ease-in-out infinite alternate!important}
+.hero#heroBanner{isolation:isolate!important;background-image:linear-gradient(116deg,#070d36 0%,#1b1557 27%,#7e197d 51%,#26328f 77%,#070d36 100%)!important;background-size:240% 240%!important;animation:hero-gradient-drift 9s ease-in-out infinite alternate!important}
 .hero#heroBanner:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 40% 44% at 50% 82%,rgba(255,75,229,.38),transparent 72%),radial-gradient(ellipse 24% 30% at 50% 89%,rgba(255,223,0,.22),transparent 72%);animation:hero-stage-pulse 3.8s ease-in-out infinite alternate}
 .hero#heroBanner:after{content:"";display:block!important;position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(5,8,37,.15),transparent 45%,rgba(5,8,37,.24))!important}
 .hero#heroBanner .hero-slides{background:transparent!important;z-index:0!important}
@@ -2107,7 +2107,7 @@ body.is-scrolling .hero{
 /* Final hero motion: no poster/banner artwork and no logo overlay. The full
    frame is a clearly moving synth gradient with a seamless, equal-size rail
    of original product assets. */
-.hero#heroBanner{background:linear-gradient(118deg,#071039 0%,#172267 19%,#5b1a88 39%,#bd267c 55%,#213b9e 75%,#071039 100%)!important;background-size:300% 300%!important;background-position:0% 50%!important;animation:hero-gradient-pan 8s ease-in-out infinite alternate!important}
+.hero#heroBanner{background-image:linear-gradient(118deg,#071039 0%,#172267 19%,#5b1a88 39%,#bd267c 55%,#213b9e 75%,#071039 100%)!important;background-size:300% 300%!important;animation:hero-gradient-pan 8s ease-in-out infinite alternate!important}
 .hero#heroBanner .hero-slides,.hero#heroBanner .hero-slide{background:transparent!important;background-image:none!important}
 .hero#heroBanner:before{background:linear-gradient(120deg,rgba(0,193,255,.16),rgba(255,71,218,.28),rgba(255,218,67,.12),rgba(0,193,255,.16));background-size:260% 100%;animation:hero-gradient-overlay-pan 6.5s ease-in-out infinite alternate!important;opacity:1!important}
 .hero-product-stage{top:26%!important;left:0!important;width:100%!important;height:72%!important;transform:none!important;overflow:hidden!important;display:block!important;mask-image:linear-gradient(90deg,transparent 0%,#000 5%,#000 95%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 5%,#000 95%,transparent 100%)}
@@ -2149,3 +2149,71 @@ body.is-scrolling .hero#heroBanner:before{animation-play-state:running!important
 .tag--top-rated{background:linear-gradient(135deg,#166534,#4ade80)!important}
 @keyframes tag-blink{0%,55%,100%{opacity:1}75%{opacity:.15}}
 @media(prefers-reduced-motion:reduce){.tag--hot-pick,.tag--trending{animation:none!important}}
+
+/* ============================================================
+   Hero container background: continuous moving purple/pink
+   gradient, same technique as the main page background
+   (explicit longhand properties + non-important background-position
+   so the animation can actually drive it — a shorthand `background:`
+   with !important elsewhere was silently locking position at 0% 0%).
+   ============================================================ */
+.hero#heroBanner{
+  background-image:linear-gradient(120deg,
+    #1a0f3d 0%,
+    #4a1a7a 22%,
+    #a3197e 44%,
+    #d1428f 60%,
+    #7a1f8f 78%,
+    #1a0f3d 100%
+  )!important;
+  background-size:280% 280%!important;
+  background-repeat:no-repeat!important;
+  background-position:0% 30%;
+  animation:hero-purple-pink-cycle 10s ease-in-out infinite!important;
+}
+@keyframes hero-purple-pink-cycle{
+  0%{background-position:0% 30%}
+  25%{background-position:60% 55%}
+  50%{background-position:100% 25%}
+  75%{background-position:40% 60%}
+  100%{background-position:0% 30%}
+}
+@media(prefers-reduced-motion:reduce){.hero#heroBanner{animation:none!important}}
+
+/* ============================================================
+   Hero background: continuous moving purple/pink gradient.
+   Uses a real oversized child layer animated via transform
+   (not background-position) — this element has proven resistant
+   to background-position animation specifically in this project,
+   while transform-based motion has been reliable everywhere else.
+   ============================================================ */
+.hero-gradient-layer{
+  position:absolute;
+  top:-60%;
+  left:-60%;
+  width:220%;
+  height:220%;
+  z-index:0;
+  pointer-events:none;
+  background-image:linear-gradient(120deg,
+    #1a0f3d 0%,
+    #4a1a7a 20%,
+    #a3197e 40%,
+    #d1428f 55%,
+    #a3197e 70%,
+    #4a1a7a 85%,
+    #1a0f3d 100%
+  );
+  background-size:100% 100%;
+  animation:hero-gradient-layer-drift 10s ease-in-out infinite;
+  will-change:transform;
+}
+@keyframes hero-gradient-layer-drift{
+  0%{transform:translate(0,0)}
+  25%{transform:translate(18%,10%)}
+  50%{transform:translate(30%,-8%)}
+  75%{transform:translate(10%,14%)}
+  100%{transform:translate(0,0)}
+}
+.hero#heroBanner .hero-slides,.hero#heroBanner .hero-product-stage,.hero#heroBanner .hero-typewriter{position:relative;z-index:1}
+@media(prefers-reduced-motion:reduce){.hero-gradient-layer{animation:none!important}}
