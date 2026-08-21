@@ -1003,6 +1003,13 @@ body{background:#2452b8}
   .hero-logo-overlay__image{animation:none!important;transform:translate3d(-50%,-50%,0)}
 }
 
+/* Hero banner assets are already composed at 1584×396. Keep each complete
+   image inside the existing hero frame with no overlay, crop, or bleed. */
+.hero#heroBanner .hero-slides{inset:0!important;overflow:hidden!important;border-radius:inherit!important}
+.hero#heroBanner .hero-slide{inset:0!important;background-size:100% 100%!important;background-position:center!important;transform:none!important}
+.hero#heroBanner .hero-slide.is-active{animation:none!important;transform:none!important}
+.hero#heroBanner .hero-logo-overlay{display:none!important}
+
 /* One global cadence keeps every product-card cart sticker appearing and
    disappearing together, including cards rendered after a tab change. */
 .add-cart{
