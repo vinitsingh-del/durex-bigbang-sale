@@ -272,25 +272,9 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
    approved sale messages without changing the hero card geometry. */
 (()=>{
   const textEl=document.querySelector('#heroTypeText');
-  const hero=document.querySelector('#heroBanner');
-  let logo=document.querySelector('#heroLogoBeat');
-  if(!logo&&hero){
-    logo=document.createElement('div');logo.id='heroLogoBeat';logo.className='hero-logo-beat';logo.setAttribute('aria-hidden','true');
-    logo.innerHTML='<img src="assets/bigbang-sale-logo.webp" alt="">';hero.appendChild(logo);
-  }
   if(!textEl)return;
   const phrases=['PRICES LOUD.','PLEASURE LOUDER.','UP TO 69% OFF','ENTER THE SALE.'];
   let phrase=0,pos=0,deleting=false;
-  const logoBeat=()=>{
-    textEl.textContent='';
-    hero?.classList.add('logo-beat-active');
-    logo?.classList.add('is-active');
-    setTimeout(()=>{
-      hero?.classList.remove('logo-beat-active');
-      logo?.classList.remove('is-active');
-      phrase=3;pos=0;deleting=false;setTimeout(tick,260);
-    },2000);
-  };
   const tick=()=>{
     const value=phrases[phrase];
     textEl.textContent=value.slice(0,pos);
@@ -298,7 +282,6 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
     if(!deleting&&pos<value.length)pos++;
     else if(deleting&&pos>0)pos--;
     else if(!deleting){
-      if(phrase===2){logoBeat();return}
       deleting=true;delay=phrase===3?1800:1450
     }
     else{deleting=false;phrase=(phrase+1)%phrases.length;delay=260}

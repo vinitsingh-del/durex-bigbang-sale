@@ -2304,3 +2304,21 @@ body.is-scrolling .hero#heroBanner:before{animation-play-state:running!important
     top:-7px!important;
   }
 }
+
+
+/* Root-cause hero crop correction: the gradient stacking rule above made the
+   rail stage relative and pushed it below the fixed hero viewport. Restore the
+   original absolute stage, keep the rail at its designed baseline, and make
+   the centre zoom grow upward so products and discount pills remain complete. */
+.hero#heroBanner .hero-product-stage{
+  position:absolute!important;
+}
+.hero#heroBanner .hero-product-track{
+  top:0!important;
+}
+.hero#heroBanner .hero-product-item img{
+  transform-origin:center bottom!important;
+}
+.hero#heroBanner .hero-logo-beat{
+  display:none!important;
+}
