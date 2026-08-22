@@ -2354,3 +2354,15 @@ body.cart-open{overflow:hidden}
 .cart-empty p{margin:8px 0 18px;color:#5b6f81;font-size:12px}
 .cart-empty a{display:inline-block;padding:11px 17px;border-radius:999px;background:#07318d;color:#fff;text-transform:uppercase;font:800 10px One,Arial,sans-serif}
 @media(max-width:520px){.cart-drawer{padding:18px;width:100vw}.cart-drawer__head h2{font-size:22px}.cart-line{grid-template-columns:70px 1fr}.cart-line__media{height:76px}}
+
+/* One price-adjacent discount system: glossy navy pill from approved sample 01. */
+.price-current{display:flex;align-items:center;gap:7px;min-width:0;white-space:nowrap}
+.price-current>b{flex:0 0 auto}
+.sale-discount{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;height:20px;padding:0 7px;border:2px solid #fff;border-radius:999px;background:linear-gradient(170deg,#1974e8 0%,#07318d 34%,#06164d 72%,#020927 100%);color:#fff;box-shadow:0 0 0 1px #1767d3,0 3px 7px #00114645,inset 0 1px 2px #dff8ffcc;font-style:normal;font-family:One,Arial,sans-serif;font-weight:800;line-height:1;text-transform:uppercase;letter-spacing:.02em;white-space:nowrap}
+.sale-discount:before{content:"";position:absolute;z-index:0;top:-45%;left:3%;width:72%;height:74%;border-radius:50%;background:linear-gradient(180deg,#ffffffbd,transparent);transform:rotate(-7deg);pointer-events:none}
+.sale-discount strong,.sale-discount span{position:relative;z-index:1;font:800 8px/1 One,Arial,sans-serif;color:#fff}
+.sale-discount strong{padding-right:5px;font-size:10px}
+.sale-discount span{padding-left:5px;border-left:1px solid #ffffffb8;letter-spacing:.05em}
+.sale-catalog .sale-discount{box-shadow:0 0 0 1px #53d9ff,0 3px 9px #00114670,inset 0 1px 2px #dff8ffdd}
+.bundle2-info .price-current{gap:6px}
+@media(max-width:680px){.price-current{gap:5px}.sale-discount{height:17px;padding:0 5px;border-width:1.5px}.sale-discount strong{padding-right:4px;font-size:8px}.sale-discount span{padding-left:4px;font-size:6.5px}.bundle2-info .sale-discount{transform:scale(.92);transform-origin:left center}}

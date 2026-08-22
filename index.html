@@ -79,13 +79,18 @@ const productPages=Object.freeze({
   'Durex Play A-Game':'https://www.durexindia.com/products/durex-massagers-play-a-game'
 });
 const productURL=name=>productPages[name]||'https://www.durexindia.com/search?q='+encodeURIComponent(name);
+const discountSticker=tag=>{
+  if(!/off/i.test(tag||''))return '';
+  const value=String(tag).replace(/\s*off\s*$/i,'').trim();
+  return '<em class="sale-discount" aria-label="'+value+' off"><strong>'+value+'</strong><span>OFF</span></em>';
+};
 const cardHTML=([name,img,price,mrp,tag],video='')=>{
   const isDiscount=/off/i.test(tag||'');
   const cornerTag=tag&&!isDiscount?(tag==='Sale pick'?'Bestseller':tag):'';
   const subLine=mrp?'<div class="price-sub"><s>'+mrp+'</s></div>':'';
   const media=video?'<video src="'+video+'" poster="'+productImage(img)+'" autoplay muted loop playsinline preload="auto" aria-label="'+name+' product video" style="display:block;width:100%;height:100%;object-fit:cover"></video>':'<img src="'+productImage(img)+'" alt="'+name+'" loading="lazy">';
   const safeName=name.replace(/"/g,'&quot;');
-  return '<article class="card" data-product-card data-product-name="'+safeName+'" data-product-price="'+price+'" data-product-url="'+productURL(name)+'" tabindex="0" role="link" aria-label="View '+safeName+'"><div class="media">'+media+(cornerTag?'<span class="tag">'+cornerTag+'</span>':'')+'</div><div class="info"><p>Durex Sale Pick</p><h3>'+name+'</h3><div class="bottom"><div class="price-row"><b>'+price+'</b>'+subLine+'</div><button class="add" data-add aria-label="Add '+name+' to cart"><span class="add-label">Add to cart</span><span class="add-cart" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20.5" r="1.4" fill="#fff" stroke="none"/><circle cx="17.5" cy="20.5" r="1.4" fill="#fff" stroke="none"/><path d="M2.5 3h2l2.5 12.4a2 2 0 0 0 2 1.6h8.3a2 2 0 0 0 2-1.55L21 8H6.2"/></svg></span></button></div></div></article>';
+  return '<article class="card" data-product-card data-product-name="'+safeName+'" data-product-price="'+price+'" data-product-url="'+productURL(name)+'" tabindex="0" role="link" aria-label="View '+safeName+'"><div class="media">'+media+(cornerTag?'<span class="tag">'+cornerTag+'</span>':'')+'</div><div class="info"><p>Durex Sale Pick</p><h3>'+name+'</h3><div class="bottom"><div class="price-row"><div class="price-current"><b>'+price+'</b>'+discountSticker(tag)+'</div>'+subLine+'</div><button class="add" data-add aria-label="Add '+name+' to cart"><span class="add-label">Add to cart</span><span class="add-cart" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20.5" r="1.4" fill="#fff" stroke="none"/><circle cx="17.5" cy="20.5" r="1.4" fill="#fff" stroke="none"/><path d="M2.5 3h2l2.5 12.4a2 2 0 0 0 2 1.6h8.3a2 2 0 0 0 2-1.55L21 8H6.2"/></svg></span></button></div></div></article>';
 };
 const markup=product=>cardHTML(product);
 const massagerVideos=['assets/c6252565906c.mp4','assets/ca0ffa202f1c.mp4','assets/06314e5975c2.webm','assets/e17e58c121cb.webm'];
@@ -206,9 +211,9 @@ document.querySelector('.close').onclick=()=>document.querySelector('#notice').r
     document.querySelector('#bundle2Steps').innerHTML=dots+'<span class="bundle2-line '+(picked.length>=need?'is-done':'')+'"></span><span class="bundle2-dot bundle2-dot--set '+(picked.length>=need?'is-done':'')+'">SET</span>';
   };
   const renderRow=()=>{
-    row.innerHTML=pool.map(([name,img,price],i)=>{
+    row.innerHTML=pool.map(([name,img,price,mrp,tag],i)=>{
       const on=picked.includes(i);
-      return '<article class="bundle2-card'+(on?' is-picked':'')+'" data-i="'+i+'"><span class="bundle2-check" aria-hidden="true">'+(on?'✓':'')+'</span><div class="bundle2-media"><img src="'+productImage(img)+'" alt="'+name+'" loading="lazy"></div><div class="bundle2-info"><p>'+name+'</p><b>'+price+'</b></div></article>';
+      return '<article class="bundle2-card'+(on?' is-picked':'')+'" data-i="'+i+'"><span class="bundle2-check" aria-hidden="true">'+(on?'✓':'')+'</span><div class="bundle2-media"><img src="'+productImage(img)+'" alt="'+name+'" loading="lazy"></div><div class="bundle2-info"><p>'+name+'</p><div class="price-current"><b>'+price+'</b>'+discountSticker(tag)+'</div></div></article>';
     }).join('');
   };
   const renderSummary=()=>{
