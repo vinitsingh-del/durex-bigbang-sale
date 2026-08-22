@@ -2286,3 +2286,21 @@ body.is-scrolling .hero#heroBanner:before{animation-play-state:running!important
     max-height:88%!important;
   }
 }
+
+
+/* Exact vertical crop fix only: keep the hero frame/mask unchanged and
+   lift the full product rail above the lower floor/border line. */
+.hero#heroBanner .hero-product-stage{
+  overflow:hidden!important;
+  mask-image:linear-gradient(90deg,transparent 0%,#000 5%,#000 95%,transparent 100%)!important;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 5%,#000 95%,transparent 100%)!important;
+}
+.hero#heroBanner .hero-product-track{
+  position:relative!important;
+  top:-10px!important;
+}
+@media(max-width:680px){
+  .hero#heroBanner .hero-product-track{
+    top:-7px!important;
+  }
+}
