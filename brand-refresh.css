@@ -2789,8 +2789,14 @@ body main .quick-links-head {
   padding: 0 !important;
   transform: none !important;
   object-fit: contain !important;
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
   animation: none !important;
-  opacity: 1 !important;
+  opacity: 1;
+  will-change: opacity, scale;
 }
 @media (max-width: 680px) {
   .card .media > img.tag--top-rated.tag--art,
