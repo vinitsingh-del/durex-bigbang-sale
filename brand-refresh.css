@@ -2719,3 +2719,16 @@ body main :is(section:has(.compare),#afterLubes,#lubes,#condoms,#massagers,#perf
     transform-origin: center 45% !important;
   }
 }
+
+/* Alignment fix — center THE 69 STORE title/intro and Find-Your-Fix header
+   on both desktop and mobile. High specificity to beat all earlier rules. */
+body main .sale-catalog .sale-intro,
+body main section.sale-catalog .sale-intro {
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+body main .quick-links-head {
+  justify-content: center !important;
+  text-align: center !important;
+}
