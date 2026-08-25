@@ -2478,16 +2478,29 @@ body.cart-open{overflow:hidden}
 .massagers-reel-card{scroll-snap-align:start}
 .massagers-reel-card .reel-meta{gap:6px!important;padding-bottom:2px}
 .massagers-reel-card .reel-add{
-  margin-top:6px;padding:8px 10px;min-height:0;
+  margin-top:6px;padding:8px 12px!important;min-height:0;
   background:linear-gradient(135deg,#0a58d0,#07318d)!important;
   color:#fff!important;border:0!important;border-radius:10px!important;
   font:800 10px One,Arial!important;letter-spacing:.05em!important;text-transform:uppercase!important;
-  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  display:inline-flex!important;align-items:center;justify-content:center!important;gap:6px;
   box-shadow:0 4px 10px rgba(7,49,141,.35);cursor:pointer;
-  align-self:flex-start;
+  align-self:stretch!important;width:100%!important;
+  padding-right:12px!important;padding-left:12px!important;
 }
 .massagers-reel-card .reel-add:hover{filter:brightness(1.08)}
-.massagers-reel-card .reel-add .add-cart{display:inline-grid;place-items:center}
+.massagers-reel-card .reel-add .add-label{margin:0!important}
+/* Undo the absolute-positioned red circle for reel-cards — inline the icon so
+   it can't overhang past the card's rounded corner and get clipped. */
+.massagers-reel-card .reel-add .add-cart{
+  position:relative!important;
+  right:auto!important;top:auto!important;
+  transform:none!important;
+  width:20px!important;height:20px!important;
+  border:1.5px solid #fff!important;
+  animation:none!important;
+  flex:0 0 20px;
+}
+.massagers-reel-card .reel-add .add-cart svg{width:11px!important;height:11px!important}
 .mass-arrow--prev,.mass-arrow--next{
   position:absolute;top:50%;transform:translateY(-50%);z-index:5;
   width:36px;height:36px;display:grid;place-items:center;
