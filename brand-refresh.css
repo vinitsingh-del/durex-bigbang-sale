@@ -2531,3 +2531,13 @@ body.cart-open{overflow:hidden}
   }
   .massagers-reel-card .reel-add .add-cart svg{width:9px!important;height:9px!important}
 }
+
+/* Fix: earlier rules set .card{overflow:visible!important} paired with a
+   fixed aspect-ratio to prevent content clipping. Aspect-ratio is now auto,
+   so we can safely restore overflow:hidden — and we need to, because the
+   child .info div has border-radius:0 with a white background, and its
+   square bottom corners were poking through .card's rounded corner and
+   reading as a "square behind" the card. */
+.card, .sale-catalog .card {
+  overflow: hidden !important;
+}
