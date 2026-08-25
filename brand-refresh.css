@@ -2377,3 +2377,60 @@ body.cart-open{overflow:hidden}
 }
 .hero#heroBanner .hero-product-stage::-webkit-scrollbar{display:none!important;height:0!important}
 .hero-product-item{cursor:pointer!important}
+
+/* ============================================================
+   1) Add to Cart: blue everywhere (was yellow on most cards, blue
+      only on sale-catalog tab cards) — unify to blue, bump font size
+      up across every context.
+   2) Discount "% OFF" badge: green instead of blue.
+   ============================================================ */
+.add,.card .add,.bottom .add,.sale-catalog .card .add{
+  background:linear-gradient(170deg,#1974e8 0%,#07318d 55%,#06164d 100%)!important;
+  color:#fff!important;
+}
+.add,.card .add,.bottom .add{font-size:13px!important}
+.sale-catalog .card .add{font-size:11.5px!important}
+@media(max-width:680px){
+  .add,.card .add,.bottom .add{font-size:11px!important}
+  .sale-catalog .card .add{font-size:10.5px!important}
+}
+
+.sale-discount{
+  background:linear-gradient(170deg,#1a9e4b 0%,#0d6b32 34%,#0a4a24 72%,#052e16 100%)!important;
+  box-shadow:0 0 0 1px #22c55e,0 3px 7px #00230f45,inset 0 1px 2px #d7fce6cc!important;
+}
+.sale-catalog .sale-discount{box-shadow:0 0 0 1px #4ade80,0 3px 9px #00230f70,inset 0 1px 2px #d7fce6dd!important}
+
+/* ============================================================
+   Mobile: Bestsellers / Just Launched / Massagers grids converted
+   to horizontal scroll, matching the Condoms/Lubes/Performance/
+   Playthings rails (which already scroll on both mobile and
+   desktop). Desktop is untouched — those sections stay a static
+   grid there, exactly as before.
+   ============================================================ */
+@media(max-width:680px){
+  .cards:not(.sale-catalog .cards){
+    display:flex!important;
+    grid-template-columns:none!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    scroll-snap-type:x mandatory!important;
+    -webkit-overflow-scrolling:touch!important;
+    scrollbar-width:none!important;
+    gap:10px!important;
+    padding:2px 0 8px!important;
+  }
+  .cards:not(.sale-catalog .cards)::-webkit-scrollbar{display:none!important}
+  .cards:not(.sale-catalog .cards) .card{
+    flex:0 0 172.5px!important;
+    width:172.5px!important;
+    max-width:none!important;
+    scroll-snap-align:start!important;
+  }
+}
+
+/* Defensive hardening: guarantee every card and its media area stays
+   rounded/clipped consistently, including video-based cards. */
+.card{border-radius:15px!important}
+.card .media{border-radius:15px 15px 0 0!important;overflow:hidden!important}
+.card .media video{border-radius:0!important}
