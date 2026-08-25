@@ -2532,20 +2532,17 @@ body.cart-open{overflow:hidden}
   .massagers-reel-card .reel-add .add-cart svg{width:9px!important;height:9px!important}
 }
 
-/* Fix: earlier rules set .card{overflow:visible!important} paired with a
-   fixed aspect-ratio to prevent content clipping. Aspect-ratio is now auto,
-   so we can safely restore overflow:hidden — and we need to, because the
-   child .info div has border-radius:0 with a white background, and its
-   square bottom corners were poking through .card's rounded corner and
-   reading as a "square behind" the card. Ultra-high specificity + last-in-
-   file so it beats every earlier `.card`/`.sale-catalog .card` !important
-   rule regardless of load order. */
-body .card.card,
-body .sale-catalog .card.card,
-body .cards .card.card,
-body .rail .card.card,
-body [data-cards] .card.card {
-  overflow: hidden !important;
-  overflow-x: hidden !important;
-  overflow-y: hidden !important;
+/* Fix: the child .info div was rendering as a "square behind" the card
+   because .info has border-radius:0 with a white background, and .card is
+   overflow:visible (intentionally — the first sale-catalog card needs the
+   SALE sticker to overflow outside the top-left corner). Rounding .info's
+   BOTTOM corners to match .card's radius stops the square peek-through
+   without touching overflow, so the SALE sticker still works. */
+body .card > .info,
+body .sale-catalog .card > .info,
+body .cards .card > .info,
+body .rail .card > .info,
+body [data-cards] .card > .info {
+  border-bottom-left-radius: 15px !important;
+  border-bottom-right-radius: 15px !important;
 }
