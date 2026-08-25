@@ -1187,10 +1187,17 @@ body.is-loading{overflow:hidden}
 }
 
 /* Preserve the complete portrait product video inside the existing media boxes. */
-.card .media video,
-.compare .compare-pic video{
+.card .media video{
   object-fit:contain!important;
   object-position:center center!important;
+}
+.compare .compare-pic video{
+  object-fit:cover!important;
+  object-position:center center!important;
+}
+.compare .compare-pic img{
+  object-fit:cover!important;
+  padding:0!important;
 }
 
 /* ============================================================
