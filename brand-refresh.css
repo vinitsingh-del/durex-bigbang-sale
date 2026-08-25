@@ -2773,7 +2773,9 @@ body main .quick-links-head {
    product-image rule so the sticker retains label sizing and never inherits
    the product image hover/zoom treatment. */
 .card .media > img.tag--top-rated.tag--art,
-.card:hover .media > img.tag--top-rated.tag--art {
+.card:hover .media > img.tag--top-rated.tag--art,
+.card .media > img.tag--value-pick.tag--art,
+.card:hover .media > img.tag--value-pick.tag--art {
   top: 9px !important;
   right: 9px !important;
   bottom: auto !important;
@@ -2785,10 +2787,14 @@ body main .quick-links-head {
   padding: 0 !important;
   transform: none !important;
   object-fit: contain !important;
+  animation: none !important;
+  opacity: 1 !important;
 }
 @media (max-width: 680px) {
   .card .media > img.tag--top-rated.tag--art,
-  .card:hover .media > img.tag--top-rated.tag--art {
+  .card:hover .media > img.tag--top-rated.tag--art,
+  .card .media > img.tag--value-pick.tag--art,
+  .card:hover .media > img.tag--value-pick.tag--art {
     top: 7px !important;
     right: 7px !important;
     width: 72px !important;

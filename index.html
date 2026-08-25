@@ -120,13 +120,14 @@ function paintExtraTags(){
         painted.style.setProperty('animation','none','important');
         painted.style.setProperty('opacity','1','important');
         if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-          painted.animate([{translate:'0 0'},{translate:'0 -4px'},{translate:'0 0'}],{duration:3200,iterations:Infinity,easing:'ease-in-out'});
+          painted.style.setProperty('transform-origin','center','important');
+          painted.animate([{scale:'1'},{scale:'1.08'},{scale:'1'}],{duration:1200,iterations:Infinity,easing:'ease-in-out'});
         }
       }
     }
   };
   paintByName('Durex Play Buzzy Rabbit','tag--top-rated','Smooth Operator','assets/smooth-operator-sticker.png');
-  paintByName('Durex Play Wild Wand','tag--value-pick','Value Pick');
+  paintByName('Durex Play Wild Wand','tag--value-pick','Self Love','assets/self-love-sticker.png');
   paintByName('Durex Intense Vibe Ring','tag--limited-stock','Limited Stock');
 }
 paintExtraTags();
