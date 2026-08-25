@@ -2768,3 +2768,30 @@ body main .quick-links-head {
     drop-shadow(0 8px 22px rgba(6, 20, 97, 0.42))
     drop-shadow(0 0 18px rgba(170, 110, 240, 0.45)) !important;
 }
+
+/* Final Buzzy Rabbit campaign-label lock. Keep this after every global
+   product-image rule so the sticker retains label sizing and never inherits
+   the product image hover/zoom treatment. */
+.card .media > img.tag--top-rated.tag--art,
+.card:hover .media > img.tag--top-rated.tag--art {
+  top: 9px !important;
+  right: 9px !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: 96px !important;
+  max-width: 32% !important;
+  height: auto !important;
+  max-height: none !important;
+  padding: 0 !important;
+  transform: none !important;
+  object-fit: contain !important;
+}
+@media (max-width: 680px) {
+  .card .media > img.tag--top-rated.tag--art,
+  .card:hover .media > img.tag--top-rated.tag--art {
+    top: 7px !important;
+    right: 7px !important;
+    width: 72px !important;
+    max-width: 34% !important;
+  }
+}
