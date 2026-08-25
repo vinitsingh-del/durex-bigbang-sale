@@ -2702,3 +2702,20 @@ body main :is(section:has(.compare),#afterLubes,#lubes,#condoms,#massagers,#perf
   grid-row: 1;
   justify-self: end;
 }
+
+/* Mobile-only product image zoom: 1.15× scale on shop-the-sale product images
+   so the package reads punchier on small screens. Scoped strictly to <680px
+   viewport and to .card .media img (product cards only) — desktop unchanged,
+   videos unchanged, Pick Your Pleasure/Massagers reel-cards untouched.
+   transform-origin sits at 45% Y so the product front label stays centered
+   in the visible frame instead of drifting to the bottom edge on crop. */
+@media (max-width: 680px) {
+  body main .card .media img,
+  body main .sale-catalog .card .media img,
+  body main .rail .card .media img,
+  body main #wanted .card .media img,
+  body main #launchCards .card .media img {
+    transform: scale(1.15) !important;
+    transform-origin: center 45% !important;
+  }
+}
