@@ -793,12 +793,13 @@ body{background:#2452b8}
 .hero-slide-text{position:relative;margin:0;font:800 clamp(26px,4.6vw,64px)/1.05 One,Arial;letter-spacing:-.01em;text-transform:uppercase;color:#fff;-webkit-text-fill-color:#fff;text-shadow:-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,2px 2px 0 #000,0 6px 18px #00000070;max-width:22ch}
 @media(max-width:680px){.hero-slide-text{font-size:clamp(20px,7.2vw,34px);-webkit-text-stroke:0}}
 @media(prefers-reduced-motion:reduce){.hero-slide{transition:none}.hero-slide.is-active{animation:none}}
-/* Retro border glow, cycling through the brand's blue / yellow / red palette */
-.hero{animation:hero-border-glow 6s ease-in-out infinite}
+/* Retro border glow removed — the red-orange keyframe was producing a visible
+   ring artifact at the top-left of the hero. Keeps the base drop shadow only. */
+.hero{animation:none}
 @keyframes hero-border-glow{
-  0%,100%{box-shadow:0 24px 50px #04134d75,0 0 0 5px #2f6fe066,0 0 34px 8px #2f6fe055}
-  33%{box-shadow:0 24px 50px #04134d75,0 0 0 5px #ffd23f66,0 0 34px 8px #ffd23f55}
-  66%{box-shadow:0 24px 50px #04134d75,0 0 0 5px #ff5c3d66,0 0 34px 8px #ff5c3d55}
+  0%,100%{box-shadow:0 24px 50px #04134d75}
+  33%{box-shadow:0 24px 50px #04134d75}
+  66%{box-shadow:0 24px 50px #04134d75}
 }
 @media(prefers-reduced-motion:reduce){.hero{animation:none}}
 
@@ -2512,3 +2513,21 @@ body.cart-open{overflow:hidden}
 .mass-arrow--next{right:6px}
 .mass-arrow--prev:hover,.mass-arrow--next:hover{background:#00113fdd}
 @media(max-width:680px){.mass-arrow--prev,.mass-arrow--next{width:30px;height:30px;font-size:16px}}
+
+/* Mobile-only: reel-card shrinks to 132px, so scale the ATC button down
+   proportionally — smaller font, tighter padding, smaller icon — so nothing
+   overflows the card's rounded corner. Scoped to .massagers-reel-card only. */
+@media(max-width:680px){
+  .massagers-reel-card .reel-add{
+    font:800 8.5px One,Arial!important;
+    padding:6px 8px!important;
+    gap:4px!important;
+    border-radius:8px!important;
+  }
+  .massagers-reel-card .reel-add .add-cart{
+    width:16px!important;height:16px!important;
+    flex:0 0 16px!important;
+    border-width:1.2px!important;
+  }
+  .massagers-reel-card .reel-add .add-cart svg{width:9px!important;height:9px!important}
+}
