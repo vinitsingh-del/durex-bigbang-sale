@@ -2546,3 +2546,53 @@ body [data-cards] .card > .info {
   border-bottom-left-radius: 15px !important;
   border-bottom-right-radius: 15px !important;
 }
+
+/* ============================================================
+   SECTION SPACING SPEC (Neeraj — Nov 5).
+   Uniform 18px top padding across every top-level content section.
+   Desktop-only 8px exceptions between:
+     - THE 69 STORE (sale-catalog) → Shop by Category (quick-links)
+     - Massagers → Performance
+   Reels → Footer: 56px desktop / 38px mobile.
+   Body prefix bumps specificity above competing !important rules.
+   ============================================================ */
+body #heroBanner,
+body .sale-catalog,
+body .quick-links,
+body #wanted,
+body .launch,
+body main section:has(.compare),
+body #afterLubes,
+body #lubes,
+body #condoms,
+body #massagers,
+body #performance,
+body #playthings,
+body main section:has(.trust),
+body #reels {
+  padding-top: 18px !important;
+  margin-top: 0 !important;
+}
+
+/* Hero sits flush at page top */
+body #heroBanner {
+  padding-top: 0 !important;
+}
+
+/* Desktop-only 8px between the two flagged pairs */
+@media (min-width: 681px) {
+  body .quick-links,
+  body #performance {
+    padding-top: 8px !important;
+  }
+}
+
+/* Bottom spacing before footer */
+body #reels {
+  padding-bottom: 56px !important;
+}
+@media (max-width: 680px) {
+  body #reels {
+    padding-bottom: 38px !important;
+  }
+}
