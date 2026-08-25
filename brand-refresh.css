@@ -2795,3 +2795,10 @@ body main .quick-links-head {
     max-width: 34% !important;
   }
 }
+
+/* Hero product rail: reduce inter-item gap by another 10%.
+   Desktop 11px → 10px, mobile 5px → 4px. */
+.hero-product-track { gap: 10px !important; }
+@media (max-width: 680px) {
+  .hero-product-track { gap: 4px !important; }
+}
