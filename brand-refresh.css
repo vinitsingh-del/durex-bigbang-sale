@@ -2615,6 +2615,10 @@ body main .sale-catalog {
   padding-top: 18px !important;
   margin-top: 0 !important;
 }
+body main .sale-catalog {
+  padding-top: 8px !important;
+  margin-top: -12px !important;
+}
 body main .rewards {
   padding-top: 18px !important;
   padding-bottom: 18px !important;
@@ -2644,6 +2648,10 @@ body main .quick-links {
   body main .sale-catalog {
     padding-top: 18px !important;
     margin-top: 0 !important;
+  }
+  body main .sale-catalog {
+    padding-top: 8px !important;
+    margin-top: -12px !important;
   }
   body main .rewards {
     padding-top: 18px !important;
