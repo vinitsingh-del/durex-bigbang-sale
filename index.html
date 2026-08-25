@@ -407,22 +407,23 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
   const track=document.querySelector('.hero-product-track');
   if(!track)return;
   const products=[
-    ['hero-zip-buzzy-rabbit.png','Durex Play Buzzy Rabbit'],
-    ['hero-zip-a-game.png','Durex Play A-Game'],
-    ['hero-zip-elevate.png','Durex Elevate'],
     ['hero-zip-extra-time.png','Durex Extra Time'],
+    ['hero-zip-buzzy-rabbit.png','Durex Play Buzzy Rabbit'],
     ['hero-zip-extra-dots.png','Durex Extra Dots'],
-    ['hero-zip-extra-ribbed.webp','Durex Extra Ribbed'],
-    ['hero-zip-extra-thin.png','Durex Extra Thin'],
-    ['hero-zip-mutual-climax.png','Durex Mutual Climax'],
     ['hero-zip-real-feel.webp','Durex Real Feel'],
+    ['hero-zip-a-game.png','Durex Play A-Game'],
+    ['hero-zip-extra-ribbed.webp','Durex Extra Ribbed'],
+    ['hero-zip-elevate.png','Durex Elevate'],
+    ['hero-zip-wild-wand.png','Durex Play Wild Wand'],
     ['hero-zip-smooth-glide.png','Durex Smooth Glide'],
     ['hero-zip-vibe-ring.png','Durex Intense Vibe Ring'],
-    ['hero-zip-wild-wand.png','Durex Play Wild Wand']
+    ['hero-zip-mutual-climax.png','Durex Mutual Climax'],
+    ['hero-zip-extra-thin.png','Durex Extra Thin']
   ];
   track.innerHTML=[...products,...products].map(([src,alt])=>'<div class="hero-product-item"><img src="assets/'+src+'" alt="'+alt+'"><span class="hero-product-discount">UP TO 69% OFF</span></div>').join('');
   const items=[...track.children];
   const hero=document.querySelector('#heroBanner');
+  const stage=document.querySelector('.hero-product-stage');
   const updateCentre=()=>{
     if(!hero)return;
     const centre=hero.getBoundingClientRect().left+hero.getBoundingClientRect().width/2;
@@ -432,6 +433,61 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
     requestAnimationFrame(updateCentre);
   };
   requestAnimationFrame(updateCentre);
+
+  /* Auto-scroll driven by real scrollLeft (not a CSS transform animation) so
+     the user can grab and scroll the rail themselves at any time. Pauses
+     while the user is interacting, resumes automatically after a short
+     pause, and loops seamlessly since the product list is duplicated once. */
+  if(stage){
+    const speed=matchMedia('(max-width: 680px)').matches?38:34; // px/sec, matches prior animation pace
+    let paused=false,resumeTimer=null,lastTs=null,halfWidth=0;
+    const measure=()=>{halfWidth=track.scrollWidth/2};
+    measure();
+    addEventListener('resize',measure,{passive:true});
+    const pauseAutoScroll=()=>{
+      paused=true;
+      clearTimeout(resumeTimer);
+      resumeTimer=setTimeout(()=>{paused=false;lastTs=null},2200);
+    };
+    ['pointerdown','wheel','touchstart'].forEach(evt=>stage.addEventListener(evt,pauseAutoScroll,{passive:true}));
+    stage.addEventListener('scroll',()=>{
+      if(halfWidth>0){
+        if(stage.scrollLeft>=halfWidth)stage.scrollLeft-=halfWidth;
+        else if(stage.scrollLeft<=0)stage.scrollLeft+=halfWidth;
+      }
+    },{passive:true});
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+      const step=ts=>{
+        if(lastTs===null)lastTs=ts;
+        const dt=(ts-lastTs)/1000;
+        lastTs=ts;
+        if(!paused&&halfWidth>0){
+          stage.scrollLeft+=speed*dt;
+          if(stage.scrollLeft>=halfWidth)stage.scrollLeft-=halfWidth;
+        }
+        requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+  }
+
+  /* Click a product to jump to its category section on the page. */
+  const categoryFor=name=>{
+    if(/condom|extra time|extra dots|extra ribbed|extra thin|mutual climax|smooth glide/i.test(name))return'condoms';
+    if(/lube|real feel/i.test(name))return'lubes';
+    if(/elevate|performa/i.test(name))return'performance';
+    if(/rabbit|wand|vibe ring|massager/i.test(name))return'massagers';
+    if(/a-game|slide and ride|snap|card game|play/i.test(name))return'playthings';
+    return'sale-catalog';
+  };
+  items.forEach(item=>{
+    const img=item.querySelector('img');
+    if(!img)return;
+    item.addEventListener('click',()=>{
+      const id=categoryFor(img.alt||'');
+      document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
 })();
 </script><script>
 /* Keep the mobile sale controls out of the first two screens; Mood Now remains independent. */
@@ -545,7 +601,7 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
     document.body.classList.remove('is-loading');
     setTimeout(()=>preloader.remove(),650);
   };
-  const finishAfterMinimum=()=>setTimeout(finish,Math.max(0,1500-(performance.now()-started)));
+  const finishAfterMinimum=()=>setTimeout(finish,Math.max(0,1050-(performance.now()-started)));
   if(document.readyState==='complete')finishAfterMinimum();
   else addEventListener('load',finishAfterMinimum,{once:true});
   setTimeout(finish,4000);
