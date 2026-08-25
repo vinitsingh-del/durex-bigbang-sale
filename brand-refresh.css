@@ -2263,3 +2263,106 @@ body.is-scrolling .hero#heroBanner:before{animation-play-state:running!important
   }
   .hero-product-discount{bottom:2px!important}
 }
+
+
+/* Hero rail framing fix: let each contained product leave its item viewport
+   cleanly while the hero itself remains the no-bleed boundary. */
+.hero#heroBanner .hero-product-stage{
+  overflow:visible!important;
+  mask-image:none!important;
+  -webkit-mask-image:none!important;
+}
+.hero#heroBanner .hero-product-item{
+  overflow:visible!important;
+}
+.hero#heroBanner .hero-product-item img{
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  max-width:100%!important;
+  max-height:90%!important;
+}
+@media(max-width:680px){
+  .hero#heroBanner .hero-product-item img{
+    max-height:88%!important;
+  }
+}
+
+
+/* Exact vertical crop fix only: keep the hero frame/mask unchanged and
+   lift the full product rail above the lower floor/border line. */
+.hero#heroBanner .hero-product-stage{
+  overflow:hidden!important;
+  mask-image:linear-gradient(90deg,transparent 0%,#000 5%,#000 95%,transparent 100%)!important;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 5%,#000 95%,transparent 100%)!important;
+}
+.hero#heroBanner .hero-product-track{
+  position:relative!important;
+  top:-10px!important;
+}
+@media(max-width:680px){
+  .hero#heroBanner .hero-product-track{
+    top:-7px!important;
+  }
+}
+
+
+/* Root-cause hero crop correction: the gradient stacking rule above made the
+   rail stage relative and pushed it below the fixed hero viewport. Restore the
+   original absolute stage, keep the rail at its designed baseline, and make
+   the centre zoom grow upward so products and discount pills remain complete. */
+.hero#heroBanner .hero-product-stage{
+  position:absolute!important;
+}
+.hero#heroBanner .hero-product-track{
+  top:0!important;
+}
+.hero#heroBanner .hero-product-item img{
+  transform-origin:center bottom!important;
+}
+.hero#heroBanner .hero-logo-beat{
+  display:none!important;
+}
+/* Commerce behaviour only: product links and persistent cart drawer. */
+[data-product-card]{cursor:pointer}
+[data-product-card]:focus-visible{outline:2px solid #ffdf00;outline-offset:3px}
+body.cart-open{overflow:hidden}
+.cart-backdrop{position:fixed;z-index:9998;inset:0;background:#020a2fb8;opacity:0;transition:opacity .22s ease}
+.cart-backdrop.is-open{opacity:1}
+.cart-drawer{position:fixed;z-index:9999;top:0;right:0;width:min(430px,100vw);height:100dvh;padding:22px;background:#f6fbff;color:#06164d;box-shadow:-18px 0 54px #02092b66;transform:translateX(102%);transition:transform .28s ease;display:flex;flex-direction:column;overflow:hidden}
+.cart-drawer.is-open{transform:translateX(0)}
+.cart-drawer__head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding-bottom:17px;border-bottom:1px solid #07318d22}
+.cart-drawer__head p{margin:0 0 4px;color:#345172;text-transform:uppercase;letter-spacing:.12em;font:800 9px One,Arial,sans-serif}
+.cart-drawer__head h2{margin:0;font:800 25px/.95 One,Arial,sans-serif}
+.cart-drawer__head button{width:34px;height:34px;border:1px solid #07318d26;border-radius:50%;background:#fff;color:#06164d;font-size:24px;line-height:1;cursor:pointer}
+.cart-drawer__items{flex:1;min-height:0;overflow:auto;padding:6px 2px 6px 0}
+.cart-line{display:grid;grid-template-columns:78px 1fr;gap:13px;padding:14px 0;border-bottom:1px solid #07318d18}
+.cart-line__media{height:84px;border-radius:10px;background:#fff;overflow:hidden}
+.cart-line__media img{width:100%;height:100%;object-fit:contain;padding:6px}
+.cart-line__body{min-width:0;display:flex;flex-direction:column;align-items:flex-start}
+.cart-line__body>a{color:#06164d;font:800 13px/1.15 One,Arial,sans-serif}
+.cart-line__body>span{margin-top:5px;color:#345172;font-size:12px}
+.cart-line__controls{display:flex;align-items:center;gap:8px;margin-top:auto}
+.cart-line__controls button{min-width:26px;height:26px;padding:0;border:1px solid #07318d2e;border-radius:50%;background:#fff;color:#06164d;cursor:pointer}
+.cart-line__controls strong{min-width:16px;text-align:center;font:800 11px One,Arial,sans-serif}
+.cart-line__controls .cart-line__remove{width:auto;margin-left:4px;padding:0 4px;border:0;border-radius:0;background:none;color:#5b6f81;text-decoration:underline;font-size:10px}
+.cart-drawer__foot{padding-top:16px;border-top:1px solid #07318d22}
+.cart-total{display:flex;justify-content:space-between;align-items:center;font:800 16px One,Arial,sans-serif}
+.cart-drawer__foot>p{margin:6px 0 13px;color:#5b6f81;font-size:11px}
+.cart-drawer .yellow{width:100%;min-height:44px;border:0;border-radius:999px;background:#ffdf00;color:#06164d;text-transform:uppercase;font:800 11px One,Arial,sans-serif;cursor:pointer}
+.cart-empty{padding:42px 8px;text-align:center}
+.cart-empty b{font:800 19px One,Arial,sans-serif}
+.cart-empty p{margin:8px 0 18px;color:#5b6f81;font-size:12px}
+.cart-empty a{display:inline-block;padding:11px 17px;border-radius:999px;background:#07318d;color:#fff;text-transform:uppercase;font:800 10px One,Arial,sans-serif}
+@media(max-width:520px){.cart-drawer{padding:18px;width:100vw}.cart-drawer__head h2{font-size:22px}.cart-line{grid-template-columns:70px 1fr}.cart-line__media{height:76px}}
+
+/* One price-adjacent discount system: glossy navy pill from approved sample 01. */
+.price-current{display:flex;align-items:center;gap:7px;min-width:0;white-space:nowrap}
+.price-current>b{flex:0 0 auto}
+.sale-discount{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;height:20px;padding:0 7px;border:2px solid #fff;border-radius:999px;background:linear-gradient(170deg,#1974e8 0%,#07318d 34%,#06164d 72%,#020927 100%);color:#fff;box-shadow:0 0 0 1px #1767d3,0 3px 7px #00114645,inset 0 1px 2px #dff8ffcc;font-style:normal;font-family:One,Arial,sans-serif;font-weight:800;line-height:1;text-transform:uppercase;letter-spacing:.02em;white-space:nowrap}
+.sale-discount:before{content:"";position:absolute;z-index:0;top:-45%;left:3%;width:72%;height:74%;border-radius:50%;background:linear-gradient(180deg,#ffffffbd,transparent);transform:rotate(-7deg);pointer-events:none}
+.sale-discount strong,.sale-discount span{position:relative;z-index:1;font:800 8px/1 One,Arial,sans-serif;color:#fff}
+.sale-discount strong{padding-right:5px;font-size:10px}
+.sale-discount span{padding-left:5px;border-left:1px solid #ffffffb8;letter-spacing:.05em}
+.sale-catalog .sale-discount{box-shadow:0 0 0 1px #53d9ff,0 3px 9px #00114670,inset 0 1px 2px #dff8ffdd}
+.bundle2-info .price-current{gap:6px}
+@media(max-width:680px){.price-current{gap:5px}.sale-discount{height:17px;padding:0 5px;border-width:1.5px}.sale-discount strong{padding-right:4px;font-size:8px}.sale-discount span{padding-left:4px;font-size:6.5px}.bundle2-info .sale-discount{transform:scale(.92);transform-origin:left center}}
