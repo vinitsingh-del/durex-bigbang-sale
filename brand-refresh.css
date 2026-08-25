@@ -2155,6 +2155,23 @@ body.is-scrolling .hero#heroBanner:before{animation-play-state:running!important
 .tag--top-rated{background:linear-gradient(135deg,#166534,#4ade80)!important;animation:tag-blink-glow 1.8s ease-in-out infinite;--tag-glow:rgba(74,222,128,.85)}
 .tag--value-pick{background:linear-gradient(135deg,#1e3a8a,#3b82f6)!important;animation:tag-blink-glow 1.8s ease-in-out infinite;--tag-glow:rgba(59,130,246,.85)}
 .tag--limited-stock{background:linear-gradient(135deg,#701a75,#c026d3)!important;animation:tag-blink-glow 1.8s ease-in-out infinite;--tag-glow:rgba(192,38,212,.85)}
+.card .media .tag--top-rated.tag--art{
+  top:9px!important;
+  right:9px!important;
+  width:min(25%,104px)!important;
+  height:auto!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  object-fit:contain!important;
+  filter:drop-shadow(0 5px 5px rgba(0,19,77,.34));
+  pointer-events:none;
+}
+@media(max-width:680px){
+  .card .media .tag--top-rated.tag--art{right:7px!important;top:7px!important;width:min(28%,78px)!important}
+}
 @keyframes tag-blink-glow{
   0%,100%{opacity:1;box-shadow:0 2px 7px rgba(0,19,77,.4),0 0 10px 2px var(--tag-glow)}
   55%{opacity:1;box-shadow:0 2px 7px rgba(0,19,77,.4),0 0 10px 2px var(--tag-glow)}

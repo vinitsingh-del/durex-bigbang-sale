@@ -104,12 +104,17 @@ function paintExtraTags(){
   tabCards.forEach(c=>c.querySelectorAll('.tag--hot-pick,.tag--trending').forEach(t=>t.remove()));
   if(tabCards[0]&&!tabCards[0].querySelector('.tag'))tabCards[0].querySelector('.media')?.insertAdjacentHTML('beforeend','<span class="tag tag--hot-pick">Hot Pick</span>');
   if(tabCards[1]&&!tabCards[1].querySelector('.tag'))tabCards[1].querySelector('.media')?.insertAdjacentHTML('beforeend','<span class="tag tag--trending">Trending</span>');
-  const paintByName=(name,cls,label)=>{
+  const paintByName=(name,cls,label,imageSrc='')=>{
     document.querySelectorAll('.'+cls).forEach(t=>t.remove());
     const match=[...document.querySelectorAll('.card')].find(c=>!c.closest('#tabCards')&&c.querySelector('h3')?.textContent?.trim()===name);
-    if(match&&!match.querySelector('.tag'))match.querySelector('.media')?.insertAdjacentHTML('beforeend','<span class="tag '+cls+'">'+label+'</span>');
+    if(match&&!match.querySelector('.tag')){
+      const tag=imageSrc
+        ? '<img class="tag '+cls+' tag--art" src="'+imageSrc+'" alt="'+label+'">'
+        : '<span class="tag '+cls+'">'+label+'</span>';
+      match.querySelector('.media')?.insertAdjacentHTML('beforeend',tag);
+    }
   };
-  paintByName('Durex Play Buzzy Rabbit','tag--top-rated','Top Rated');
+  paintByName('Durex Play Buzzy Rabbit','tag--top-rated','This Bae Never Ghosts','assets/this-bae-never-ghosts-sticker.png');
   paintByName('Durex Play Wild Wand','tag--value-pick','Value Pick');
   paintByName('Durex Intense Vibe Ring','tag--limited-stock','Limited Stock');
 }
