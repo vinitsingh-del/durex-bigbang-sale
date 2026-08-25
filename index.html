@@ -439,7 +439,7 @@ document.addEventListener('error',event=>{const image=event.target;if(image.tagN
      while the user is interacting, resumes automatically after a short
      pause, and loops seamlessly since the product list is duplicated once. */
   if(stage){
-    const speed=matchMedia('(max-width: 680px)').matches?38:34; // px/sec, matches prior animation pace
+    const speed=matchMedia('(max-width: 680px)').matches?45.6:40.8; // px/sec, 20% faster than prior pace
     let paused=false,resumeTimer=null,lastTs=null,halfWidth=0;
     const measure=()=>{halfWidth=track.scrollWidth/2};
     measure();
