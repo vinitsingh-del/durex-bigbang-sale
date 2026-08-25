@@ -2775,7 +2775,9 @@ body main .quick-links-head {
 .card .media > img.tag--top-rated.tag--art,
 .card:hover .media > img.tag--top-rated.tag--art,
 .card .media > img.tag--value-pick.tag--art,
-.card:hover .media > img.tag--value-pick.tag--art {
+.card:hover .media > img.tag--value-pick.tag--art,
+.card .media > img.tag--limited-stock.tag--art,
+.card:hover .media > img.tag--limited-stock.tag--art {
   top: 9px !important;
   right: 9px !important;
   bottom: auto !important;
@@ -2794,7 +2796,9 @@ body main .quick-links-head {
   .card .media > img.tag--top-rated.tag--art,
   .card:hover .media > img.tag--top-rated.tag--art,
   .card .media > img.tag--value-pick.tag--art,
-  .card:hover .media > img.tag--value-pick.tag--art {
+  .card:hover .media > img.tag--value-pick.tag--art,
+  .card .media > img.tag--limited-stock.tag--art,
+  .card:hover .media > img.tag--limited-stock.tag--art {
     top: 7px !important;
     right: 7px !important;
     width: 72px !important;
