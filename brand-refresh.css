@@ -2537,7 +2537,15 @@ body.cart-open{overflow:hidden}
    so we can safely restore overflow:hidden — and we need to, because the
    child .info div has border-radius:0 with a white background, and its
    square bottom corners were poking through .card's rounded corner and
-   reading as a "square behind" the card. */
-.card, .sale-catalog .card {
+   reading as a "square behind" the card. Ultra-high specificity + last-in-
+   file so it beats every earlier `.card`/`.sale-catalog .card` !important
+   rule regardless of load order. */
+body .card.card,
+body .sale-catalog .card.card,
+body .cards .card.card,
+body .rail .card.card,
+body [data-cards] .card.card {
   overflow: hidden !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
 }
