@@ -649,8 +649,9 @@ body:before{background-image:radial-gradient(ellipse at 8% 12%,#d9fbff73 0,trans
 .placeholder-note{max-width:520px;margin:0 auto;color:#dff2ffcc;font-size:13px;line-height:1.5}
 
 /* 11. Explore control gets a directional arrow that flips when the panel opens */
-.mega-arrow{display:inline-block;margin-left:6px;font-size:10px;transition:transform .3s ease}
-.mobile-mega.open [data-mega-toggle] .mega-arrow{transform:rotate(180deg)}
+.mega-arrow{display:inline-block;margin-left:6px;font-size:12px;line-height:1;transition:transform .3s ease;animation:megaBlink 1.4s ease-in-out infinite}
+.mobile-mega.open [data-mega-toggle] .mega-arrow{transform:rotate(180deg);animation:none}
+@keyframes megaBlink{0%,100%{opacity:1;transform:translateY(0)}50%{opacity:.35;transform:translateY(-2px)}}
 
 /* 5 & 12. Category rail: header on top, real category art, one continuous revolving line */
 .quick-links{position:static!important;display:block!important;top:auto!important;grid-template-columns:none!important;padding:0!important;margin:30px 0 22px!important;background:none!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important}
@@ -752,8 +753,8 @@ body{background:#2452b8}
 .bundle2-row::-webkit-scrollbar{display:none}
 .bundle2-card{position:relative;flex:0 0 168px;border-radius:14px;overflow:hidden;background:#fff;border:1px solid #e5f6ffca;box-shadow:0 8px 18px #00105228;cursor:pointer;scroll-snap-align:start;transition:box-shadow .25s ease,transform .25s ease}
 .bundle2-card.is-picked{box-shadow:0 0 0 2px #ffdf00,0 10px 22px #0010522e;transform:translateY(-3px)}
-.bundle2-check{position:absolute;top:8px;right:8px;z-index:2;width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:#fff;border:1px solid #c9dcec;color:#07165a;font:800 11px One,Arial}
-.bundle2-card.is-picked .bundle2-check{background:#ffdf00;border-color:#ffdf00}
+.bundle2-check{position:absolute;top:8px;right:8px;z-index:2;width:24px;height:24px;display:grid;place-items:center;border-radius:50%;background:#07318d;border:1px solid #07318d;color:#fff;font:800 14px One,Arial;box-shadow:0 4px 10px rgba(7,49,141,.28);transition:background .18s ease,transform .18s ease}
+.bundle2-card.is-picked .bundle2-check{background:#0057ff;border-color:#0057ff;transform:scale(1.06);box-shadow:0 6px 14px rgba(0,87,255,.45)}
 .bundle2-media{height:150px;background:#eef6fb}
 .bundle2-media img{width:100%;height:100%;object-fit:contain;padding:12px}
 .bundle2-info{padding:10px 11px 12px}
@@ -2434,3 +2435,61 @@ body.cart-open{overflow:hidden}
 .card{border-radius:15px!important}
 .card .media{border-radius:15px 15px 0 0!important;overflow:hidden!important}
 .card .media video{border-radius:0!important}
+
+/* Task 5: Pick your pleasure — horizontal scroll (desktop + mobile) + glassmorphism cards */
+.compare{
+  display:flex!important;
+  grid-template-columns:none!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  gap:16px!important;
+  padding:6px 2px 14px!important;
+  scroll-snap-type:x mandatory!important;
+  -webkit-overflow-scrolling:touch!important;
+  scrollbar-width:none!important;
+}
+.compare::-webkit-scrollbar{display:none!important}
+.compare article{
+  flex:0 0 300px!important;
+  width:300px!important;
+  scroll-snap-align:start!important;
+  background:rgba(255,255,255,.14)!important;
+  border:1px solid rgba(255,255,255,.28)!important;
+  backdrop-filter:blur(18px) saturate(140%)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(140%)!important;
+  color:#fff!important;
+  box-shadow:0 10px 26px rgba(0,16,60,.20), inset 0 1px 0 rgba(255,255,255,.35)!important;
+}
+.compare article h3{color:#fff!important}
+.compare article p{color:rgba(255,255,255,.75)!important}
+.compare .compare-pic{background:rgba(255,255,255,.06)!important}
+@media(max-width:680px){
+  .compare{gap:12px!important;padding:6px 2px 12px!important}
+  .compare article{flex:0 0 84vw!important;width:84vw!important}
+}
+
+/* Task 4: Massagers reel-style — ATC button + arrow styling scoped to massagers rail */
+.massagers-reel-card{scroll-snap-align:start}
+.massagers-reel-card .reel-meta{gap:6px!important;padding-bottom:2px}
+.massagers-reel-card .reel-add{
+  margin-top:6px;padding:8px 10px;min-height:0;
+  background:linear-gradient(135deg,#0a58d0,#07318d)!important;
+  color:#fff!important;border:0!important;border-radius:10px!important;
+  font:800 10px One,Arial!important;letter-spacing:.05em!important;text-transform:uppercase!important;
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  box-shadow:0 4px 10px rgba(7,49,141,.35);cursor:pointer;
+  align-self:flex-start;
+}
+.massagers-reel-card .reel-add:hover{filter:brightness(1.08)}
+.massagers-reel-card .reel-add .add-cart{display:inline-grid;place-items:center}
+.mass-arrow--prev,.mass-arrow--next{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:5;
+  width:36px;height:36px;display:grid;place-items:center;
+  border:1px solid #ffffff40;border-radius:50%;
+  background:#00113fa8;color:#fff;font-size:20px;line-height:1;cursor:pointer;
+  backdrop-filter:blur(6px);
+}
+.mass-arrow--prev{left:6px}
+.mass-arrow--next{right:6px}
+.mass-arrow--prev:hover,.mass-arrow--next:hover{background:#00113fdd}
+@media(max-width:680px){.mass-arrow--prev,.mass-arrow--next{width:30px;height:30px;font-size:16px}}
