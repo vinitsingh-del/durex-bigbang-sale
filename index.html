@@ -116,7 +116,7 @@ function paintExtraTags(){
         : '<span class="tag '+cls+'">'+label+'</span>';
       match.querySelector('.media')?.insertAdjacentHTML('beforeend',tag);
       const painted=match.querySelector('.'+cls);
-      if(painted&&cls==='tag--top-rated'){
+      if(painted&&['tag--top-rated','tag--value-pick','tag--limited-stock'].includes(cls)){
         painted.style.setProperty('animation','none','important');
         painted.style.setProperty('opacity','1','important');
         if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
@@ -128,7 +128,7 @@ function paintExtraTags(){
   };
   paintByName('Durex Play Buzzy Rabbit','tag--top-rated','Smooth Operator','assets/smooth-operator-sticker.png');
   paintByName('Durex Play Wild Wand','tag--value-pick','Self Love','assets/self-love-sticker.png');
-  paintByName('Durex Intense Vibe Ring','tag--limited-stock','Limited Stock');
+  paintByName('Durex Intense Vibe Ring','tag--limited-stock','Chill Vibes, Safe Rides','assets/chill-vibes-sticker.png');
 }
 paintExtraTags();
 const best=document.querySelector('#wanted');best.querySelector('.kicker').textContent='Loved by the community';best.querySelector('.title').innerHTML='BESTSELLERS.<i>Start here.</i>';
