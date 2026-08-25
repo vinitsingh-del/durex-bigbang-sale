@@ -2596,3 +2596,73 @@ body #reels {
     padding-bottom: 38px !important;
   }
 }
+
+/* ============================================================
+   Section spacing normalization — 18px between all sections on
+   desktop and mobile. Two exceptions:
+     - Sale Catalog → Shop by Category (.quick-links) sits 8px
+       below on desktop / 18px on mobile
+     - Footer already sits 56px desktop / 38px mobile below Reels
+       (kept as-is)
+   Uses `body main` prefix + chained selectors for (0,2,2) specificity
+   to beat every earlier .section {padding-top:X!important} rule.
+   ============================================================ */
+body main .section,
+body main section.section,
+body main .wanted,
+body main .launch,
+body main .sale-catalog {
+  padding-top: 18px !important;
+  margin-top: 0 !important;
+}
+body main .rewards {
+  padding-top: 18px !important;
+  padding-bottom: 18px !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+body main .dark-showcase {
+  padding-top: 18px !important;
+  padding-bottom: 18px !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+body main .bundle {
+  margin-top: 18px !important;
+  margin-bottom: 0 !important;
+}
+body main .quick-links {
+  margin-top: 8px !important;
+  margin-bottom: 0 !important;
+}
+
+@media (max-width: 680px) {
+  body main .section,
+  body main section.section,
+  body main .wanted,
+  body main .launch,
+  body main .sale-catalog {
+    padding-top: 18px !important;
+    margin-top: 0 !important;
+  }
+  body main .rewards {
+    padding-top: 18px !important;
+    padding-bottom: 18px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  body main .dark-showcase {
+    padding-top: 18px !important;
+    padding-bottom: 18px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  body main .bundle {
+    margin-top: 18px !important;
+    margin-bottom: 0 !important;
+  }
+  body main .quick-links {
+    margin-top: 18px !important;
+    margin-bottom: 0 !important;
+  }
+}
