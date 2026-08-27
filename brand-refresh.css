@@ -2905,3 +2905,13 @@ body main .quick-links-head {
 @media(max-width:680px) and (prefers-reduced-motion:reduce){
   .tag--glow{animation:none!important}
 }
+
+/* Mobile-only heading polish: reduce View all by exactly 20% and reuse the
+   existing Just Launched blink on each section's companion subtitle. */
+@media(max-width:680px){
+  body main .heading > a{font-size:8.4px!important}
+  body main section h2 i{animation:store-blink 1.1s steps(2,end) infinite!important}
+}
+@media(max-width:680px) and (prefers-reduced-motion:reduce){
+  body main section h2 i{animation:none!important}
+}
