@@ -2765,19 +2765,20 @@ body main .quick-links-head {
   text-align: center !important;
 }
 
-/* Preloader fix: match main-page background gradient (same colors + same
-   page-gradient-flow animation), and soften the logo drop-shadow to a
-   brand-purple glow instead of a harsh white halo — the white glow was
-   revealing the PNG's rectangular transparency edges as a hard rim. */
+/* Preloader background: exact same active gradient and movement as the page. */
 .sale-preloader {
-  background:
-    radial-gradient(ellipse at 8% 12%, #d9fbff73 0, transparent 30%),
-    radial-gradient(ellipse at 90% 80%, #b56bd673 0, transparent 35%),
-    radial-gradient(ellipse at 48% 48%, #08a9c850 0, transparent 42%),
-    linear-gradient(135deg, #04195f, #075d9d 52%, #402477 100%) !important;
-  background-size: 210% 210% !important;
-  animation: page-gradient-flow 11s linear infinite !important;
+  background-image:linear-gradient(120deg,
+    #ff76e9 0%,
+    #007bff 33%,
+    #8b3fd9 66%,
+    #ff7ea0 100%
+  )!important;
+  background-size:260% 260%!important;
+  background-repeat:no-repeat!important;
+  background-position:0% 30%!important;
+  animation:pop-gradient-cycle 9.3s ease-in-out infinite!important;
 }
+@media(max-width:680px){.sale-preloader{background-size:340% 340%!important;animation-duration:8.5s!important}}
 .sale-preloader__logo {
   filter:
     drop-shadow(0 8px 22px rgba(6, 20, 97, 0.42))
