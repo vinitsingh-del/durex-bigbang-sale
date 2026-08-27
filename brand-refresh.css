@@ -2704,20 +2704,28 @@ body main .quick-links {
 /* From “Can't decide” through the sale-category sections, center only each
    heading's eyebrow/subtitle and title; links and section content stay intact. */
 body main :is(section:has(.compare),#afterLubes,#lubes,#condoms,#massagers,#performance,#playthings) > .heading {
-  display: grid !important;
-  grid-template-columns: minmax(0,1fr) auto minmax(max-content,1fr) !important;
-  align-items: end !important;
+  display: block !important;
+  position: relative !important;
 }
 body main :is(section:has(.compare),#afterLubes,#lubes,#condoms,#massagers,#performance,#playthings) > .heading > div {
-  grid-column: 2;
-  grid-row: 1;
-  justify-self: center;
   text-align: center !important;
+  padding: 0 96px !important;
 }
 body main :is(section:has(.compare),#afterLubes,#lubes,#condoms,#massagers,#performance,#playthings) > .heading > a {
-  grid-column: 3;
-  grid-row: 1;
-  justify-self: end;
+  position: absolute !important;
+  right: 0 !important;
+  bottom: 4px !important;
+}
+@media(max-width:680px){
+  body main :is(section:has(.compare),#afterLubes,#lubes,#condoms,#massagers,#performance,#playthings) > .heading > div {
+    padding: 0 78px !important;
+  }
+  body main :is(section:has(#trustCarousel),#reels) > .heading {
+    text-align: center !important;
+  }
+  body main :is(section:has(#trustCarousel),#reels) > .heading > div {
+    width: 100% !important;
+  }
 }
 
 /* Mobile-only product image zoom: 1.15× scale on shop-the-sale product images
@@ -2733,6 +2741,13 @@ body main :is(section:has(.compare),#afterLubes,#lubes,#condoms,#massagers,#perf
   body main #wanted .card .media img,
   body main #launchCards .card .media img {
     transform: scale(1.15) !important;
+    transform-origin: center 45% !important;
+  }
+  /* Badges shouldn't overlap the product: cards carrying a glow-capsule
+     badge get slightly less zoom so the top of the image clears the badge.
+     Cards without a badge are untouched. */
+  body main .card .media:has(.tag--glow) img {
+    transform: scale(0.92) !important;
     transform-origin: center 45% !important;
   }
 }
@@ -2868,3 +2883,10 @@ body main .quick-links-head {
   50%{box-shadow:0 0 0 1px rgba(255,255,255,.8),0 3px 10px rgba(0,10,50,.5),0 0 16px 4px var(--glow-color)}
 }
 @media(prefers-reduced-motion:reduce){.tag--glow{animation:none!important}}
+
+/* Client request: reduce mobile gap by a further 2px for Your Pleasure
+   Playground (category tiles) and THE 69 STORE (sale-catalog cards). */
+@media(max-width:680px){
+  body main .quick-links-track{gap:8px!important}
+  body main .sale-catalog .cards{gap:8px!important}
+}
