@@ -2908,12 +2908,21 @@ body main .quick-links-head {
 
 /* Mobile-only heading polish: keep View all compact, prevent companion
    subtitles from splitting mid-phrase and retain the Just Launched blink. */
+@keyframes view-all-shine-mobile{
+  0%,100%{transform:scale(.96);filter:brightness(1);text-shadow:0 0 1px #fff,0 0 4px rgba(255,255,255,.65)}
+  50%{transform:scale(1.18);filter:brightness(1.5);text-shadow:0 0 2px #fff,0 0 8px #fff,0 0 14px rgba(121,216,255,.95)}
+}
 @media(max-width:680px){
-  body main .heading > a{font-size:5px!important}
+  body main .heading > a{
+    font-size:5px!important;
+    transform-origin:right center!important;
+    animation:view-all-shine-mobile 1.6s ease-in-out infinite!important;
+  }
   body main .heading h2 i{white-space:nowrap!important}
   body main #afterLubes > .heading > div{padding-right:12px!important;padding-left:12px!important}
   body main section h2 i{animation:store-blink 1.1s steps(2,end) infinite!important}
 }
 @media(max-width:680px) and (prefers-reduced-motion:reduce){
+  body main .heading > a{animation:none!important;text-shadow:0 0 6px rgba(255,255,255,.8)!important}
   body main section h2 i{animation:none!important}
 }
