@@ -2818,3 +2818,9 @@ body main .quick-links-head {
 @media (max-width: 680px) {
   .hero-product-track { gap: 4px !important; }
 }
+
+/* Client request: remove the countdown timer on desktop specifically.
+   Mobile already hides the entire notice bar, so nothing changes there. */
+@media(min-width:681px){
+  .notice .timer{display:none!important}
+}

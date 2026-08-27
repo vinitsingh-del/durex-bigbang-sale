@@ -140,7 +140,7 @@ function paintExtraTags(){
   paintByName('Durex Intense Vibe Ring','tag--limited-stock','Chill Vibes, Safe Rides','assets/chill-vibes-sticker.png');
 }
 paintExtraTags();
-const best=document.querySelector('#wanted');best.querySelector('.kicker').textContent='Loved by the community';best.querySelector('.title').innerHTML='BESTSELLERS.<i>Start here.</i>';
+const best=document.querySelector('#wanted');best.querySelector('.kicker').textContent='Loved by the community';best.querySelector('.title').innerHTML='BESTSELLERS.';
 const launch=document.createElement('section');launch.className='launch';launch.innerHTML='<p class="kicker">Fresh on the shelf</p><h2 class="title">JUST LAUNCHED.<i>New ways to play.</i></h2><div class="cards" id="launchCards"></div>';best.after(launch);document.querySelector('#launchCards').innerHTML=[saleProducts.lubes[3],saleProducts.three[2],saleProducts.massagers[3],saleProducts.ten[0]].map(markup).join('');
 const data={wanted:[saleProducts.massagers[0],saleProducts.massagers[1],saleProducts.massagers[2],saleProducts.ten[2]],condoms:[...saleProducts.three,...saleProducts.ten],lubes:saleProducts.lubes,massagers:saleProducts.massagers,performance:saleProducts.performance,playthings:[['Durex Playthings O! Snap Card Game','https://www.durexindia.com/cdn/shop/files/O_Snap_3d13743a-7460-4a52-bdd1-5afc5fadebea.webp?v=1721044269&width=1445','₹930','₹1,874','50% off'],['Durex Playthings Lights Off Eye Mask','https://www.durexindia.com/cdn/shop/files/1_ac7aa896-c019-43f2-8b37-9847b3704112.webp?v=1690786256&width=1445','₹950','₹1,874','49% off'],['Durex Playthings Turn On Card Game','https://www.durexindia.com/cdn/shop/files/Turn_On_0ce54ddd-dbe4-474c-97f8-e4b0e787571a.webp?v=1721044428&width=1445','₹1,874','','Sale pick'],['Durex Playthings Hands Off Restraints','https://www.durexindia.com/cdn/shop/files/Hand_off.webp?v=1721044178&width=1445','₹1,499','₹3,499','57% off'],['Durex Playthings Fantasy Roleplay Card Game','https://www.durexindia.com/cdn/shop/files/1_24.webp?v=1733146463&width=1445','₹2,811','','Sale pick'],['Durex Playthings Oralicious Board Game for Couples','https://www.durexindia.com/cdn/shop/files/1_3_1.webp?v=1721722323&width=1445','₹2,811','','Sale pick']]};
 const cardVideoFor=(group,index)=>group==='massagers'?massagerVideos[index]:group==='wanted'&&index<2?massagerVideos[index]:'';
@@ -303,11 +303,11 @@ update();
    scroll takes the person straight there. */
 (()=>{
   const moods=[
-    {label:'Bold',target:'sale-catalog',color:'#2f6fe0'},
-    {label:'Popular',target:'wanted',color:'#ffd23f'},
-    {label:'Romantic',target:'massagers',color:'#ff5c3d'},
-    {label:'Playful',target:'playthings',color:'#ff5eb8'},
-    {label:'Classic',target:'condoms',color:'#38c9e9'}
+    {label:'69 Store',target:'sale-catalog',color:'#2f6fe0'},
+    {label:'Bestsellers',target:'wanted',color:'#ffd23f'},
+    {label:'Massagers',target:'massagers',color:'#ff5c3d'},
+    {label:'Playthings',target:'playthings',color:'#ff5eb8'},
+    {label:'Condoms',target:'condoms',color:'#38c9e9'}
   ];
   const n=moods.length;const slice=360/n;
   const gradientStops=moods.map((m,i)=>`${m.color} ${i*slice}deg ${(i+1)*slice}deg`).join(',');
