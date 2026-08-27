@@ -2834,3 +2834,37 @@ body main .quick-links-head {
   .quick-links-track a{flex:0 0 108px!important;min-height:88px!important}
   .quick-links-track a img{width:52px!important;height:52px!important}
 }
+
+/* ============================================================
+   Client-requested badge rework:
+   - Massagers keeps its own distinct sticker design (unchanged,
+     see the image-based tag--top-rated/value-pick/limited-stock
+     system already applied to Buzzy Rabbit/Wild Wand/Vibe Ring).
+   - Every other category gets this shared "glow capsule" badge,
+     used only with these 4 labels: New Launch, Most Loved,
+     Bestseller, Trending.
+   ============================================================ */
+.tag--glow{
+  position:absolute!important;
+  top:10px!important;
+  left:auto!important;
+  right:10px!important;
+  padding:6px 13px!important;
+  border-radius:999px!important;
+  background:linear-gradient(135deg,#1e2f8f,#3b1e8f)!important;
+  color:#fff!important;
+  font:800 9px One,Arial!important;
+  letter-spacing:.07em!important;
+  text-transform:uppercase!important;
+  --glow-color:rgba(59,30,143,.85);
+  box-shadow:0 0 0 1px rgba(255,255,255,.5),0 3px 8px rgba(0,10,50,.35);
+  animation:tag-glow-pulse 2.2s ease-in-out infinite!important;
+}
+.tag--glow.tag--glow-launch{background:linear-gradient(135deg,#0d6b32,#1a9e4b)!important;--glow-color:rgba(26,158,75,.85)}
+.tag--glow.tag--glow-loved{background:linear-gradient(135deg,#9d174d,#ff5c8a)!important;--glow-color:rgba(255,92,138,.85)}
+.tag--glow.tag--glow-trending{background:linear-gradient(135deg,#a3197e,#ff5eb8)!important;--glow-color:rgba(255,94,184,.85)}
+@keyframes tag-glow-pulse{
+  0%,100%{box-shadow:0 0 0 1px rgba(255,255,255,.5),0 3px 8px rgba(0,10,50,.35),0 0 6px 1px var(--glow-color)}
+  50%{box-shadow:0 0 0 1px rgba(255,255,255,.8),0 3px 10px rgba(0,10,50,.5),0 0 16px 4px var(--glow-color)}
+}
+@media(prefers-reduced-motion:reduce){.tag--glow{animation:none!important}}
