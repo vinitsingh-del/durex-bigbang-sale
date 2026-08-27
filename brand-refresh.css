@@ -2705,7 +2705,7 @@ body main .quick-links {
    heading's eyebrow/subtitle and title; links and section content stay intact. */
 body main :is(section:has(.compare),#afterLubes,#lubes,#condoms,#massagers,#performance,#playthings) > .heading {
   display: grid !important;
-  grid-template-columns: minmax(0,1fr) auto minmax(0,1fr) !important;
+  grid-template-columns: minmax(0,1fr) auto minmax(max-content,1fr) !important;
   align-items: end !important;
 }
 body main :is(section:has(.compare),#afterLubes,#lubes,#condoms,#massagers,#performance,#playthings) > .heading > div {
