@@ -2884,9 +2884,24 @@ body main .quick-links-head {
 }
 @media(prefers-reduced-motion:reduce){.tag--glow{animation:none!important}}
 
-/* Client request: reduce mobile gap by a further 2px for Your Pleasure
+/* Client request: mobile glow badges are 10% smaller and keep their existing
+   glow pulse while also appearing/disappearing. Desktop remains unchanged. */
+@keyframes tag-glow-pulse-mobile{
+  0%,30%,70%,100%{opacity:1;box-shadow:0 0 0 1px rgba(255,255,255,.5),0 3px 8px rgba(0,10,50,.35),0 0 6px 1px var(--glow-color)}
+  50%{opacity:0;box-shadow:0 0 0 1px rgba(255,255,255,.8),0 3px 10px rgba(0,10,50,.5),0 0 16px 4px var(--glow-color)}
+}
+
+/* Client request: reduce mobile gap by another 2px for Your Pleasure
    Playground (category tiles) and THE 69 STORE (sale-catalog cards). */
 @media(max-width:680px){
-  body main .quick-links-track{gap:8px!important}
-  body main .sale-catalog .cards{gap:8px!important}
+  .tag--glow{
+    transform:scale(.9)!important;
+    transform-origin:top right!important;
+    animation:tag-glow-pulse-mobile 2.2s ease-in-out infinite!important;
+  }
+  body main .quick-links-track{gap:6px!important}
+  body main .sale-catalog .cards{gap:6px!important}
+}
+@media(max-width:680px) and (prefers-reduced-motion:reduce){
+  .tag--glow{animation:none!important}
 }
