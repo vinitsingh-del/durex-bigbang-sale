@@ -536,7 +536,7 @@ body:before{background:radial-gradient(ellipse at 8% 4%,#d9fbff4d 0,transparent 
 
 /* The 69 Store uses the supplied companion-word treatment: yellow, serif, no bullet. */
 .sale-catalog .store-signal{display:none!important}
-.sale-catalog .kicker{font:400 clamp(16px,1.5vw,22px)/.9 Georgia,serif!important;letter-spacing:-.03em!important;text-transform:none!important;color:#ffdf00!important;text-shadow:none!important;animation:none!important}
+.sale-catalog .kicker{font:400 clamp(16px,1.5vw,22px)/.9 One,Arial,sans-serif!important;letter-spacing:-.03em!important;text-transform:none!important;color:#ffdf00!important;text-shadow:none!important;animation:none!important}
 @media(max-width:680px){.sale-catalog .kicker{font-size:17px!important;line-height:.9!important}}
 
 /* Restore the label blink without restoring the removed bullet. */
