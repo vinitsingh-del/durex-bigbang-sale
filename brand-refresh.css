@@ -2824,3 +2824,13 @@ body main .quick-links-head {
 @media(min-width:681px){
   .notice .timer{display:none!important}
 }
+
+/* Client request: "Your Pleasure Playground" (category) container is too
+   small — bump up the tile and icon size, both breakpoints. Layout/order
+   unchanged, still a horizontal row of the same tiles. */
+.quick-links-track a{flex:0 0 152px!important;min-height:0!important}
+.quick-links-track a img{width:72px!important;height:72px!important}
+@media(max-width:680px){
+  .quick-links-track a{flex:0 0 108px!important;min-height:88px!important}
+  .quick-links-track a img{width:52px!important;height:52px!important}
+}
