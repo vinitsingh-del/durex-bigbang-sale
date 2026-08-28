@@ -2928,8 +2928,8 @@ body main .quick-links-head {
   body main section h2 i{animation:none!important}
 }
 
-/* Mobile only: enlarge product photography inside existing card frames by
-   12.5%. Badges, stickers, videos, card geometry and desktop stay untouched. */
+/* Mobile only: enlarge the actual product pack inside existing image frames.
+   Badges, stickers, videos, card geometry and desktop stay untouched. */
 @media(max-width:680px){
-  body main .card .media > img:not(.tag){scale:1.125!important}
+  body main .card .media > img:not(.tag){scale:1.25!important}
 }
