@@ -2823,8 +2823,8 @@ body main .quick-links-head {
   .card:hover .media > img.tag--limited-stock.tag--art {
     top: 7px !important;
     right: 7px !important;
-    width: 72px !important;
-    max-width: 34% !important;
+    width: 58px !important;
+    max-width: 27% !important;
   }
 }
 
@@ -2896,7 +2896,7 @@ body main .quick-links-head {
    Playground (category tiles) and THE 69 STORE (sale-catalog cards). */
 @media(max-width:680px){
   .tag--glow{
-    transform:scale(.9)!important;
+    transform:scale(.72)!important;
     transform-origin:top right!important;
     animation:tag-glow-pulse-mobile 2.2s ease-in-out infinite!important;
   }
@@ -2931,5 +2931,5 @@ body main .quick-links-head {
 /* Mobile only: enlarge the actual product pack inside existing image frames.
    Badges, stickers, videos, card geometry and desktop stay untouched. */
 @media(max-width:680px){
-  body main .card .media > img:not(.tag){scale:1.25!important}
+  body main .card .media > img:not(.tag){scale:1.125!important}
 }
