@@ -2934,44 +2934,59 @@ body main .quick-links-head {
   body main .card .media > img:not(.tag){scale:1.125!important}
 }
 
-/* Durex Promise: retain the carousel card and add the four requested icons. */
-.trust-promise{
+/* Durex Promise: one unified panel with all four promises visible together. */
+body main .trust--all{
+  display:block!important;
+  overflow:visible!important;
+  padding:24px!important;
+  border:1px solid rgba(223,243,255,.70)!important;
+  border-radius:16px!important;
+  background:rgba(8,43,129,.25)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 10px 26px rgba(0,16,60,.16)!important;
+}
+body main .trust-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:24px;
+}
+body main .trust-promise{
   display:flex;
   align-items:center;
-  gap:20px;
-  margin-top:24px;
+  min-width:0;
+  gap:14px;
 }
-.trust-promise>div{min-width:0}
-.trust-promise .trust-icon{
-  flex:0 0 82px;
-  width:82px;
-  height:82px;
+body main .trust-promise>div{min-width:0}
+body main .trust-promise .trust-icon{
+  flex:0 0 58px;
+  width:58px;
+  height:58px;
   object-fit:contain;
 }
-.trust-promise h3{margin:0 0 8px!important}
-.trust-promise p{margin:0!important}
-@media(max-width:680px){
-  .trust-promise{gap:15px;margin-top:18px}
-  .trust-promise .trust-icon{flex-basis:64px;width:64px;height:64px}
-}
+body main .trust-promise h3{margin:0 0 4px!important;font-size:18px!important;line-height:1.1!important}
+body main .trust-promise p{margin:0!important;font-size:12px!important;line-height:1.2!important}
 
-/* Pick Your Pleasure only: stronger glass cards and native 9:16 media. */
+/* Pick Your Pleasure only: compact layered glass cards with native 9:16 media. */
 body main .compare article{
+  display:flex!important;
+  flex-direction:column!important;
   aspect-ratio:auto!important;
   height:auto!important;
   min-height:0!important;
+  padding:12px!important;
+  border-radius:18px!important;
   overflow:hidden!important;
-  background:linear-gradient(145deg,rgba(255,255,255,.24),rgba(255,255,255,.08))!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.26),rgba(255,255,255,.07))!important;
   border:1px solid rgba(255,255,255,.62)!important;
   backdrop-filter:blur(22px) saturate(165%)!important;
   -webkit-backdrop-filter:blur(22px) saturate(165%)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.48),0 12px 30px rgba(0,16,60,.25)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 12px 30px rgba(0,16,60,.22)!important;
 }
 body main .compare .compare-pic{
   width:100%!important;
   height:auto!important;
   aspect-ratio:9/16!important;
   overflow:hidden!important;
+  border-radius:13px!important;
   background:rgba(255,255,255,.06)!important;
   border:1px solid rgba(255,255,255,.34)!important;
 }
@@ -2983,4 +2998,60 @@ body main .compare .compare-pic>img{
   padding:0!important;
   object-fit:cover!important;
   object-position:center center!important;
+}
+body main .compare .compare-pic span{
+  left:10px!important;
+  right:10px!important;
+  bottom:10px!important;
+  padding:7px 9px!important;
+  border:1px solid rgba(255,255,255,.28)!important;
+  border-radius:9px!important;
+  background:rgba(6,31,120,.78)!important;
+  backdrop-filter:blur(10px)!important;
+  -webkit-backdrop-filter:blur(10px)!important;
+}
+body main .compare h3{margin:12px 0 5px!important;line-height:1.08!important}
+body main .compare p{line-height:1.3!important}
+body main .compare button{min-height:42px!important;margin-top:12px!important;border-radius:10px!important}
+@media(max-width:680px){
+  body main .trust--all{padding:15px!important;border-radius:14px!important}
+  body main .trust-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 10px}
+  body main .trust-promise{gap:8px}
+  body main .trust-promise .trust-icon{flex-basis:38px;width:38px;height:38px}
+  body main .trust-promise h3{font-size:11px!important;margin-bottom:2px!important}
+  body main .trust-promise p{font-size:8px!important}
+
+  body main .compare{gap:8px!important;padding:4px 1px 10px!important}
+  body main .compare article{
+    flex:0 0 42vw!important;
+    width:42vw!important;
+    padding:7px!important;
+    border-radius:13px!important;
+  }
+  body main .compare .compare-pic{border-radius:10px!important}
+  body main .compare .compare-pic span{
+    left:6px!important;
+    right:6px!important;
+    bottom:6px!important;
+    padding:5px 6px!important;
+    border-radius:7px!important;
+    font-size:7px!important;
+    line-height:1.15!important;
+  }
+  body main .compare h3{
+    margin:8px 0 4px!important;
+    font-size:11px!important;
+    line-height:1.08!important;
+  }
+  body main .compare p{
+    font-size:8px!important;
+    line-height:1.2!important;
+  }
+  body main .compare button{
+    min-height:32px!important;
+    margin-top:auto!important;
+    padding:7px 5px!important;
+    border-radius:8px!important;
+    font-size:7px!important;
+  }
 }
