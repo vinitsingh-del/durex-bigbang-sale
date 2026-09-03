@@ -2933,3 +2933,12 @@ body main .quick-links-head {
 @media(max-width:680px){
   body main .card .media > img:not(.tag){scale:1.125!important}
 }
+
+/* Mobile only: keep Pick Your Pleasure cards at the desktop 3:4 ratio. */
+@media(max-width:680px){
+  body main .compare article{
+    aspect-ratio:3/4!important;
+    height:auto!important;
+    min-height:0!important;
+  }
+}
