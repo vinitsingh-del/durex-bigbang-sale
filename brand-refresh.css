@@ -2934,11 +2934,53 @@ body main .quick-links-head {
   body main .card .media > img:not(.tag){scale:1.125!important}
 }
 
-/* Mobile only: keep Pick Your Pleasure cards at the desktop 3:4 ratio. */
+/* Durex Promise: retain the carousel card and add the four requested icons. */
+.trust-promise{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  margin-top:24px;
+}
+.trust-promise>div{min-width:0}
+.trust-promise .trust-icon{
+  flex:0 0 82px;
+  width:82px;
+  height:82px;
+  object-fit:contain;
+}
+.trust-promise h3{margin:0 0 8px!important}
+.trust-promise p{margin:0!important}
 @media(max-width:680px){
-  body main .compare article{
-    aspect-ratio:3/4!important;
-    height:auto!important;
-    min-height:0!important;
-  }
+  .trust-promise{gap:15px;margin-top:18px}
+  .trust-promise .trust-icon{flex-basis:64px;width:64px;height:64px}
+}
+
+/* Pick Your Pleasure only: stronger glass cards and native 9:16 media. */
+body main .compare article{
+  aspect-ratio:auto!important;
+  height:auto!important;
+  min-height:0!important;
+  overflow:hidden!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.24),rgba(255,255,255,.08))!important;
+  border:1px solid rgba(255,255,255,.62)!important;
+  backdrop-filter:blur(22px) saturate(165%)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(165%)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.48),0 12px 30px rgba(0,16,60,.25)!important;
+}
+body main .compare .compare-pic{
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:9/16!important;
+  overflow:hidden!important;
+  background:rgba(255,255,255,.06)!important;
+  border:1px solid rgba(255,255,255,.34)!important;
+}
+body main .compare .compare-pic>video,
+body main .compare .compare-pic>img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  padding:0!important;
+  object-fit:cover!important;
+  object-position:center center!important;
 }
